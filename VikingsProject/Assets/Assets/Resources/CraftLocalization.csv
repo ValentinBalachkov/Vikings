@@ -1,7 +1,0 @@
-id;name_en;description_en;lvl1_wood;lvl1_stone;lvl2_wood;lvl2_stone;lvl3_wood;lvl3_stone;lvl4_wood;lvl4_stone;lvl5_wood;lvl5_stone
-axe;Axe;Increase Tree extraction speed;4;3;10;7;25;16;73;48;195;127
-house;House;Increase storage of food;15;12;41;33;122;98;365;292;1094;875
-tower;Tower;Increase field;4;4;12;11;36;33;106;98;;
-pick;Pick;Increase Stone mining speed;15;9;41;25;122;73;324;195;972;584
-woodStorage;Wood storage;Increase storage of wood;36;48;108;144;324;432;972;1296;2916;3888
-stoneStorage;Stone storage;Increase storage of stone;4;4;12;10;33;27;98;81;234;195
