@@ -10,16 +10,17 @@ namespace Vikings.Chanacter
         private CharacterStateMachine _stateMachine;
         private WeaponController _weaponController;
         private ItemsOnMapController _itemsOnMapController;
-        
+
         private ItemController _currentItem;
 
-        public CollectState(CharacterStateMachine stateMachine, WeaponController weaponController, ItemsOnMapController itemsOnMapController) : base("Collect", stateMachine)
+        public CollectState(CharacterStateMachine stateMachine, WeaponController weaponController,
+            ItemsOnMapController itemsOnMapController) : base("Collect", stateMachine)
         {
             _stateMachine = stateMachine;
             _weaponController = weaponController;
             _itemsOnMapController = itemsOnMapController;
         }
-        
+
         public override void Enter()
         {
             base.Enter();
@@ -45,8 +46,15 @@ namespace Vikings.Chanacter
 
         private void ChangeState(ItemData itemData, int count)
         {
-            _stateMachine.SetState<MovingState>();
             _currentItem.OnCollect -= ChangeState;
+
+            if (itemData.ID == 3)
+            {
+                _stateMachine.SetState<MoveToStorageState>();
+                return;
+            }
+
+            _stateMachine.SetState<MovingState>();
         }
     }
 }

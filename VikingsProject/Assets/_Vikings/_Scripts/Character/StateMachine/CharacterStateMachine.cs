@@ -14,6 +14,7 @@ namespace Vikings.Chanacter
 
         private MovingState _movingState;
         private CollectState _collectState;
+        private MoveToStorageState _moveToStorageState;
 
         private List<BaseState> _states = new();
 
@@ -21,8 +22,10 @@ namespace Vikings.Chanacter
         {
             _movingState = new MovingState(this, _itemsOnMapController, _playerPrefab);
             _collectState = new CollectState(this, _weaponController, _itemsOnMapController);
+            _moveToStorageState = new MoveToStorageState(this, _itemsOnMapController, _playerPrefab);
             _states.Add(_movingState);
             _states.Add(_collectState);
+            _states.Add(_moveToStorageState);
             SetState<MovingState>();
         }
 
