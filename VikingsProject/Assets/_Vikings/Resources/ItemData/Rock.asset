@@ -17,3 +17,4 @@ MonoBehaviour:
   _prefab: {fileID: 6806352097513530124, guid: 265b88c448f749b4aaa70377c927eddb, type: 3}
   _dropCount: 1
   _itemName: Rock
+  _limitCount: 10

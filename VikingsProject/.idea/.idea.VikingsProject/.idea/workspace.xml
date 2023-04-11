@@ -12,6 +12,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/_Vikings/_Scripts/Character/PlayerController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Vikings/_Scripts/Inventory/InventoryData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Vikings/_Scripts/UI/InventoryView.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ai.navigation@1.1.1/Runtime/NavMeshSurface.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -88,7 +89,8 @@
       <workItem from="1680926280061" duration="131000" />
       <workItem from="1680926428138" duration="17285000" />
       <workItem from="1681005464755" duration="13474000" />
-      <workItem from="1681136899298" duration="8711000" />
+      <workItem from="1681136899298" duration="9301000" />
+      <workItem from="1681230235338" duration="4508000" />
     </task>
     <servers />
   </component>

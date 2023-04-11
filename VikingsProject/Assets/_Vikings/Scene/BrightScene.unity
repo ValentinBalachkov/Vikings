@@ -5428,6 +5428,10 @@ MonoBehaviour:
     item: {fileID: 11400000, guid: b90d6cdefc2ad7e4cbdd899ef9e419e5, type: 2}
   _storageData: {fileID: 11400000, guid: 480902296caabf2408ac395a39489084, type: 2}
   _storagePoint: {fileID: 1399576591}
+  _boneFirePrefab: {fileID: 4806180808365266072, guid: c9c1b9e66720e6440a4f220e98b13002,
+    type: 3}
+  _boneFirePoint: {fileID: 2008548320}
+  _navMeshSurface: {fileID: 142486466}
 --- !u!4 &687125594
 Transform:
   m_ObjectHideFlags: 0
@@ -13477,6 +13481,37 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2005839649}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2008548319
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2008548320}
+  m_Layer: 0
+  m_Name: BoneFireSpawnpoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2008548320
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008548319}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.41, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2018636518
 GameObject:
   m_ObjectHideFlags: 0
@@ -14171,6 +14206,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 541810998, guid: c36a170aed7712a42b71a6f07aa9db45, type: 3}
+      propertyPath: _storageData
+      value: 
+      objectReference: {fileID: 11400000, guid: 480902296caabf2408ac395a39489084,
+        type: 2}
+    - target: {fileID: 541810998, guid: c36a170aed7712a42b71a6f07aa9db45, type: 3}
+      propertyPath: _characterStateMachine
+      value: 
+      objectReference: {fileID: 449289997}
     - target: {fileID: 1335112581, guid: c36a170aed7712a42b71a6f07aa9db45, type: 3}
       propertyPath: m_Enabled
       value: 1

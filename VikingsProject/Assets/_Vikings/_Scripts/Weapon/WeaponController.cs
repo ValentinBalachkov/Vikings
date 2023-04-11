@@ -28,7 +28,7 @@ namespace Vikings.Weapon
             
             foreach (var item in _weaponData.weaponUpgradePrices)
             {
-                _inventoryData.ChangeItemCount(item.itemData, item.count);
+                _inventoryData.ChangeItemCount(item.itemData, -item.count);
             }
             _weaponData.Upgrade();
         }

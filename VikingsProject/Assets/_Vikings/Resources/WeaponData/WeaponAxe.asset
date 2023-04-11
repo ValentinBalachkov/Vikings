@@ -18,5 +18,5 @@ MonoBehaviour:
   - count: 5
     itemData: {fileID: 11400000, guid: 8b782c2617e0b8048985ef732675d1be, type: 2}
   _id: 1
-  _level: 1
+  _level: 0
   _collectTime: 4

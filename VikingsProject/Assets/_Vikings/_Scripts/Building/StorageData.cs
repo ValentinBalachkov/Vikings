@@ -7,7 +7,7 @@ namespace Vikings.Building
     [CreateAssetMenu(fileName = "StorageData", menuName = "Data/StorageData", order = 4)]
     public class StorageData : ScriptableObject
     {
-        public Action<int> OnChangeCountStorage;
+        public Action<int, int> OnChangeCountStorage;
         public Action<int, int> OnUpgradeStorage;
         public ItemData ItemType => _itemType;
         public int Count => _count;
@@ -33,7 +33,7 @@ namespace Vikings.Building
                 _count += count;
             }
             
-            OnChangeCountStorage?.Invoke(_count);
+            OnChangeCountStorage?.Invoke(_count, _maxStorageCount);
         }
 
         public void UpgradeStorage()
@@ -44,6 +44,11 @@ namespace Vikings.Building
             }
             _maxStorageCount *= _currentLevel;
             OnUpgradeStorage?.Invoke(_maxStorageCount, _currentLevel);
+        }
+
+        public bool IsFullStorage()
+        {
+            return _count >= _maxStorageCount;
         }
     
     }

@@ -17,14 +17,14 @@ namespace Vikings.Building
                return;
            }
            
-           if (item.count + _storageData.Count <= _storageData.MaxStorageCount)
+           if (item.count + _storageData.Count < _storageData.MaxStorageCount)
            {
                _storageData.ChangeStorageCount(item.count);
                _inventoryData.ChangeItemCount(item.itemData, -item.count);
            }
            else
            {
-               int countToChange = item.count - _storageData.MaxStorageCount;
+               int countToChange = _storageData.MaxStorageCount - _storageData.Count;
                _storageData.ChangeStorageCount(countToChange);
                _inventoryData.ChangeItemCount(item.itemData, -countToChange);
            }

@@ -9,7 +9,7 @@ namespace Vikings.Inventory
     [CreateAssetMenu(fileName = "InventoryData", menuName = "Data/InventoryData", order = 2)]
     public class InventoryData : ScriptableObject
     {
-        public Action OnInventoryChange;
+        public Action<ItemData> OnInventoryChange;
         
         [SerializeField] private List<ItemsCountData>  _itemsOnInventory;
 
@@ -23,7 +23,14 @@ namespace Vikings.Inventory
             var item = _itemsOnInventory.FirstOrDefault(x => x.itemData.ID == itemData.ID);
             if (item != null)
             {
-                item.count += count;
+                if (item.itemData.LimitCount <= item.count + count)
+                {
+                    item.count = item.itemData.LimitCount;
+                }
+                else
+                {
+                    item.count += count;
+                }
             }
             else
             {
@@ -34,7 +41,13 @@ namespace Vikings.Inventory
                 });
             }
             
-            OnInventoryChange?.Invoke();
+            OnInventoryChange?.Invoke(itemData);
+        }
+
+        public bool IsFullInventory()
+        {
+            var list = _itemsOnInventory.Where(x => x.count < x.itemData.LimitCount).ToList();
+            return list.Count == 0;
         }
     
     }

@@ -11,15 +11,15 @@ namespace Vikings.Building
 
         private void Start()
         {
-            _storageData.OnChangeCountStorage += UpdateUI;
-            _storageData.OnUpgradeStorage += UpdateUI;
+            _storageData.OnChangeCountStorage += UpdateUICount;
+            _storageData.OnUpgradeStorage += UpdateUIUpgrade;
         }
-        private void UpdateUI(int itemCount)
+        private void UpdateUICount(int itemCount, int maxCount)
         {
-            _countText.text = $"{_storageData.ItemType.ItemName}: {itemCount}";
+            _countText.text = $"{itemCount}/{maxCount}";
         }
         
-        private void UpdateUI(int maxCount, int level)
+        private void UpdateUIUpgrade(int maxCount, int level)
         {
             _levelText.text = $"level: {level} \n max: {maxCount}";
         }

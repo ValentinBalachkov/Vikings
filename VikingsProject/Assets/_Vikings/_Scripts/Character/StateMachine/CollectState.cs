@@ -48,13 +48,16 @@ namespace Vikings.Chanacter
         {
             _currentItem.OnCollect -= ChangeState;
 
-            if (itemData.ID == 3)
+            if (!(_stateMachine.CurrentState is IdleState))
             {
-                _stateMachine.SetState<MoveToStorageState>();
-                return;
-            }
+                if (itemData.ID == 3)
+                {
+                    _stateMachine.SetState<MoveToStorageState>();
+                    return;
+                }
 
-            _stateMachine.SetState<MovingState>();
+                _stateMachine.SetState<MovingState>();
+            }
         }
     }
 }
