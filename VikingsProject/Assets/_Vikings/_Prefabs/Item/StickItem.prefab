@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 7538969506033860324}
   - component: {fileID: 7538969506033860327}
   - component: {fileID: 5036173777696872966}
+  - component: {fileID: 7845769885392414129}
   m_Layer: 0
   m_Name: StickItem
   m_TagString: Untagged
@@ -151,3 +152,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.65, y: 0.46, z: 0.25}
   m_Center: {x: -0.28, y: 0.24, z: 0.13}
+--- !u!208 &7845769885392414129
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7538969506033860326}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.335, y: 0.175, z: 0.11}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.3, y: 0, z: 0.11}
+  m_TimeToStationary: 0.5

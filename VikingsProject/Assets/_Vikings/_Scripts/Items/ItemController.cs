@@ -7,6 +7,7 @@ namespace Vikings.Items
 {
     public class ItemController : MonoBehaviour
     {
+        public ItemData Item => _itemData;
         public Action<ItemData, int> OnCollect;
         [SerializeField] private GameObject _model;
         

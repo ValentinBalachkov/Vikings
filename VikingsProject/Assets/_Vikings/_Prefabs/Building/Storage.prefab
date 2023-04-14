@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 271082999149964319}
   - component: {fileID: 271082999149964318}
   - component: {fileID: 271082999149964316}
+  - component: {fileID: 344299322137120561}
   m_Layer: 0
   m_Name: Storage
   m_TagString: Untagged
@@ -138,6 +139,22 @@ MonoBehaviour:
   _countText: {fileID: 2525979836830021007}
   _levelText: {fileID: 5416767659584765402}
   _storageData: {fileID: 11400000, guid: 480902296caabf2408ac395a39489084, type: 2}
+--- !u!208 &344299322137120561
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271082999150218105}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.61700004, y: 0.23600002, z: 0.36600003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.23600002, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &271082999150218887
 GameObject:
   m_ObjectHideFlags: 0

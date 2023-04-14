@@ -6,6 +6,7 @@ namespace Vikings.Building
 {
     public class StorageController : MonoBehaviour
     {
+        public StorageData StorageData => _storageData;
         [SerializeField] private StorageData _storageData;
         [SerializeField] private InventoryData _inventoryData;
 

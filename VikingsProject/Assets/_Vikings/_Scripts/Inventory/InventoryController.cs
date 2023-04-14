@@ -7,6 +7,8 @@ namespace Vikings.Inventory
 {
     public class InventoryController : MonoBehaviour
     {
+        public InventoryData InventoryData => _inventoryData;
+        
         [SerializeField] private InventoryData _inventoryData;
         [SerializeField] private StorageData _storageData;
         [SerializeField] private CharacterStateMachine _characterStateMachine;
@@ -21,19 +23,7 @@ namespace Vikings.Inventory
         private void Awake()
         {
             _itemDatas = Resources.LoadAll<ItemData>($"ItemData");
-            _inventoryData.OnInventoryChange += OnChangeInventoryAndStorage;
         }
-
-        private void OnChangeInventoryAndStorage(ItemData itemData)
-        {
-            if (_inventoryData.IsFullInventory() && _storageData.IsFullStorage())
-            {
-                _characterStateMachine.SetState<IdleState>();
-            }
-            else if(_characterStateMachine.CurrentState is IdleState)
-            {
-                _characterStateMachine.SetState<MovingState>();
-            }
-        }
+        
     }
 }

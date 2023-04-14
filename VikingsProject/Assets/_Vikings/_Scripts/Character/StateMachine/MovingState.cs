@@ -10,7 +10,7 @@ namespace Vikings.Chanacter
 
         private ItemController _currentPoint;
         private PlayerController _playerPrefab;
-        private const float OFFSET_DISTANCE = 0.2f;
+        private const float OFFSET_DISTANCE = 0.3f;
         public MovingState(CharacterStateMachine stateMachine, ItemsOnMapController itemsOnMapController, PlayerController playerPrefab) : base("Moving",
             stateMachine)
         {
