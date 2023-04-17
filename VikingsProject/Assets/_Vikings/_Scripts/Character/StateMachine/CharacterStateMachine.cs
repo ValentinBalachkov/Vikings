@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Vikings.Items;
+using Vikings.Building;
 using Vikings.Weapon;
 
 namespace Vikings.Chanacter
@@ -9,9 +9,11 @@ namespace Vikings.Chanacter
     public class CharacterStateMachine : StateMachine
     {
         public BaseState CurrentState => _currentState;
-        [SerializeField] private ItemsOnMapController _itemsOnMapController;
+        [SerializeField] private StorageOnMap _storageOnMap;
         [SerializeField] private PlayerController _playerPrefab;
         [SerializeField] private WeaponController _weaponController;
+        [SerializeField] private BoneFireController _boneFireController;
+        [SerializeField] private InventoryController _inventoryController;
 
         private MovingState _movingState;
         private CollectState _collectState;
@@ -22,17 +24,16 @@ namespace Vikings.Chanacter
         private BaseState _currentState;
 
 
-        private void Start()
+        private void Awake()
         {
-            _movingState = new MovingState(this, _itemsOnMapController, _playerPrefab);
-            _collectState = new CollectState(this, _weaponController, _itemsOnMapController);
-            _moveToStorageState = new MoveToStorageState(this, _itemsOnMapController, _playerPrefab);
-            _idleState = new IdleState(this, _itemsOnMapController, _playerPrefab);
+            _movingState = new MovingState(this, _storageOnMap, _playerPrefab);
+            _collectState = new CollectState(this, _weaponController, _storageOnMap, _inventoryController);
+            _moveToStorageState = new MoveToStorageState(this, _storageOnMap, _playerPrefab);
+            _idleState = new IdleState(this, _boneFireController, _playerPrefab);
             _states.Add(_movingState);
             _states.Add(_collectState);
             _states.Add(_moveToStorageState);
             _states.Add(_idleState);
-            SetState<MovingState>();
         }
 
         public void SetState<T>() where T : BaseState

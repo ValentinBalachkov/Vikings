@@ -1,39 +1,71 @@
-﻿using System.Linq;
-using UnityEngine;
-using Vikings.Inventory;
+﻿using System;
+using System.Linq;
+using Vikings.Items;
+
 
 namespace Vikings.Building
 {
-    public class StorageController : MonoBehaviour
+    public class StorageController : AbstractBuilding
     {
-        public StorageData StorageData => _storageData;
-        [SerializeField] private StorageData _storageData;
-        [SerializeField] private InventoryData _inventoryData;
+        public Action<ItemData> OnChangeCountStorage;
+        public Action<int, int> OnUpgradeStorage;
 
-        public void SetItemsOnStorage()
+        
+        private StorageOnMap _storageOnMap;
+
+        public override void Init(StorageData storageData, StorageOnMap storageOnMap)
         {
-           var item = _inventoryData.GetInventory().FirstOrDefault(x => x.itemData.ID == _storageData.ItemType.ID);
-           if (item == null)
-           {
-               return;
-           }
-           
-           if (item.count + _storageData.Count < _storageData.MaxStorageCount)
-           {
-               _storageData.ChangeStorageCount(item.count);
-               _inventoryData.ChangeItemCount(item.itemData, -item.count);
-           }
-           else
-           {
-               int countToChange = _storageData.MaxStorageCount - _storageData.Count;
-               _storageData.ChangeStorageCount(countToChange);
-               _inventoryData.ChangeItemCount(item.itemData, -countToChange);
-           }
+            base.storageData = storageData;
+            _storageOnMap = storageOnMap;
+        }
+        
+        
+        public override void ChangeStorageCount(PriceToUpgrade priceToUpgrade)
+        {
+            if (storageData.Count + priceToUpgrade.count > storageData.MaxStorageCount)
+            {
+                storageData.Count = storageData.MaxStorageCount;
+            }
+            else
+            {
+                storageData.Count += priceToUpgrade.count;
+            }
+            
+            OnChangeCountStorage?.Invoke(storageData.ItemType);
         }
 
-        public void UpgradeStorage()
+        public override void UpgradeStorage()
         {
-            _storageData.UpgradeStorage();
+            if (storageData.CurrentLevel >= 3)
+            {
+                return;
+            }
+            
+            foreach (var upgradePrice in storageData.PriceToUpgrade)
+            {
+                var storage = _storageOnMap.StorageControllers.FirstOrDefault(x => x.StorageData.ItemType.ID == upgradePrice.itemData.ID);
+                if (storage != null && upgradePrice.count <= storage.StorageData.Count)
+                {
+                    continue;
+                }
+
+                return;
+            }
+            
+            foreach (var item in storageData.PriceToUpgrade)
+            {
+                var storage = _storageOnMap.StorageControllers.FirstOrDefault(x => x.StorageData.ItemType.ID == item.itemData.ID);
+                if (storage != null) storage.ChangeStorageCount( new PriceToUpgrade{count = -item.count, itemData = item.itemData} );
+            }
+            
+            storageData.MaxStorageCount += 10;
+            storageData.CurrentLevel++;
+            OnUpgradeStorage?.Invoke(storageData.MaxStorageCount, storageData.CurrentLevel);
+        }
+
+        public override bool IsFullStorage()
+        {
+            return storageData.Count >= storageData.MaxStorageCount;
         }
         
     }

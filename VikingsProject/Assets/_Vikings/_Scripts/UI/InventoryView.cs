@@ -1,26 +1,31 @@
 using TMPro;
 using UnityEngine;
-using Vikings.Inventory;
+using Vikings.Building;
 using Vikings.Items;
 
 namespace Vikings.UI
 {
     public class InventoryView : MonoBehaviour
     {
-        [SerializeField] private InventoryData _inventoryData;
+        [SerializeField] private StorageOnMap _storageOnMap;
         [SerializeField] private TMP_Text[] _itemsCountText;
 
         private void Awake()
         {
-            _inventoryData.OnInventoryChange += UpdateUI;
+            foreach (var storage in _storageOnMap.StorageControllers)
+            {
+                if (storage is StorageController controller)
+                    controller.OnChangeCountStorage += UpdateUI;
+            }
         }
 
         private void UpdateUI(ItemData itemData)
         {
-            var inventory = _inventoryData.GetInventory();
-            for (int i = 0; i < inventory.Count; i++)
+            for (int i = 0; i < _storageOnMap.StorageControllers.Count; i++)
             {
-                _itemsCountText[i].text =  $"{inventory[i].itemData.ItemName}: {inventory[i].count}/{inventory[i].itemData.LimitCount}";
+                var storageData = _storageOnMap.StorageControllers[i].StorageData;
+                _itemsCountText[i].text =
+                    $"{storageData.ItemType.ItemName}: {storageData.Count}/{storageData.MaxStorageCount}";
             }
         }
     }

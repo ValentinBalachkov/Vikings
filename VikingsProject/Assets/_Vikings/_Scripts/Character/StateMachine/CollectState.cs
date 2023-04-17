@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Vikings.Inventory;
+﻿using Vikings.Building;
 using Vikings.Items;
 using Vikings.Weapon;
 
@@ -9,55 +8,32 @@ namespace Vikings.Chanacter
     {
         private CharacterStateMachine _stateMachine;
         private WeaponController _weaponController;
-        private ItemsOnMapController _itemsOnMapController;
+        private StorageOnMap _storageOnMap;
+        private InventoryController _inventoryController;
 
         private ItemController _currentItem;
 
         public CollectState(CharacterStateMachine stateMachine, WeaponController weaponController,
-            ItemsOnMapController itemsOnMapController) : base("Collect", stateMachine)
+            StorageOnMap storageOnMap, InventoryController inventoryController) : base("Collect", stateMachine)
         {
             _stateMachine = stateMachine;
             _weaponController = weaponController;
-            _itemsOnMapController = itemsOnMapController;
+            _storageOnMap = storageOnMap;
+            _inventoryController = inventoryController;
         }
 
         public override void Enter()
         {
             base.Enter();
-            _currentItem = _itemsOnMapController.GetElementFromQueue();
-            _currentItem.OnCollect += ChangeState;
-            _currentItem.ActivateItem(_weaponController.GetCurrentCollectTime());
+            _currentItem = _storageOnMap.GetElementFromQueue();
+            _inventoryController.CollectItem(_currentItem, _weaponController.WeaponData);
+            _inventoryController.OnCollect += ChangeState;
         }
 
-        public override void Exit()
+        private void ChangeState()
         {
-            base.Exit();
-        }
-
-        public override void UpdatePhysics()
-        {
-            base.UpdatePhysics();
-        }
-
-        public override void UpdateLogic()
-        {
-            base.UpdateLogic();
-        }
-
-        private void ChangeState(ItemData itemData, int count)
-        {
-            // _currentItem.OnCollect -= ChangeState;
-            //
-            // if (!(_stateMachine.CurrentState is IdleState))
-            // {
-            //     if (itemData.ID == 3)
-            //     {
-            //         _stateMachine.SetState<MoveToStorageState>();
-            //         return;
-            //     }
-            //
-            //     _stateMachine.SetState<MovingState>();
-            // }
+            _inventoryController.OnCollect -= ChangeState;
+            _stateMachine.SetState<MoveToStorageState>();
         }
     }
 }

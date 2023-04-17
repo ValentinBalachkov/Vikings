@@ -15,6 +15,6 @@ MonoBehaviour:
   _id: 3
   _icon: {fileID: 0}
   _prefab: {fileID: 7538969506033860327, guid: d49c1c83a9b28c448ab88049e1347b28, type: 3}
-  _dropCount: 2
+  _dropCount: 3
   _itemName: Wood
   _limitCount: 10

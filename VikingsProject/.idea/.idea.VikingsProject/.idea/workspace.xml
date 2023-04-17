@@ -10,9 +10,9 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/_Vikings/_Scripts/Building/StorageData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Vikings/_Scripts/Character/PlayerController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/_Vikings/_Scripts/Inventory/InventoryData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Vikings/_Scripts/UI/InventoryView.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ai.navigation@1.1.1/Runtime/NavMeshSurface.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Editor/UI/SelectableEditor.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -92,6 +92,9 @@
       <workItem from="1681136899298" duration="9301000" />
       <workItem from="1681230235338" duration="4508000" />
       <workItem from="1681396106769" duration="6841000" />
+      <workItem from="1681489065635" duration="2060000" />
+      <workItem from="1681529155356" duration="23641000" />
+      <workItem from="1681743493572" duration="5171000" />
     </task>
     <servers />
   </component>

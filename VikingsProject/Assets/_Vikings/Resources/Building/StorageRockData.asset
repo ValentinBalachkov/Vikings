@@ -9,14 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e32b4f83f9664dd38e42d8df55929795, type: 3}
-  m_Name: WeaponAxe
+  m_Script: {fileID: 11500000, guid: 3c28eeb759f94304bae33740cbfab451, type: 3}
+  m_Name: StorageRockData
   m_EditorClassIdentifier: 
-  weaponUpgradePrices:
+  _itemType: {fileID: 11400000, guid: 8b782c2617e0b8048985ef732675d1be, type: 2}
+  _count: 0
+  _maxStorageCount: 10
+  _currentLevel: 1
+  _storageController: {fileID: 271082999149964318, guid: 7e5ac4c674ac44240bc671b01e446abd,
+    type: 3}
+  _priceToUpgrade:
   - itemData: {fileID: 11400000, guid: 842ec8fe0ff14054fb025a7b78239191, type: 2}
     count: 10
   - itemData: {fileID: 11400000, guid: 8b782c2617e0b8048985ef732675d1be, type: 2}
     count: 5
-  _id: 1
-  _level: 1
-  _collectTime: 2

@@ -1,38 +1,39 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
-using Vikings.Inventory;
 
 namespace Vikings.Items
 {
     public class ItemController : MonoBehaviour
     {
+        public Action OnEnable;
+        public bool IsEnable => _isEnable;
         public ItemData Item => _itemData;
-        public Action<ItemData, int> OnCollect;
-        [SerializeField] private GameObject _model;
         
+        [SerializeField] private GameObject _model;
+
         private const float DELAY_ENABLE = 5f;
         private ItemData _itemData;
-        
+        private bool _isEnable;
 
-        public void Init(ItemData itemData, InventoryController inventoryController)
+        public void Init(ItemData itemData)
         {
-            OnCollect += inventoryController.ChangeItemCount;
             _itemData = itemData;
         }
 
-        public void ActivateItem(float collectTime)
+        public void DisableItemOnMap()
         {
-            StartCoroutine(GetItemCoroutine(collectTime));
+            StartCoroutine(GetItemCoroutine());
         }
 
-        private IEnumerator GetItemCoroutine(float collectTime)
+        private IEnumerator GetItemCoroutine()
         {
-            yield return new WaitForSeconds(collectTime);
-            _model.SetActive(false);
-            OnCollect?.Invoke(_itemData, _itemData.DropCount);
+            _isEnable = false;
+            _model.SetActive(_isEnable);
             yield return new WaitForSeconds(DELAY_ENABLE);
-            _model.SetActive(true);
+            _isEnable = true;
+            _model.SetActive(_isEnable);
+            OnEnable?.Invoke();
         }
     }
 }

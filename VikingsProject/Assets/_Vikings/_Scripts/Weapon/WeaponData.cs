@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Vikings.Inventory;
+using Vikings.Building;
 
 namespace Vikings.Weapon
 {
@@ -9,7 +9,7 @@ namespace Vikings.Weapon
     public class WeaponData : ScriptableObject
     {
         public Action<int, float> OnUpgrade;
-        public List<ItemsCountData> weaponUpgradePrices = new();
+        public List<PriceToUpgrade> weaponUpgradePrices = new();
 
 
         public int ID => _id;
@@ -23,9 +23,11 @@ namespace Vikings.Weapon
         public void Upgrade()
         {
             _level++;
-            _collectTime /= _level;
+            if (_collectTime > 0)
+            {
+                _collectTime--;
+            }
             OnUpgrade?.Invoke(_level, _collectTime);
         }
     }
-    
 }

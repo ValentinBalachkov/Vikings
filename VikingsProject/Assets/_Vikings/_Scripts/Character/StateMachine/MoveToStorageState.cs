@@ -1,45 +1,31 @@
 ﻿using UnityEngine;
-using Vikings.Items;
+using Vikings.Building;
 
 namespace Vikings.Chanacter
 {
     public class MoveToStorageState : BaseState
     {
-        private ItemsOnMapController _itemsOnMapController;
+        private StorageOnMap _storageOnMap;
         private PlayerController _playerPrefab;
         private const float OFFSET_DISTANCE = 0.5f;
         private CharacterStateMachine _stateMachine;
         
-        public MoveToStorageState(CharacterStateMachine stateMachine, ItemsOnMapController itemsOnMapController, PlayerController playerPrefab) : base("Move to storage", stateMachine)
+        public MoveToStorageState(CharacterStateMachine stateMachine, StorageOnMap storageOnMap, PlayerController playerPrefab) : 
+            base("Move to storage", stateMachine)
         {
             _stateMachine = stateMachine;
-            _itemsOnMapController = itemsOnMapController;
+            _storageOnMap = storageOnMap;
             _playerPrefab = playerPrefab;
         }
         
-        public override void Enter()
-        {
-            base.Enter();
-        }
-
-        public override void Exit()
-        {
-            base.Exit();
-        }
-
         public override void UpdatePhysics()
         {
             base.UpdatePhysics();
-            _playerPrefab.MoveToPoint(_itemsOnMapController.StorageController.transform);
-            if (!(Vector3.Distance(_playerPrefab.transform.position, _itemsOnMapController.StorageController.transform.position) <=
+            
+            _playerPrefab.MoveToPoint(_storageOnMap.GetCurrentStoragePosition());
+            if (!(Vector3.Distance(_playerPrefab.transform.position, _storageOnMap.GetCurrentStoragePosition().position) <=
                   OFFSET_DISTANCE)) return;
-            _itemsOnMapController.StorageController.SetItemsOnStorage();
-            _stateMachine.SetState<MovingState>();
-        }
-
-        public override void UpdateLogic()
-        {
-            base.UpdateLogic();
+            _storageOnMap.SetItemToStorage();
         }
     }
 }

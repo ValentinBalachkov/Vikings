@@ -1,12 +1,12 @@
 ﻿using System;
 using Vikings.Items;
 
-namespace Vikings.Inventory
+namespace Vikings.Building
 {
     [Serializable]
-    public class ItemsCountData
+    public class PriceToUpgrade
     {
-        public int count;
         public ItemData itemData;
+        public int count;
     }
 }
