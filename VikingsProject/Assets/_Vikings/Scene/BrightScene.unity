@@ -13215,9 +13215,9 @@ MonoBehaviour:
   _characterStateMachine: {fileID: 449289997}
   _inventoryController: {fileID: 4784603357717078737}
   _storageData:
-  - storageData: {fileID: 11400000, guid: 480902296caabf2408ac395a39489084, type: 2}
+  - buildingData: {fileID: 11400000, guid: 63cf7087542e9bd4d98a37838c0a57d1, type: 2}
     spawnPoint: {fileID: 1399576591}
-  - storageData: {fileID: 11400000, guid: e3cc3053499092a49a9428165be974ad, type: 2}
+  - buildingData: {fileID: 11400000, guid: faf2712929f2ea84097b4dfb786d3243, type: 2}
     spawnPoint: {fileID: 163505418}
 --- !u!1 &1975680563
 GameObject:

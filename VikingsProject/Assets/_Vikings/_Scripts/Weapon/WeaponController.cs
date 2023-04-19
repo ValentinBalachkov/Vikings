@@ -20,8 +20,8 @@ namespace Vikings.Weapon
             
             foreach (var weaponPrice in _weaponData.weaponUpgradePrices)
             {
-                var storage = _storageOnMap.StorageControllers.FirstOrDefault(x => x.StorageData.ItemType.ID == weaponPrice.itemData.ID);
-                if (storage != null && weaponPrice.count <= storage.StorageData.Count)
+                var storage = _storageOnMap.StorageControllers.FirstOrDefault(x => x.BuildingData.StorageData.ItemType.ID == weaponPrice.itemData.ID);
+                if (storage != null && weaponPrice.count <= storage.BuildingData.StorageData.Count)
                 {
                     continue;
                 }
@@ -31,7 +31,7 @@ namespace Vikings.Weapon
 
             foreach (var item in _weaponData.weaponUpgradePrices)
             {
-                var storage = _storageOnMap.StorageControllers.FirstOrDefault(x => x.StorageData.ItemType.ID == item.itemData.ID);
+                var storage = _storageOnMap.StorageControllers.FirstOrDefault(x => x.BuildingData.StorageData.ItemType.ID == item.itemData.ID);
                 if (storage != null) storage.ChangeStorageCount(new PriceToUpgrade{count = -item.count, itemData = item.itemData});
             }
             _weaponData.Upgrade();

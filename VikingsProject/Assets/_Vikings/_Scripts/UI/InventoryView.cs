@@ -23,9 +23,9 @@ namespace Vikings.UI
         {
             for (int i = 0; i < _storageOnMap.StorageControllers.Count; i++)
             {
-                var storageData = _storageOnMap.StorageControllers[i].StorageData;
+                var buildingData = _storageOnMap.StorageControllers[i].BuildingData;
                 _itemsCountText[i].text =
-                    $"{storageData.ItemType.ItemName}: {storageData.Count}/{storageData.MaxStorageCount}";
+                    $"{buildingData.StorageData.ItemType.ItemName}: {buildingData.StorageData.Count}/{buildingData.StorageData.MaxStorageCount}";
             }
         }
     }

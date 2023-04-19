@@ -13,38 +13,38 @@ namespace Vikings.Building
         
         private StorageOnMap _storageOnMap;
 
-        public override void Init(StorageData storageData, StorageOnMap storageOnMap)
+        public override void Init(BuildingData buildingData, StorageOnMap storageOnMap)
         {
-            base.storageData = storageData;
+            this.buildingData = buildingData;
             _storageOnMap = storageOnMap;
         }
         
         
         public override void ChangeStorageCount(PriceToUpgrade priceToUpgrade)
         {
-            if (storageData.Count + priceToUpgrade.count > storageData.MaxStorageCount)
+            if (buildingData.StorageData.Count + priceToUpgrade.count > buildingData.StorageData.MaxStorageCount)
             {
-                storageData.Count = storageData.MaxStorageCount;
+                buildingData.StorageData.Count = buildingData.StorageData.MaxStorageCount;
             }
             else
             {
-                storageData.Count += priceToUpgrade.count;
+                buildingData.StorageData.Count += priceToUpgrade.count;
             }
             
-            OnChangeCountStorage?.Invoke(storageData.ItemType);
+            OnChangeCountStorage?.Invoke(buildingData.StorageData.ItemType);
         }
 
         public override void UpgradeStorage()
         {
-            if (storageData.CurrentLevel >= 3)
+            if (buildingData.StorageData.CurrentLevel >= 3)
             {
                 return;
             }
             
-            foreach (var upgradePrice in storageData.PriceToUpgrade)
+            foreach (var upgradePrice in buildingData.StorageData.PriceToUpgrade)
             {
-                var storage = _storageOnMap.StorageControllers.FirstOrDefault(x => x.StorageData.ItemType.ID == upgradePrice.itemData.ID);
-                if (storage != null && upgradePrice.count <= storage.StorageData.Count)
+                var storage = _storageOnMap.StorageControllers.FirstOrDefault(x => x.BuildingData.StorageData.ItemType.ID == upgradePrice.itemData.ID);
+                if (storage != null && upgradePrice.count <= storage.BuildingData.StorageData.Count)
                 {
                     continue;
                 }
@@ -52,20 +52,20 @@ namespace Vikings.Building
                 return;
             }
             
-            foreach (var item in storageData.PriceToUpgrade)
+            foreach (var item in buildingData.StorageData.PriceToUpgrade)
             {
-                var storage = _storageOnMap.StorageControllers.FirstOrDefault(x => x.StorageData.ItemType.ID == item.itemData.ID);
+                var storage = _storageOnMap.StorageControllers.FirstOrDefault(x => x.BuildingData.StorageData.ItemType.ID == item.itemData.ID);
                 if (storage != null) storage.ChangeStorageCount( new PriceToUpgrade{count = -item.count, itemData = item.itemData} );
             }
             
-            storageData.MaxStorageCount += 10;
-            storageData.CurrentLevel++;
-            OnUpgradeStorage?.Invoke(storageData.MaxStorageCount, storageData.CurrentLevel);
+            buildingData.StorageData.MaxStorageCount += 10;
+            buildingData.StorageData.CurrentLevel++;
+            OnUpgradeStorage?.Invoke(buildingData.StorageData.MaxStorageCount, buildingData.StorageData.CurrentLevel);
         }
 
         public override bool IsFullStorage()
         {
-            return storageData.Count >= storageData.MaxStorageCount;
+            return buildingData.StorageData.Count >= buildingData.StorageData.MaxStorageCount;
         }
         
     }

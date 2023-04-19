@@ -19,12 +19,15 @@ namespace Vikings.Building
         public PriceToUpgrade[] PriceToUpgrades => _priceToUpgrades;
         public float BuildTime => _buildTime;
         public PriceToUpgrade[] currentItemsCount;
+        public BuildingController BuildingController => _buildingController;
 
         [SerializeField] private StorageData _storageData;
         [SerializeField] private bool _isBuild;
         [SerializeField] private PriceToUpgrade[] _priceToUpgrades;
         [SerializeField] private float _buildTime;
         [SerializeField] private string _buildingName;
+        [SerializeField] private BuildingController _buildingController;
+
 
         public void LoadData()
         {

@@ -1,17 +1,19 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using System;
+using System.Linq;
 
 namespace Vikings.Building
 {
     public class BuildingController : AbstractBuilding
     {
-        [SerializeField] private BuildingData _buildingData;
+        public Action<BuildingData> OnChangeCount;
+
+
         private StorageOnMap _storageOnMap;
 
         public override void ChangeStorageCount(PriceToUpgrade price)
         {
-            var item = _buildingData.PriceToUpgrades.FirstOrDefault(x => x.itemData.ID == price.itemData.ID);
-            var currentItem = _buildingData.currentItemsCount.FirstOrDefault(x => x.itemData.ID == price.itemData.ID);
+            var item = buildingData.PriceToUpgrades.FirstOrDefault(x => x.itemData.ID == price.itemData.ID);
+            var currentItem = buildingData.currentItemsCount.FirstOrDefault(x => x.itemData.ID == price.itemData.ID);
             if (price.count + currentItem.count <= item.count)
             {
                 currentItem.count += price.count;
@@ -20,30 +22,37 @@ namespace Vikings.Building
             {
                 currentItem.count = item.count;
             }
+            
+            OnChangeCount?.Invoke(buildingData);
+
+            if (IsFullStorage())
+            {
+                UpgradeStorage();
+            }
         }
 
-        public override void Init(StorageData storageData, StorageOnMap storageOnMap)
+        public override void Init(BuildingData buildingData, StorageOnMap storageOnMap)
         {
-            this.storageData = storageData;
+            this.buildingData = buildingData;
             _storageOnMap = storageOnMap;
         }
 
         public override bool IsFullStorage()
         {
-            for (int i = 0; i < _buildingData.PriceToUpgrades.Length; i++)
+            for (int i = 0; i < buildingData.PriceToUpgrades.Length; i++)
             {
-                if (_buildingData.PriceToUpgrades[i].count > _buildingData.currentItemsCount[i].count)
+                if (buildingData.PriceToUpgrades[i].count > buildingData.currentItemsCount[i].count)
                 {
                     return false;
                 }
             }
-            _buildingData.IsBuild = true;
+            buildingData.IsBuild = true;
             return true;
         }
 
         public override void UpgradeStorage()
         {
-            
+            _storageOnMap.UpgradeBuildingToStorage(buildingData);
         }
     }
 }

@@ -22,6 +22,7 @@ namespace Vikings.Chanacter
 
         public PriceToUpgrade SetItemToStorage()
         {
+            Debug.Log(_currentItem.Item);
             var price = new PriceToUpgrade
             {
                 count = _count,

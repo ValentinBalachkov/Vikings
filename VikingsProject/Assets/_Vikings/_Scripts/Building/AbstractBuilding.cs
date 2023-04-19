@@ -4,11 +4,11 @@ namespace Vikings.Building
 {
     public abstract class AbstractBuilding : MonoBehaviour
     {
-        public StorageData StorageData => storageData;
+        public BuildingData BuildingData => buildingData;
         
-        protected StorageData storageData;
+        protected BuildingData buildingData;
         public abstract void ChangeStorageCount(PriceToUpgrade count);
-        public abstract void Init(StorageData storageData, StorageOnMap storageOnMap);
+        public abstract void Init(BuildingData buildingData, StorageOnMap storageOnMap);
         public abstract bool IsFullStorage();
         public abstract void UpgradeStorage();
     }
