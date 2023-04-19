@@ -1,0 +1,153 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using Vikings.Chanacter;
+using Vikings.Items;
+using Vikings.UI;
+using Random = UnityEngine.Random;
+
+namespace Vikings.Building
+{
+    public class BuildingsOnMap : MonoBehaviour
+    {
+        [SerializeField] private ItemsOnMapController _itemsOnMapController;
+        [SerializeField] private StoragePosition[] _storageData;
+        [SerializeField] private CharacterStateMachine _characterStateMachine;
+        [SerializeField] private InventoryController _inventoryController;
+
+        [SerializeField] private InventoryView _inventoryView;
+
+        private List<AbstractBuilding> _buildingControllers = new();
+
+        private List<ItemController> _itemQueue = new();
+        private AbstractBuilding _currentBuilding;
+
+        public void SpawnStorage(int index)
+        {
+            _storageData[index].buildingData.LoadData();
+            if (_storageData[index].buildingData.IsBuild)
+            {
+                var item = Instantiate(_storageData[index].buildingData.StorageData.StorageController, _storageData[index].spawnPoint);
+                _buildingControllers.Add(item);
+                item.Init(_storageData[index].buildingData);
+                _inventoryView.AddStorageController(item);
+            }
+            else
+            {
+                var item = Instantiate(_storageData[index].buildingData.BuildingController, _storageData[index].spawnPoint);
+                _buildingControllers.Add(item);
+                item.Init(_storageData[index].buildingData);
+            }
+            
+            UpdateCurrentBuilding();
+        }
+        
+        // public void SpawnStorages()
+        // {
+        //     foreach (var storage in _storageData)
+        //     {
+        //         storage.buildingData.LoadData();
+        //         if (storage.buildingData.IsBuild)
+        //         {
+        //             var item = Instantiate(storage.buildingData.StorageData.StorageController, storage.spawnPoint);
+        //             _buildingControllers.Add(item);
+        //             item.Init(storage.buildingData);
+        //             _inventoryView.AddStorageController(item);
+        //         }
+        //         else
+        //         {
+        //             var item = Instantiate(storage.buildingData.BuildingController, storage.spawnPoint);
+        //             _buildingControllers.Add(item);
+        //             item.Init(storage.buildingData);
+        //         }
+        //         
+        //     }
+        //
+        //     UpdateCurrentBuilding();
+        // }
+
+        public void UpdateCurrentBuilding()
+        {
+            if (_currentBuilding != null && _currentBuilding.IsFullStorage() && _characterStateMachine.CurrentState is not CraftingState)
+            {
+                _characterStateMachine.SetState<CraftingState>();
+                return;
+            }
+            
+            _currentBuilding = _buildingControllers.OrderBy(x => x is BuildingController).FirstOrDefault(x => !x.IsFullStorage());
+            _itemQueue.Clear();
+
+            if (_currentBuilding == null)
+            {
+                _characterStateMachine.SetState<IdleState>();
+                return;
+            }
+
+            UpdateItemsQueue(_currentBuilding.GetCurrentPriceToUpgrades());
+        }
+
+        public void UpdateItemsQueue(PriceToUpgrade[] priceToUpgrades)
+        {
+            _itemQueue.Clear();
+            foreach (var price in priceToUpgrades)
+            {
+                var item = _itemsOnMapController.ItemsList.Where(x => x.Item.ID == price.itemData.ID);
+                _itemQueue.AddRange(item);
+            }
+
+            if (_itemQueue.Count > 0)
+            {
+                _characterStateMachine.SetState<MovingState>();
+                return;
+            }
+            _characterStateMachine.SetState<IdleState>();
+        }
+        
+        public Transform GetCurrentBuildingPosition()
+        {
+            return _currentBuilding.transform;
+        }
+
+        public AbstractBuilding GetCurrentBuilding()
+        {
+            return _currentBuilding;
+        }
+        
+        public void SetItemToStorage()
+        {
+            if (_currentBuilding != null)
+            {
+                _currentBuilding.ChangeStorageCount(_inventoryController.SetItemToStorage());
+                UpdateCurrentBuilding();
+            }
+        }
+        
+        public ItemController GetElementPosition()
+        {
+            return _itemQueue[Random.Range(0, _itemQueue.Count)];
+        }
+        
+        public void UpgradeBuildingToStorage()
+        {
+            var data = _storageData.FirstOrDefault(x => x.buildingData == _currentBuilding.BuildingData);
+            if (data == null) return;
+
+            var item = Instantiate(data.buildingData.StorageData.StorageController, data.spawnPoint);
+            _buildingControllers.Add(item);
+            data.buildingData.BuildingController.OnChangeCount = null;
+            Destroy(_currentBuilding.gameObject);
+            _buildingControllers.Remove(data.buildingData.BuildingController);
+            item.Init(data.buildingData);
+            _inventoryView.AddStorageController(item);
+            UpdateCurrentBuilding();
+        }
+    }
+    
+    [Serializable]
+    public class StoragePosition
+    {
+        public BuildingData buildingData;
+        public Transform spawnPoint;
+    }
+}

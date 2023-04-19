@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Vikings.Items;
 
 
@@ -9,14 +8,11 @@ namespace Vikings.Building
     {
         public Action<ItemData> OnChangeCountStorage;
         public Action<int, int> OnUpgradeStorage;
-
         
-        private StorageOnMap _storageOnMap;
 
-        public override void Init(BuildingData buildingData, StorageOnMap storageOnMap)
+        public override void Init(BuildingData buildingData)
         {
             this.buildingData = buildingData;
-            _storageOnMap = storageOnMap;
         }
         
         
@@ -36,36 +32,49 @@ namespace Vikings.Building
 
         public override void UpgradeStorage()
         {
-            if (buildingData.StorageData.CurrentLevel >= 3)
-            {
-                return;
-            }
-            
-            foreach (var upgradePrice in buildingData.StorageData.PriceToUpgrade)
-            {
-                var storage = _storageOnMap.StorageControllers.FirstOrDefault(x => x.BuildingData.StorageData.ItemType.ID == upgradePrice.itemData.ID);
-                if (storage != null && upgradePrice.count <= storage.BuildingData.StorageData.Count)
-                {
-                    continue;
-                }
+            // if (buildingData.StorageData.CurrentLevel >= 3)
+            // {
+            //     return;
+            // }
+            //
+            // foreach (var upgradePrice in buildingData.StorageData.PriceToUpgrade)
+            // {
+            //     var storage = _storageOnMap.StorageControllers.FirstOrDefault(x => x.BuildingData.StorageData.ItemType.ID == upgradePrice.itemData.ID);
+            //     if (storage != null && upgradePrice.count <= storage.BuildingData.StorageData.Count)
+            //     {
+            //         continue;
+            //     }
+            //
+            //     return;
+            // }
+            //
+            // foreach (var item in buildingData.StorageData.PriceToUpgrade)
+            // {
+            //     var storage = _storageOnMap.StorageControllers.FirstOrDefault(x => x.BuildingData.StorageData.ItemType.ID == item.itemData.ID);
+            //     if (storage != null) storage.ChangeStorageCount( new PriceToUpgrade{count = -item.count, itemData = item.itemData} );
+            // }
+            //
+            // buildingData.StorageData.MaxStorageCount += 10;
+            // buildingData.StorageData.CurrentLevel++;
+            // OnUpgradeStorage?.Invoke(buildingData.StorageData.MaxStorageCount, buildingData.StorageData.CurrentLevel);
+        }
 
-                return;
-            }
-            
-            foreach (var item in buildingData.StorageData.PriceToUpgrade)
+        public override PriceToUpgrade[] GetCurrentPriceToUpgrades()
+        {
+            PriceToUpgrade price = new PriceToUpgrade()
             {
-                var storage = _storageOnMap.StorageControllers.FirstOrDefault(x => x.BuildingData.StorageData.ItemType.ID == item.itemData.ID);
-                if (storage != null) storage.ChangeStorageCount( new PriceToUpgrade{count = -item.count, itemData = item.itemData} );
-            }
-            
-            buildingData.StorageData.MaxStorageCount += 10;
-            buildingData.StorageData.CurrentLevel++;
-            OnUpgradeStorage?.Invoke(buildingData.StorageData.MaxStorageCount, buildingData.StorageData.CurrentLevel);
+                count = buildingData.StorageData.Count,
+                itemData = buildingData.StorageData.ItemType
+            };
+
+            PriceToUpgrade[] priceToUpgrades = { price };
+            return priceToUpgrades;
         }
 
         public override bool IsFullStorage()
         {
-            return buildingData.StorageData.Count >= buildingData.StorageData.MaxStorageCount;
+            bool isFullStorage = buildingData.StorageData.Count >= buildingData.StorageData.MaxStorageCount;
+            return isFullStorage;
         }
         
     }

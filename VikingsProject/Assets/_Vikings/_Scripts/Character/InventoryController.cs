@@ -14,15 +14,19 @@ namespace Vikings.Chanacter
         private ItemController _currentItem;
         private int _count;
 
-        public void CollectItem(ItemController itemData, WeaponData weaponData)
+        public void SetItem(ItemController itemData)
         {
             _currentItem = itemData;
+        }
+
+        public void CollectItem(WeaponData weaponData)
+        {
             StartCoroutine(CollectItemsCoroutine(weaponData));
         }
 
         public PriceToUpgrade SetItemToStorage()
         {
-            Debug.Log(_currentItem.Item);
+            Debug.Log(_currentItem);
             var price = new PriceToUpgrade
             {
                 count = _count,

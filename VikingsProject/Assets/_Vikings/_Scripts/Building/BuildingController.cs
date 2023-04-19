@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Vikings.Building
@@ -6,10 +7,7 @@ namespace Vikings.Building
     public class BuildingController : AbstractBuilding
     {
         public Action<BuildingData> OnChangeCount;
-
-
-        private StorageOnMap _storageOnMap;
-
+        
         public override void ChangeStorageCount(PriceToUpgrade price)
         {
             var item = buildingData.PriceToUpgrades.FirstOrDefault(x => x.itemData.ID == price.itemData.ID);
@@ -31,10 +29,9 @@ namespace Vikings.Building
             }
         }
 
-        public override void Init(BuildingData buildingData, StorageOnMap storageOnMap)
+        public override void Init(BuildingData buildingData)
         {
             this.buildingData = buildingData;
-            _storageOnMap = storageOnMap;
         }
 
         public override bool IsFullStorage()
@@ -47,12 +44,27 @@ namespace Vikings.Building
                 }
             }
             buildingData.IsBuild = true;
+            
             return true;
         }
 
         public override void UpgradeStorage()
         {
-            _storageOnMap.UpgradeBuildingToStorage(buildingData);
+            //_storageOnMap.UpgradeBuildingToStorage(buildingData);
+        }
+
+        public override PriceToUpgrade[] GetCurrentPriceToUpgrades()
+        {
+            List<PriceToUpgrade> price = new();
+            for (int i = 0; i < buildingData.PriceToUpgrades.Length; i++)
+            {
+                if (buildingData.PriceToUpgrades[i].count > buildingData.currentItemsCount[i].count)
+                {
+                    price.Add( buildingData.currentItemsCount[i]);
+                }
+            }
+
+            return price.ToArray();
         }
     }
 }

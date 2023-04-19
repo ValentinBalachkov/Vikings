@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Vikings.Building
 {
@@ -8,8 +9,10 @@ namespace Vikings.Building
         
         protected BuildingData buildingData;
         public abstract void ChangeStorageCount(PriceToUpgrade count);
-        public abstract void Init(BuildingData buildingData, StorageOnMap storageOnMap);
+        public abstract void Init(BuildingData buildingData);
         public abstract bool IsFullStorage();
         public abstract void UpgradeStorage();
+
+        public abstract PriceToUpgrade[] GetCurrentPriceToUpgrades();
     }
 }

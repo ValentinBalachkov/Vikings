@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Vikings.Building;
+using Vikings.Chanacter;
 
 namespace Vikings.Items
 {
@@ -12,7 +13,10 @@ namespace Vikings.Items
 
         [SerializeField] private BoneFireController _boneFireController;
 
-        [SerializeField] private StorageOnMap _storageOnMap;
+        [SerializeField] private BuildingsOnMap _buildingsOnMap;
+
+        [SerializeField] private CharacterStateMachine _characterStateMachine;
+        
 
         private List<ItemController> _itemsList = new();
 
@@ -37,7 +41,8 @@ namespace Vikings.Items
             }
 
             _boneFireController.Spawn();
-            _storageOnMap.SpawnStorages();
+            _characterStateMachine.SetState<IdleState>();
+            //_buildingsOnMap.SpawnStorages();
         }
     }
 }
