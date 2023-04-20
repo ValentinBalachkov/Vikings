@@ -70,14 +70,18 @@ namespace Vikings.Building
 
         public void UpdateCurrentBuilding()
         {
+            Debug.Log(0);
             foreach (var character in _charactersOnMap.CharactersList)
             {
-                if (_currentBuilding != null && _currentBuilding.IsFullStorage() &&
+                Debug.Log(1);
+                if (_currentBuilding != null && _currentBuilding is BuildingController && _currentBuilding.IsFullStorage() &&
                     character.CurrentState is not CraftingState)
                 {
+                    Debug.Log(2);
                     character.SetState<CraftingState>();
                     continue;
                 }
+                Debug.Log(3);
 
                 _currentBuilding = _buildingControllers.OrderBy(x => x is BuildingController)
                     .FirstOrDefault(x => !x.IsFullStorage());
@@ -140,16 +144,26 @@ namespace Vikings.Building
 
         public void UpgradeBuildingToStorage()
         {
+           
             var data = _storageData.FirstOrDefault(x => x.buildingData == _currentBuilding.BuildingData);
             if (data == null) return;
-
+           
             var item = Instantiate(data.buildingData.StorageData.StorageController, data.spawnPoint);
+          
             _buildingControllers.Add(item);
+         
             data.buildingData.BuildingController.OnChangeCount = null;
+          
             Destroy(_currentBuilding.gameObject);
+        
+            _currentBuilding = null;
+          
             _buildingControllers.Remove(data.buildingData.BuildingController);
+           
             item.Init(data.buildingData);
+           
             _inventoryView.AddStorageController(item);
+            
             UpdateCurrentBuilding();
         }
     }

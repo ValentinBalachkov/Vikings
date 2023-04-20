@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using Vikings.Building;
@@ -9,7 +11,7 @@ namespace Vikings.UI
     public class InventoryView : MonoBehaviour
     {
         [SerializeField] private BuildingsOnMap _buildingsOnMap;
-        [SerializeField] private TMP_Text[] _itemsCountText;
+        [SerializeField] private InventoryViewTextData[] _itemsCountText;
 
         private List<StorageController> _storageControllers = new();
 
@@ -21,12 +23,20 @@ namespace Vikings.UI
 
         private void UpdateUI(ItemData itemData)
         {
-            for (int i = 0; i < _storageControllers.Count; i++)
-            {
-                var buildingData = _storageControllers[i].BuildingData;
-                _itemsCountText[i].text =
-                    $"{buildingData.StorageData.ItemType.ItemName}: {buildingData.StorageData.Count}/{buildingData.StorageData.MaxStorageCount}";
-            }
+            var storage =
+                _storageControllers.FirstOrDefault(x => x.BuildingData.StorageData.ItemType.ID == itemData.ID);
+            if(storage == null) return;
+
+            var item = _itemsCountText.FirstOrDefault(x => x.item.ID == itemData.ID);
+            
+            item.countText.text = $" {storage.BuildingData.StorageData.Count}/{storage.BuildingData.StorageData.MaxStorageCount}";
         }
+    }
+
+    [Serializable]
+    public class InventoryViewTextData
+    {
+        public TMP_Text countText;
+        public ItemData item;
     }
 }

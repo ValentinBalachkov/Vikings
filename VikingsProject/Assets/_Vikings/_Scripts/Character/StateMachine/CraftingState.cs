@@ -30,6 +30,7 @@ namespace Vikings.Chanacter
 
         public override void UpdatePhysics()
         {
+            if(_isCrafting) return;
             _playerController.MoveToPoint(_buildingsOnMap.GetCurrentBuildingPosition());
             if (!(Vector3.Distance(_playerController.transform.position, _buildingsOnMap.GetCurrentBuildingPosition().position) <=
                   OFFSET_DISTANCE)) return;
