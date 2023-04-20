@@ -8,6 +8,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/_Vikings/_Scripts/Building/HomeController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Vikings/_Scripts/Building/StorageData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Vikings/_Scripts/Character/PlayerController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Vikings/_Scripts/UI/InventoryView.cs" root0="FORCE_HIGHLIGHTING" />
@@ -97,7 +98,7 @@
       <workItem from="1681743493572" duration="5171000" />
       <workItem from="1681827980162" duration="5794000" />
       <workItem from="1681912877972" duration="13780000" />
-      <workItem from="1681998125113" duration="6029000" />
+      <workItem from="1681998125113" duration="8443000" />
     </task>
     <servers />
   </component>

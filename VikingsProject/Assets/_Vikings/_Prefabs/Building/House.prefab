@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8480261106038355648}
   - component: {fileID: 509501779382944748}
-  - component: {fileID: 847216987942271562}
   - component: {fileID: 5957777346596679902}
+  - component: {fileID: -1726127725469879221}
   m_Layer: 0
   m_Name: House
   m_TagString: Untagged
@@ -57,18 +57,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5.064766, y: 5.186595, z: 7.147155}
   m_Center: {x: -0.00057411194, y: 4.450407, z: 0.00000035762787}
---- !u!114 &847216987942271562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 181163595917362788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5f664276fcd4047964956d262c8a0dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5957777346596679902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,7 +71,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _countText: {fileID: 7431612760648335103}
   _levelText: {fileID: 7552972875495059105}
-  _storageController: {fileID: 847216987942271562}
+  _storageController: {fileID: -1726127725469879221}
+--- !u!114 &-1726127725469879221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181163595917362788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 612fe8a6276b9f0458ea44eb3a25e8d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4610943079481845679
 GameObject:
   m_ObjectHideFlags: 0

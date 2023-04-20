@@ -5,7 +5,7 @@ namespace Vikings.Building
         public override void Init(BuildingData buildingData)
         {
             base.Init(buildingData);
-            
+            BuildingHomeActionController.Instance.OnHomeBuilding();
         }
     }
 }
