@@ -25,7 +25,7 @@ namespace Vikings.Chanacter
             _playerPrefab.MoveToPoint(_buildingsOnMap.GetCurrentBuildingPosition());
             if (!(Vector3.Distance(_playerPrefab.transform.position, _buildingsOnMap.GetCurrentBuildingPosition().position) <=
                   OFFSET_DISTANCE)) return;
-            _buildingsOnMap.SetItemToStorage();
+            _buildingsOnMap.SetItemToStorage(_stateMachine);
         }
     }
 }

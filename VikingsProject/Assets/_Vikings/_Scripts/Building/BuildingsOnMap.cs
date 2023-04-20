@@ -13,8 +13,7 @@ namespace Vikings.Building
     {
         [SerializeField] private ItemsOnMapController _itemsOnMapController;
         [SerializeField] private StoragePosition[] _storageData;
-        [SerializeField] private CharacterStateMachine _characterStateMachine;
-        [SerializeField] private InventoryController _inventoryController;
+        [SerializeField] private CharactersOnMap _charactersOnMap;
 
         [SerializeField] private InventoryView _inventoryView;
 
@@ -28,21 +27,23 @@ namespace Vikings.Building
             _storageData[index].buildingData.LoadData();
             if (_storageData[index].buildingData.IsBuild)
             {
-                var item = Instantiate(_storageData[index].buildingData.StorageData.StorageController, _storageData[index].spawnPoint);
+                var item = Instantiate(_storageData[index].buildingData.StorageData.StorageController,
+                    _storageData[index].spawnPoint);
                 _buildingControllers.Add(item);
                 item.Init(_storageData[index].buildingData);
                 _inventoryView.AddStorageController(item);
             }
             else
             {
-                var item = Instantiate(_storageData[index].buildingData.BuildingController, _storageData[index].spawnPoint);
+                var item = Instantiate(_storageData[index].buildingData.BuildingController,
+                    _storageData[index].spawnPoint);
                 _buildingControllers.Add(item);
                 item.Init(_storageData[index].buildingData);
             }
-            
+
             UpdateCurrentBuilding();
         }
-        
+
         // public void SpawnStorages()
         // {
         //     foreach (var storage in _storageData)
@@ -69,22 +70,27 @@ namespace Vikings.Building
 
         public void UpdateCurrentBuilding()
         {
-            if (_currentBuilding != null && _currentBuilding.IsFullStorage() && _characterStateMachine.CurrentState is not CraftingState)
+            foreach (var character in _charactersOnMap.CharactersList)
             {
-                _characterStateMachine.SetState<CraftingState>();
-                return;
-            }
-            
-            _currentBuilding = _buildingControllers.OrderBy(x => x is BuildingController).FirstOrDefault(x => !x.IsFullStorage());
-            _itemQueue.Clear();
+                if (_currentBuilding != null && _currentBuilding.IsFullStorage() &&
+                    character.CurrentState is not CraftingState)
+                {
+                    character.SetState<CraftingState>();
+                    continue;
+                }
 
-            if (_currentBuilding == null)
-            {
-                _characterStateMachine.SetState<IdleState>();
-                return;
-            }
+                _currentBuilding = _buildingControllers.OrderBy(x => x is BuildingController)
+                    .FirstOrDefault(x => !x.IsFullStorage());
+                _itemQueue.Clear();
 
-            UpdateItemsQueue(_currentBuilding.GetCurrentPriceToUpgrades());
+                if (_currentBuilding == null)
+                {
+                    character.SetState<IdleState>();
+                    continue;
+                }
+
+                UpdateItemsQueue(_currentBuilding.GetCurrentPriceToUpgrades());
+            }
         }
 
         public void UpdateItemsQueue(PriceToUpgrade[] priceToUpgrades)
@@ -96,14 +102,18 @@ namespace Vikings.Building
                 _itemQueue.AddRange(item);
             }
 
-            if (_itemQueue.Count > 0)
+            foreach (var character in _charactersOnMap.CharactersList)
             {
-                _characterStateMachine.SetState<MovingState>();
-                return;
+                if (_itemQueue.Count > 0)
+                {
+                    character.SetState<MovingState>();
+                    continue;
+                }
+
+                character.SetState<IdleState>();
             }
-            _characterStateMachine.SetState<IdleState>();
         }
-        
+
         public Transform GetCurrentBuildingPosition()
         {
             return _currentBuilding.transform;
@@ -113,21 +123,21 @@ namespace Vikings.Building
         {
             return _currentBuilding;
         }
-        
-        public void SetItemToStorage()
+
+        public void SetItemToStorage(CharacterStateMachine characterStateMachine)
         {
             if (_currentBuilding != null)
             {
-                _currentBuilding.ChangeStorageCount(_inventoryController.SetItemToStorage());
+                _currentBuilding.ChangeStorageCount(characterStateMachine.InventoryController.SetItemToStorage());
                 UpdateCurrentBuilding();
             }
         }
-        
+
         public ItemController GetElementPosition()
         {
             return _itemQueue[Random.Range(0, _itemQueue.Count)];
         }
-        
+
         public void UpgradeBuildingToStorage()
         {
             var data = _storageData.FirstOrDefault(x => x.buildingData == _currentBuilding.BuildingData);
@@ -143,7 +153,7 @@ namespace Vikings.Building
             UpdateCurrentBuilding();
         }
     }
-    
+
     [Serializable]
     public class StoragePosition
     {

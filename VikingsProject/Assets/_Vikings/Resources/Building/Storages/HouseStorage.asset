@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c28eeb759f94304bae33740cbfab451, type: 3}
+  m_Name: HouseStorage
+  m_EditorClassIdentifier: 
+  _itemType: {fileID: 11400000, guid: b90d6cdefc2ad7e4cbdd899ef9e419e5, type: 2}
+  _count: 0
+  _maxStorageCount: 10
+  _currentLevel: 1
+  _storageController: {fileID: 847216987942271562, guid: c434ae09455d2844d9c2f4f9377b77bd,
+    type: 3}
+  _priceToUpgrade:
+  - itemData: {fileID: 11400000, guid: 842ec8fe0ff14054fb025a7b78239191, type: 2}
+    count: 15
+  - itemData: {fileID: 11400000, guid: 8b782c2617e0b8048985ef732675d1be, type: 2}
+    count: 10

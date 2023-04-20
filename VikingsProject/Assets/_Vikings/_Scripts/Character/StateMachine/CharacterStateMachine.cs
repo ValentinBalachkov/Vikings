@@ -9,11 +9,17 @@ namespace Vikings.Chanacter
     public class CharacterStateMachine : StateMachine
     {
         public BaseState CurrentState => _currentState;
-        [SerializeField] private BuildingsOnMap _buildingsOnMap;
+        public InventoryController InventoryController => _inventoryController;
+
         [SerializeField] private PlayerController _playerPrefab;
-        [SerializeField] private WeaponController _weaponController;
-        [SerializeField] private BoneFireController _boneFireController;
         [SerializeField] private InventoryController _inventoryController;
+        private BuildingsOnMap _buildingsOnMap;
+        private WeaponController _weaponController;
+
+
+        private BoneFireController _boneFireController;
+
+        private PlayerController _playerController;
 
         private MovingState _movingState;
         private CollectState _collectState;
@@ -24,19 +30,29 @@ namespace Vikings.Chanacter
         private List<BaseState> _states = new();
         private BaseState _currentState;
 
-
-        private void Awake()
+        public void SpawnCharacter(Transform position)
         {
-            _movingState = new MovingState(this, _buildingsOnMap, _playerPrefab, _inventoryController);
+            _playerController = Instantiate(_playerPrefab, position);
+        }
+
+        public void Init(BuildingsOnMap buildingsOnMap, WeaponController weaponController, BoneFireController boneFireController)
+        {
+            _buildingsOnMap = buildingsOnMap;
+            _weaponController = weaponController;
+            _boneFireController = boneFireController;
+            
+            _movingState = new MovingState(this, _buildingsOnMap, _playerController, _inventoryController);
             _collectState = new CollectState(this, _weaponController, _buildingsOnMap, _inventoryController);
-            _moveToStorageState = new MoveToStorageState(this, _buildingsOnMap, _playerPrefab);
-            _idleState = new IdleState(this, _boneFireController, _playerPrefab);
-            _craftingState = new CraftingState(this, _buildingsOnMap, _playerPrefab);
+            _moveToStorageState = new MoveToStorageState(this, _buildingsOnMap, _playerController);
+            _idleState = new IdleState(this, _boneFireController, _playerController);
+            _craftingState = new CraftingState(this, _buildingsOnMap, _playerController);
             _states.Add(_movingState);
             _states.Add(_collectState);
             _states.Add(_moveToStorageState);
             _states.Add(_idleState);
             _states.Add(_craftingState);
+
+            SetState<IdleState>();
         }
 
         public void SetState<T>() where T : BaseState
