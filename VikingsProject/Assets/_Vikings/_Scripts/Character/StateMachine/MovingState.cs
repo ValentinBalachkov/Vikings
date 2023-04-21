@@ -11,7 +11,7 @@ namespace Vikings.Chanacter
 
         private IGetItem _currentPoint;
         private PlayerController _playerPrefab;
-        private const float OFFSET_DISTANCE = 0.3f;
+        private const float OFFSET_DISTANCE = 1f;
         public MovingState(CharacterStateMachine stateMachine, BuildingsOnMap buildingsOnMap, PlayerController playerPrefab, InventoryController inventoryController) : base("Moving",
             stateMachine)
         {
@@ -30,8 +30,8 @@ namespace Vikings.Chanacter
         public override void UpdatePhysics()
         {
             base.UpdatePhysics();
-            _playerPrefab.MoveToPoint(_currentPoint.transform);
-            if (!(Vector3.Distance(_playerPrefab.transform.position, _currentPoint.transform.position) <=
+            _playerPrefab.MoveToPoint(_currentPoint.GetItemPosition());
+            if (!(Vector3.Distance(_playerPrefab.transform.position, _currentPoint.GetItemPosition().position) <=
                   OFFSET_DISTANCE)) return;
             _stateMachine.SetState<CollectState>();
         }

@@ -1,32 +1,28 @@
 ﻿using System;
+using UnityEngine;
 using Vikings.Items;
 
 
 namespace Vikings.Building
 {
-    public class StorageController : AbstractBuilding
+    public class StorageController : AbstractBuilding, IGetItem
     {
         public Action<ItemData> OnChangeCountStorage;
         public Action<int, int> OnUpgradeStorage;
-        
+        public int Priority { get; set; }
+
 
         public override void Init(BuildingData buildingData)
         {
+            Priority = 0;
             this.buildingData = buildingData;
         }
 
-        public bool IsAvaibleToGetItem()
+        public bool IsAvailableToGetItem()
         {
             return buildingData.StorageData.Count >= buildingData.StorageData.ItemType.DropCount;
         }
 
-        public void GetItemFromStorage()
-        {
-            buildingData.StorageData.Count -= buildingData.StorageData.ItemType.DropCount;
-            OnChangeCountStorage?.Invoke(buildingData.StorageData.ItemType);
-        }
-        
-        
         public override void ChangeStorageCount(PriceToUpgrade priceToUpgrade)
         {
             if (buildingData.StorageData.Count + priceToUpgrade.count > buildingData.StorageData.MaxStorageCount)
@@ -37,7 +33,7 @@ namespace Vikings.Building
             {
                 buildingData.StorageData.Count += priceToUpgrade.count;
             }
-            
+
             OnChangeCountStorage?.Invoke(buildingData.StorageData.ItemType);
         }
 
@@ -87,6 +83,21 @@ namespace Vikings.Building
             bool isFullStorage = buildingData.StorageData.Count >= buildingData.StorageData.MaxStorageCount;
             return isFullStorage;
         }
-        
+
+        public Transform GetItemPosition()
+        {
+            return transform;
+        }
+
+        public void TakeItem()
+        {
+            buildingData.StorageData.Count -= buildingData.StorageData.ItemType.DropCount;
+            OnChangeCountStorage?.Invoke(buildingData.StorageData.ItemType);
+        }
+
+        public ItemData GetItemData()
+        {
+            return buildingData.StorageData.ItemType;
+        }
     }
 }

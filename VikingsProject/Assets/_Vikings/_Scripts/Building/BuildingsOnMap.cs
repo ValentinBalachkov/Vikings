@@ -72,17 +72,15 @@ namespace Vikings.Building
 
         public void UpdateCurrentBuilding()
         {
-           
             foreach (var character in _charactersOnMap.CharactersList)
             {
-                
-                if (_currentBuilding != null && _currentBuilding is BuildingController && _currentBuilding.IsFullStorage() &&
+                if (_currentBuilding != null && _currentBuilding is BuildingController &&
+                    _currentBuilding.IsFullStorage() &&
                     character.CurrentState is not CraftingState)
                 {
                     character.SetState<CraftingState>();
                     continue;
                 }
-               
 
                 _currentBuilding = _buildingControllers.OrderBy(x => x is BuildingController)
                     .FirstOrDefault(x => !x.IsFullStorage());
@@ -104,8 +102,14 @@ namespace Vikings.Building
             foreach (var price in priceToUpgrades)
             {
                 var item = _itemsOnMapController.ItemsList.Where(x => x.Item.ID == price.itemData.ID);
+                var storages = _storageControllers.Where(x =>
+                    x.BuildingData.StorageData.ItemType.ID == price.itemData.ID &&
+                    x.BuildingData != _currentBuilding.BuildingData &&
+                    x.IsAvailableToGetItem());
                 _itemQueue.AddRange(item);
+                _itemQueue.AddRange(storages);
             }
+            
 
             foreach (var character in _charactersOnMap.CharactersList)
             {
@@ -140,33 +144,32 @@ namespace Vikings.Building
 
         public IGetItem GetElementPosition()
         {
-            return _itemQueue[Random.Range(0, _itemQueue.Count)];
+            return _itemQueue.OrderBy(x => x.Priority).ToList()[0];
         }
 
         public void UpgradeBuildingToStorage()
         {
-           
             var data = _storageData.FirstOrDefault(x => x.buildingData == _currentBuilding.BuildingData);
             if (data == null) return;
-           
+
             var item = Instantiate(data.buildingData.StorageData.StorageController, data.spawnPoint);
-            
+
             _storageControllers.Add(item);
-          
+
             _buildingControllers.Add(item);
-         
+
             data.buildingData.BuildingController.OnChangeCount = null;
-          
+
             Destroy(_currentBuilding.gameObject);
-        
+
             _currentBuilding = null;
-          
+
             _buildingControllers.Remove(data.buildingData.BuildingController);
-           
+
             item.Init(data.buildingData);
-           
+
             _inventoryView.AddStorageController(item);
-            
+
             UpdateCurrentBuilding();
         }
     }

@@ -5,6 +5,7 @@ namespace Vikings.Building
 {
     public interface IGetItem
     {
+        public int Priority { get; set; }
         public Transform GetItemPosition();
 
         public void TakeItem();
