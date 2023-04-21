@@ -14,6 +14,17 @@ namespace Vikings.Building
         {
             this.buildingData = buildingData;
         }
+
+        public bool IsAvaibleToGetItem()
+        {
+            return buildingData.StorageData.Count >= buildingData.StorageData.ItemType.DropCount;
+        }
+
+        public void GetItemFromStorage()
+        {
+            buildingData.StorageData.Count -= buildingData.StorageData.ItemType.DropCount;
+            OnChangeCountStorage?.Invoke(buildingData.StorageData.ItemType);
+        }
         
         
         public override void ChangeStorageCount(PriceToUpgrade priceToUpgrade)

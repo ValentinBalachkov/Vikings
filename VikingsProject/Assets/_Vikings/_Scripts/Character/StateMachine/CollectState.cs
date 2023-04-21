@@ -1,5 +1,4 @@
 ﻿using Vikings.Building;
-using Vikings.Items;
 using Vikings.Weapon;
 
 namespace Vikings.Chanacter
@@ -11,7 +10,7 @@ namespace Vikings.Chanacter
         private BuildingsOnMap _buildingsOnMap;
         private InventoryController _inventoryController;
 
-        private ItemController _currentItem;
+        private IGetItem _currentItem;
 
         public CollectState(CharacterStateMachine stateMachine, WeaponController weaponController,
             BuildingsOnMap buildingsOnMap, InventoryController inventoryController) : base("Collect", stateMachine)

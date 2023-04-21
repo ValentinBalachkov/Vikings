@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using Vikings.Building;
 
 namespace Vikings.Items
 {
-    public class ItemController : MonoBehaviour
+    public class ItemController : MonoBehaviour, IGetItem
     {
         public Action OnEnable;
         public bool IsEnable => _isEnable;
@@ -34,6 +35,16 @@ namespace Vikings.Items
             _isEnable = true;
             _model.SetActive(_isEnable);
             OnEnable?.Invoke();
+        }
+
+        public Transform GetItemPosition()
+        {
+            return transform;
+        }
+
+        public void TakeItem()
+        {
+            StartCoroutine(GetItemCoroutine());
         }
     }
 }

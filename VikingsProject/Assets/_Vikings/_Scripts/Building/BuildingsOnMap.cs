@@ -18,8 +18,9 @@ namespace Vikings.Building
         [SerializeField] private InventoryView _inventoryView;
 
         private List<AbstractBuilding> _buildingControllers = new();
+        private List<StorageController> _storageControllers = new();
 
-        private List<ItemController> _itemQueue = new();
+        private List<IGetItem> _itemQueue = new();
         private AbstractBuilding _currentBuilding;
 
         public void SpawnStorage(int index)
@@ -32,6 +33,7 @@ namespace Vikings.Building
                 _buildingControllers.Add(item);
                 item.Init(_storageData[index].buildingData);
                 _inventoryView.AddStorageController(item);
+                _storageControllers.Add(item);
             }
             else
             {
@@ -70,18 +72,17 @@ namespace Vikings.Building
 
         public void UpdateCurrentBuilding()
         {
-            Debug.Log(0);
+           
             foreach (var character in _charactersOnMap.CharactersList)
             {
-                Debug.Log(1);
+                
                 if (_currentBuilding != null && _currentBuilding is BuildingController && _currentBuilding.IsFullStorage() &&
                     character.CurrentState is not CraftingState)
                 {
-                    Debug.Log(2);
                     character.SetState<CraftingState>();
                     continue;
                 }
-                Debug.Log(3);
+               
 
                 _currentBuilding = _buildingControllers.OrderBy(x => x is BuildingController)
                     .FirstOrDefault(x => !x.IsFullStorage());
@@ -137,7 +138,7 @@ namespace Vikings.Building
             }
         }
 
-        public ItemController GetElementPosition()
+        public IGetItem GetElementPosition()
         {
             return _itemQueue[Random.Range(0, _itemQueue.Count)];
         }
@@ -149,6 +150,8 @@ namespace Vikings.Building
             if (data == null) return;
            
             var item = Instantiate(data.buildingData.StorageData.StorageController, data.spawnPoint);
+            
+            _storageControllers.Add(item);
           
             _buildingControllers.Add(item);
          

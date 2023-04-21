@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using Vikings.Building;
-using Vikings.Items;
 
 namespace Vikings.Chanacter
 {
@@ -10,7 +9,7 @@ namespace Vikings.Chanacter
         private CharacterStateMachine _stateMachine;
         private InventoryController _inventoryController;
 
-        private ItemController _currentPoint;
+        private IGetItem _currentPoint;
         private PlayerController _playerPrefab;
         private const float OFFSET_DISTANCE = 0.3f;
         public MovingState(CharacterStateMachine stateMachine, BuildingsOnMap buildingsOnMap, PlayerController playerPrefab, InventoryController inventoryController) : base("Moving",

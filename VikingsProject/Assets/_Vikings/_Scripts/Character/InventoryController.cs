@@ -2,7 +2,6 @@
 using System.Collections;
 using UnityEngine;
 using Vikings.Building;
-using Vikings.Items;
 using Vikings.Weapon;
 
 namespace Vikings.Chanacter
@@ -11,10 +10,10 @@ namespace Vikings.Chanacter
     {
         public Action OnCollect;
         
-        private ItemController _currentItem;
+        private IGetItem _currentItem;
         private int _count;
 
-        public void SetItem(ItemController itemData)
+        public void SetItem(IGetItem itemData)
         {
             _currentItem = itemData;
         }
@@ -30,7 +29,7 @@ namespace Vikings.Chanacter
             var price = new PriceToUpgrade
             {
                 count = _count,
-                itemData = _currentItem.Item
+                itemData = _currentItem.GetItemData()
             };
             _currentItem = null;
             _count = 0;
@@ -39,13 +38,13 @@ namespace Vikings.Chanacter
 
         private IEnumerator CollectItemsCoroutine(WeaponData weaponData)
         {
-            while (_count < _currentItem.Item.DropCount)
+            while (_count < _currentItem.GetItemData().DropCount)
             {
                 yield return new WaitForSeconds(weaponData.CollectTime);
                 _count++;
                 yield return null;
             }
-            _currentItem.DisableItemOnMap();
+            _currentItem.TakeItem();
             OnCollect?.Invoke();
         }
     }
