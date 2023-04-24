@@ -28,3 +28,4 @@ MonoBehaviour:
   _buildingName: WoodStorageBuilding
   _buildingController: {fileID: 750211685007338083, guid: f41d7e963e0ceda4487ee1daec913e9e,
     type: 3}
+  _craftingTableController: {fileID: 0}

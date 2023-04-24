@@ -2,32 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Vikings.Building;
+using Vikings.Items;
 
 namespace Vikings.Weapon
 {
     [CreateAssetMenu(fileName = "WeaponData", menuName = "Data/WeaponData", order = 3)]
     public class WeaponData : ScriptableObject
     {
-        public Action<int, float> OnUpgrade;
-        public List<PriceToUpgrade> weaponUpgradePrices = new();
-
-
-        public int ID => _id;
-        public int Level => _level;
-        public float CollectTime => _collectTime;
-        
-        [SerializeField] private int _id;
-        [SerializeField] private int _level;
-        [SerializeField] private float _collectTime;
-
-        public void Upgrade()
+        public bool IsOpen
         {
-            _level++;
-            if (_collectTime > 0)
+            get => _isOpen;
+            set
             {
-                _collectTime--;
+                _isOpen = value;
+                if (_isOpen)
+                {
+                    OnOpen?.Invoke(this);
+                }
             }
-            OnUpgrade?.Invoke(_level, _collectTime);
         }
+
+        public Action<WeaponData> OnOpen;
+
+        public ItemData ItemData => _itemData;
+        public int CraftingTime => _craftingTime;
+
+        public List<PriceToUpgrade> PriceToBuy => _priceToBuy;
+
+        [SerializeField] private ItemData _itemData;
+        [SerializeField] private bool _isOpen;
+        [SerializeField] private List<PriceToUpgrade> _priceToBuy = new();
+        [SerializeField] private int _craftingTime;
     }
 }

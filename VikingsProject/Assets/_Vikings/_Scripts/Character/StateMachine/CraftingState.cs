@@ -35,10 +35,25 @@ namespace Vikings.Chanacter
             if (!(Vector3.Distance(_playerController.transform.position, _buildingsOnMap.GetCurrentBuildingPosition().position) <=
                   OFFSET_DISTANCE)) return;
 
+            if (!_isCrafting && _buildingsOnMap.GetCurrentBuilding() is CraftingTableController)
+            {
+                StartTimerCraftingTable(_buildingsOnMap.GetCurrentBuilding() as CraftingTableController);
+            }
+
             if (!_isCrafting)
             {
                 StartTimer();
             }
+        }
+
+        private async Task StartTimerCraftingTable(CraftingTableController craftingTableController)
+        {
+            _isCrafting = true;
+            int time = craftingTableController.CraftingTableData.craftingTime * 1000;
+            await Task.Delay(time);
+            craftingTableController.OpenCurrentWeapon();
+            _buildingsOnMap.ClearCurrentBuilding();
+            _buildingsOnMap.UpdateCurrentBuilding();
         }
 
         private async Task StartTimer()

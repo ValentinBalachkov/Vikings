@@ -14,7 +14,6 @@ namespace Vikings.Chanacter
         [SerializeField] private PlayerController _playerPrefab;
         [SerializeField] private InventoryController _inventoryController;
         private BuildingsOnMap _buildingsOnMap;
-        private WeaponController _weaponController;
 
 
         private BoneFireController _boneFireController;
@@ -35,14 +34,13 @@ namespace Vikings.Chanacter
             _playerController = Instantiate(_playerPrefab, position);
         }
 
-        public void Init(BuildingsOnMap buildingsOnMap, WeaponController weaponController, BoneFireController boneFireController)
+        public void Init(BuildingsOnMap buildingsOnMap, BoneFireController boneFireController)
         {
             _buildingsOnMap = buildingsOnMap;
-            _weaponController = weaponController;
             _boneFireController = boneFireController;
             
             _movingState = new MovingState(this, _buildingsOnMap, _playerController, _inventoryController);
-            _collectState = new CollectState(this, _weaponController, _buildingsOnMap, _inventoryController);
+            _collectState = new CollectState(this, _buildingsOnMap, _inventoryController);
             _moveToStorageState = new MoveToStorageState(this, _buildingsOnMap, _playerController);
             _idleState = new IdleState(this, _boneFireController, _playerController);
             _craftingState = new CraftingState(this, _buildingsOnMap, _playerController);

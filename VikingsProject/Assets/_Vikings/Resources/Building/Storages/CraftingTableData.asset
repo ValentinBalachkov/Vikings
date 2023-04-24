@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 168a22c003ac4607ab6e9c704435d4d1, type: 3}
-  m_Name: Rock
+  m_Script: {fileID: 11500000, guid: ea348bd1198b3b9479dc9bdec75979ed, type: 3}
+  m_Name: CraftingTableData
   m_EditorClassIdentifier: 
-  _id: 2
-  _icon: {fileID: 0}
-  _prefab: {fileID: 6806352097513530124, guid: 265b88c448f749b4aaa70377c927eddb, type: 3}
-  _dropCount: 1
-  _itemName: Rock
-  _isOpen: 1
+  currentItemsCount: []
+  craftingTime: 0

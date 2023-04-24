@@ -17,4 +17,4 @@ MonoBehaviour:
   _prefab: {fileID: 2187595118771098226, guid: 178401ce06cdcc54abb8f511d2edf97b, type: 3}
   _dropCount: 3
   _itemName: Eat
-  _limitCount: 10
+  _isOpen: 1

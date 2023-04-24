@@ -18,7 +18,7 @@ namespace Vikings.UI
         
         private void Awake()
         {
-            _weaponData.OnUpgrade += UpdateUI;
+           
         }
 
         private void Start()

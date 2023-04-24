@@ -23,6 +23,7 @@ namespace Vikings.Items
         {
             Priority = 1;
             _itemData = itemData;
+            _isEnable = true;
         }
 
         public Transform GetItemPosition()

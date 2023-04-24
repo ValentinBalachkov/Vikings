@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Vikings.Building;
 
@@ -11,15 +12,26 @@ namespace Vikings.Items
         [SerializeField] private ItemPosition[] _itemPositions;
 
         [SerializeField] private BoneFireController _boneFireController;
+        [SerializeField] private BuildingsOnMap _buildingsOnMap;
 
         private List<ItemController> _itemsList = new();
 
         private StorageController _storageController;
         private GameObject _boneFire;
+        private List<ItemController> _allItems = new();
 
         private void Awake()
         {
             Spawn();
+        }
+
+        public void AddItemToItemsList(ItemData itemData)
+        {
+            var items = _allItems.Where(x => x.Item.ID == itemData.ID).ToList();
+            foreach (var item in items)
+            {
+                _itemsList.Add(item);
+            }
         }
 
         private void Spawn()
@@ -30,7 +42,13 @@ namespace Vikings.Items
                 {
                     var itemOnScene = Instantiate(item.item.Prefab, pos);
                     itemOnScene.Init(item.item);
-                    _itemsList.Add(itemOnScene);
+                    _allItems.Add(itemOnScene);
+                    itemOnScene.OnEnable += () => _buildingsOnMap.UpdateCurrentBuilding(false, true);
+                    if (item.item.IsOpen)
+                    {
+                        _itemsList.Add(itemOnScene);
+                        Debug.Log(itemOnScene.Item.ItemName);
+                    }
                 }
             }
 

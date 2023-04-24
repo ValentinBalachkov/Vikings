@@ -18,9 +18,9 @@ namespace Vikings.Chanacter
             _currentItem = itemData;
         }
 
-        public void CollectItem(WeaponData weaponData)
+        public void CollectItem()
         {
-            StartCoroutine(CollectItemsCoroutine(weaponData));
+            StartCoroutine(CollectItemsCoroutine());
         }
 
         public PriceToUpgrade SetItemToStorage()
@@ -36,11 +36,12 @@ namespace Vikings.Chanacter
             return price;
         }
 
-        private IEnumerator CollectItemsCoroutine(WeaponData weaponData)
+        private IEnumerator CollectItemsCoroutine()
         {
+            Debug.Log($"{ _currentItem.GetItemData().DropCount}");
             while (_count < _currentItem.GetItemData().DropCount)
             {
-                yield return new WaitForSeconds(weaponData.CollectTime);
+                yield return new WaitForSeconds(1f);
                 _count++;
                 yield return null;
             }

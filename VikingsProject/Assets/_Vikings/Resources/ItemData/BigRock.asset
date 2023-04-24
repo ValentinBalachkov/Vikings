@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 168a22c003ac4607ab6e9c704435d4d1, type: 3}
-  m_Name: Rock
+  m_Name: BigRock
   m_EditorClassIdentifier: 
   _id: 2
   _icon: {fileID: 0}
-  _prefab: {fileID: 6806352097513530124, guid: 265b88c448f749b4aaa70377c927eddb, type: 3}
-  _dropCount: 1
-  _itemName: Rock
-  _isOpen: 1
+  _prefab: {fileID: 5574324935936413242, guid: 4234d00f95c98b641b16e0204d9d10e3, type: 3}
+  _dropCount: 3
+  _itemName: BigRock
+  _isOpen: 0

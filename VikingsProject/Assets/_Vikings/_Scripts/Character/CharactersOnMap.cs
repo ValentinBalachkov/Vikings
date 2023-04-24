@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Vikings.Building;
-using Vikings.Weapon;
 
 namespace Vikings.Chanacter
 {
@@ -11,7 +9,6 @@ namespace Vikings.Chanacter
         public List<CharacterStateMachine> CharactersList => _charactersOnMap;
 
         [SerializeField] private BuildingsOnMap _buildingsOnMap;
-        [SerializeField] private WeaponController _weaponController;
         [SerializeField] private BoneFireController _boneFireController;
 
         [SerializeField] private Transform _characterSpawnPoint;
@@ -29,7 +26,7 @@ namespace Vikings.Chanacter
         {
             var character = Instantiate(_characterStateMachine[index]);
             character.SpawnCharacter(_characterSpawnPoint);
-            character.Init(_buildingsOnMap, _weaponController, _boneFireController);
+            character.Init(_buildingsOnMap, _boneFireController);
             _charactersOnMap.Add(character);
         }
     }

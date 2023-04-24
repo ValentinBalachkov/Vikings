@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 168a22c003ac4607ab6e9c704435d4d1, type: 3}
-  m_Name: Wood
+  m_Name: Tree
   m_EditorClassIdentifier: 
   _id: 3
   _icon: {fileID: 0}
-  _prefab: {fileID: 7538969506033860327, guid: d49c1c83a9b28c448ab88049e1347b28, type: 3}
+  _prefab: {fileID: 7538969506033860327, guid: d06300a92d81b484096311d0b6fa69aa, type: 3}
   _dropCount: 3
-  _itemName: Wood
-  _limitCount: 10
+  _itemName: Three
+  _isOpen: 0

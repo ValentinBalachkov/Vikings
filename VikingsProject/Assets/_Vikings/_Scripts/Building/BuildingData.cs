@@ -16,6 +16,8 @@ namespace Vikings.Building
                 SaveData();
             }
         }
+
+        public CraftingTableController CraftingTableController => _craftingTableController;
         public PriceToUpgrade[] PriceToUpgrades => _priceToUpgrades;
         public float BuildTime => _buildTime;
         public PriceToUpgrade[] currentItemsCount;
@@ -28,6 +30,8 @@ namespace Vikings.Building
         [SerializeField] private string _buildingName;
         [SerializeField] private BuildingController _buildingController;
 
+
+        [SerializeField] private CraftingTableController _craftingTableController;
 
         public void LoadData()
         {
