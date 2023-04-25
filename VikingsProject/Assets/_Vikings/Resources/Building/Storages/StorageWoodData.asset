@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StorageWoodData
   m_EditorClassIdentifier: 
   _itemType: {fileID: 11400000, guid: 842ec8fe0ff14054fb025a7b78239191, type: 2}
-  _count: 0
+  _count: 1
   _maxStorageCount: 10
   _currentLevel: 1
   _storageController: {fileID: 271082999149964318, guid: f037e5ca64d9edf41b7c108fb73e1532,
@@ -22,4 +22,4 @@ MonoBehaviour:
   - itemData: {fileID: 11400000, guid: 842ec8fe0ff14054fb025a7b78239191, type: 2}
     count: 5
   - itemData: {fileID: 11400000, guid: 8b782c2617e0b8048985ef732675d1be, type: 2}
-    count: 2
+    count: 5

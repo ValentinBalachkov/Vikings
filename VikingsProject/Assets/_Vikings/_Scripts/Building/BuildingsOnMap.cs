@@ -26,6 +26,7 @@ namespace Vikings.Building
         private List<IGetItem> _itemQueue = new();
         private AbstractBuilding _currentBuilding;
         private CraftingTableController _craftingTableController;
+        private AbstractBuilding _currentStorageToUpgrade;
 
         public void SpawnStorage(int index)
         {
@@ -56,6 +57,13 @@ namespace Vikings.Building
             }
 
             UpdateCurrentBuilding();
+        }
+
+        public void SetStorageUpgradeState(ItemData itemData)
+        {
+           var storage = _storageControllers.FirstOrDefault(x => x.BuildingData.StorageData.ItemType.ID == itemData.ID);
+           storage.SetUpgradeState();
+           _currentStorageToUpgrade = storage;
         }
 
         // public void SpawnStorages()
@@ -98,7 +106,7 @@ namespace Vikings.Building
                 
                 if (_currentBuilding != null && _currentBuilding is BuildingController or CraftingTableController &&
                     _currentBuilding.IsFullStorage() &&
-                    character.CurrentState is not CraftingState)
+                    character.CurrentState is not CraftingState || (_currentBuilding != null && _currentBuilding.isUpgradeState &&  _currentBuilding.IsFullStorage()))
                 {
                     character.SetState<CraftingState>();
                     continue;
@@ -108,14 +116,17 @@ namespace Vikings.Building
                 {
                     _currentBuilding = _craftingTableController;
                 }
+                else if(_storageControllers.Any(x => x.isUpgradeState))
+                {
+                    _currentBuilding = _storageControllers.FirstOrDefault(x => x.isUpgradeState);
+                }
                 else
                 {
                     _currentBuilding = _buildingControllers.OrderBy(x => x is CraftingTableController).
                         ThenByDescending(x => x is BuildingController)
                         .FirstOrDefault(x => !x.IsFullStorage());
                 }
-
-
+                
                 _itemQueue.Clear();
 
                

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Vikings.Items;
 
@@ -9,13 +11,33 @@ namespace Vikings.Building
     {
         public Action<ItemData> OnChangeCountStorage;
         public Action<int, int> OnUpgradeStorage;
+        public bool IsUpgradeState => isUpgradeState;
         public int Priority { get; set; }
+
+        private List<PriceToUpgrade> _currentItemsForUpgrade = new();
+       
 
 
         public override void Init(BuildingData buildingData)
         {
             Priority = 0;
             this.buildingData = buildingData;
+        }
+
+        public void SetUpgradeState()
+        {
+            _currentItemsForUpgrade.Clear();
+            foreach (var item in _currentItemsForUpgrade)
+            {
+                _currentItemsForUpgrade.Add(new PriceToUpgrade
+                {
+                    count = 0,
+                    itemData = item.itemData
+                });
+                
+            }
+
+            isUpgradeState = true;
         }
 
         public bool IsAvailableToGetItem()
@@ -25,63 +47,75 @@ namespace Vikings.Building
 
         public override void ChangeStorageCount(PriceToUpgrade priceToUpgrade)
         {
-            if (buildingData.StorageData.Count + priceToUpgrade.count > buildingData.StorageData.MaxStorageCount)
+            if (!isUpgradeState)
             {
-                buildingData.StorageData.Count = buildingData.StorageData.MaxStorageCount;
+                if (buildingData.StorageData.Count + priceToUpgrade.count > buildingData.StorageData.MaxStorageCount)
+                {
+                    buildingData.StorageData.Count = buildingData.StorageData.MaxStorageCount;
+                }
+                else
+                {
+                    buildingData.StorageData.Count += priceToUpgrade.count;
+                }
+
+                OnChangeCountStorage?.Invoke(buildingData.StorageData.ItemType);
+                return;
+            }
+
+            var item = _currentItemsForUpgrade.FirstOrDefault(x => x.itemData.ID == priceToUpgrade.itemData.ID);
+            var defaultItem = buildingData.StorageData.PriceToUpgrade.FirstOrDefault(x => x.itemData.ID == priceToUpgrade.itemData.ID);
+            if (item.count + priceToUpgrade.count >= defaultItem.count)
+            {
+                Debug.Log(defaultItem.count + " Storage");
+                item.count = defaultItem.count;
             }
             else
             {
-                buildingData.StorageData.Count += priceToUpgrade.count;
+                Debug.Log(priceToUpgrade.count + " Storage");
+                item.count += priceToUpgrade.count;
             }
-
-            OnChangeCountStorage?.Invoke(buildingData.StorageData.ItemType);
         }
 
         public override void UpgradeStorage()
         {
-            // if (buildingData.StorageData.CurrentLevel >= 3)
-            // {
-            //     return;
-            // }
-            //
-            // foreach (var upgradePrice in buildingData.StorageData.PriceToUpgrade)
-            // {
-            //     var storage = _storageOnMap.StorageControllers.FirstOrDefault(x => x.BuildingData.StorageData.ItemType.ID == upgradePrice.itemData.ID);
-            //     if (storage != null && upgradePrice.count <= storage.BuildingData.StorageData.Count)
-            //     {
-            //         continue;
-            //     }
-            //
-            //     return;
-            // }
-            //
-            // foreach (var item in buildingData.StorageData.PriceToUpgrade)
-            // {
-            //     var storage = _storageOnMap.StorageControllers.FirstOrDefault(x => x.BuildingData.StorageData.ItemType.ID == item.itemData.ID);
-            //     if (storage != null) storage.ChangeStorageCount( new PriceToUpgrade{count = -item.count, itemData = item.itemData} );
-            // }
-            //
-            // buildingData.StorageData.MaxStorageCount += 10;
-            // buildingData.StorageData.CurrentLevel++;
-            // OnUpgradeStorage?.Invoke(buildingData.StorageData.MaxStorageCount, buildingData.StorageData.CurrentLevel);
+            buildingData.StorageData.MaxStorageCount *= 2;
+            isUpgradeState = false;
         }
 
         public override PriceToUpgrade[] GetCurrentPriceToUpgrades()
         {
-            PriceToUpgrade price = new PriceToUpgrade()
+            if (!isUpgradeState)
             {
-                count = buildingData.StorageData.Count,
-                itemData = buildingData.StorageData.ItemType
-            };
+                PriceToUpgrade price = new PriceToUpgrade()
+                {
+                    count = buildingData.StorageData.Count,
+                    itemData = buildingData.StorageData.ItemType
+                };
 
-            PriceToUpgrade[] priceToUpgrades = { price };
-            return priceToUpgrades;
+                PriceToUpgrade[] priceToUpgrades = { price };
+                return priceToUpgrades;
+            }
+
+            return _currentItemsForUpgrade.ToArray();
         }
 
         public override bool IsFullStorage()
         {
-            bool isFullStorage = buildingData.StorageData.Count >= buildingData.StorageData.MaxStorageCount;
-            return isFullStorage;
+            if (!isUpgradeState)
+            {
+                bool isFullStorage = buildingData.StorageData.Count >= buildingData.StorageData.MaxStorageCount;
+                return isFullStorage;
+            }
+
+            for (int i = 0; i < buildingData.StorageData.PriceToUpgrade.Length; i++)
+            {
+                if (buildingData.StorageData.PriceToUpgrade[i].count > _currentItemsForUpgrade[i].count)
+                {
+                    return false;
+                }
+            }
+            
+            return true;
         }
 
         public Transform GetItemPosition()

@@ -1,6 +1,5 @@
 using UnityEngine;
 using Vikings.Items;
-using Vikings.Weapon;
 
 namespace Vikings.Building
 {
