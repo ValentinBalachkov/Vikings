@@ -7,6 +7,7 @@ namespace Vikings.Building
     public class CraftingTableData : ScriptableObject
     {
         public List<PriceToUpgrade> currentItemsCount = new();
+        public List<PriceToUpgrade> priceToUpgradeCraftingTable = new();
         public int craftingTime;
 
         public void Setup(List<PriceToUpgrade> price, int time)

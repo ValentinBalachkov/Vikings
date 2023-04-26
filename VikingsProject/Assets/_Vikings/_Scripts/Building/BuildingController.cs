@@ -48,11 +48,6 @@ namespace Vikings.Building
             return true;
         }
 
-        public override void UpgradeStorage()
-        {
-            //_storageOnMap.UpgradeBuildingToStorage(buildingData);
-        }
-
         public override PriceToUpgrade[] GetCurrentPriceToUpgrades()
         {
             List<PriceToUpgrade> price = new();
@@ -66,5 +61,8 @@ namespace Vikings.Building
 
             return price.ToArray();
         }
+        
+        public override void UpgradeStorage() { }
+        public override void SetUpgradeState() { }
     }
 }

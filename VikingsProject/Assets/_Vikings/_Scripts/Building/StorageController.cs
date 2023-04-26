@@ -11,7 +11,6 @@ namespace Vikings.Building
     {
         public Action<ItemData> OnChangeCountStorage;
         public Action<int, int> OnUpgradeStorage;
-        public bool IsUpgradeState => isUpgradeState;
         public int Priority { get; set; }
 
         private List<PriceToUpgrade> _currentItemsForUpgrade = new();
@@ -24,10 +23,11 @@ namespace Vikings.Building
             this.buildingData = buildingData;
         }
 
-        public void SetUpgradeState()
+        public override void SetUpgradeState()
         {
             _currentItemsForUpgrade.Clear();
-            foreach (var item in _currentItemsForUpgrade)
+            
+            foreach (var item in buildingData.StorageData.PriceToUpgrade)
             {
                 _currentItemsForUpgrade.Add(new PriceToUpgrade
                 {
@@ -64,21 +64,20 @@ namespace Vikings.Building
 
             var item = _currentItemsForUpgrade.FirstOrDefault(x => x.itemData.ID == priceToUpgrade.itemData.ID);
             var defaultItem = buildingData.StorageData.PriceToUpgrade.FirstOrDefault(x => x.itemData.ID == priceToUpgrade.itemData.ID);
+
             if (item.count + priceToUpgrade.count >= defaultItem.count)
             {
-                Debug.Log(defaultItem.count + " Storage");
                 item.count = defaultItem.count;
             }
             else
             {
-                Debug.Log(priceToUpgrade.count + " Storage");
                 item.count += priceToUpgrade.count;
             }
         }
 
         public override void UpgradeStorage()
         {
-            buildingData.StorageData.MaxStorageCount *= 2;
+            buildingData.StorageData.MaxStorageCount += 10;
             isUpgradeState = false;
         }
 

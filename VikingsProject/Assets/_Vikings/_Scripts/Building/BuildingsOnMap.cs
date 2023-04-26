@@ -62,34 +62,19 @@ namespace Vikings.Building
         public void SetStorageUpgradeState(ItemData itemData)
         {
            var storage = _storageControllers.FirstOrDefault(x => x.BuildingData.StorageData.ItemType.ID == itemData.ID);
-           storage.SetUpgradeState();
            _currentStorageToUpgrade = storage;
         }
 
-        // public void SpawnStorages()
-        // {
-        //     foreach (var storage in _storageData)
-        //     {
-        //         storage.buildingData.LoadData();
-        //         if (storage.buildingData.IsBuild)
-        //         {
-        //             var item = Instantiate(storage.buildingData.StorageData.StorageController, storage.spawnPoint);
-        //             _buildingControllers.Add(item);
-        //             item.Init(storage.buildingData);
-        //             _inventoryView.AddStorageController(item);
-        //         }
-        //         else
-        //         {
-        //             var item = Instantiate(storage.buildingData.BuildingController, storage.spawnPoint);
-        //             _buildingControllers.Add(item);
-        //             item.Init(storage.buildingData);
-        //         }
-        //         
-        //     }
-        //
-        //     UpdateCurrentBuilding();
-        // }
+        public void SetCraftingTableToUpgrade()
+        {
+            _currentStorageToUpgrade = _craftingTableController;
+        }
 
+        public void SetHomeUpgradeState()
+        {
+            var storage = _storageControllers.FirstOrDefault(x => x is HomeController);
+            _currentStorageToUpgrade = storage;
+        }
         public CraftingTableController GetCraftingTable()
         {
             return _craftingTableController;
@@ -126,10 +111,16 @@ namespace Vikings.Building
                         ThenByDescending(x => x is BuildingController)
                         .FirstOrDefault(x => !x.IsFullStorage());
                 }
+
+                if (_currentStorageToUpgrade != null)
+                {
+                    _currentStorageToUpgrade.SetUpgradeState();
+                    _currentBuilding = _currentStorageToUpgrade;
+                    _currentStorageToUpgrade = null;
+                }
                 
                 _itemQueue.Clear();
 
-               
                 if (_currentBuilding == null)
                 {
                     character.SetState<IdleState>();
@@ -206,6 +197,13 @@ namespace Vikings.Building
                 _craftingTableController = Instantiate(data.buildingData.CraftingTableController, data.spawnPoint);
                 _buildingControllers.Add(_craftingTableController);
                 _weaponBtn.SetActive(true);
+            }
+            else if(_currentBuilding.isUpgradeState)
+            {
+                _currentBuilding.UpgradeStorage();
+                _currentBuilding = null;
+                UpdateCurrentBuilding();
+                return;
             }
             else
             {
