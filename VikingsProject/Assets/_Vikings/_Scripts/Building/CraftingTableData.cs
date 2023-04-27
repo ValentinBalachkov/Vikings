@@ -6,6 +6,12 @@ namespace Vikings.Building
     [CreateAssetMenu(fileName = "CraftingTableData", menuName = "Data/CraftingTableData", order = 6)]
     public class CraftingTableData : ScriptableObject
     {
+        public bool isOpen;
+        public int currentLevel;
+        public Sprite icon;
+        public string nameText;
+        public string description;
+        
         public List<PriceToUpgrade> currentItemsCount = new();
         public List<PriceToUpgrade> priceToUpgradeCraftingTable = new();
         public int craftingTime;

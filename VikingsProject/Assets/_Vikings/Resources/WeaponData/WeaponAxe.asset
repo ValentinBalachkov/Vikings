@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e32b4f83f9664dd38e42d8df55929795, type: 3}
   m_Name: WeaponAxe
   m_EditorClassIdentifier: 
+  isOpenForCrafting: 0
+  icon: {fileID: 21300000, guid: e226014751f25b241b053ca1184dd147, type: 3}
+  nameText: Axe
+  description: Description
   _itemData: {fileID: 11400000, guid: aa71cd7377003654ab1aad130b722e73, type: 2}
   _isOpen: 0
   _priceToBuy:

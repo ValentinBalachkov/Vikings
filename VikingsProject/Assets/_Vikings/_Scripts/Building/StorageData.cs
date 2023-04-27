@@ -6,6 +6,10 @@ namespace Vikings.Building
     [CreateAssetMenu(fileName = "StorageData", menuName = "Data/StorageData", order = 4)]
     public class StorageData : ScriptableObject
     {
+        public bool isOpen;
+        public Sprite icon;
+        public string nameText;
+        public string description;
        
         public ItemData ItemType => _itemType;
 

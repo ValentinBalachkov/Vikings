@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 168a22c003ac4607ab6e9c704435d4d1, type: 3}
   m_Name: Tree
   m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: e226014751f25b241b053ca1184dd147, type: 3}
+  nameText: 
+  description: Description
   _id: 3
-  _icon: {fileID: 0}
   _prefab: {fileID: 7538969506033860327, guid: d06300a92d81b484096311d0b6fa69aa, type: 3}
   _dropCount: 3
   _itemName: Three

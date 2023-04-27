@@ -9,6 +9,11 @@ namespace Vikings.Weapon
     [CreateAssetMenu(fileName = "WeaponData", menuName = "Data/WeaponData", order = 3)]
     public class WeaponData : ScriptableObject
     {
+        public bool isOpenForCrafting;
+        public Sprite icon;
+        public string nameText;
+        public string description;
+        
         public bool IsOpen
         {
             get => _isOpen;

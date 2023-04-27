@@ -5,6 +5,11 @@ namespace Vikings.Items
     [CreateAssetMenu(fileName = "ItemData", menuName = "Data/ItemData", order = 1)]
     public class ItemData : ScriptableObject
     {
+        
+        public Sprite icon;
+        public string nameText;
+        public string description;
+        
         public bool IsOpen
         {
             get => _isOpen;
@@ -23,14 +28,10 @@ namespace Vikings.Items
         public string ItemName => _itemName;
 
         public int DropCount => _dropCount;
-
-        public Sprite Icon => _icon;
-
+        
         public ItemController Prefab => _prefab;
 
         [SerializeField] private int _id;
-
-        [SerializeField] private Sprite _icon;
 
         [SerializeField] private ItemController _prefab;
 
