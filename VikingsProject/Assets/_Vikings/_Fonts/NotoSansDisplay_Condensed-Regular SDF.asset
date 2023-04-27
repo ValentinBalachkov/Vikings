@@ -60,9 +60,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: NotoSansDisplay_Condensed-Regular SDF
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: 1598541609
   material: {fileID: 22803045636655437}
-  materialHashCode: 0
+  materialHashCode: -204991127
   m_Version: 1.1.0
   m_SourceFontFileGUID: c74cd88341a685b42af890098ab04d0a
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: c74cd88341a685b42af890098ab04d0a,
@@ -2782,9 +2782,9 @@ Material:
     - _OutlineWidth: 0
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
-    - _ScaleRatioA: 1
-    - _ScaleRatioB: 1
-    - _ScaleRatioC: 1
+    - _ScaleRatioA: 0.8333333
+    - _ScaleRatioB: 0.6770833
+    - _ScaleRatioC: 0.6770833
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
