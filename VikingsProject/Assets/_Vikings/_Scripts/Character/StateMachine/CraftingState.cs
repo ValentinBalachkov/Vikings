@@ -48,9 +48,13 @@ namespace Vikings.Chanacter
 
         private async Task StartTimerCraftingTable(CraftingTableController craftingTableController)
         {
+            var indicator = craftingTableController.GetComponentInChildren<CraftingIndicatorView>();
             _isCrafting = true;
+            indicator.gameObject.SetActive(true);
+            indicator.Setup(craftingTableController.CraftingTableData.craftingTime);
             int time = craftingTableController.CraftingTableData.craftingTime * 1000;
             await Task.Delay(time);
+            indicator.gameObject.SetActive(false);
             craftingTableController.OpenCurrentWeapon();
             _buildingsOnMap.ClearCurrentBuilding();
             _buildingsOnMap.UpdateCurrentBuilding();
@@ -58,9 +62,13 @@ namespace Vikings.Chanacter
 
         private async Task StartTimer()
         {
+            var indicator = _buildingsOnMap.GetCurrentBuilding().GetComponentInChildren<CraftingIndicatorView>();
             _isCrafting = true;
+            indicator.gameObject.SetActive(true);
+            indicator.Setup((int)_buildingsOnMap.GetCurrentBuilding().BuildingData.BuildTime);
             int time = (int)_buildingsOnMap.GetCurrentBuilding().BuildingData.BuildTime * 1000;
             await Task.Delay(time);
+            indicator.gameObject.SetActive(false);
             _buildingsOnMap.UpgradeBuildingToStorage();
         }
 
