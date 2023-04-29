@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b11b29b1395646e18f5dfeddd1194cc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  craftingIndicatorView: {fileID: 326960300306263570}
   isUpgradeState: 0
   _collectingResourceView: {fileID: 6991434293679183526}
 --- !u!114 &750211685007338110
@@ -622,6 +623,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2134ac70d630a741be1b83fa1534b6e, type: 3}
+--- !u!114 &326960300306263570 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 238235158890825643, guid: f2134ac70d630a741be1b83fa1534b6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 560690681603598777}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8ab9142eb1da7f44ba33ff18596a58b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &4366207121896408487 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4273945779589098526, guid: f2134ac70d630a741be1b83fa1534b6e,

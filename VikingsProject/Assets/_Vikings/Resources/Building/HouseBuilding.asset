@@ -26,6 +26,6 @@ MonoBehaviour:
     count: 10
   _buildTime: 10
   _buildingName: HouseBuilding
-  _buildingController: {fileID: 750211685007338083, guid: f41d7e963e0ceda4487ee1daec913e9e,
+  _buildingController: {fileID: 750211685007338083, guid: 2f4e4d9fa3086fe4ead3aec48daa69ca,
     type: 3}
   _craftingTableController: {fileID: 0}

@@ -26,6 +26,6 @@ MonoBehaviour:
     count: 5
   _buildTime: 5
   _buildingName: WoodStorageBuilding
-  _buildingController: {fileID: 750211685007338083, guid: f41d7e963e0ceda4487ee1daec913e9e,
+  _buildingController: {fileID: 750211685007338083, guid: 8bbdb0ada0764284bb3d3433c842da2b,
     type: 3}
   _craftingTableController: {fileID: 0}

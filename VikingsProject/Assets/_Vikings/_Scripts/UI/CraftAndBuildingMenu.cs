@@ -13,6 +13,7 @@ namespace Vikings.UI
         [SerializeField] private List<StorageData> _storageDatas;
         [SerializeField] private BuildingsOnMap _buildingsOnMap;
         [SerializeField] private CraftingTableData _craftingTableData;
+        [SerializeField] private BuildingData _craftingTableBuildingData;
 
 
         private void Start()
@@ -35,7 +36,7 @@ namespace Vikings.UI
             }
             
             var craftingTable = Instantiate(_menuElement, _content);
-            craftingTable.UpdateUI(_craftingTableData.nameText, _craftingTableData.description, 0, _craftingTableData.icon, _craftingTableData.priceToUpgradeCraftingTable.ToArray());
+            craftingTable.UpdateUI(_craftingTableData.nameText, _craftingTableData.description, 0, _craftingTableData.icon, _craftingTableBuildingData.PriceToUpgrades);
             craftingTable.AddOnClickListener(() => _buildingsOnMap.SpawnStorage(3));
         }
         

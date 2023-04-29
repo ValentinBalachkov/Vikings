@@ -8,7 +8,7 @@ namespace Vikings.Chanacter
     {
         private BuildingsOnMap _buildingsOnMap;
         private PlayerController _playerController;
-        private const float OFFSET_DISTANCE = 0.5f;
+        private const float OFFSET_DISTANCE = 1f;
         private bool _isCrafting;
         
         public CraftingState(StateMachine stateMachine, BuildingsOnMap buildingsOnMap, PlayerController playerController) : base("Crafting state", stateMachine)
@@ -37,24 +37,24 @@ namespace Vikings.Chanacter
 
             if (!_isCrafting && _buildingsOnMap.GetCurrentBuilding() is CraftingTableController)
             {
-                StartTimerCraftingTable(_buildingsOnMap.GetCurrentBuilding() as CraftingTableController);
+                CraftingTableController craftingTableController =
+                    _buildingsOnMap.GetCurrentBuilding() as CraftingTableController;
+                _buildingsOnMap.GetCurrentBuilding().craftingIndicatorView.Setup(craftingTableController.CraftingTableData.craftingTime);
+                StartTimerCraftingTable(craftingTableController);
             }
 
             if (!_isCrafting)
             {
+                _buildingsOnMap.GetCurrentBuilding().craftingIndicatorView.Setup((int)_buildingsOnMap.GetCurrentBuilding().BuildingData.BuildTime);
                 StartTimer();
             }
         }
 
         private async Task StartTimerCraftingTable(CraftingTableController craftingTableController)
         {
-            var indicator = craftingTableController.GetComponentInChildren<CraftingIndicatorView>();
             _isCrafting = true;
-            indicator.gameObject.SetActive(true);
-            indicator.Setup(craftingTableController.CraftingTableData.craftingTime);
             int time = craftingTableController.CraftingTableData.craftingTime * 1000;
             await Task.Delay(time);
-            indicator.gameObject.SetActive(false);
             craftingTableController.OpenCurrentWeapon();
             _buildingsOnMap.ClearCurrentBuilding();
             _buildingsOnMap.UpdateCurrentBuilding();
@@ -62,13 +62,9 @@ namespace Vikings.Chanacter
 
         private async Task StartTimer()
         {
-            var indicator = _buildingsOnMap.GetCurrentBuilding().GetComponentInChildren<CraftingIndicatorView>();
             _isCrafting = true;
-            indicator.gameObject.SetActive(true);
-            indicator.Setup((int)_buildingsOnMap.GetCurrentBuilding().BuildingData.BuildTime);
             int time = (int)_buildingsOnMap.GetCurrentBuilding().BuildingData.BuildTime * 1000;
             await Task.Delay(time);
-            indicator.gameObject.SetActive(false);
             _buildingsOnMap.UpgradeBuildingToStorage();
         }
 

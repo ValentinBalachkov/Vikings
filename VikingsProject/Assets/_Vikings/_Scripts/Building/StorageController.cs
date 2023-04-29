@@ -22,7 +22,6 @@ namespace Vikings.Building
         {
             Priority = 0;
             this.buildingData = buildingData;
-            _collectingResourceView.Setup(buildingData.StorageData.nameText);
         }
 
         public override void SetUpgradeState()
@@ -109,10 +108,6 @@ namespace Vikings.Building
             if (!isUpgradeState)
             {
                 bool isFullStorage = buildingData.StorageData.Count >= buildingData.StorageData.MaxStorageCount;
-                if (isFullStorage)
-                {
-                    _collectingResourceView.gameObject.SetActive(false);
-                }
                 return isFullStorage;
             }
 

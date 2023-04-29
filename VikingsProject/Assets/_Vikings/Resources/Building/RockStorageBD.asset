@@ -26,6 +26,6 @@ MonoBehaviour:
     count: 8
   _buildTime: 10
   _buildingName: RockStorageBuilding
-  _buildingController: {fileID: 750211685007338083, guid: f41d7e963e0ceda4487ee1daec913e9e,
+  _buildingController: {fileID: 750211685007338083, guid: 6535512bdaf533f4884c02c08e7f7fda,
     type: 3}
   _craftingTableController: {fileID: 0}

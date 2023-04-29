@@ -9,6 +9,8 @@ public class CraftingIndicatorView : MonoBehaviour
 
     public void Setup(int maxCount)
     {
+        DebugLogger.SendMessage("ASDASDASD", Color.green);
+        gameObject.SetActive(true);
         _indicatorImage.fillAmount = 0;
         _maxCount = maxCount;
         StartCoroutine(UpdateIndicatorCoroutine());
@@ -17,13 +19,14 @@ public class CraftingIndicatorView : MonoBehaviour
     private IEnumerator UpdateIndicatorCoroutine()
     {
         int currentTime = 0;
-
+        DebugLogger.SendMessage("2222222", Color.green);
         while (currentTime < _maxCount)
         {
             yield return new WaitForSeconds(1f);
             _indicatorImage.fillAmount = (float)currentTime / (float)_maxCount;
             currentTime++;
         }
+        gameObject.SetActive(false);
     }
     
 }
