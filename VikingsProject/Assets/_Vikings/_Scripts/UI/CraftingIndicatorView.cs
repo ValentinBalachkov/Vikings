@@ -21,7 +21,7 @@ public class CraftingIndicatorView : MonoBehaviour
         while (currentTime < _maxCount)
         {
             yield return new WaitForSeconds(1f);
-            _indicatorImage.fillAmount = currentTime / _maxCount;
+            _indicatorImage.fillAmount = (float)currentTime / (float)_maxCount;
             currentTime++;
         }
     }

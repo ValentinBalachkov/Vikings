@@ -17,7 +17,7 @@ MonoBehaviour:
   nameText: "\u0421\u043A\u043B\u0430\u0434 \u0434\u0435\u0440\u0435\u0432\u0430"
   description: Description
   _itemType: {fileID: 11400000, guid: 842ec8fe0ff14054fb025a7b78239191, type: 2}
-  _count: 1
+  _count: 0
   _maxStorageCount: 10
   _currentLevel: 1
   _storageController: {fileID: 271082999149964318, guid: f037e5ca64d9edf41b7c108fb73e1532,

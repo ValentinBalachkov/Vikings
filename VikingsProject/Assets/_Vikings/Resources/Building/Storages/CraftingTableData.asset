@@ -19,4 +19,4 @@ MonoBehaviour:
   description: Description
   currentItemsCount: []
   priceToUpgradeCraftingTable: []
-  craftingTime: 0
+  craftingTime: 10

@@ -156,8 +156,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -29.999998, y: 22.32143}
-  m_SizeDelta: {x: 200, y: 37.5}
+  m_AnchoredPosition: {x: -14.975509, y: 22.32143}
+  m_SizeDelta: {x: 242.0686, y: 37.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &970509684653894829
 CanvasRenderer:
@@ -197,8 +197,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4280303450
+  m_fontColor: {r: 0.3529412, g: 0.24705882, b: 0.1254902, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -728,8 +728,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 374, y: 88}
+  m_AnchoredPosition: {x: -0.00049448013, y: 0}
+  m_SizeDelta: {x: 357.14, y: 88}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &970509685205610179
 CanvasRenderer:
@@ -858,8 +858,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Allows you to cut down trees. Upgrade to increase the amount of wood you
-    get
+  m_text: desctiption
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc432addbafe76f45bc8b2a0552a0465, type: 2}
   m_sharedMaterial: {fileID: 286565289805951467, guid: dc432addbafe76f45bc8b2a0552a0465,
@@ -869,8 +868,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4280303450
+  m_fontColor: {r: 0.3529412, g: 0.24705882, b: 0.1254902, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

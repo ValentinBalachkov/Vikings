@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Inspector
+  m_Title: Project
   m_RootView: {fileID: 3}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 100}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 121
+  controlID: 132
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -734,14 +734,14 @@ MonoBehaviour:
   m_OverrideSceneCullingMask: 6917529027641081856
   m_SceneIsLit: 1
   m_SceneLighting: 1
-  m_2DMode: 0
+  m_2DMode: 1
   m_isRotationLocked: 0
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -7.457691, y: -3.7614312, z: 4.921477}
+    m_Target: {x: -78.67601, y: 132.48154, z: -2.6913826}
     speed: 2
-    m_Value: {x: -7.457691, y: -3.7614312, z: 4.921477}
+    m_Value: {x: -92.043846, y: 136.77603, z: -2.8667142}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -769,7 +769,7 @@ MonoBehaviour:
       m_Size: {x: 0, y: 0}
     yGrid:
       m_Fade:
-        m_Target: 1
+        m_Target: 0
         speed: 2
         m_Value: 1
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
@@ -777,9 +777,9 @@ MonoBehaviour:
       m_Size: {x: 1, y: 1}
     zGrid:
       m_Fade:
-        m_Target: 0
+        m_Target: 1
         speed: 2
-        m_Value: 0
+        m_Value: 1
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
       m_Pivot: {x: 0, y: 0, z: 0}
       m_Size: {x: 1, y: 1}
@@ -787,17 +787,17 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.22357416, y: -0.43084922, z: 0.11107206, w: 0.8672186}
+    m_Target: {x: 0, y: 0, z: 0, w: 1}
     speed: 2
-    m_Value: {x: 0.22357176, y: -0.4308446, z: 0.11107087, w: 0.8672093}
+    m_Value: {x: 0.000000016705597, y: -0.000000042839492, z: 0.000000015628402, w: 1.0000001}
   m_Size:
-    m_Target: 7.154231
+    m_Target: 372.09286
     speed: 2
-    m_Value: 7.154231
+    m_Value: 389.62604
   m_Ortho:
-    m_Target: 0
+    m_Target: 1
     speed: 2
-    m_Value: 0
+    m_Value: 1
   m_CameraSettings:
     m_Speed: 1
     m_SpeedNormalized: 0.5
@@ -811,7 +811,7 @@ MonoBehaviour:
     m_FarClip: 10000
     m_DynamicClip: 1
     m_OcclusionCulling: 0
-  m_LastSceneViewRotation: {x: -0.18628323, y: 0.59293854, z: -0.14340997, w: -0.7701784}
+  m_LastSceneViewRotation: {x: 0.25027704, y: -0.64180535, z: 0.2341389, w: 0.68603975}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
@@ -855,20 +855,20 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 96f1e8ff
-      m_LastClickedID: -1511018
-      m_ExpandedIDs: 64f1e8ff78f1e8ff82f1e8ff96f1e8ffe62dfcffd43cfcfff87afcff98affdffa8affdffb4affdff7eb0fdff84b0fdffe4b0fdff2460feff8460feff7262fefff641ffff6e52ffffb861ffff7472ffffe47affffd285ffff408effffd6f7ffff58b70000bccb000086cc000088cc00000ecd0000
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 5ea6dfff28a7dfff32afdffff663f9ff1064f9ff2064f9ff1243fcff2a43fcffd6defeffeadefeff226fffff366fffff38f7ffff4cf7ffffe4faffff767700009c7700009a790000a67b0000ba7b0000c47b0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Popup_Crafting
-        m_OriginalName: Popup_Crafting
+        m_Name: Image_Res_02
+        m_OriginalName: Image_Res_02
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -1383916
+        m_UserData: 59280
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
         m_OriginalEventType: 0
@@ -928,23 +928,23 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/_Vikings/_Prefabs/Building
+    - Assets/_Vikings/Resources/Building/Storages
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/_Vikings/_Prefabs/Building
+  - Assets/_Vikings/Resources/Building/Storages
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Git\Github\Vikings\VikingsProject
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 95}
-    m_SelectedIDs: 24830000
-    m_LastClickedID: 33572
-    m_ExpandedIDs: 00000000f8820000fa820000fc820000fe82000000830000028300000483000006830000088300000a830000368300003883000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 100}
+    m_SelectedIDs: c8db0000
+    m_LastClickedID: 56264
+    m_ExpandedIDs: 00000000428300004483000046830000488300004a8300004c8300004e8300005083000052830000548300008283000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -972,7 +972,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000f8820000fa820000fc820000fe82000000830000028300000483000006830000088300000a830000
+    m_ExpandedIDs: 00000000428300004483000046830000488300004a8300004c8300004e830000508300005283000054830000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

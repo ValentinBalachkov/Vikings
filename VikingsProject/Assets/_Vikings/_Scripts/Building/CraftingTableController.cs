@@ -12,6 +12,7 @@ namespace Vikings.Building
         public CraftingTableData CraftingTableData => _craftingTableData;
         
         [SerializeField] private CraftingTableData _craftingTableData;
+        [SerializeField] private CollectingResourceView _collectingResourceView;
 
         private WeaponData _currentWeapon;
         private List<PriceToUpgrade> _currentItemsForUpgrade = new();
@@ -54,6 +55,7 @@ namespace Vikings.Building
                 {
                     itemUpg.count += price.count;
                 }
+                _collectingResourceView.UpdateView(_currentItemsForUpgrade.ToArray(), _craftingTableData.priceToUpgradeCraftingTable.ToArray());
                 return;
             }
             
@@ -67,6 +69,8 @@ namespace Vikings.Building
             {
                 currentItem.count = item.count;
             }
+            
+            _collectingResourceView.UpdateView(_craftingTableData.currentItemsCount.ToArray(), _currentWeapon.PriceToBuy.ToArray());
             OnChangeCount?.Invoke(_currentWeapon.PriceToBuy.ToArray(), _craftingTableData.currentItemsCount.ToArray());
 
         }
@@ -78,7 +82,10 @@ namespace Vikings.Building
             _craftingTableData.Clear();
         }
 
-        public override void Init(BuildingData buildingData) { }
+        public override void Init(BuildingData buildingData)
+        {
+            _collectingResourceView.Setup(buildingData.StorageData.nameText);
+        }
 
         public override bool IsFullStorage()
         {
@@ -92,6 +99,7 @@ namespace Vikings.Building
                     }
                 }
             
+                _collectingResourceView.gameObject.SetActive(false);
                 return true;
             }
             
@@ -107,6 +115,7 @@ namespace Vikings.Building
                     return false;
                 }
             }
+            _collectingResourceView.gameObject.SetActive(false);
             return true;
         }
 
