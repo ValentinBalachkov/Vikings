@@ -22,6 +22,7 @@ namespace Vikings.Chanacter
         public override void Enter()
         {
             base.Enter();
+            _playerPrefab.SetMoveAnimation();
             _isCollect = false;
         }
 
@@ -31,8 +32,9 @@ namespace Vikings.Chanacter
             
             _playerPrefab.MoveToPoint(_buildingsOnMap.GetCurrentBuildingPosition());
             if ((Vector3.Distance(_playerPrefab.transform.position, _buildingsOnMap.GetCurrentBuildingPosition().position) >
-                  OFFSET_DISTANCE) || _isCollect) return;
+                 OFFSET_DISTANCE) || _isCollect) return;
             _isCollect = true;
+            _playerPrefab.SetCraftingAnimation();
             _buildingsOnMap.SetItemToStorage(_stateMachine);
         }
     }

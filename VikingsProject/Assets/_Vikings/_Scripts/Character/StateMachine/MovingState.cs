@@ -26,6 +26,7 @@ namespace Vikings.Chanacter
             base.Enter();
             _currentPoint = _buildingsOnMap.GetElementPosition();
             _inventoryController.SetItem(_currentPoint);
+            _playerPrefab.SetMoveAnimation();
         }
         public override void UpdatePhysics()
         {
@@ -33,6 +34,7 @@ namespace Vikings.Chanacter
             _playerPrefab.MoveToPoint(_currentPoint.GetItemPosition());
             if (!(Vector3.Distance(_playerPrefab.transform.position, _currentPoint.GetItemPosition().position) <=
                   OFFSET_DISTANCE)) return;
+            _playerPrefab.SetIdleAnimation();
             _stateMachine.SetState<CollectState>();
         }
     }

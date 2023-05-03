@@ -20,6 +20,15 @@ namespace Vikings.Building
         {
             foreach (var item in price)
             {
+                priceToUpgradeCraftingTable.Add(new PriceToUpgrade()
+                {
+                    count = item.count,
+                    itemData = item.itemData
+                });
+            }
+            
+            foreach (var item in price)
+            {
                 currentItemsCount.Add(new PriceToUpgrade()
                 {
                     count = 0,

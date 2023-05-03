@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6ef1cb2d7a134b4a8ae00f2a1715eb3, type: 3}
+  m_Name: CraftingTableBuildingDefault
+  m_EditorClassIdentifier: 
+  currentItemsCount:
+  - itemData: {fileID: 11400000, guid: 842ec8fe0ff14054fb025a7b78239191, type: 2}
+    count: 0
+  - itemData: {fileID: 11400000, guid: 8b782c2617e0b8048985ef732675d1be, type: 2}
+    count: 0
+  _storageData: {fileID: 11400000, guid: f4dba2db7e1f1e8448039679f5005385, type: 2}
+  _isBuild: 0
+  _priceToUpgrades:
+  - itemData: {fileID: 11400000, guid: 842ec8fe0ff14054fb025a7b78239191, type: 2}
+    count: 5
+  - itemData: {fileID: 11400000, guid: 8b782c2617e0b8048985ef732675d1be, type: 2}
+    count: 5
+  _buildTime: 10
+  _buildingName: CraftingTableBuilding
+  _buildingController: {fileID: 750211685007338083, guid: f41d7e963e0ceda4487ee1daec913e9e,
+    type: 3}
+  _craftingTableController: {fileID: 3752727427173915836, guid: 1128704e28d781c438db5dd0fa241e44,
+    type: 3}

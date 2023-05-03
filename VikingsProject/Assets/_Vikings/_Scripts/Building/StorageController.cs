@@ -22,6 +22,7 @@ namespace Vikings.Building
         {
             Priority = 0;
             this.buildingData = buildingData;
+            buildingData.StorageData.CurrentLevel++;
         }
 
         public override void SetUpgradeState()
@@ -84,6 +85,7 @@ namespace Vikings.Building
             buildingData.StorageData.MaxStorageCount += 10;
             isUpgradeState = false;
             _collectingResourceView.gameObject.SetActive(false);
+            buildingData.StorageData.CurrentLevel++;
         }
 
         public override PriceToUpgrade[] GetCurrentPriceToUpgrades()

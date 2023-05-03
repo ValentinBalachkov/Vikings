@@ -16,10 +16,11 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: e226014751f25b241b053ca1184dd147, type: 3}
   nameText: "\u0414\u043E\u043C"
   description: Description
+  isDefaultOpen: 0
   _itemType: {fileID: 11400000, guid: b90d6cdefc2ad7e4cbdd899ef9e419e5, type: 2}
   _count: 0
   _maxStorageCount: 10
-  _currentLevel: 1
+  _currentLevel: 0
   _storageController: {fileID: -1726127725469879221, guid: c434ae09455d2844d9c2f4f9377b77bd,
     type: 3}
   _priceToUpgrade:

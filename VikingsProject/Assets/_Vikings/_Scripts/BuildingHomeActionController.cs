@@ -25,9 +25,9 @@ namespace Vikings.Building
 
             var position = _camera.transform.position;
             _camera.transform.DOMove(new Vector3
-            (position.x + 1,
+            (position.x,
                 position.y + 1,
-                position.z), 0.01f);
+                position.z + 1), 0.01f);
         }
     }
 }

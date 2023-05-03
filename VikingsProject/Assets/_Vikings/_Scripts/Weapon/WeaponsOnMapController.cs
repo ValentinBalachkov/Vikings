@@ -7,6 +7,7 @@ namespace Vikings.Weapon
 {
     public class WeaponsOnMapController : MonoBehaviour
     {
+        public List<WeaponData> WeaponsData => _weaponsList;
         [SerializeField] private ItemsOnMapController _itemsOnMapController;
         [SerializeField] private List<WeaponData> _weaponsList = new();
         [SerializeField] private BuildingsOnMap _buildingsOnMap;

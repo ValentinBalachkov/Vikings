@@ -10,6 +10,7 @@ namespace Vikings.Building
         public Sprite icon;
         public string nameText;
         public string description;
+        public bool isDefaultOpen;
        
         public ItemData ItemType => _itemType;
 

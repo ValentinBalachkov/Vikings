@@ -23,6 +23,7 @@ namespace Vikings.Chanacter
         public override void Enter()
         {
             base.Enter();
+            _playerPrefab.SetMoveAnimation();
         }
 
         public override void Exit()
@@ -40,6 +41,11 @@ namespace Vikings.Chanacter
             {
                 _playerPrefab.MoveToPoint(_boneFireController.GetCurrentPosition());
             }
+            else
+            {
+                _playerPrefab.SetIdleAnimation();
+            }
+            
         }
 
         public override void UpdateLogic()

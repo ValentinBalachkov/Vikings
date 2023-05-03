@@ -20,6 +20,7 @@ namespace Vikings.Chanacter
         public override void Enter()
         {
             _isCrafting = false;
+            _playerController.SetMoveAnimation();
             base.Enter();
         }
 
@@ -52,6 +53,7 @@ namespace Vikings.Chanacter
 
         private async Task StartTimerCraftingTable(CraftingTableController craftingTableController)
         {
+            _playerController.SetCraftingAnimation();
             _isCrafting = true;
             int time = craftingTableController.CraftingTableData.craftingTime * 1000;
             await Task.Delay(time);
@@ -62,6 +64,7 @@ namespace Vikings.Chanacter
 
         private async Task StartTimer()
         {
+            _playerController.SetCraftingAnimation();
             _isCrafting = true;
             int time = (int)_buildingsOnMap.GetCurrentBuilding().BuildingData.BuildTime * 1000;
             await Task.Delay(time);

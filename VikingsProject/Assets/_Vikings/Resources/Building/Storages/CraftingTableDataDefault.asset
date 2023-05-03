@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea348bd1198b3b9479dc9bdec75979ed, type: 3}
-  m_Name: CraftingTableData
+  m_Name: CraftingTableDataDefault
   m_EditorClassIdentifier: 
   isOpen: 0
   currentLevel: 0
@@ -19,4 +19,4 @@ MonoBehaviour:
   description: Description
   currentItemsCount: []
   priceToUpgradeCraftingTable: []
-  craftingTime: 5
+  craftingTime: 0

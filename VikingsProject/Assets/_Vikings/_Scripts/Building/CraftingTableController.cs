@@ -8,11 +8,14 @@ namespace Vikings.Building
 {
     public class CraftingTableController : AbstractBuilding
     {
+        public GameObject Model => _model;
         public Action<PriceToUpgrade[], PriceToUpgrade[]> OnChangeCount;
         public CraftingTableData CraftingTableData => _craftingTableData;
         
         [SerializeField] private CraftingTableData _craftingTableData;
         [SerializeField] private CollectingResourceView _collectingResourceView;
+        [SerializeField] private GameObject _model;
+        
 
         private WeaponData _currentWeapon;
         private List<PriceToUpgrade> _currentItemsForUpgrade = new();
@@ -21,6 +24,7 @@ namespace Vikings.Building
         {
             _currentWeapon = weaponData;
             _craftingTableData.Setup(_currentWeapon.PriceToBuy, _currentWeapon.CraftingTime);
+            _collectingResourceView.Setup(weaponData.nameText);
         }
 
         public override void SetUpgradeState()
@@ -84,7 +88,7 @@ namespace Vikings.Building
 
         public override void Init(BuildingData buildingData)
         {
-            _collectingResourceView.Setup(buildingData.StorageData.nameText);
+            _craftingTableData.currentLevel++;
         }
 
         public override bool IsFullStorage()
@@ -122,6 +126,7 @@ namespace Vikings.Building
         public override void UpgradeStorage()
         {
             DebugLogger.SendMessage("TODO add open new craft elements", Color.cyan);
+            _craftingTableData.currentLevel++;
             isUpgradeState = false;
         }
 

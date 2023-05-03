@@ -40,7 +40,7 @@ namespace Vikings.Chanacter
             _boneFireController = boneFireController;
             
             _movingState = new MovingState(this, _buildingsOnMap, _playerController, _inventoryController);
-            _collectState = new CollectState(this, _buildingsOnMap, _inventoryController);
+            _collectState = new CollectState(this,_playerController, _buildingsOnMap, _inventoryController);
             _moveToStorageState = new MoveToStorageState(this, _buildingsOnMap, _playerController);
             _idleState = new IdleState(this, _boneFireController, _playerController);
             _craftingState = new CraftingState(this, _buildingsOnMap, _playerController);
