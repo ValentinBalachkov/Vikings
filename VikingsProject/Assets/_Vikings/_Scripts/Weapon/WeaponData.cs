@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SecondChanceSystem.SaveSystem;
 using UnityEngine;
 using Vikings.Building;
 using Vikings.Items;
@@ -7,7 +8,7 @@ using Vikings.Items;
 namespace Vikings.Weapon
 {
     [CreateAssetMenu(fileName = "WeaponData", menuName = "Data/WeaponData", order = 3)]
-    public class WeaponData : ScriptableObject
+    public class WeaponData : ScriptableObject, IData
     {
         public bool isOpenForCrafting;
         public Sprite icon;
@@ -38,5 +39,18 @@ namespace Vikings.Weapon
         [SerializeField] private bool _isOpen;
         [SerializeField] private List<PriceToUpgrade> _priceToBuy = new();
         [SerializeField] private int _craftingTime;
+        public void Save()
+        {
+            SaveLoadSystem.SaveData(this);
+        }
+
+        public void Load()
+        {
+            var data = SaveLoadSystem.LoadData(this) as WeaponData;
+            if (data != null)
+            {
+                _isOpen = data._isOpen;
+            }
+        }
     }
 }

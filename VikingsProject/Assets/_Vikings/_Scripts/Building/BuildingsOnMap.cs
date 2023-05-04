@@ -40,11 +40,18 @@ namespace Vikings.Building
                 storageData.spawnPoint);
             _buildingControllers.Add(_craftingTableControllerOnStartGame);
             _craftingTableControllerOnStartGame.Model.SetActive(false);
+
+            for (int i = 0; i < _storageData.Length; i++)
+            {
+                if (_storageData[i].buildingData.StorageData.CurrentLevel > 0)
+                {
+                    SpawnStorage(i);
+                }
+            }
         }
 
         public void SpawnStorage(int index)
         {
-            _storageData[index].buildingData.LoadData();
             if (_storageData[index].buildingData.IsBuild)
             {
                 if (_storageData[index].buildingData.StorageData == null)

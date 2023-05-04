@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using SecondChanceSystem.SaveSystem;
+using UnityEngine;
 
 namespace Vikings.Items
 {
     [CreateAssetMenu(fileName = "ItemData", menuName = "Data/ItemData", order = 1)]
-    public class ItemData : ScriptableObject
+    public class ItemData : ScriptableObject, IData
     {
         
         public Sprite icon;
@@ -13,14 +14,7 @@ namespace Vikings.Items
         public bool IsOpen
         {
             get => _isOpen;
-            set
-            {
-                _isOpen = value;
-                if (_isOpen)
-                {
-                    SaveData();
-                }
-            } 
+            set => _isOpen = value;
         }
 
         public int ID => _id;
@@ -41,20 +35,18 @@ namespace Vikings.Items
 
         [SerializeField] private bool _isOpen;
 
-        public void LoadData()
+        public void Save()
         {
-            if (!PlayerPrefs.HasKey(_itemName)) return;
-            var value = PlayerPrefs.GetInt(_itemName);
-            if (value == 1)
-            {
-                _isOpen = true;
-            }
+            SaveLoadSystem.SaveData(this);
         }
 
-        private void SaveData()
+        public void Load()
         {
-            int value = _isOpen ? 1 : 0;
-            PlayerPrefs.SetInt(_itemName, value);
+            var data = SaveLoadSystem.LoadData(this) as ItemData;
+            if (data != null)
+            {
+                _isOpen = data._isOpen;
+            }
         }
     }
 }

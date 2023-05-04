@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using SecondChanceSystem.SaveSystem;
 using UnityEngine;
 
 namespace Vikings.Building
 {
     [CreateAssetMenu(fileName = "CraftingTableData", menuName = "Data/CraftingTableData", order = 6)]
-    public class CraftingTableData : ScriptableObject
+    public class CraftingTableData : ScriptableObject, IData
     {
         public bool isOpen;
         public int currentLevel;
@@ -43,7 +44,23 @@ namespace Vikings.Building
             currentItemsCount.Clear();
             craftingTime = 0;
         }
-        
+
+        public void Save()
+        {
+            SaveLoadSystem.SaveData(this);
+        }
+
+        public void Load()
+        {
+            var data = SaveLoadSystem.LoadData(this) as CraftingTableData;
+            if (data != null)
+            {
+                currentLevel = data.currentLevel;
+                currentItemsCount = data.currentItemsCount;
+                priceToUpgradeCraftingTable = data.priceToUpgradeCraftingTable;
+                craftingTime = data.craftingTime;
+            }
+        }
     }
 
 }

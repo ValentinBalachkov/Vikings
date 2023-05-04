@@ -1,20 +1,17 @@
+using SecondChanceSystem.SaveSystem;
 using UnityEngine;
 
 namespace Vikings.Building
 {
     [CreateAssetMenu(fileName = "BuildingData", menuName = "Data/BuildingData", order = 5)]
-    public class BuildingData : ScriptableObject
+    public class BuildingData : ScriptableObject, IData
     {
         public StorageData StorageData => _storageData;
 
         public bool IsBuild
         {
             get => _isBuild;
-            set
-            {
-                _isBuild = value;
-                SaveData();
-            }
+            set => _isBuild = value;
         }
 
         public CraftingTableController CraftingTableController => _craftingTableController;
@@ -43,10 +40,19 @@ namespace Vikings.Building
             }
         }
 
-        private void SaveData()
+        public void Save()
         {
-            int value = _isBuild ? 1 : 0;
-            PlayerPrefs.SetInt(_buildingName, value);
+            SaveLoadSystem.SaveData(this);
+        }
+
+        public void Load()
+        {
+           var data = SaveLoadSystem.LoadData(this) as BuildingData;
+           if (data != null)
+           {
+               _isBuild = data._isBuild;
+               currentItemsCount = data.currentItemsCount;
+           }
         }
     }
 }

@@ -1,10 +1,11 @@
+using SecondChanceSystem.SaveSystem;
 using UnityEngine;
 using Vikings.Items;
 
 namespace Vikings.Building
 {
     [CreateAssetMenu(fileName = "StorageData", menuName = "Data/StorageData", order = 4)]
-    public class StorageData : ScriptableObject
+    public class StorageData : ScriptableObject, IData
     {
         public bool isOpen;
         public Sprite icon;
@@ -46,6 +47,21 @@ namespace Vikings.Building
         [SerializeField] private StorageController _storageController;
 
         [SerializeField] private PriceToUpgrade[] _priceToUpgrade;
+        public void Save()
+        {
+            SaveLoadSystem.SaveData(this);
+        }
+
+        public void Load()
+        {
+            var data = SaveLoadSystem.LoadData(this) as StorageData;
+            if (data != null)
+            {
+                _count = data._count;
+                _maxStorageCount = data._maxStorageCount;
+                _currentLevel = data._currentLevel;
+            }
+        }
     }
 
 }
