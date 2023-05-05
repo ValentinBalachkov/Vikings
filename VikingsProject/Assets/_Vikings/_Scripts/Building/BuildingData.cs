@@ -39,7 +39,7 @@ namespace Vikings.Building
 
         public void Load()
         {
-           var data = SaveLoadSystem.LoadData(this) as BuildingData;
+            var data = SaveLoadSystem.LoadData(this) as BuildingData;
            if (data != null)
            {
                _isBuild = data._isBuild;

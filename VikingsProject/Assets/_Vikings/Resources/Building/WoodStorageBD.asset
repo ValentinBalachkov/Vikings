@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentItemsCount:
   - itemData: {fileID: 11400000, guid: 842ec8fe0ff14054fb025a7b78239191, type: 2}
-    count: 10
+    count: 0
   - itemData: {fileID: 11400000, guid: 8b782c2617e0b8048985ef732675d1be, type: 2}
-    count: 5
-  isSetOnMap: 1
+    count: 0
+  isSetOnMap: 0
   _storageData: {fileID: 11400000, guid: 480902296caabf2408ac395a39489084, type: 2}
   _isBuild: 0
   _priceToUpgrades:
