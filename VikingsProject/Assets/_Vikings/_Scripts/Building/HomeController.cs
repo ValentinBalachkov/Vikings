@@ -2,9 +2,9 @@ namespace Vikings.Building
 {
     public class HomeController : StorageController
     {
-        public override void Init(BuildingData buildingData)
+        public override void Init(BuildingData buildingData, bool isSaveInit = false)
         {
-            base.Init(buildingData);
+            base.Init(buildingData, isSaveInit);
             BuildingHomeActionController.Instance.OnHomeBuilding();
         }
 

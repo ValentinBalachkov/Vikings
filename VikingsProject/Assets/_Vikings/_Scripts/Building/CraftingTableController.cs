@@ -86,9 +86,12 @@ namespace Vikings.Building
             _craftingTableData.Clear();
         }
 
-        public override void Init(BuildingData buildingData)
+        public override void Init(BuildingData buildingData , bool isSaveInit = false)
         {
-            _craftingTableData.currentLevel++;
+            if (!isSaveInit)
+            {
+                _craftingTableData.currentLevel++;
+            }
         }
 
         public override bool IsFullStorage()

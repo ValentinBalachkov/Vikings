@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WeaponPick
   m_EditorClassIdentifier: 
   isOpenForCrafting: 0
-  icon: {fileID: 21300000, guid: e226014751f25b241b053ca1184dd147, type: 3}
+  icon: {fileID: 21300000, guid: 4d832d01eddb56c40849746c07a262a0, type: 3}
   nameText: Pick
   description: Description
   _itemData: {fileID: 11400000, guid: cbe7421b5bd4c3b4fb2fab3fb3cb57f0, type: 2}

@@ -43,14 +43,14 @@ namespace Vikings.Building
 
             for (int i = 0; i < _storageData.Length; i++)
             {
-                if (_storageData[i].buildingData.StorageData.CurrentLevel > 0)
+                if (_storageData[i].buildingData.StorageData.CurrentLevel > 0 || _storageData[i].buildingData.isSetOnMap)
                 {
-                    SpawnStorage(i);
+                    SpawnStorage(i, true);
                 }
             }
         }
 
-        public void SpawnStorage(int index)
+        public void SpawnStorage(int index, bool isSave = false)
         {
             if (_storageData[index].buildingData.IsBuild)
             {
@@ -67,7 +67,7 @@ namespace Vikings.Building
                 var item = Instantiate(_storageData[index].buildingData.StorageData.StorageController,
                     _storageData[index].spawnPoint);
                 _buildingControllers.Add(item);
-                item.Init(_storageData[index].buildingData);
+                item.Init(_storageData[index].buildingData, isSave);
                 _inventoryView.AddStorageController(item);
                 _storageControllers.Add(item);
             }
@@ -76,7 +76,7 @@ namespace Vikings.Building
                 var item = Instantiate(_storageData[index].buildingData.BuildingController,
                     _storageData[index].spawnPoint);
                 _buildingControllers.Add(item);
-                item.Init(_storageData[index].buildingData);
+                item.Init(_storageData[index].buildingData, isSave);
 
                 if (index == 3)
                 {
@@ -153,13 +153,6 @@ namespace Vikings.Building
                         _currentBuilding = _buildingControllers
                             .OrderBy(x => x is BuildingController)
                             .FirstOrDefault(x => !x.IsFullStorage());
-                    }
-                    
-                   
-                    DebugLogger.SendMessage($"{_currentBuilding}", Color.blue);
-                    foreach (var VARIABLE in _buildingControllers)
-                    {
-                        DebugLogger.SendMessage($"{VARIABLE}", Color.red);
                     }
                 }
 

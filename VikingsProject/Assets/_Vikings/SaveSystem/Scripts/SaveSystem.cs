@@ -45,7 +45,7 @@ namespace SecondChanceSystem.SaveSystem
 #if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
         SavePath = Path.Combine(Application.persistentDataPath, saveFileName);
 #else
-            SavePath = Path.Combine(Application.dataPath + "/SecondChanceSystem/Save", saveFileName);
+            SavePath = Path.Combine(Application.dataPath + "/_Vikings/Save", saveFileName);
 #endif
             return SavePath;
         }

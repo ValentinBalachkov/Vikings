@@ -18,11 +18,14 @@ namespace Vikings.Building
        
 
 
-        public override void Init(BuildingData buildingData)
+        public override void Init(BuildingData buildingData, bool isSaveInit = false)
         {
             Priority = 0;
             this.buildingData = buildingData;
-            buildingData.StorageData.CurrentLevel++;
+            if (!isSaveInit)
+            {
+                buildingData.StorageData.CurrentLevel++;
+            }
         }
 
         public override void SetUpgradeState()

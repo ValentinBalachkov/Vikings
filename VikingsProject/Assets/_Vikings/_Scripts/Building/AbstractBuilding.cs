@@ -9,7 +9,7 @@ namespace Vikings.Building
         
         protected BuildingData buildingData;
         public abstract void ChangeStorageCount(PriceToUpgrade count);
-        public abstract void Init(BuildingData buildingData);
+        public abstract void Init(BuildingData buildingData, bool isSaveInit = false);
         public abstract bool IsFullStorage();
         public abstract void UpgradeStorage();
 

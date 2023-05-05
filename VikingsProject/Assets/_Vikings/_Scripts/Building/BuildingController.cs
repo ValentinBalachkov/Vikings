@@ -22,9 +22,9 @@ namespace Vikings.Building
             {
                 currentItem.count = item.count;
             }
-            
+
             _collectingResourceView.UpdateView(buildingData.currentItemsCount, buildingData.PriceToUpgrades);
-            
+
             OnChangeCount?.Invoke(buildingData);
 
             if (IsFullStorage())
@@ -34,10 +34,11 @@ namespace Vikings.Building
             }
         }
 
-        public override void Init(BuildingData buildingData)
+        public override void Init(BuildingData buildingData, bool isSaveInit = false)
         {
             this.buildingData = buildingData;
             _collectingResourceView.Setup(buildingData.StorageData.nameText);
+            buildingData.isSetOnMap = true;
         }
 
         public override bool IsFullStorage()
@@ -49,8 +50,8 @@ namespace Vikings.Building
                     return false;
                 }
             }
-            buildingData.IsBuild = true;
-            
+            //  buildingData.IsBuild = true;
+
             return true;
         }
 
@@ -61,14 +62,19 @@ namespace Vikings.Building
             {
                 if (buildingData.PriceToUpgrades[i].count > buildingData.currentItemsCount[i].count)
                 {
-                    price.Add( buildingData.currentItemsCount[i]);
+                    price.Add(buildingData.currentItemsCount[i]);
                 }
             }
 
             return price.ToArray();
         }
-        
-        public override void UpgradeStorage() { }
-        public override void SetUpgradeState() { }
+
+        public override void UpgradeStorage()
+        {
+        }
+
+        public override void SetUpgradeState()
+        {
+        }
     }
 }

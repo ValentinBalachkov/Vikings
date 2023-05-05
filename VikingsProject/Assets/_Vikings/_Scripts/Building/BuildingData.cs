@@ -20,6 +20,8 @@ namespace Vikings.Building
         public PriceToUpgrade[] currentItemsCount;
         public BuildingController BuildingController => _buildingController;
 
+        public bool isSetOnMap;
+
         [SerializeField] private StorageData _storageData;
         [SerializeField] private bool _isBuild;
         [SerializeField] private PriceToUpgrade[] _priceToUpgrades;
@@ -29,16 +31,6 @@ namespace Vikings.Building
 
 
         [SerializeField] private CraftingTableController _craftingTableController;
-
-        public void LoadData()
-        {
-            if (!PlayerPrefs.HasKey(_buildingName)) return;
-            var value = PlayerPrefs.GetInt(_buildingName);
-            if (value == 1)
-            {
-                _isBuild = true;
-            }
-        }
 
         public void Save()
         {
@@ -52,6 +44,7 @@ namespace Vikings.Building
            {
                _isBuild = data._isBuild;
                currentItemsCount = data.currentItemsCount;
+               isSetOnMap = data.isSetOnMap;
            }
         }
     }
