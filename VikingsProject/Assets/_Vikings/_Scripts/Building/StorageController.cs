@@ -42,7 +42,7 @@ namespace Vikings.Building
                 
             }
 
-            _collectingResourceView.Setup(buildingData.StorageData.nameText);
+            _collectingResourceView.Setup(buildingData.StorageData.nameText, buildingData.currentItemsCount, buildingData.PriceToUpgrades);
             isUpgradeState = true;
         }
 

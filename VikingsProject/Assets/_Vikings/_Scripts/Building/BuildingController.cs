@@ -37,7 +37,14 @@ namespace Vikings.Building
         public override void Init(BuildingData buildingData, bool isSaveInit = false)
         {
             this.buildingData = buildingData;
-            _collectingResourceView.Setup(buildingData.StorageData.nameText);
+            if (this.buildingData.currentItemsCount != null && this.buildingData.PriceToUpgrades != null)
+            {
+                _collectingResourceView.Setup(this.buildingData.StorageData.nameText, this.buildingData.currentItemsCount, this.buildingData.PriceToUpgrades);
+            }
+            else
+            {
+                _collectingResourceView.Setup(this.buildingData.StorageData.nameText);
+            }
             buildingData.isSetOnMap = true;
         }
 

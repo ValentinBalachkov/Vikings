@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Vikings.Building;
 using Vikings.Items;
@@ -13,6 +14,41 @@ namespace Vikings.Weapon
         [SerializeField] private BuildingsOnMap _buildingsOnMap;
         [SerializeField] private GameObject[] _interface;
         
+        [SerializeField] private CraftingTableData _craftingTableData;
+        [SerializeField] private CraftingTableData _craftingTableDataDefault;
+
+
+        private void Start()
+        {
+            foreach (var weapon in _weaponsList)
+            {
+                weapon.OnOpen += OnOpenWeapon;
+            }
+        }
+
+        public void CheckForCraft()
+        {
+            int weaponId = 0;
+            
+            if (_craftingTableData.currentItemsCount.Count > 0)
+            {
+                weaponId = _craftingTableData.currentWeaponId;
+            }
+            else if( _craftingTableDataDefault.currentItemsCount.Count > 0)
+            {
+                weaponId = _craftingTableDataDefault.currentWeaponId;
+            }
+
+            if (_craftingTableData.currentItemsCount.Count > 0 || _craftingTableDataDefault.currentItemsCount.Count > 0)
+            {
+                _buildingsOnMap.GetCraftingTable().SetupCraftWeapon(_weaponsList.FirstOrDefault(x => x.id == weaponId));
+                _buildingsOnMap.UpdateCurrentBuilding(true);
+                foreach (var item in _interface)
+                {
+                    item.SetActive(false);
+                }
+            }
+        }
 
         public void StartCraftWeapon(int index)
         {
@@ -21,14 +57,6 @@ namespace Vikings.Weapon
             foreach (var item in _interface)
             {
                 item.SetActive(false);
-            }
-        }
-        
-        private void Start()
-        {
-            foreach (var weapon in _weaponsList)
-            {
-                weapon.OnOpen += OnOpenWeapon;
             }
         }
 

@@ -16,6 +16,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 4d832d01eddb56c40849746c07a262a0, type: 3}
   nameText: Pick
   description: Description
+  id: 1
   _itemData: {fileID: 11400000, guid: cbe7421b5bd4c3b4fb2fab3fb3cb57f0, type: 2}
   _isOpen: 0
   _priceToBuy:

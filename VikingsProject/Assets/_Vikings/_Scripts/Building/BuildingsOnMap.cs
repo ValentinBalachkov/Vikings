@@ -5,6 +5,7 @@ using UnityEngine;
 using Vikings.Chanacter;
 using Vikings.Items;
 using Vikings.UI;
+using Vikings.Weapon;
 
 namespace Vikings.Building
 {
@@ -21,8 +22,8 @@ namespace Vikings.Building
         [SerializeField] private BuildingData _craftingTable;
 
         [SerializeField] private StoragePosition _craftingTableDefault;
-        
-
+        [SerializeField] private CraftingTableData _craftingTableData;
+        [SerializeField] private WeaponsOnMapController _weaponsOnMapController;
 
         private List<AbstractBuilding> _buildingControllers = new();
         private List<StorageController> _storageControllers = new();
@@ -43,11 +44,23 @@ namespace Vikings.Building
 
             for (int i = 0; i < _storageData.Length; i++)
             {
-                if (_storageData[i].buildingData.StorageData.CurrentLevel > 0 || _storageData[i].buildingData.isSetOnMap)
+                if (_storageData[i].buildingData.StorageData != null)
                 {
-                    SpawnStorage(i, true);
+                    if (_storageData[i].buildingData.StorageData.CurrentLevel > 0 || _storageData[i].buildingData.isSetOnMap)
+                    {
+                        SpawnStorage(i, true);
+                    }
+                }
+                else
+                {
+                    if (_craftingTableData.currentLevel > 0)
+                    {
+                        SpawnStorage(i, true);
+                    }
                 }
             }
+            
+            _weaponsOnMapController.CheckForCraft();
         }
 
         public void SpawnStorage(int index, bool isSave = false)
@@ -85,6 +98,7 @@ namespace Vikings.Building
                         _buildingControllers.Remove(_craftingTableControllerOnStartGame);
                         Destroy(_craftingTableControllerOnStartGame.gameObject);
                     }
+                    
                 }
             }
 
@@ -240,6 +254,7 @@ namespace Vikings.Building
             {
                 _craftingTableController = Instantiate(data.buildingData.CraftingTableController, data.spawnPoint);
                 _buildingControllers.Add(_craftingTableController);
+                data.buildingData.IsBuild = true;
                 _craftingTableController.Init(_craftingTable);
                 _weaponBtn.SetActive(true);
             }
@@ -257,6 +272,7 @@ namespace Vikings.Building
                 _storageControllers.Add(item);
                 _buildingControllers.Add(item);
                 item.Init(data.buildingData);
+                data.buildingData.IsBuild = true;
                 _inventoryView.AddStorageController(item);
             }
 

@@ -23,8 +23,8 @@ namespace Vikings.Building
         public void SetupCraftWeapon(WeaponData weaponData)
         {
             _currentWeapon = weaponData;
-            _craftingTableData.Setup(_currentWeapon.PriceToBuy, _currentWeapon.CraftingTime);
-            _collectingResourceView.Setup(weaponData.nameText);
+            _craftingTableData.Setup(_currentWeapon.PriceToBuy, _currentWeapon.CraftingTime, weaponData.id);
+            _collectingResourceView.Setup(weaponData.nameText, _craftingTableData.currentItemsCount.ToArray(), _craftingTableData.priceToUpgradeCraftingTable.ToArray());
         }
 
         public override void SetUpgradeState()

@@ -8,6 +8,8 @@ namespace Vikings.Chanacter
     {
         public List<CharacterStateMachine> CharactersList => _charactersOnMap;
 
+        [SerializeField] private CharactersConfig _charactersConfig;
+        
         [SerializeField] private BuildingsOnMap _buildingsOnMap;
         [SerializeField] private BoneFireController _boneFireController;
 
@@ -15,11 +17,18 @@ namespace Vikings.Chanacter
         [SerializeField] private CharacterStateMachine[] _characterStateMachine;
 
         private List<CharacterStateMachine> _charactersOnMap = new();
+        
 
 
         private void Start()
         {
             AddCharacterOnMap(0);
+
+            if (_charactersConfig.charactersCount <= 0) return;
+            for (int i = 0; i < _charactersConfig.charactersCount; i++)
+            {
+                AddCharacterOnMap(0);
+            }
         }
 
         public void AddCharacterOnMap(int index)

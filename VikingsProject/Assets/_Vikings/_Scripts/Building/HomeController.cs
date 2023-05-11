@@ -5,6 +5,7 @@ namespace Vikings.Building
         public override void Init(BuildingData buildingData, bool isSaveInit = false)
         {
             base.Init(buildingData, isSaveInit);
+            if(isSaveInit) return;
             BuildingHomeActionController.Instance.OnHomeBuilding();
         }
 

@@ -198,8 +198,8 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: -563}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_SizeDelta: {x: 0, y: -538}
+  m_Pivot: {x: 0, y: 1}
 --- !u!114 &37026592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,7 +229,7 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 25
     m_Bottom: 0
   m_ChildAlignment: 1
   m_Spacing: 50
@@ -725,6 +725,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 7370277067777427919}
   _charactersOnMap: {fileID: 944111476}
+  _charactersConfig: {fileID: 11400000, guid: 556d7956795907442b7227389da83726, type: 2}
 --- !u!1 &273849131
 GameObject:
   m_ObjectHideFlags: 0
@@ -1496,6 +1497,7 @@ MonoBehaviour:
   _craftingTableData:
   - {fileID: 11400000, guid: 1fc812a57f3c9f144bdb91e364854175, type: 2}
   - {fileID: 11400000, guid: 8556bafbd029f304096a42175a8fc358, type: 2}
+  _charactersConfig: {fileID: 11400000, guid: 556d7956795907442b7227389da83726, type: 2}
 --- !u!4 &510598405
 Transform:
   m_ObjectHideFlags: 0
@@ -2807,6 +2809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f3610a0c564fc791be87ff89eac49f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _charactersConfig: {fileID: 11400000, guid: 556d7956795907442b7227389da83726, type: 2}
   _buildingsOnMap: {fileID: 1788616209}
   _boneFireController: {fileID: 973209295}
   _characterSpawnPoint: {fileID: 1840150022}
@@ -4607,6 +4610,8 @@ MonoBehaviour:
   _craftingTableDefault:
     buildingData: {fileID: 11400000, guid: 286bb1c6aed69f04490fb374cf130e8f, type: 2}
     spawnPoint: {fileID: 292437008}
+  _craftingTableData: {fileID: 11400000, guid: 1fc812a57f3c9f144bdb91e364854175, type: 2}
+  _weaponsOnMapController: {fileID: 1888331429}
 --- !u!4 &1788616210
 Transform:
   m_ObjectHideFlags: 0
@@ -5253,6 +5258,9 @@ MonoBehaviour:
   _buildingsOnMap: {fileID: 1788616209}
   _interface:
   - {fileID: 330603310}
+  _craftingTableData: {fileID: 11400000, guid: 1fc812a57f3c9f144bdb91e364854175, type: 2}
+  _craftingTableDataDefault: {fileID: 11400000, guid: 8556bafbd029f304096a42175a8fc358,
+    type: 2}
 --- !u!4 &1888331430
 Transform:
   m_ObjectHideFlags: 0

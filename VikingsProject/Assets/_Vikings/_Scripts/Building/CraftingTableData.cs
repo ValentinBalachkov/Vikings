@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using SecondChanceSystem.SaveSystem;
 using UnityEngine;
 
@@ -12,13 +13,19 @@ namespace Vikings.Building
         public Sprite icon;
         public string nameText;
         public string description;
+        public int currentWeaponId;
         
         public List<PriceToUpgrade> currentItemsCount = new();
         public List<PriceToUpgrade> priceToUpgradeCraftingTable = new();
         public int craftingTime;
+        
+        private PriceToUpgrade[] _currentItemsCountArray;
+        private PriceToUpgrade[] _priceToUpgradeCraftingTableArray;
 
-        public void Setup(List<PriceToUpgrade> price, int time)
+        public void Setup(List<PriceToUpgrade> price, int time, int weaponId)
         {
+            currentWeaponId = weaponId;
+            
             foreach (var item in price)
             {
                 priceToUpgradeCraftingTable.Add(new PriceToUpgrade()
@@ -47,6 +54,8 @@ namespace Vikings.Building
 
         public void Save()
         {
+            _currentItemsCountArray = currentItemsCount.ToArray();
+            _priceToUpgradeCraftingTableArray = priceToUpgradeCraftingTable.ToArray();
             SaveLoadSystem.SaveData(this);
         }
 
@@ -56,8 +65,11 @@ namespace Vikings.Building
             if (data != null)
             {
                 currentLevel = data.currentLevel;
-                currentItemsCount = data.currentItemsCount;
-                priceToUpgradeCraftingTable = data.priceToUpgradeCraftingTable;
+                if (data._currentItemsCountArray != null)
+                {
+                    currentItemsCount = data._currentItemsCountArray.ToList();
+                    priceToUpgradeCraftingTable = data._priceToUpgradeCraftingTableArray.ToList();
+                }
                 craftingTime = data.craftingTime;
             }
         }
