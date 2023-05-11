@@ -128,7 +128,6 @@ namespace Vikings.Building
 
         public override void UpgradeStorage()
         {
-            DebugLogger.SendMessage("TODO add open new craft elements", Color.cyan);
             _craftingTableData.currentLevel++;
             isUpgradeState = false;
         }

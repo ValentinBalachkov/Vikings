@@ -12,7 +12,7 @@ namespace Vikings.Weapon
         [SerializeField] private ItemsOnMapController _itemsOnMapController;
         [SerializeField] private List<WeaponData> _weaponsList = new();
         [SerializeField] private BuildingsOnMap _buildingsOnMap;
-        [SerializeField] private GameObject[] _interface;
+        [SerializeField] private MenuButtonsManager _menuButtonsManager;
         
         [SerializeField] private CraftingTableData _craftingTableData;
         [SerializeField] private CraftingTableData _craftingTableDataDefault;
@@ -43,10 +43,7 @@ namespace Vikings.Weapon
             {
                 _buildingsOnMap.GetCraftingTable().SetupCraftWeapon(_weaponsList.FirstOrDefault(x => x.id == weaponId));
                 _buildingsOnMap.UpdateCurrentBuilding(true);
-                foreach (var item in _interface)
-                {
-                    item.SetActive(false);
-                }
+                _menuButtonsManager.EnableButtons(false);
             }
         }
 
@@ -54,19 +51,13 @@ namespace Vikings.Weapon
         {
             _buildingsOnMap.GetCraftingTable().SetupCraftWeapon(_weaponsList[index]);
             _buildingsOnMap.UpdateCurrentBuilding(true);
-            foreach (var item in _interface)
-            {
-                item.SetActive(false);
-            }
+            _menuButtonsManager.EnableButtons(false);
         }
 
         private void OnOpenWeapon(WeaponData weaponData)
         {
             _itemsOnMapController.AddItemToItemsList(weaponData.ItemData);
-            foreach (var item in _interface)
-            {
-                item.SetActive(true);
-            }
+            _menuButtonsManager.EnableButtons(true);
         }
         
     }

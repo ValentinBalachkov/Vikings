@@ -16,8 +16,7 @@ namespace Vikings.Building
         [SerializeField] private CharactersOnMap _charactersOnMap;
 
         [SerializeField] private InventoryView _inventoryView;
-        [SerializeField] private GameObject _weaponBtn;
-        [SerializeField] private GameObject _menu;
+        [SerializeField] private MenuButtonsManager _menu;
 
         [SerializeField] private BuildingData _craftingTable;
 
@@ -246,7 +245,7 @@ namespace Vikings.Building
 
         public void UpgradeBuildingToStorage()
         {
-            _menu.SetActive(true);
+            _menu.EnableButtons(true);
             var data = _storageData.FirstOrDefault(x => x.buildingData == _currentBuilding.BuildingData);
             if (data == null) return;
 
@@ -256,7 +255,6 @@ namespace Vikings.Building
                 _buildingControllers.Add(_craftingTableController);
                 data.buildingData.IsBuild = true;
                 _craftingTableController.Init(_craftingTable);
-                _weaponBtn.SetActive(true);
             }
             else if (_currentBuilding.isUpgradeState)
             {
