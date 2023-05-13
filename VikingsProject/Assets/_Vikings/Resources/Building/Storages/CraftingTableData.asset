@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpen: 0
   currentLevel: 0
-  icon: {fileID: 21300000, guid: e226014751f25b241b053ca1184dd147, type: 3}
+  icon: {fileID: 21300000, guid: bf5558c6a1680954698420e85333ead7, type: 3}
   nameText: "\u0412\u0435\u0440\u0441\u0442\u0430\u043A"
   description: Description
+  currentWeaponId: 0
   currentItemsCount: []
   priceToUpgradeCraftingTable: []
   craftingTime: 5

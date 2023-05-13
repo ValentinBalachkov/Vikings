@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StorageRockData
   m_EditorClassIdentifier: 
   isOpen: 0
-  icon: {fileID: 21300000, guid: 4d832d01eddb56c40849746c07a262a0, type: 3}
+  icon: {fileID: 21300000, guid: e8ff7fab8368d754c9416581c2b9d338, type: 3}
   nameText: "\u0421\u043A\u043B\u0430\u0434 \u043A\u0430\u043C\u043D\u044F"
   description: Description
   isDefaultOpen: 0

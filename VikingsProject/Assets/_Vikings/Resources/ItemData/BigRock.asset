@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 168a22c003ac4607ab6e9c704435d4d1, type: 3}
   m_Name: BigRock
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: e226014751f25b241b053ca1184dd147, type: 3}
+  icon: {fileID: 21300000, guid: 9c86f890a9ca36241abf6cb6c592a6e6, type: 3}
   nameText: 
   description: Description
   _id: 2

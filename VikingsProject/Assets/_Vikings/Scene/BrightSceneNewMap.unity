@@ -2812,9 +2812,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 330603310}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
+      - m_Target: {fileID: 330603313}
+        m_TargetAssemblyTypeName: MenuButtonsManager, Assembly-CSharp
+        m_MethodName: EnableButtons
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4958,6 +4958,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RewardButtons
+      objectReference: {fileID: 0}
+    - target: {fileID: 8197588060126321756, guid: 5ef31c24266493e4686a4cd2a1bfe933,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
