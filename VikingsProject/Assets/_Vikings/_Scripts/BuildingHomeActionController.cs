@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 using Vikings.Chanacter;
 
@@ -24,10 +25,7 @@ namespace Vikings.Building
         {
             if (_charactersConfig.cameraPositionY != 0)
             {
-                _camera.transform.position = new Vector3
-                (_camera.transform.position.x,
-                    _charactersConfig.cameraPositionY,
-                    _charactersConfig.cameraPositionZ);
+                StartCoroutine(MoveCameraCoroutine(_charactersConfig.cameraPositionY));
             }
         }
 
@@ -35,15 +33,18 @@ namespace Vikings.Building
         {
             _charactersOnMap.AddCharacterOnMap(1);
             _charactersConfig.charactersCount++;
+            float posY = _camera.orthographicSize + 1;
 
-            var position = _camera.transform.position;
-            _camera.transform.DOMove(new Vector3
-            (position.x,
-                position.y + 1,
-                position.z + 1), 0.01f);
-
-            _charactersConfig.cameraPositionY = _camera.transform.position.y;
-            _charactersConfig.cameraPositionZ = _camera.transform.position.z;
+            _charactersConfig.cameraPositionY = posY;
+            StartCoroutine(MoveCameraCoroutine(posY));
+         }
+        private IEnumerator MoveCameraCoroutine(float position)
+        {
+            while (_camera.orthographicSize < position)
+            {
+                _camera.orthographicSize += 0.01f;
+                yield return null;
+            }
         }
     }
 }

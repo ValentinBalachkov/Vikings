@@ -13,6 +13,7 @@ namespace Vikings.Building
         public Sprite icon;
         public string nameText;
         public string description;
+        public string required;
         public int currentWeaponId;
         
         public List<PriceToUpgrade> currentItemsCount = new();

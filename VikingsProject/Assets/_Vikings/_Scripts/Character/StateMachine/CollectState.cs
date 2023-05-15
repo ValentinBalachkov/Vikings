@@ -37,7 +37,6 @@ namespace Vikings.Chanacter
 
         private void ChangeState()
         {
-          
             _inventoryController.OnCollect -= ChangeState;
             _stateMachine.SetState<MoveToStorageState>();
         }

@@ -14,6 +14,7 @@ namespace Vikings.Weapon
         public Sprite icon;
         public string nameText;
         public string description;
+        public string required;
         public int id;
         
         public bool IsOpen
