@@ -15,7 +15,9 @@ MonoBehaviour:
   isOpenForCrafting: 0
   icon: {fileID: 21300000, guid: 70b65ef7ee8cf914aab0e53c4a165b5a, type: 3}
   nameText: Axe
-  description: Description
+  description: Allows you to cut down trees. Upgrade to increase the amount of wood
+    you get
+  required: 
   id: 0
   _itemData: {fileID: 11400000, guid: aa71cd7377003654ab1aad130b722e73, type: 2}
   _isOpen: 0

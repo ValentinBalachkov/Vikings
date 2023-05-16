@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpen: 0
   icon: {fileID: 21300000, guid: e8ff7fab8368d754c9416581c2b9d338, type: 3}
-  nameText: "\u0421\u043A\u043B\u0430\u0434 \u043A\u0430\u043C\u043D\u044F"
-  description: Description
+  nameText: Stone storage
+  description: Allows storing stone. Upgrade to increase the capacity
+  required: 
   isDefaultOpen: 0
   _itemType: {fileID: 11400000, guid: 8b782c2617e0b8048985ef732675d1be, type: 2}
   _count: 0
