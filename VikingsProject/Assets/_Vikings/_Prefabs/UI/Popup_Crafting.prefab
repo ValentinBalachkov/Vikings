@@ -266,6 +266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _indicatorImage: {fileID: 4273945779951522563}
+  _rectTransform: {fileID: 4273945779589098526}
 --- !u!1 &4273945779951522573
 GameObject:
   m_ObjectHideFlags: 0

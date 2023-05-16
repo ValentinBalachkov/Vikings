@@ -4,11 +4,25 @@ using UnityEngine.UI;
 
 public class CraftingIndicatorView : MonoBehaviour
 {
+    public static CraftingIndicatorView Instance => _instance;
+    private static CraftingIndicatorView _instance;
     [SerializeField] private Image _indicatorImage;
+    [SerializeField] private RectTransform _rectTransform;
+    
     private int _maxCount;
 
-    public void Setup(int maxCount)
+    private void Awake()
     {
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+        gameObject.SetActive(false);
+    }
+
+    public void Setup(int maxCount, Transform pos)
+    {
+        _rectTransform.position = Camera.main.WorldToScreenPoint(pos.position);
         gameObject.SetActive(true);
         _indicatorImage.fillAmount = 0;
         _maxCount = maxCount;

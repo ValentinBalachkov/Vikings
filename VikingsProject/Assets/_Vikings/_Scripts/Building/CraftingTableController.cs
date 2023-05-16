@@ -13,7 +13,6 @@ namespace Vikings.Building
         public CraftingTableData CraftingTableData => _craftingTableData;
         
         [SerializeField] private CraftingTableData _craftingTableData;
-        [SerializeField] private CollectingResourceView _collectingResourceView;
         [SerializeField] private GameObject _model;
         
 
@@ -24,7 +23,7 @@ namespace Vikings.Building
         {
             _currentWeapon = weaponData;
             _craftingTableData.Setup(_currentWeapon.PriceToBuy, _currentWeapon.CraftingTime, weaponData.id);
-            _collectingResourceView.Setup(weaponData.nameText, _craftingTableData.currentItemsCount.ToArray(), _craftingTableData.priceToUpgradeCraftingTable.ToArray());
+            CollectingResourceView.Instance.Setup(weaponData.nameText, _craftingTableData.currentItemsCount.ToArray(), _craftingTableData.priceToUpgradeCraftingTable.ToArray(), transform);
         }
 
         public override void SetUpgradeState()
@@ -59,7 +58,7 @@ namespace Vikings.Building
                 {
                     itemUpg.count += price.count;
                 }
-                _collectingResourceView.UpdateView(_currentItemsForUpgrade.ToArray(), _craftingTableData.priceToUpgradeCraftingTable.ToArray());
+                CollectingResourceView.Instance.UpdateView(_currentItemsForUpgrade.ToArray(), _craftingTableData.priceToUpgradeCraftingTable.ToArray());
                 return;
             }
             
@@ -74,7 +73,7 @@ namespace Vikings.Building
                 currentItem.count = item.count;
             }
             
-            _collectingResourceView.UpdateView(_craftingTableData.currentItemsCount.ToArray(), _currentWeapon.PriceToBuy.ToArray());
+            CollectingResourceView.Instance.UpdateView(_craftingTableData.currentItemsCount.ToArray(), _currentWeapon.PriceToBuy.ToArray());
             OnChangeCount?.Invoke(_currentWeapon.PriceToBuy.ToArray(), _craftingTableData.currentItemsCount.ToArray());
 
         }
@@ -106,7 +105,7 @@ namespace Vikings.Building
                     }
                 }
             
-                _collectingResourceView.gameObject.SetActive(false);
+                CollectingResourceView.Instance.gameObject.SetActive(false);
                 return true;
             }
             
@@ -122,7 +121,7 @@ namespace Vikings.Building
                     return false;
                 }
             }
-            _collectingResourceView.gameObject.SetActive(false);
+            CollectingResourceView.Instance.gameObject.SetActive(false);
             return true;
         }
 

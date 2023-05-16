@@ -40,13 +40,13 @@ namespace Vikings.Chanacter
             {
                 CraftingTableController craftingTableController =
                     _buildingsOnMap.GetCurrentBuilding() as CraftingTableController;
-                _buildingsOnMap.GetCurrentBuilding().craftingIndicatorView.Setup(craftingTableController.CraftingTableData.craftingTime);
+                CraftingIndicatorView.Instance.Setup(craftingTableController.CraftingTableData.craftingTime,  _buildingsOnMap.GetCurrentBuilding().transform);
                 StartTimerCraftingTable(craftingTableController);
             }
 
             if (!_isCrafting)
             {
-                _buildingsOnMap.GetCurrentBuilding().craftingIndicatorView.Setup((int)_buildingsOnMap.GetCurrentBuilding().BuildingData.BuildTime);
+                CraftingIndicatorView.Instance.Setup((int)_buildingsOnMap.GetCurrentBuilding().BuildingData.BuildTime, _buildingsOnMap.GetCurrentBuilding().transform);
                 StartTimer();
             }
         }

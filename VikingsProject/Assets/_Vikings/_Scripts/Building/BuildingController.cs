@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace Vikings.Building
 {
     public class BuildingController : AbstractBuilding
     {
         public Action<BuildingData> OnChangeCount;
-        [SerializeField] private CollectingResourceView _collectingResourceView;
 
         public override void ChangeStorageCount(PriceToUpgrade price)
         {
@@ -23,13 +21,13 @@ namespace Vikings.Building
                 currentItem.count = item.count;
             }
 
-            _collectingResourceView.UpdateView(buildingData.currentItemsCount, buildingData.PriceToUpgrades);
+            CollectingResourceView.Instance.UpdateView(buildingData.currentItemsCount, buildingData.PriceToUpgrades);
 
             OnChangeCount?.Invoke(buildingData);
 
             if (IsFullStorage())
             {
-                _collectingResourceView.gameObject.SetActive(false);
+                CollectingResourceView.Instance.gameObject.SetActive(false);
                 UpgradeStorage();
             }
         }
@@ -37,9 +35,9 @@ namespace Vikings.Building
         public override void Init(BuildingData buildingData, bool isSaveInit = false)
         {
             this.buildingData = buildingData;
-            _collectingResourceView.Setup(
+            CollectingResourceView.Instance.Setup(
                 this.buildingData.StorageData == null ? "Crafting table" : this.buildingData.StorageData.nameText,
-                this.buildingData.currentItemsCount, this.buildingData.PriceToUpgrades);
+                this.buildingData.currentItemsCount, this.buildingData.PriceToUpgrades, transform);
 
             buildingData.isSetOnMap = true;
         }

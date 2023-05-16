@@ -14,8 +14,7 @@ namespace Vikings.Building
         public int Priority { get; set; }
 
         private List<PriceToUpgrade> _currentItemsForUpgrade = new();
-        [SerializeField] private CollectingResourceView _collectingResourceView;
-       
+
 
 
         public override void Init(BuildingData buildingData, bool isSaveInit = false)
@@ -42,7 +41,7 @@ namespace Vikings.Building
                 
             }
 
-            _collectingResourceView.Setup(buildingData.StorageData.nameText, buildingData.currentItemsCount, buildingData.PriceToUpgrades);
+            CollectingResourceView.Instance.Setup(buildingData.StorageData.nameText, buildingData.currentItemsCount, buildingData.PriceToUpgrades, transform);
             isUpgradeState = true;
         }
 
@@ -80,14 +79,14 @@ namespace Vikings.Building
                 item.count += priceToUpgrade.count;
             }
             
-            _collectingResourceView.UpdateView(_currentItemsForUpgrade.ToArray(), buildingData.StorageData.PriceToUpgrade.ToArray());
+            CollectingResourceView.Instance.UpdateView(_currentItemsForUpgrade.ToArray(), buildingData.StorageData.PriceToUpgrade.ToArray());
         }
 
         public override void UpgradeStorage()
         {
             buildingData.StorageData.MaxStorageCount += 10;
             isUpgradeState = false;
-            _collectingResourceView.gameObject.SetActive(false);
+            CollectingResourceView.Instance.gameObject.SetActive(false);
             buildingData.StorageData.CurrentLevel++;
         }
 
@@ -123,7 +122,7 @@ namespace Vikings.Building
                     return false;
                 }
             }
-            _collectingResourceView.gameObject.SetActive(false);
+            CollectingResourceView.Instance.gameObject.SetActive(false);
             return true;
         }
 

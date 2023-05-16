@@ -629,13 +629,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5c00e14d64f2134aaf6a87b1508101f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _woodPanel: {fileID: 4263725310426570699}
-  _rockPanel: {fileID: 4263725310286212844}
   _name: {fileID: 4263725309258876943}
   _woodBar: {fileID: 4263725310027825377}
   _rockBar: {fileID: 4263725308988199090}
   _woodCount: {fileID: 4263725308871501674}
   _rockCount: {fileID: 4263725310838247357}
+  _rectTransform: {fileID: 4263725310160349955}
 --- !u!1 &4263725310266509782
 GameObject:
   m_ObjectHideFlags: 0

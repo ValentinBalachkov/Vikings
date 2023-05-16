@@ -17,7 +17,8 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: bf5558c6a1680954698420e85333ead7, type: 3}
   nameText: "\u0412\u0435\u0440\u0441\u0442\u0430\u043A"
   description: Description
+  required: 
   currentWeaponId: 0
   currentItemsCount: []
   priceToUpgradeCraftingTable: []
-  craftingTime: 5
+  craftingTime: 0
