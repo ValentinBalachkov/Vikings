@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: CraftingTableData
   m_EditorClassIdentifier: 
   isOpen: 0
-  currentLevel: 0
+  currentLevel: 1
   icon: {fileID: 21300000, guid: bf5558c6a1680954698420e85333ead7, type: 3}
   nameText: Workbench
   description: Allows you to create tools and buildings. Upgrade to reduce the amount
     of wood and stone needed for crafting
-  required: 
+  required: Axe
   currentWeaponId: 0
   currentItemsCount: []
   priceToUpgradeCraftingTable: []

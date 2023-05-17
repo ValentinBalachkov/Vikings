@@ -17,7 +17,7 @@ MonoBehaviour:
   nameText: Pickaxe
   description: Allows you to mine stones. Upgrade to increase the amount of stones
     you get
-  required: 
+  required: Workbench
   id: 1
   _itemData: {fileID: 11400000, guid: cbe7421b5bd4c3b4fb2fab3fb3cb57f0, type: 2}
   _isOpen: 0
