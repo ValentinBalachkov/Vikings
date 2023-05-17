@@ -17,8 +17,8 @@ namespace Vikings.UI
         [SerializeField] private Image[] _priceForUpgradeImage;
         [SerializeField] private TMP_Text[] _priceForUpgradeCount;
         [SerializeField] private TMP_Text _buttonDescription;
+        [SerializeField] private TMP_Text _requiredText;
         
-
         [SerializeField] private Sprite _activeSprite;
         [SerializeField] private Sprite _defaultSprite;
         
@@ -40,16 +40,20 @@ namespace Vikings.UI
         {
             _buttonDescription.text = isCreate ? "Create" : "Upgrade";
         }
+        
 
-        public void SetEnable(bool isEnable)
+        public void SetEnable(bool isEnable, string requiredText)
         {
             if (isEnable)
             {
+                _requiredText.gameObject.SetActive(false);
                 _upgradeBtn.interactable = true;
                 _upgradeBtn.image.sprite = _activeSprite;
             }
             else
             {
+                _requiredText.gameObject.SetActive(true);
+                _requiredText.text = requiredText;
                 _upgradeBtn.interactable = false;
                 _upgradeBtn.image.sprite = _defaultSprite;
             }

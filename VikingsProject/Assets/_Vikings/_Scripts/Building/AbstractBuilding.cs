@@ -4,7 +4,6 @@ namespace Vikings.Building
 {
     public abstract class AbstractBuilding : MonoBehaviour
     {
-        public CraftingIndicatorView craftingIndicatorView;
         public BuildingData BuildingData => buildingData;
         
         protected BuildingData buildingData;

@@ -21,4 +21,4 @@ MonoBehaviour:
   currentWeaponId: 0
   currentItemsCount: []
   priceToUpgradeCraftingTable: []
-  craftingTime: 0
+  craftingTime: 5

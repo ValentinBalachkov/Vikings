@@ -41,6 +41,11 @@ namespace Vikings.Items
                 foreach (var pos in item.position)
                 {
                     var itemOnScene = Instantiate(item.item.Prefab, pos);
+                    if (item.item.ItemName == "Three")
+                    {
+                        var scale = Random.Range(0.7f, 1f);
+                        itemOnScene.transform.localScale = new Vector3(scale, scale, scale);
+                    }
                     itemOnScene.Init(item.item);
                     _allItems.Add(itemOnScene);
                     itemOnScene.OnEnable += () => _buildingsOnMap.UpdateCurrentBuilding(false, true);

@@ -11,6 +11,7 @@ namespace Vikings.Chanacter
         private const float OFFSET_DISTANCE = 0.5f;
         private CharacterStateMachine _stateMachine;
         private StorageData _storageData;
+        private bool _isStopMove;
         
         public IdleState(CharacterStateMachine stateMachine, BoneFireController boneFireController, PlayerController playerPrefab) : 
             base("Idle state", stateMachine)
@@ -23,6 +24,7 @@ namespace Vikings.Chanacter
         public override void Enter()
         {
             base.Enter();
+            _isStopMove = false;
             _playerPrefab.SetMoveAnimation();
         }
 
@@ -34,6 +36,7 @@ namespace Vikings.Chanacter
         public override void UpdatePhysics()
         {
             base.UpdatePhysics();
+            if(_isStopMove) return;
 
             if (Vector3.Distance(_playerPrefab.transform.position,
                     _boneFireController.GetCurrentPosition().position) >
@@ -43,14 +46,11 @@ namespace Vikings.Chanacter
             }
             else
             {
+                _isStopMove = true;
                 _playerPrefab.SetIdleAnimation();
             }
             
         }
 
-        public override void UpdateLogic()
-        {
-            base.UpdateLogic();
-        }
     }
 }

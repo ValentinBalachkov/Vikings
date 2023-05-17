@@ -7,9 +7,8 @@ namespace Vikings.Chanacter
     {
         private BuildingsOnMap _buildingsOnMap;
         private PlayerController _playerPrefab;
-        private const float OFFSET_DISTANCE = 1f;
+        private const float OFFSET_DISTANCE = 0.5f;
         private CharacterStateMachine _stateMachine;
-        private bool _isCollect;
         private bool _isSetToStorage;
         
         public MoveToStorageState(CharacterStateMachine stateMachine, BuildingsOnMap buildingsOnMap, PlayerController playerPrefab) : 
@@ -24,21 +23,30 @@ namespace Vikings.Chanacter
         {
             base.Enter();
             _playerPrefab.SetMoveAnimation();
-            _isCollect = false;
+            _playerPrefab.OnEndAnimation += OnSetItemAnimation;
             _isSetToStorage = false;
+        }
+
+        public override void Exit()
+        {
+            _playerPrefab.OnEndAnimation -= OnSetItemAnimation;
         }
 
         public override void UpdatePhysics()
         {
             base.UpdatePhysics();
             if(_isSetToStorage) return;
+           
             _playerPrefab.MoveToPoint(_buildingsOnMap.GetCurrentBuildingPosition());
-            if ((Vector3.Distance(_playerPrefab.transform.position, _buildingsOnMap.GetCurrentBuildingPosition().position) >
-                 OFFSET_DISTANCE) || _isCollect) return;
-            _isCollect = true;
-            _playerPrefab.SetCraftingAnimation();
-            _buildingsOnMap.SetItemToStorage(_stateMachine);
+            if (Vector3.Distance(_playerPrefab.transform.position, _buildingsOnMap.GetCurrentBuildingPosition().position) >
+                OFFSET_DISTANCE) return;
+            _playerPrefab.SetCollectAnimation();
             _isSetToStorage = true;
+        }
+
+        private void OnSetItemAnimation()
+        {
+            _buildingsOnMap.SetItemToStorage(_stateMachine);
         }
     }
 }

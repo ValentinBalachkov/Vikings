@@ -51,7 +51,8 @@ namespace Vikings.UI
                     _storageDatas[i].PriceToUpgrade);
                 item.SetButtonDescription(_storageDatas[i].CurrentLevel == 0);
                 item.SetEnable((_craftingTableData.currentLevel - _storageDatas[i].CurrentLevel == k) ||
-                               (_storageDatas[i].isDefaultOpen && _storageDatas[i].CurrentLevel == 0));
+                               (_storageDatas[i].isDefaultOpen && _storageDatas[i].CurrentLevel == 0),
+                    $"REQUIRED {_storageDatas[i].required} LEVEL{_craftingTableData.currentLevel + 1}");
                 var index = i;
                 if (_storageDatas[i].CurrentLevel == 0)
                 {
@@ -77,7 +78,7 @@ namespace Vikings.UI
             craftingTable.UpdateUI(_craftingTableData.nameText, _craftingTableData.description, _craftingTableData.currentLevel + 1,
                 _craftingTableData.icon, _craftingTableBuildingData.PriceToUpgrades);
             craftingTable.SetButtonDescription(_craftingTableData.currentLevel == 0);
-            craftingTable.SetEnable(_weaponsOnMapController.WeaponsData[0].IsOpen);
+            craftingTable.SetEnable(_weaponsOnMapController.WeaponsData[0].IsOpen, $"REQUIRED {_craftingTableData.required} LEVEL{1}");
             if (_craftingTableData.currentLevel == 0)
             {
                 craftingTable.AddOnClickListener(() =>
@@ -106,7 +107,8 @@ namespace Vikings.UI
                     _weaponsOnMapController.WeaponsData[i].PriceToBuy.ToArray());
                 weapon.SetButtonDescription(!_weaponsOnMapController.WeaponsData[i].IsOpen);
                 weapon.SetEnable(((i == 0 && _storageDatas[0].CurrentLevel > 0) ||
-                                 (i == 1 && _craftingTableData.currentLevel == 2)) && !_weaponsOnMapController.WeaponsData[i].IsOpen);
+                                 (i == 1 && _craftingTableData.currentLevel == 2)) && !_weaponsOnMapController.WeaponsData[i].IsOpen, 
+                    $"REQUIRED {_weaponsOnMapController.WeaponsData[i].required} LEVEL{_craftingTableData.currentLevel + 1}");
                 var index = i;
                 weapon.AddOnClickListener(() =>
                 {

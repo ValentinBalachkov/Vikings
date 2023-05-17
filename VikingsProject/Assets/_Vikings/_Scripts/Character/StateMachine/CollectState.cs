@@ -10,9 +10,7 @@ namespace Vikings.Chanacter
         private BuildingsOnMap _buildingsOnMap;
         private InventoryController _inventoryController;
         private PlayerController _playerController;
-
-        private IGetItem _currentItem;
-
+        
         public CollectState(CharacterStateMachine stateMachine, PlayerController playerController,
             BuildingsOnMap buildingsOnMap, InventoryController inventoryController) : base("Collect", stateMachine)
         {
@@ -28,8 +26,6 @@ namespace Vikings.Chanacter
             
             _playerController.SetCollectAnimation();
 
-            _currentItem = _buildingsOnMap.GetElementPosition();
-          
             _inventoryController.OnCollect += ChangeState;
            
             _inventoryController.CollectItem();
