@@ -42,7 +42,7 @@ namespace Vikings.Building
 
         private IEnumerator MoveCameraCoroutine(HouseCameraPositionInfo positionInfo)
         {
-            _camera.transform.position = positionInfo.position;
+            _camera.transform.localPosition = positionInfo.position;
             while (_camera.orthographicSize < positionInfo.size)
             {
                 _camera.orthographicSize += 0.01f;
