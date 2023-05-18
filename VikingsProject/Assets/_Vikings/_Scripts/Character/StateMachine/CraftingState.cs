@@ -21,21 +21,14 @@ namespace Vikings.Chanacter
         {
             _isCrafting = false;
             _playerController.SetMoveAnimation();
-            base.Enter();
-        }
-
-        public override void Exit()
-        {
-            base.Exit();
-        }
-
-        public override void UpdatePhysics()
-        {
-            if(_isCrafting) return;
+            _playerController.SetStoppingDistance(OFFSET_DISTANCE);
+            _playerController.SetActionOnGetPosition(OnGetPoint);
             _playerController.MoveToPoint(_buildingsOnMap.GetCurrentBuildingPosition());
-            if (!(Vector3.Distance(_playerController.transform.position, _buildingsOnMap.GetCurrentBuildingPosition().position) <=
-                  OFFSET_DISTANCE)) return;
+        }
 
+        private void OnGetPoint()
+        {
+            _playerController.transform.LookAt(_buildingsOnMap.GetCurrentBuilding().transform);
             if (!_isCrafting && _buildingsOnMap.GetCurrentBuilding() is CraftingTableController)
             {
                 CraftingTableController craftingTableController =

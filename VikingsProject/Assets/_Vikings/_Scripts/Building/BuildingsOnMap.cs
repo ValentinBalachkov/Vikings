@@ -233,9 +233,10 @@ namespace Vikings.Building
             }
         }
 
-        public IGetItem GetElementPosition()
+        public IGetItem GetElementPosition(Transform playerPos)
         {
-            return _itemQueue.OrderBy(x => x.Priority).ThenByDescending(x => x.GetItemData().DropCount).ToList()[0];
+            return _itemQueue.OrderBy(x => x.Priority).ThenByDescending(x => x.GetItemData().DropCount).
+                ThenBy(x => Vector3.Distance(x.GetItemPosition().position, playerPos.position)).ToList()[0];
         }
 
         public void ClearCurrentBuilding()

@@ -18,8 +18,6 @@ namespace Vikings.Chanacter
             Debug.Log("Enter state: " + _stateName);
         }
         public virtual void Exit(){}
-        public virtual void UpdatePhysics(){}
-        public virtual void UpdateLogic(){}
     }  
 }
 

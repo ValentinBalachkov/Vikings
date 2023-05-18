@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using Vikings.Building;
+﻿using Vikings.Building;
 
 namespace Vikings.Chanacter
 {
@@ -9,8 +8,7 @@ namespace Vikings.Chanacter
         private PlayerController _playerPrefab;
         private const float OFFSET_DISTANCE = 0.5f;
         private CharacterStateMachine _stateMachine;
-        private bool _isSetToStorage;
-        
+
         public MoveToStorageState(CharacterStateMachine stateMachine, BuildingsOnMap buildingsOnMap, PlayerController playerPrefab) : 
             base("Move to storage", stateMachine)
         {
@@ -24,7 +22,9 @@ namespace Vikings.Chanacter
             base.Enter();
             _playerPrefab.SetMoveAnimation();
             _playerPrefab.OnEndAnimation += OnSetItemAnimation;
-            _isSetToStorage = false;
+            _playerPrefab.SetStoppingDistance(OFFSET_DISTANCE);
+            _playerPrefab.SetActionOnGetPosition(OnGetPoint);
+            _playerPrefab.MoveToPoint(_buildingsOnMap.GetCurrentBuildingPosition());
         }
 
         public override void Exit()
@@ -32,16 +32,10 @@ namespace Vikings.Chanacter
             _playerPrefab.OnEndAnimation -= OnSetItemAnimation;
         }
 
-        public override void UpdatePhysics()
+        private void OnGetPoint()
         {
-            base.UpdatePhysics();
-            if(_isSetToStorage) return;
-           
-            _playerPrefab.MoveToPoint(_buildingsOnMap.GetCurrentBuildingPosition());
-            if (Vector3.Distance(_playerPrefab.transform.position, _buildingsOnMap.GetCurrentBuildingPosition().position) >
-                OFFSET_DISTANCE) return;
+            _playerPrefab.transform.LookAt(_buildingsOnMap.GetCurrentBuildingPosition());
             _playerPrefab.SetCollectAnimation();
-            _isSetToStorage = true;
         }
 
         private void OnSetItemAnimation()

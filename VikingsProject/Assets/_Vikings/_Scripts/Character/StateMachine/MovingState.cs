@@ -24,17 +24,17 @@ namespace Vikings.Chanacter
         public override void Enter()
         {
             base.Enter();
-            _currentPoint = _buildingsOnMap.GetElementPosition();
+            _currentPoint = _buildingsOnMap.GetElementPosition(_playerPrefab.transform);
             _inventoryController.SetItem(_currentPoint);
             _playerPrefab.SetMoveAnimation();
-        }
-        public override void UpdatePhysics()
-        {
-            base.UpdatePhysics();
+            _playerPrefab.SetStoppingDistance(OFFSET_DISTANCE);
+            _playerPrefab.SetActionOnGetPosition(OnGetPoint);
             _playerPrefab.MoveToPoint(_currentPoint.GetItemPosition());
-            if (!(Vector3.Distance(_playerPrefab.transform.position, _currentPoint.GetItemPosition().position) <=
-                  OFFSET_DISTANCE)) return;
-            //_playerPrefab.SetIdleAnimation();
+        }
+
+        private void OnGetPoint()
+        {
+            _playerPrefab.transform.LookAt(_currentPoint.GetItemPosition());
             _stateMachine.SetState<CollectState>();
         }
     }

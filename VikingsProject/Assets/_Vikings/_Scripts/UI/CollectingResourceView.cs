@@ -34,7 +34,7 @@ public class CollectingResourceView : MonoBehaviour
         _woodBar.fillAmount = (float)current[0].count / (float)all[0].count;
         _rockBar.fillAmount = (float)current[1].count / (float)all[1].count;
         _name.text = nameBuilding;
-        _rectTransform.position = Camera.main.WorldToScreenPoint(pos.position);
+        _rectTransform.position = Camera.main.WorldToScreenPoint(new Vector3(pos.position.x, pos.position.y, pos.position.z - 1f));
         gameObject.SetActive(true);
     }
     

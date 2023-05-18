@@ -12,15 +12,5 @@ namespace Vikings.Chanacter
             _currentState = newState;
             _currentState.Enter();
         }
-
-        private void Update()
-        {
-            _currentState?.UpdateLogic();
-        }
-
-        private void FixedUpdate()
-        {
-            _currentState?.UpdatePhysics();
-        }
     }
 }

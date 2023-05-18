@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5574324935936413244}
-  - component: {fileID: 5574324935936413245}
   - component: {fileID: 5574324935936413242}
   m_Layer: 0
   m_Name: Rock
@@ -34,22 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!208 &5574324935936413245
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5574324935936413246}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.135, y: 0.5, z: 0.25}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!114 &5574324935936413242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,7 +117,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 246698796908615031, guid: 00d6b947c67a87743977d97784c6ee6a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6499612434933896359}
   m_SourcePrefab: {fileID: 100100000, guid: 00d6b947c67a87743977d97784c6ee6a, type: 3}
 --- !u!1 &1346655228193790456 stripped
 GameObject:
@@ -142,6 +129,22 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1286961816687660175}
   m_PrefabAsset: {fileID: 0}
+--- !u!208 &6499612434933896359
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346655228193790456}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.136, z: 0.245}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.003, y: 0.136, z: 0.022000002}
+  m_TimeToStationary: 0.5
 --- !u!4 &3263400416508744872 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4365634657894881319, guid: 00d6b947c67a87743977d97784c6ee6a,

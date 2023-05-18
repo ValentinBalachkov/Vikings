@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using Vikings.Building;
-using Vikings.Items;
 
 namespace Vikings.Chanacter
 {
@@ -8,7 +7,7 @@ namespace Vikings.Chanacter
     {
         private BoneFireController _boneFireController;
         private PlayerController _playerPrefab;
-        private const float OFFSET_DISTANCE = 0.5f;
+        private const float OFFSET_DISTANCE = 0.8f;
         private CharacterStateMachine _stateMachine;
         private StorageData _storageData;
         private bool _isStopMove;
@@ -26,31 +25,17 @@ namespace Vikings.Chanacter
             base.Enter();
             _isStopMove = false;
             _playerPrefab.SetMoveAnimation();
+            _playerPrefab.SetStoppingDistance(OFFSET_DISTANCE);
+            _playerPrefab.SetActionOnGetPosition(OnGetPath);
+            _playerPrefab.MoveToPoint(_boneFireController.GetCurrentPosition());
         }
-
-        public override void Exit()
+        
+        private void OnGetPath()
         {
-            base.Exit();
+            _playerPrefab.transform.LookAt(_boneFireController.GetCurrentPosition());
+            _playerPrefab.SetIdleAnimation();
         }
-
-        public override void UpdatePhysics()
-        {
-            base.UpdatePhysics();
-            if(_isStopMove) return;
-
-            if (Vector3.Distance(_playerPrefab.transform.position,
-                    _boneFireController.GetCurrentPosition().position) >
-                OFFSET_DISTANCE)
-            {
-                _playerPrefab.MoveToPoint(_boneFireController.GetCurrentPosition());
-            }
-            else
-            {
-                _isStopMove = true;
-                _playerPrefab.SetIdleAnimation();
-            }
-            
-        }
+        
 
     }
 }

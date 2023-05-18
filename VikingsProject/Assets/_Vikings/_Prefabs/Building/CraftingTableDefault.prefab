@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c130122df144c74868cc09ee137b970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  craftingIndicatorView: {fileID: 0}
   isUpgradeState: 0
   _craftingTableData: {fileID: 11400000, guid: 8556bafbd029f304096a42175a8fc358, type: 2}
   _model: {fileID: 8275611074021766352}
@@ -142,7 +141,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 2.6520002, y: 1.4490001, z: 3.104}
+  m_Extents: {x: 1.405, y: 1.4490001, z: 1.515}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1

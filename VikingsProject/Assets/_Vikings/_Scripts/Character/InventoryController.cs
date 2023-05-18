@@ -38,7 +38,6 @@ namespace Vikings.Chanacter
 
         private IEnumerator CollectItemsCoroutine()
         {
-            Debug.Log($"{ _currentItem.GetItemData().DropCount}");
             while (_count < _currentItem.GetItemData().DropCount)
             {
                 yield return new WaitForSeconds(1f);
