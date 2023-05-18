@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using DG.Tweening;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using Vikings.Chanacter;
 
@@ -12,6 +12,8 @@ namespace Vikings.Building
         [SerializeField] private Camera _camera;
         [SerializeField] private CharactersOnMap _charactersOnMap;
         [SerializeField] private CharactersConfig _charactersConfig;
+        [SerializeField] private HouseCameraPositionInfo[] _houseCameraPosition;
+
 
         private void Awake()
         {
@@ -23,9 +25,9 @@ namespace Vikings.Building
 
         private void Start()
         {
-            if (_charactersConfig.cameraPositionY != 0)
+            if (_charactersConfig.houseLevel != 0)
             {
-                StartCoroutine(MoveCameraCoroutine(_charactersConfig.cameraPositionY));
+                StartCoroutine(MoveCameraCoroutine(_houseCameraPosition[_charactersConfig.houseLevel]));
             }
         }
 
@@ -33,18 +35,26 @@ namespace Vikings.Building
         {
             _charactersOnMap.AddCharacterOnMap(1);
             _charactersConfig.charactersCount++;
-            float posY = _camera.orthographicSize + 1;
+            if (_charactersConfig.houseLevel >= 10) return;
+            _charactersConfig.houseLevel++;
+            StartCoroutine(MoveCameraCoroutine(_houseCameraPosition[_charactersConfig.houseLevel]));
+        }
 
-            _charactersConfig.cameraPositionY = posY;
-            StartCoroutine(MoveCameraCoroutine(posY));
-         }
-        private IEnumerator MoveCameraCoroutine(float position)
+        private IEnumerator MoveCameraCoroutine(HouseCameraPositionInfo positionInfo)
         {
-            while (_camera.orthographicSize < position)
+            _camera.transform.position = positionInfo.position;
+            while (_camera.orthographicSize < positionInfo.size)
             {
                 _camera.orthographicSize += 0.01f;
                 yield return null;
             }
         }
+    }
+
+    [Serializable]
+    public class HouseCameraPositionInfo
+    {
+        public Vector3 position;
+        public float size;
     }
 }

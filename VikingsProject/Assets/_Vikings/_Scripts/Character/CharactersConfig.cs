@@ -7,8 +7,8 @@ namespace Vikings.Chanacter
     public class CharactersConfig : ScriptableObject, IData
     {
         public int charactersCount;
-        public float cameraPositionY;
-        public float cameraPositionZ;
+        public int houseLevel;
+       
         
         public void Save()
         {
@@ -21,8 +21,8 @@ namespace Vikings.Chanacter
             if (data != null)
             {
                 charactersCount = data.charactersCount;
-                cameraPositionY = data.cameraPositionY;
-                cameraPositionZ = data.cameraPositionZ;
+                houseLevel = data.houseLevel;
+
             }
         }
     }

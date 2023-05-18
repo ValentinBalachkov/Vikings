@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18254636, g: 0.22825746, b: 0.30720943, a: 1}
+  m_IndirectSpecularColor: {r: 0.18254638, g: 0.22825746, b: 0.30720952, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1514,6 +1514,27 @@ MonoBehaviour:
   _camera: {fileID: 7370277067777427919}
   _charactersOnMap: {fileID: 944111476}
   _charactersConfig: {fileID: 11400000, guid: 556d7956795907442b7227389da83726, type: 2}
+  _houseCameraPosition:
+  - position: {x: 0, y: 4, z: 0}
+    size: 3.5
+  - position: {x: 0, y: 4, z: 0}
+    size: 4
+  - position: {x: 0, y: 4, z: 0}
+    size: 4.5
+  - position: {x: 0, y: 4, z: 0}
+    size: 4.5
+  - position: {x: 0, y: 4, z: 0}
+    size: 5
+  - position: {x: 0, y: 4, z: 0}
+    size: 6
+  - position: {x: 0, y: 5, z: 0}
+    size: 7
+  - position: {x: 0, y: 6, z: 0}
+    size: 9
+  - position: {x: 0, y: 6, z: 0}
+    size: 9
+  - position: {x: 0, y: 6.5, z: 0}
+    size: 9.5
 --- !u!1 &273849131
 GameObject:
   m_ObjectHideFlags: 0
@@ -18131,7 +18152,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 65702494392957705}
   m_LocalRotation: {x: 0, y: -0.89879405, z: 0.4383712, w: 0}
-  m_LocalPosition: {x: 0, y: 6.5, z: 0}
+  m_LocalPosition: {x: 0, y: 4, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18359,7 +18380,7 @@ Camera:
   far clip plane: 1000
   field of view: 26.991467
   orthographic: 1
-  orthographic size: 9.5
+  orthographic size: 3.5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
