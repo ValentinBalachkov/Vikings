@@ -1,0 +1,1 @@
+{"isOpenForCrafting":false,"icon":{"instanceID":32642},"nameText":"Axe","description":"Allows you to cut down trees. Upgrade to increase the amount of wood you get","required":"Wood storage","id":0,"_itemData":{"instanceID":29518},"_isOpen":false,"_priceToBuy":[{"itemData":{"instanceID":28242},"count":5},{"itemData":{"instanceID":28732},"count":5}],"_craftingTime":5}

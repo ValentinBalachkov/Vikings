@@ -19,6 +19,7 @@ public class SaveLoadManager : MonoBehaviour
     private void Awake()
     {
         LoadAll();
+        Application.targetFrameRate = 60;
     }
 
     private void OnApplicationPause(bool pauseStatus)
