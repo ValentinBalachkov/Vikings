@@ -20,7 +20,7 @@ MonoBehaviour:
   isDefaultOpen: 0
   _itemType: {fileID: 11400000, guid: b90d6cdefc2ad7e4cbdd899ef9e419e5, type: 2}
   _count: 0
-  _maxStorageCount: 10
+  _maxStorageCount: 20
   _currentLevel: 0
   _storageController: {fileID: -1726127725469879221, guid: c434ae09455d2844d9c2f4f9377b77bd,
     type: 3}
@@ -29,3 +29,4 @@ MonoBehaviour:
     count: 15
   - itemData: {fileID: 11400000, guid: 8b782c2617e0b8048985ef732675d1be, type: 2}
     count: 10
+  _buildTime: 11

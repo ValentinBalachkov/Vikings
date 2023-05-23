@@ -16,6 +16,7 @@ namespace Vikings.Weapon
         public string description;
         public string required;
         public int id;
+        public int level;
         
         public bool IsOpen
         {
@@ -35,7 +36,36 @@ namespace Vikings.Weapon
         public ItemData ItemData => _itemData;
         public int CraftingTime => _craftingTime;
 
-        public List<PriceToUpgrade> PriceToBuy => _priceToBuy;
+        public List<PriceToUpgrade> PriceToBuy
+        {
+            get
+            {
+                if (level == 0)
+                {
+                    return _priceToBuy;
+                }
+
+                List<PriceToUpgrade> newPrice = new();
+                foreach (var price in _priceToBuy)
+                {
+                    var a = price.count - 1;
+                    float p = 0;
+                    for (int i = 2; i <= level + 1; i++)
+                    {
+                        p += Mathf.Pow(i, 4) + ((a * i) - Mathf.Pow(i, 3));
+                        a = (int)p;
+                    }
+                        
+                    newPrice.Add(new PriceToUpgrade
+                    {
+                        count = (int)p,
+                        itemData = price.itemData
+                    });
+                }
+
+                return newPrice;
+            }
+        }
 
         [SerializeField] private ItemData _itemData;
         [SerializeField] private bool _isOpen;
@@ -52,6 +82,7 @@ namespace Vikings.Weapon
             if (data != null)
             {
                 _isOpen = data._isOpen;
+                level = data.level;
             }
         }
     }

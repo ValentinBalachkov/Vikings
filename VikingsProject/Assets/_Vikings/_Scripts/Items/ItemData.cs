@@ -25,6 +25,8 @@ namespace Vikings.Items
         
         public ItemController Prefab => _prefab;
 
+        public float CollectTime => _collectTime;
+        
         [SerializeField] private int _id;
 
         [SerializeField] private ItemController _prefab;
@@ -34,6 +36,9 @@ namespace Vikings.Items
         [SerializeField] private string _itemName;
 
         [SerializeField] private bool _isOpen;
+
+        [SerializeField] private float _collectTime;
+
 
         public void Save()
         {

@@ -20,3 +20,4 @@ MonoBehaviour:
   _dropCount: 1
   _itemName: Rock
   _isOpen: 1
+  _collectTime: 0.7

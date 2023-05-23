@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using SecondChanceSystem.SaveSystem;
 using UnityEngine;
 using Vikings.Items;
@@ -13,6 +15,7 @@ namespace Vikings.Building
         public string description;
         public string required;
         public bool isDefaultOpen;
+        
        
         public ItemData ItemType => _itemType;
 
@@ -28,9 +31,50 @@ namespace Vikings.Building
             set => _maxStorageCount = value;
         }
 
+        public float BuildTime
+        {
+            get
+            {
+                if (_currentLevel == 0)
+                {
+                    return _buildTime;
+                }
+                return (0.5f * Mathf.Pow(_currentLevel + 1, 2)) + _buildTime;
+            }
+        }
+
         public StorageController StorageController => _storageController;
 
-        public PriceToUpgrade[] PriceToUpgrade => _priceToUpgrade;
+        public List<PriceToUpgrade> PriceToUpgrade
+        {
+            get
+            {
+                if (_currentLevel == 0)
+                {
+                    return _priceToUpgrade.ToList();
+                }
+
+                List<PriceToUpgrade> newPrice = new();
+                foreach (var price in _priceToUpgrade)
+                {
+                    var a = price.count - 1;
+                    float p = 0;
+                    for (int i = 2; i <= _currentLevel + 1; i++)
+                    {
+                        p += Mathf.Pow(i, 4) + ((a * i) - Mathf.Pow(i, 3));
+                        a = (int)p;
+                    }
+                        
+                    newPrice.Add(new PriceToUpgrade
+                    {
+                        count = (int)p,
+                        itemData = price.itemData
+                    });
+                }
+
+                return newPrice;
+            }
+        }
 
         public int CurrentLevel
         {
@@ -48,6 +92,8 @@ namespace Vikings.Building
         [SerializeField] private StorageController _storageController;
 
         [SerializeField] private PriceToUpgrade[] _priceToUpgrade;
+        
+        [SerializeField] private float _buildTime;
         public void Save()
         {
             SaveLoadSystem.SaveData(this);

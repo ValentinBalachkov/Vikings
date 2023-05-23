@@ -22,7 +22,7 @@ namespace Vikings.Building
         public void SetupCraftWeapon(WeaponData weaponData)
         {
             _currentWeapon = weaponData;
-            _craftingTableData.Setup(_currentWeapon.PriceToBuy, _currentWeapon.CraftingTime, weaponData.id);
+            _craftingTableData.Setup(_currentWeapon.PriceToBuy, _currentWeapon.CraftingTime, _currentWeapon.level, weaponData.id);
             CollectingResourceView.Instance.Setup(weaponData.nameText, _craftingTableData.currentItemsCount.ToArray(), _craftingTableData.priceToUpgradeCraftingTable.ToArray(), transform);
         }
 

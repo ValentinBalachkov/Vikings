@@ -33,13 +33,13 @@ namespace Vikings.Chanacter
             {
                 CraftingTableController craftingTableController =
                     _buildingsOnMap.GetCurrentBuilding() as CraftingTableController;
-                CraftingIndicatorView.Instance.Setup(craftingTableController.CraftingTableData.craftingTime,  _buildingsOnMap.GetCurrentBuilding().transform);
+                CraftingIndicatorView.Instance.Setup((int)craftingTableController.CraftingTableData.TableBuildingTime,  _buildingsOnMap.GetCurrentBuilding().transform);
                 StartTimerCraftingTable(craftingTableController);
             }
 
             if (!_isCrafting)
             {
-                CraftingIndicatorView.Instance.Setup((int)_buildingsOnMap.GetCurrentBuilding().BuildingData.BuildTime, _buildingsOnMap.GetCurrentBuilding().transform);
+                CraftingIndicatorView.Instance.Setup((int)_buildingsOnMap.GetCurrentBuilding().BuildingData.StorageData.BuildTime, _buildingsOnMap.GetCurrentBuilding().transform);
                 StartTimer();
             }
         }
@@ -48,7 +48,7 @@ namespace Vikings.Chanacter
         {
             _playerController.SetCraftingAnimation();
             _isCrafting = true;
-            int time = craftingTableController.CraftingTableData.craftingTime * 1000;
+            int time = (int)craftingTableController.CraftingTableData.TableBuildingTime * 1000;
             await Task.Delay(time);
             craftingTableController.OpenCurrentWeapon();
             _buildingsOnMap.ClearCurrentBuilding();
@@ -59,7 +59,7 @@ namespace Vikings.Chanacter
         {
             _playerController.SetCraftingAnimation();
             _isCrafting = true;
-            int time = (int)_buildingsOnMap.GetCurrentBuilding().BuildingData.BuildTime * 1000;
+            int time = (int)_buildingsOnMap.GetCurrentBuilding().BuildingData.StorageData.BuildTime * 1000;
             await Task.Delay(time);
             _buildingsOnMap.UpgradeBuildingToStorage();
         }

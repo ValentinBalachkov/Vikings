@@ -15,17 +15,76 @@ namespace Vikings.Building
         public string description;
         public string required;
         public int currentWeaponId;
+        public int tableBuildingTime;
         
         public List<PriceToUpgrade> currentItemsCount = new();
         public List<PriceToUpgrade> priceToUpgradeCraftingTable = new();
-        public int craftingTime;
         
+        public List<PriceToUpgrade> PriceToUpgradeCraftingTable
+        {
+            get
+            {
+                if (currentLevel == 0)
+                {
+                    return _priceToUpgrade.ToList();
+                }
+
+                List<PriceToUpgrade> newPrice = new();
+                foreach (var price in _priceToUpgrade)
+                {
+                    var a = price.count - 1;
+                    float p = 0;
+                    for (int i = 2; i <= _currentLevel + 1; i++)
+                    {
+                        p += Mathf.Pow(i, 4) + ((a * i) - Mathf.Pow(i, 3));
+                        a = (int)p;
+                    }
+                        
+                    newPrice.Add(new PriceToUpgrade
+                    {
+                        count = (int)p,
+                        itemData = price.itemData
+                    });
+                }
+
+                return newPrice;
+            }
+        }
+        
+        public float TableBuildingTime
+        {
+            get
+            {
+                if (currentLevel == 0)
+                {
+                    return tableBuildingTime;
+                }
+                return (0.5f * Mathf.Pow(currentLevel + 1, 2)) + tableBuildingTime;
+            }
+        }
+
+        public float WeaponCraftingTime
+        {
+            get
+            {
+                if (_weaponLevel == 0)
+                {
+                    return _craftingTime;
+                }
+                return (0.5f * Mathf.Pow(_weaponLevel + 1, 2)) + _craftingTime;
+            }
+        }
+
+        private int _craftingTime;
+        private int _weaponLevel;
+
         private PriceToUpgrade[] _currentItemsCountArray;
         private PriceToUpgrade[] _priceToUpgradeCraftingTableArray;
 
-        public void Setup(List<PriceToUpgrade> price, int time, int weaponId)
+        public void Setup(List<PriceToUpgrade> price, int time, int weaponLevel, int weaponId)
         {
             currentWeaponId = weaponId;
+            _weaponLevel = weaponLevel;
             
             foreach (var item in price)
             {
@@ -44,13 +103,13 @@ namespace Vikings.Building
                     itemData = item.itemData
                 });
             }
-            craftingTime = time;
+            _craftingTime = time;
         }
 
         public void Clear()
         {
             currentItemsCount.Clear();
-            craftingTime = 0;
+            _craftingTime = 0;
         }
 
         public void Save()
@@ -71,7 +130,7 @@ namespace Vikings.Building
                     currentItemsCount = data._currentItemsCountArray.ToList();
                     priceToUpgradeCraftingTable = data._priceToUpgradeCraftingTableArray.ToList();
                 }
-                craftingTime = data.craftingTime;
+                _craftingTime = data._craftingTime;
             }
         }
     }

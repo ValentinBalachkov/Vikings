@@ -20,3 +20,4 @@ MonoBehaviour:
   _dropCount: 3
   _itemName: BigRock
   _isOpen: 0
+  _collectTime: 5

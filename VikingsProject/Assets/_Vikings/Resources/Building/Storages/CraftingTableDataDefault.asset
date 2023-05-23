@@ -19,6 +19,6 @@ MonoBehaviour:
   description: Description
   required: 
   currentWeaponId: 0
+  tableBuildingTime: 8
   currentItemsCount: []
   priceToUpgradeCraftingTable: []
-  craftingTime: 5
