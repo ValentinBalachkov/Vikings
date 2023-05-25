@@ -13,8 +13,6 @@ namespace Vikings.Building
         public Action<int, int> OnUpgradeStorage;
         public int Priority { get; set; }
 
-        private List<PriceToUpgrade> _currentItemsForUpgrade = new();
-
 
         public override void Init(BuildingData buildingData, bool isSaveInit = false)
         {
@@ -28,19 +26,14 @@ namespace Vikings.Building
 
         public override void SetUpgradeState()
         {
-            _currentItemsForUpgrade.Clear();
 
-            foreach (var item in buildingData.StorageData.PriceToUpgrade)
+            for (int i = 0; i < buildingData.StorageData.PriceToUpgrade.Count; i++)
             {
-                _currentItemsForUpgrade.Add(new PriceToUpgrade
-                {
-                    count = 0,
-                    itemData = item.itemData
-                });
+                buildingData.currentItemsCount[i].count = 0;
             }
 
             CollectingResourceView.Instance.Setup(buildingData.StorageData.nameText, buildingData.currentItemsCount,
-                buildingData.PriceToUpgrades, transform);
+                buildingData.StorageData.PriceToUpgrade.ToArray(), transform);
             isUpgradeState = true;
         }
 
@@ -66,7 +59,7 @@ namespace Vikings.Building
                 return;
             }
 
-            var item = _currentItemsForUpgrade.FirstOrDefault(x => x.itemData.ID == priceToUpgrade.itemData.ID);
+            var item = buildingData.currentItemsCount.FirstOrDefault(x => x.itemData.ID == priceToUpgrade.itemData.ID);
             var defaultItem =
                 buildingData.StorageData.PriceToUpgrade.FirstOrDefault(x =>
                     x.itemData.ID == priceToUpgrade.itemData.ID);
@@ -80,7 +73,7 @@ namespace Vikings.Building
                 item.count += priceToUpgrade.count;
             }
 
-            CollectingResourceView.Instance.UpdateView(_currentItemsForUpgrade.ToArray(),
+            CollectingResourceView.Instance.UpdateView(buildingData.currentItemsCount,
                 buildingData.StorageData.PriceToUpgrade.ToArray());
         }
 
@@ -90,8 +83,8 @@ namespace Vikings.Building
 
             buildingData.StorageData.CurrentLevel++;
             buildingData.StorageData.MaxStorageCount = (int)(Mathf.Pow(buildingData.StorageData.CurrentLevel, 5f)
-                                                             + buildingData.StorageData.CurrentLevel
-                                                             + 10);
+                                                             + Mathf.Pow(buildingData.StorageData.CurrentLevel, buildingData.StorageData.CurrentLevel - 1)
+                                                             + 20);
             CollectingResourceView.Instance.gameObject.SetActive(false);
         }
 
@@ -108,8 +101,17 @@ namespace Vikings.Building
                 PriceToUpgrade[] priceToUpgrades = { price };
                 return priceToUpgrades;
             }
+            
+            List<PriceToUpgrade> priceUpgrade = new();
+            for (int i = 0; i < buildingData.StorageData.PriceToUpgrade.Count; i++)
+            {
+                if (buildingData.StorageData.PriceToUpgrade[i].count > buildingData.currentItemsCount[i].count)
+                {
+                    priceUpgrade.Add(buildingData.currentItemsCount[i]);
+                }
+            }
 
-            return _currentItemsForUpgrade.ToArray();
+            return priceUpgrade.ToArray();
         }
 
         public override bool IsFullStorage()
@@ -122,7 +124,7 @@ namespace Vikings.Building
 
             for (int i = 0; i < buildingData.StorageData.PriceToUpgrade.Count; i++)
             {
-                if (buildingData.StorageData.PriceToUpgrade[i].count > _currentItemsForUpgrade[i].count)
+                if (buildingData.StorageData.PriceToUpgrade[i].count > buildingData.currentItemsCount[i].count)
                 {
                     return false;
                 }

@@ -45,7 +45,8 @@ namespace Vikings.Building
             {
                 if (_storageData[i].buildingData.StorageData != null)
                 {
-                    if (_storageData[i].buildingData.StorageData.CurrentLevel > 0 || _storageData[i].buildingData.isSetOnMap)
+                    if (_storageData[i].buildingData.StorageData.CurrentLevel > 0 ||
+                        _storageData[i].buildingData.isSetOnMap)
                     {
                         SpawnStorage(i, true);
                     }
@@ -58,7 +59,7 @@ namespace Vikings.Building
                     }
                 }
             }
-            
+
             _weaponsOnMapController.CheckForCraft();
         }
 
@@ -97,7 +98,6 @@ namespace Vikings.Building
                         _buildingControllers.Remove(_craftingTableControllerOnStartGame);
                         Destroy(_craftingTableControllerOnStartGame.gameObject);
                     }
-                    
                 }
             }
 
@@ -109,11 +109,13 @@ namespace Vikings.Building
             var storage =
                 _storageControllers.FirstOrDefault(x => x.BuildingData.StorageData.ItemType.ID == itemData.ID);
             _currentStorageToUpgrade = storage;
+            UpdateCurrentBuilding();
         }
 
         public void SetCraftingTableToUpgrade()
         {
             _currentStorageToUpgrade = _craftingTableController;
+            UpdateCurrentBuilding();
         }
 
         public CraftingTableController GetCraftingTable()
@@ -163,9 +165,15 @@ namespace Vikings.Building
                         _buildingControllers.FirstOrDefault(x => x is CraftingTableController && !x.IsFullStorage());
                     if (_currentBuilding == null)
                     {
-                        _currentBuilding = _buildingControllers
-                            .OrderBy(x => x is BuildingController)
-                            .FirstOrDefault(x => !x.IsFullStorage());
+                        _currentBuilding =
+                            _buildingControllers.FirstOrDefault(x => !x.IsFullStorage() && x is BuildingController);
+                        if (_currentBuilding == null)
+                        {
+                            _currentBuilding = _buildingControllers.FirstOrDefault(x => !x.IsFullStorage());
+                        }
+
+                        // _currentBuilding = _buildingControllers
+                        //     .OrderByDescending(x => !x.IsFullStorage()).ThenByDescending(x => x is BuildingController).First();
                     }
                 }
 
@@ -235,13 +243,14 @@ namespace Vikings.Building
 
         public IGetItem GetElementPosition(Transform playerPos)
         {
-            return _itemQueue.OrderBy(x => x.Priority).ThenByDescending(x => x.GetItemData().DropCount).
-                ThenBy(x => Vector3.Distance(x.GetItemPosition().position, playerPos.position)).ToList()[0];
+            return _itemQueue.OrderBy(x => x.Priority).ThenByDescending(x => x.GetItemData().DropCount)
+                .ThenBy(x => Vector3.Distance(x.GetItemPosition().position, playerPos.position)).ToList()[0];
         }
 
         public void ClearCurrentBuilding()
         {
             _currentBuilding = null;
+            _menu.EnableButtons(true);
         }
 
         public void UpgradeBuildingToStorage()

@@ -32,7 +32,6 @@ namespace Vikings.Chanacter
         
         private void OnGetPath()
         {
-            _playerPrefab.transform.LookAt(_boneFireController.GetCurrentPosition());
             _playerPrefab.SetIdleAnimation();
         }
         

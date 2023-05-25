@@ -20,6 +20,8 @@ namespace Vikings.Building
         public PriceToUpgrade[] currentItemsCount;
         public BuildingController BuildingController => _buildingController;
 
+        public int craftingTableCrateTime;
+
         public bool isSetOnMap;
 
         [SerializeField] private StorageData _storageData;

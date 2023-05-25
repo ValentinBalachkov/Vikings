@@ -34,7 +34,6 @@ namespace Vikings.Chanacter
 
         private void OnGetPoint()
         {
-            _playerPrefab.transform.LookAt(_buildingsOnMap.GetCurrentBuildingPosition());
             _playerPrefab.SetCollectAnimation();
         }
 

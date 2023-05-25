@@ -17,6 +17,7 @@ MonoBehaviour:
     count: 0
   - itemData: {fileID: 11400000, guid: 8b782c2617e0b8048985ef732675d1be, type: 2}
     count: 0
+  craftingTableCrateTime: 8
   isSetOnMap: 0
   _storageData: {fileID: 0}
   _isBuild: 0

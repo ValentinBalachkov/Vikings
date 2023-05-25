@@ -16,25 +16,28 @@ namespace Vikings.Building
         public string required;
         public int currentWeaponId;
         public int tableBuildingTime;
+
+        [SerializeField] private BuildingData _buildingData;
         
         public List<PriceToUpgrade> currentItemsCount = new();
         public List<PriceToUpgrade> priceToUpgradeCraftingTable = new();
-        
-        public List<PriceToUpgrade> PriceToUpgradeCraftingTable
+
+        public List<PriceToUpgrade> currentItemsPriceToUpgrade = new();
+        public List<PriceToUpgrade> PriceToUpgrade
         {
             get
             {
                 if (currentLevel == 0)
                 {
-                    return _priceToUpgrade.ToList();
+                    return _buildingData.PriceToUpgrades.ToList();
                 }
 
                 List<PriceToUpgrade> newPrice = new();
-                foreach (var price in _priceToUpgrade)
+                foreach (var price in _buildingData.PriceToUpgrades)
                 {
                     var a = price.count - 1;
                     float p = 0;
-                    for (int i = 2; i <= _currentLevel + 1; i++)
+                    for (int i = 2; i <= currentLevel + 1; i++)
                     {
                         p += Mathf.Pow(i, 4) + ((a * i) - Mathf.Pow(i, 3));
                         a = (int)p;
@@ -50,7 +53,7 @@ namespace Vikings.Building
                 return newPrice;
             }
         }
-        
+
         public float TableBuildingTime
         {
             get
@@ -60,18 +63,6 @@ namespace Vikings.Building
                     return tableBuildingTime;
                 }
                 return (0.5f * Mathf.Pow(currentLevel + 1, 2)) + tableBuildingTime;
-            }
-        }
-
-        public float WeaponCraftingTime
-        {
-            get
-            {
-                if (_weaponLevel == 0)
-                {
-                    return _craftingTime;
-                }
-                return (0.5f * Mathf.Pow(_weaponLevel + 1, 2)) + _craftingTime;
             }
         }
 

@@ -10,12 +10,18 @@ namespace Vikings.Chanacter
         public Action OnEndAnimation;
         [SerializeField] private Animator _animator;
         [SerializeField] private NavMeshAgent _navMeshAgent;
+        [SerializeField] private float _rotateSpeed = 10;
+        
         private Action _onGetPosition;
         private bool _onPosition;
         private Transform _currentPoint;
+        
 
         private void Update()
         {
+            var targetRotation = Quaternion.LookRotation(_navMeshAgent.destination - transform.position);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotateSpeed * Time.deltaTime);
+            
             if (CheckDestinationReached() && !_onPosition)
             {
                 _onGetPosition?.Invoke();
@@ -23,7 +29,6 @@ namespace Vikings.Chanacter
             }
             
         }
-
         private bool CheckDestinationReached() {
             float distanceToTarget = Vector3.Distance(transform.position, _currentPoint.position);
             if(Math.Round(distanceToTarget,1) <= _navMeshAgent.stoppingDistance + 0.1f)

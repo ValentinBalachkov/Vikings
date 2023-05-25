@@ -28,19 +28,23 @@ namespace Vikings.Chanacter
 
         private void OnGetPoint()
         {
-            _playerController.transform.LookAt(_buildingsOnMap.GetCurrentBuilding().transform);
             if (!_isCrafting && _buildingsOnMap.GetCurrentBuilding() is CraftingTableController)
             {
                 CraftingTableController craftingTableController =
                     _buildingsOnMap.GetCurrentBuilding() as CraftingTableController;
+                
                 CraftingIndicatorView.Instance.Setup((int)craftingTableController.CraftingTableData.TableBuildingTime,  _buildingsOnMap.GetCurrentBuilding().transform);
                 StartTimerCraftingTable(craftingTableController);
             }
-
-            if (!_isCrafting)
+            else if (!_isCrafting && _buildingsOnMap.GetCurrentBuilding().BuildingData.StorageData == null)
+            {
+                CraftingIndicatorView.Instance.Setup(_buildingsOnMap.GetCurrentBuilding().BuildingData.craftingTableCrateTime, _buildingsOnMap.GetCurrentBuilding().transform);
+                StartTimer(_buildingsOnMap.GetCurrentBuilding().BuildingData.craftingTableCrateTime);
+            }
+            else if (!_isCrafting)
             {
                 CraftingIndicatorView.Instance.Setup((int)_buildingsOnMap.GetCurrentBuilding().BuildingData.StorageData.BuildTime, _buildingsOnMap.GetCurrentBuilding().transform);
-                StartTimer();
+                StartTimer((int)_buildingsOnMap.GetCurrentBuilding().BuildingData.StorageData.BuildTime);
             }
         }
 
@@ -55,11 +59,11 @@ namespace Vikings.Chanacter
             _buildingsOnMap.UpdateCurrentBuilding();
         }
 
-        private async Task StartTimer()
+        private async Task StartTimer(int craftingTime)
         {
             _playerController.SetCraftingAnimation();
             _isCrafting = true;
-            int time = (int)_buildingsOnMap.GetCurrentBuilding().BuildingData.StorageData.BuildTime * 1000;
+            int time = craftingTime * 1000;
             await Task.Delay(time);
             _buildingsOnMap.UpgradeBuildingToStorage();
         }

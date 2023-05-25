@@ -48,7 +48,7 @@ namespace Vikings.UI
                 var item = Instantiate(_menuElement, _content);
                 _menuElements.Add(item);
                 item.UpdateUI(_storageDatas[i].nameText, _storageDatas[i].description, _storageDatas[i].CurrentLevel + 1, _storageDatas[i].icon,
-                    _storageDatas[i].PriceToUpgrade);
+                    _storageDatas[i].PriceToUpgrade.ToArray());
                 item.SetButtonDescription(_storageDatas[i].CurrentLevel == 0);
                 item.SetEnable((_craftingTableData.currentLevel - _storageDatas[i].CurrentLevel == k) ||
                                (_storageDatas[i].isDefaultOpen && _storageDatas[i].CurrentLevel == 0),
@@ -66,7 +66,7 @@ namespace Vikings.UI
                 {
                     item.AddOnClickListener(() =>
                     {
-                        _buildingsOnMap.SetStorageUpgradeState(_storageDatas[i].ItemType);
+                        _buildingsOnMap.SetStorageUpgradeState(_storageDatas[index].ItemType);
                         gameObject.SetActive(false);
                     });
                 }

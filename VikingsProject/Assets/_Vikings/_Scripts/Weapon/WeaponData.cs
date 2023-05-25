@@ -34,7 +34,18 @@ namespace Vikings.Weapon
         public Action<WeaponData> OnOpen;
 
         public ItemData ItemData => _itemData;
-        public int CraftingTime => _craftingTime;
+      
+        public float CraftingTime
+        {
+            get
+            {
+                if (level == 0)
+                {
+                    return _craftingTime;
+                }
+                return (0.5f * Mathf.Pow(level + 1, 2)) + _craftingTime;
+            }
+        }
 
         public List<PriceToUpgrade> PriceToBuy
         {
