@@ -106,9 +106,34 @@ namespace Vikings.UI
                     _weaponsOnMapController.WeaponsData[i].icon,
                     _weaponsOnMapController.WeaponsData[i].PriceToBuy.ToArray());
                 weapon.SetButtonDescription(!_weaponsOnMapController.WeaponsData[i].IsOpen);
-                weapon.SetEnable(((i == 0 && _storageDatas[0].CurrentLevel > 0) ||
-                                 (i == 1 && _craftingTableData.currentLevel == 2)) && !_weaponsOnMapController.WeaponsData[i].IsOpen, 
-                    $"REQUIRED:  {_weaponsOnMapController.WeaponsData[i].required} LEVEL{_craftingTableData.currentLevel + 1}");
+                if (i == 0)
+                {
+                    if (_weaponsOnMapController.WeaponsData[i].IsOpen)
+                    {
+                        weapon.SetEnable(_storageDatas[0].CurrentLevel > 0 && !_weaponsOnMapController.WeaponsData[i].IsOpen,
+                            $"COMING SOON");
+                    }
+                    else
+                    {
+                        weapon.SetEnable(_storageDatas[0].CurrentLevel > 0 && !_weaponsOnMapController.WeaponsData[i].IsOpen,
+                            $"REQUIRED:  {_weaponsOnMapController.WeaponsData[i].required} LEVEL{_storageDatas[0].CurrentLevel + 1}");
+                    }
+                }
+                else
+                {
+                    if (_weaponsOnMapController.WeaponsData[i].IsOpen)
+                    {
+                        weapon.SetEnable(_craftingTableData.currentLevel == 2 && !_weaponsOnMapController.WeaponsData[i].IsOpen, 
+                            $"COMING SOON");
+                    }
+                    else
+                    {
+                        weapon.SetEnable(_craftingTableData.currentLevel == 2 && !_weaponsOnMapController.WeaponsData[i].IsOpen, 
+                            $"REQUIRED:  {_weaponsOnMapController.WeaponsData[i].required} LEVEL{2}");
+                    }
+                    
+                }
+                
                 var index = i;
                 weapon.AddOnClickListener(() =>
                 {

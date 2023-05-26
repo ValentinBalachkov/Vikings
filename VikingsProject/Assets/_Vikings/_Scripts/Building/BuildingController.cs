@@ -36,7 +36,7 @@ namespace Vikings.Building
         {
             this.buildingData = buildingData;
             CollectingResourceView.Instance.Setup(
-                this.buildingData.StorageData == null ? "Crafting table" : this.buildingData.StorageData.nameText,
+                this.buildingData.StorageData == null ? "Workbench" : this.buildingData.StorageData.nameText,
                 this.buildingData.currentItemsCount, this.buildingData.PriceToUpgrades, transform);
 
             buildingData.isSetOnMap = true;
