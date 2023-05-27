@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0bfacc6b-36ed-4123-a62f-7ed1c8e5fb86" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.VikingsProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VikingsProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Vikings/_Scripts/Building/BuildingController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Vikings/_Scripts/Building/BuildingController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Vikings/_Scripts/UI/CraftAndBuildingMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Vikings/_Scripts/UI/CraftAndBuildingMenu.cs" afterDir="false" />
-    </list>
+    <list default="true" id="0bfacc6b-36ed-4123-a62f-7ed1c8e5fb86" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -46,15 +42,15 @@
   },
   "keyToStringList": {
     "rider.external.source.directories": [
-      "C:\\Users\\Valentin\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache",
-      "C:\\Users\\Valentin\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache",
-      "C:\\Users\\Valentin\\AppData\\Local\\Symbols\\src"
+      "C:\\Users\\elite\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache",
+      "C:\\Users\\elite\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache",
+      "C:\\Users\\elite\\AppData\\Local\\Symbols\\src"
     ]
   }
 }]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="D:\Unity\Hub\Editor\2022.2.1f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="E:\Unity\2022.2.1f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath D:\Git\Github\Vikings\VikingsProject -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\Git\Github\Vikings\VikingsProject" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -62,7 +58,7 @@
       <method v="2" />
     </configuration>
     <configuration name="UnitTests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="D:\Unity\Hub\Editor\2022.2.1f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="E:\Unity\2022.2.1f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath D:\Git\Github\Vikings\VikingsProject -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\Git\Github\Vikings\VikingsProject" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -140,6 +136,7 @@
       <workItem from="1684938497329" duration="8118000" />
       <workItem from="1685025878556" duration="5996000" />
       <workItem from="1685075344652" duration="1802000" />
+      <workItem from="1685159363550" duration="3090000" />
     </task>
     <servers />
   </component>

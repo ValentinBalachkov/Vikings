@@ -6,7 +6,14 @@ namespace Vikings.Items
     [Serializable]
     public class ItemPosition
     {
-        public Transform[] position;
+        public ItemLevelPosition[] position;
         public ItemData item;
+    }
+    
+    [Serializable]
+    public class ItemLevelPosition
+    {
+        public Transform[] position;
+        public int level;
     }
 }

@@ -13,6 +13,7 @@ namespace Vikings.Building
         [SerializeField] private CharactersOnMap _charactersOnMap;
         [SerializeField] private CharactersConfig _charactersConfig;
         [SerializeField] private HouseCameraPositionInfo[] _houseCameraPosition;
+        public Action<int> OnHomeLevelUp;
 
 
         private void Awake()
@@ -37,6 +38,7 @@ namespace Vikings.Building
             _charactersConfig.charactersCount++;
             if (_charactersConfig.houseLevel >= 10) return;
             _charactersConfig.houseLevel++;
+            OnHomeLevelUp?.Invoke(_charactersConfig.houseLevel);
             StartCoroutine(MoveCameraCoroutine(_houseCameraPosition[_charactersConfig.houseLevel]));
         }
 
