@@ -9,7 +9,8 @@ namespace Vikings.Chanacter
     public class InventoryController : MonoBehaviour
     {
         public Action OnCollect;
-        
+        [SerializeField] private CharactersConfig _charactersConfig;
+
         private IGetItem _currentItem;
         private int _count;
 
@@ -40,7 +41,7 @@ namespace Vikings.Chanacter
         {
             var item = _currentItem.GetItemData();
             yield return new WaitForSeconds(item.CollectTime);
-            _count = item.DropCount;
+            _count = _charactersConfig.ItemsCount < item.DropCount ? _charactersConfig.ItemsCount : item.DropCount;
             _currentItem.TakeItem();
             OnCollect?.Invoke();
         }

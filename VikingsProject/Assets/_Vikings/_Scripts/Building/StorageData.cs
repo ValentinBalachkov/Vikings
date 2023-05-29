@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using SecondChanceSystem.SaveSystem;
@@ -9,6 +10,7 @@ namespace Vikings.Building
     [CreateAssetMenu(fileName = "StorageData", menuName = "Data/StorageData", order = 4)]
     public class StorageData : ScriptableObject, IData
     {
+        public Action OnUpdateCount;
         public bool isOpen;
         public Sprite icon;
         public string nameText;
@@ -22,7 +24,11 @@ namespace Vikings.Building
         public int Count
         {
             get => _count;
-            set => _count = value;
+            set
+            {
+                _count = value;
+                OnUpdateCount?.Invoke();
+            } 
         }
 
         public int MaxStorageCount

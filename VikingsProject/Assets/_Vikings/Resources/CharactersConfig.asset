@@ -13,3 +13,13 @@ MonoBehaviour:
   m_Name: CharactersConfig
   m_EditorClassIdentifier: 
   charactersCount: 0
+  houseLevel: 0
+  speedMove: 1
+  speedMoveLevel: 1
+  speedMoveCost: 14
+  speedWork: 1
+  speedWorkLevel: 1
+  speedWorkCost: 18
+  itemsCount: 2
+  itemsCountLevel: 1
+  itemsCountCost: 10

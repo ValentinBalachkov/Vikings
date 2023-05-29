@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using UnityEngine;
 using Vikings.Building;
 
 namespace Vikings.Chanacter
@@ -10,11 +9,13 @@ namespace Vikings.Chanacter
         private PlayerController _playerController;
         private const float OFFSET_DISTANCE = 1f;
         private bool _isCrafting;
+        private CharactersConfig _charactersConfig;
         
-        public CraftingState(StateMachine stateMachine, BuildingsOnMap buildingsOnMap, PlayerController playerController) : base("Crafting state", stateMachine)
+        public CraftingState(StateMachine stateMachine, BuildingsOnMap buildingsOnMap, PlayerController playerController, CharactersConfig charactersConfig) : base("Crafting state", stateMachine)
         {
             _buildingsOnMap = buildingsOnMap;
             _playerController = playerController;
+            _charactersConfig = charactersConfig;
         }
         
         public override void Enter()
@@ -33,17 +34,24 @@ namespace Vikings.Chanacter
                 CraftingTableController craftingTableController =
                     _buildingsOnMap.GetCurrentBuilding() as CraftingTableController;
                 
-                CraftingIndicatorView.Instance.Setup((int)craftingTableController.CraftingTableData.TableBuildingTime,  _buildingsOnMap.GetCurrentBuilding().transform);
+                var defaultTime = (int)craftingTableController.CraftingTableData.TableBuildingTime;
+                int time = (int)(defaultTime + (defaultTime * (_charactersConfig.SpeedWork / 100)));
+                
+                CraftingIndicatorView.Instance.Setup(time,  _buildingsOnMap.GetCurrentBuilding().transform);
                 StartTimerCraftingTable(craftingTableController);
             }
             else if (!_isCrafting && _buildingsOnMap.GetCurrentBuilding().BuildingData.StorageData == null)
             {
-                CraftingIndicatorView.Instance.Setup(_buildingsOnMap.GetCurrentBuilding().BuildingData.craftingTableCrateTime, _buildingsOnMap.GetCurrentBuilding().transform);
+                var defaultTime = _buildingsOnMap.GetCurrentBuilding().BuildingData.craftingTableCrateTime;
+                int time = (int)(defaultTime + (defaultTime * (_charactersConfig.SpeedWork / 100)));
+                CraftingIndicatorView.Instance.Setup(time, _buildingsOnMap.GetCurrentBuilding().transform);
                 StartTimer(_buildingsOnMap.GetCurrentBuilding().BuildingData.craftingTableCrateTime);
             }
             else if (!_isCrafting)
             {
-                CraftingIndicatorView.Instance.Setup((int)_buildingsOnMap.GetCurrentBuilding().BuildingData.StorageData.BuildTime, _buildingsOnMap.GetCurrentBuilding().transform);
+                var defaultTime = (int)_buildingsOnMap.GetCurrentBuilding().BuildingData.StorageData.BuildTime;
+                int time = (int)(defaultTime + (defaultTime * (_charactersConfig.SpeedWork / 100)));
+                CraftingIndicatorView.Instance.Setup(time, _buildingsOnMap.GetCurrentBuilding().transform);
                 StartTimer((int)_buildingsOnMap.GetCurrentBuilding().BuildingData.StorageData.BuildTime);
             }
         }
@@ -52,7 +60,8 @@ namespace Vikings.Chanacter
         {
             _playerController.SetCraftingAnimation();
             _isCrafting = true;
-            int time = (int)craftingTableController.CraftingTableData.TableBuildingTime * 1000;
+            var defaultTime = (int)craftingTableController.CraftingTableData.TableBuildingTime * 1000;
+            int time = (int)(defaultTime + (defaultTime * (_charactersConfig.SpeedWork / 100)));
             await Task.Delay(time);
             craftingTableController.OpenCurrentWeapon();
             _buildingsOnMap.ClearCurrentBuilding();
@@ -63,7 +72,8 @@ namespace Vikings.Chanacter
         {
             _playerController.SetCraftingAnimation();
             _isCrafting = true;
-            int time = craftingTime * 1000;
+            var defaultTime = craftingTime * 1000;
+            int time = (int)(defaultTime + (defaultTime * (_charactersConfig.SpeedWork / 100)));
             await Task.Delay(time);
             _buildingsOnMap.UpgradeBuildingToStorage();
         }

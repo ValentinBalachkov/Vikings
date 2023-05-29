@@ -13,6 +13,8 @@ namespace Vikings.Chanacter
 
         [SerializeField] private PlayerController _playerPrefab;
         [SerializeField] private InventoryController _inventoryController;
+        [SerializeField] private CharactersConfig _charactersConfig;
+        
         private BuildingsOnMap _buildingsOnMap;
 
 
@@ -43,7 +45,7 @@ namespace Vikings.Chanacter
             _collectState = new CollectState(this,_playerController, _buildingsOnMap, _inventoryController);
             _moveToStorageState = new MoveToStorageState(this, _buildingsOnMap, _playerController);
             _idleState = new IdleState(this, _boneFireController, _playerController);
-            _craftingState = new CraftingState(this, _buildingsOnMap, _playerController);
+            _craftingState = new CraftingState(this, _buildingsOnMap, _playerController, _charactersConfig);
             _states.Add(_movingState);
             _states.Add(_collectState);
             _states.Add(_moveToStorageState);

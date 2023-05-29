@@ -11,6 +11,8 @@ namespace Vikings.Chanacter
         [SerializeField] private Animator _animator;
         [SerializeField] private NavMeshAgent _navMeshAgent;
         [SerializeField] private float _rotateSpeed = 10;
+        [SerializeField] private CharactersConfig _charactersConfig;
+        
         
         private Action _onGetPosition;
         private bool _onPosition;
@@ -21,7 +23,6 @@ namespace Vikings.Chanacter
         {
             var targetRotation = Quaternion.LookRotation(_navMeshAgent.destination - transform.position);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotateSpeed * Time.deltaTime);
-            
             if (CheckDestinationReached() && !_onPosition)
             {
                 _onGetPosition?.Invoke();
@@ -48,6 +49,7 @@ namespace Vikings.Chanacter
 
         public void MoveToPoint(Transform point)
         {
+            _navMeshAgent.speed = _charactersConfig.SpeedMove;
             _currentPoint = point;
             _navMeshAgent.SetDestination(point.position);
         }

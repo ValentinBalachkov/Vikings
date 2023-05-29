@@ -10,7 +10,7 @@ public class MenuButtonsManager : MonoBehaviour
     public void EnableButtons(bool isEnable)
     {
         _craftButton.interactable = isEnable;
-        _characterButton.interactable = false;
+        _characterButton.interactable = isEnable;
     }
     
 }
