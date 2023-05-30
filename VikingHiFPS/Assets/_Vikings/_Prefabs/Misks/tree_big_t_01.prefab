@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8320073253760131020}
   - component: {fileID: 4961010894232801385}
   - component: {fileID: 7151147031808320675}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: tree_big_t_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8664088020307772790}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.24208596, y: 0, z: 11.381656}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.08851, y: 0.08851, z: 0.08851}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4961010894232801385
 MeshFilter:
@@ -61,8 +61,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4ebe06798acb41f45a37b2c2469a3b6e, type: 2}
-  - {fileID: 2100000, guid: 97e7273572ed07445965783d26cbfd6a, type: 2}
+  - {fileID: 2100000, guid: 1716389624322af4187cfb55d608afe9, type: 2}
+  - {fileID: 2100000, guid: bfa714c690a037f469b10dfce32e10ac, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -31,7 +31,7 @@ Transform:
   m_Children:
   - {fileID: 3263400416508744872}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5574324935936413242
 MonoBehaviour:
@@ -123,7 +123,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: dbbd0c5c2dff3324bb1a5db89731c861, type: 2}
+      objectReference: {fileID: 2100000, guid: 3bb0a7311ef74474d990bd7210825992, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
