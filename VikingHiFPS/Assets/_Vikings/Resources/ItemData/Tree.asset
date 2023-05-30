@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 168a22c003ac4607ab6e9c704435d4d1, type: 3}
+  m_Name: Tree
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 47c6615d0418a1944940cbc456a698c9, type: 3}
+  nameText: 
+  description: Description
+  _id: 3
+  _prefab: {fileID: 7538969506033860327, guid: d06300a92d81b484096311d0b6fa69aa, type: 3}
+  _dropCount: 3
+  _itemName: Three
+  _isOpen: 0
+  _collectTime: 4

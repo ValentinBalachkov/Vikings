@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6ef1cb2d7a134b4a8ae00f2a1715eb3, type: 3}
+  m_Name: WoodStorageBD
+  m_EditorClassIdentifier: 
+  currentItemsCount:
+  - itemData: {fileID: 11400000, guid: 842ec8fe0ff14054fb025a7b78239191, type: 2}
+    count: 0
+  - itemData: {fileID: 11400000, guid: 8b782c2617e0b8048985ef732675d1be, type: 2}
+    count: 0
+  craftingTableCrateTime: 0
+  isSetOnMap: 0
+  _storageData: {fileID: 11400000, guid: 480902296caabf2408ac395a39489084, type: 2}
+  _isBuild: 0
+  _priceToUpgrades:
+  - itemData: {fileID: 11400000, guid: 842ec8fe0ff14054fb025a7b78239191, type: 2}
+    count: 4
+  - itemData: {fileID: 11400000, guid: 8b782c2617e0b8048985ef732675d1be, type: 2}
+    count: 4
+  _buildingName: WoodStorageBuilding
+  _buildingController: {fileID: 750211685007338083, guid: 8bbdb0ada0764284bb3d3433c842da2b,
+    type: 3}
+  _craftingTableController: {fileID: 0}
