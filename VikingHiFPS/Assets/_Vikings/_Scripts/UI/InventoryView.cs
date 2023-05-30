@@ -21,6 +21,7 @@ namespace Vikings.UI
             _itemsCountText[0].countText.text = $" {_storagesData[0].Count}/{_storagesData[0].MaxStorageCount}";
             _itemsCountText[1].countText.text = $" {_storagesData[1].Count}/{_storagesData[1].MaxStorageCount}";
             _itemsCountText[2].countText.text = $" {_storagesData[2].Count}/{_storagesData[2].MaxStorageCount}";
+            _storagesData[2].OnUpdateCount += () => { UpdateUI(null); };
         }
 
         public void AddStorageController(StorageController storageController)

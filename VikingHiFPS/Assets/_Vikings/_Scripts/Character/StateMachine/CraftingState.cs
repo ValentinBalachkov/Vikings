@@ -11,12 +11,14 @@ namespace Vikings.Chanacter
         private const float OFFSET_DISTANCE = 1f;
         private bool _isCrafting;
         private CharactersConfig _charactersConfig;
+        private CharacterStateMachine _characterStateMachine;
         
-        public CraftingState(StateMachine stateMachine, BuildingsOnMap buildingsOnMap, PlayerController playerController, CharactersConfig charactersConfig) : base("Crafting state", stateMachine)
+        public CraftingState(CharacterStateMachine stateMachine, BuildingsOnMap buildingsOnMap, PlayerController playerController, CharactersConfig charactersConfig) : base("Crafting state", stateMachine)
         {
             _buildingsOnMap = buildingsOnMap;
             _playerController = playerController;
             _charactersConfig = charactersConfig;
+            _characterStateMachine = stateMachine;
         }
         
         public override void Enter()
@@ -27,6 +29,7 @@ namespace Vikings.Chanacter
             _playerController.SetActionOnGetPosition(OnGetPoint);
             _playerController.MoveToPoint(_buildingsOnMap.GetCurrentBuildingPosition());
         }
+        
 
         private void OnGetPoint()
         {

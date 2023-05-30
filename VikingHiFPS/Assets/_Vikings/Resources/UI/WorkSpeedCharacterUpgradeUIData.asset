@@ -15,4 +15,4 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 68ee6543676f8a749a4f4812515ad6c4, type: 3}
   upgradeName: Work speed
   description: UpgradeWorkSpeed
-  upgradeCharacterEnum: 0
+  upgradeCharacterEnum: 2

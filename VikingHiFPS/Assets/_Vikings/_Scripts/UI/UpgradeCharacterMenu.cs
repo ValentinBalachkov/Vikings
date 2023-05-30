@@ -27,9 +27,11 @@ namespace Vikings.UI
             {
                 foreach (var item in _characterMenuElements)
                 {
-                    UpdateUI(item.upgradeCharacterEnum);
+                    UpdateUI();
                 }
             };
+            
+            UpdateUI();
         }
 
         private void OnDisable()
@@ -48,7 +50,7 @@ namespace Vikings.UI
                 {
                     UpdateItemsCount(_characterUpgradeUIData[index].upgradeCharacterEnum);
                     _charactersConfig.Upgrade(_characterUpgradeUIData[index].upgradeCharacterEnum); 
-                    UpdateUI(_characterUpgradeUIData[index].upgradeCharacterEnum);
+                    UpdateUI();
                 });
                 _characterMenuElements.Add(element);
                 switch (_characterUpgradeUIData[i].upgradeCharacterEnum)
@@ -83,21 +85,11 @@ namespace Vikings.UI
             }
         }
 
-        private void UpdateUI(UpgradeCharacterEnum upgradeCharacterEnum)
+        private void UpdateUI()
         {
-           var item = _characterMenuElements.FirstOrDefault(x => x.upgradeCharacterEnum == upgradeCharacterEnum);
-           switch (item.upgradeCharacterEnum)
-           {
-               case UpgradeCharacterEnum.SpeedMove:
-                   item.UpdateUI(_charactersConfig.speedMoveLevel, _charactersConfig.SpeedMoveCost, _storageData.Count >= _charactersConfig.SpeedMoveCost);
-                   break;
-               case UpgradeCharacterEnum.ItemsCount:
-                   item.UpdateUI(_charactersConfig.itemsCountLevel, _charactersConfig.ItemsCountCost, _storageData.Count >= _charactersConfig.ItemsCountCost);
-                   break;
-               case UpgradeCharacterEnum.SpeedWork:
-                   item.UpdateUI(_charactersConfig.speedWorkLevel, _charactersConfig.SpeedWorkCost, _storageData.Count >= _charactersConfig.SpeedWorkCost);
-                   break;
-           }
+            _characterMenuElements[0].UpdateUI(_charactersConfig.speedMoveLevel, _charactersConfig.SpeedMoveCost, _storageData.Count >= _charactersConfig.SpeedMoveCost);
+            _characterMenuElements[1].UpdateUI(_charactersConfig.speedWorkLevel, _charactersConfig.SpeedWorkCost, _storageData.Count >= _charactersConfig.SpeedWorkCost);
+            _characterMenuElements[2].UpdateUI(_charactersConfig.itemsCountLevel, _charactersConfig.ItemsCountCost, _storageData.Count >= _charactersConfig.ItemsCountCost);
         }
     }
 

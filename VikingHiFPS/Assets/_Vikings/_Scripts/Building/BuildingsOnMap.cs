@@ -132,6 +132,7 @@ namespace Vikings.Building
         {
             foreach (var character in _charactersOnMap.CharactersList)
             {
+
                 if (isItemCalling && character.CurrentState is CraftingState || isItemCalling && _itemQueue.Count > 0)
                 {
                     continue;
@@ -171,9 +172,6 @@ namespace Vikings.Building
                         {
                             _currentBuilding = _buildingControllers.FirstOrDefault(x => !x.IsFullStorage());
                         }
-
-                        // _currentBuilding = _buildingControllers
-                        //     .OrderByDescending(x => !x.IsFullStorage()).ThenByDescending(x => x is BuildingController).First();
                     }
                 }
 

@@ -107,10 +107,10 @@ namespace Vikings.Chanacter
                     speedMoveLevel++;
                     break;
                 case UpgradeCharacterEnum.ItemsCount:
-                    speedWorkLevel++;
+                    itemsCountLevel++;
                     break;
                 case UpgradeCharacterEnum.SpeedWork:
-                    itemsCountLevel++;
+                    speedWorkLevel++;
                     break;
             }
         }
