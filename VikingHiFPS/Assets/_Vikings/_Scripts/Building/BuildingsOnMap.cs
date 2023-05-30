@@ -243,8 +243,17 @@ namespace Vikings.Building
 
         public IGetItem GetElementPosition(Transform playerPos)
         {
-            return _itemQueue.OrderBy(x => x.Priority).ThenByDescending(x => x.GetItemData().DropCount)
-                .ThenBy(x => Vector3.Distance(x.GetItemPosition().position, playerPos.position)).ToList()[0];
+            var items = _itemQueue.OrderBy(x => x.Priority).ThenByDescending(x => x.GetItemData().DropCount)
+                .ThenBy(x => Vector3.Distance(x.GetItemPosition().position, playerPos.position)).ToList();
+            foreach (var item in items)
+            {
+                if (item.EnableToGet)
+                {
+                    item.EnableToGet = false;
+                    return item;
+                }
+            }
+            return items[0];
         }
 
         public void ClearCurrentBuilding()

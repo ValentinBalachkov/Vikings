@@ -11,6 +11,7 @@ namespace Vikings.Items
         public bool IsEnable => _isEnable;
         public ItemData Item => _itemData;
         public int Priority { get; set; }
+        public bool EnableToGet { get; set; }
 
         [SerializeField] private GameObject _model;
 
@@ -46,6 +47,7 @@ namespace Vikings.Items
             _isEnable = false;
             _model.SetActive(_isEnable);
             yield return new WaitForSeconds(DELAY_ENABLE);
+            EnableToGet = true;
             _isEnable = true;
             _model.SetActive(_isEnable);
             OnEnable?.Invoke();

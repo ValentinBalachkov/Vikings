@@ -2,7 +2,6 @@
 using System.Linq;
 using UnityEngine;
 using Vikings.Building;
-using Vikings.Weapon;
 
 namespace Vikings.Chanacter
 {
