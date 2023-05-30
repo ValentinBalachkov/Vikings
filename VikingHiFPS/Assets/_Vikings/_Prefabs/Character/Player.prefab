@@ -99,6 +99,7 @@ MonoBehaviour:
   _animator: {fileID: 1071855677951063098}
   _navMeshAgent: {fileID: 6955367304405869745}
   _rotateSpeed: 10
+  _charactersConfig: {fileID: 11400000, guid: 556d7956795907442b7227389da83726, type: 2}
 --- !u!195 &6955367304405869745
 NavMeshAgent:
   m_ObjectHideFlags: 0
