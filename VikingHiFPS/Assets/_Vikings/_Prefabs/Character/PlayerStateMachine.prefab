@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd4838cba96c4836aa7704810153241e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerPrefab: {fileID: 6955367304405869750, guid: c36a170aed7712a42b71a6f07aa9db45,
+  _playerPrefab: {fileID: 6636937159239948804, guid: c36a170aed7712a42b71a6f07aa9db45,
     type: 3}
   _inventoryController: {fileID: 28}
   _charactersConfig: {fileID: 11400000, guid: 556d7956795907442b7227389da83726, type: 2}
