@@ -27,11 +27,11 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1770182687573246230}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3752727427173915836
 MonoBehaviour:
@@ -69,7 +69,7 @@ PrefabInstance:
     - target: {fileID: 1399399166588804355, guid: 0e2a697d69a5ddd4d9b1bed8baa0460d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.026
       objectReference: {fileID: 0}
     - target: {fileID: 1399399166588804355, guid: 0e2a697d69a5ddd4d9b1bed8baa0460d,
         type: 3}
@@ -141,7 +141,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.005, y: 0.00001, z: 0.005}
+  m_Extents: {x: 0.00001, y: 0.5, z: 0.0005}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1

@@ -27,7 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3263400416508744872}
   m_Father: {fileID: 0}
@@ -123,7 +123,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: dbbd0c5c2dff3324bb1a5db89731c861, type: 2}
+      objectReference: {fileID: 2100000, guid: 3bb0a7311ef74474d990bd7210825992, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -149,12 +149,12 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.03, y: 0.15, z: 0.00001}
-  m_MoveThreshold: 0
+  m_Extents: {x: 0.00001, y: 0.15, z: 0.00001}
+  m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: -0.06, y: 0, z: 0.09}
-  m_TimeToStationary: 0
+  m_TimeToStationary: 0.1
 --- !u!4 &3263400416508744872 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4365634657894881319, guid: 00d6b947c67a87743977d97784c6ee6a,

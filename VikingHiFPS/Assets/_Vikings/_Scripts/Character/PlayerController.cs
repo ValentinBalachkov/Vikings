@@ -32,7 +32,7 @@ namespace Vikings.Chanacter
         }
         private bool CheckDestinationReached() {
             float distanceToTarget = Vector3.Distance(transform.position, _currentPoint.position);
-            if(Math.Round(distanceToTarget,1) <= _navMeshAgent.stoppingDistance + 0.1f)
+            if(Math.Round(distanceToTarget,1) <= _navMeshAgent.stoppingDistance + 0.4f)
             {
                 return true;
             }
