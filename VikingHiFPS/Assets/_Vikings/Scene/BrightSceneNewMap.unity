@@ -1925,7 +1925,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &510598404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7598,6 +7598,7 @@ MonoBehaviour:
   _charactersConfig: {fileID: 11400000, guid: 556d7956795907442b7227389da83726, type: 2}
   _boneFireController: {fileID: 973209295}
   _buildingsOnMap: {fileID: 1788616209}
+  _charactersOnMap: {fileID: 944111476}
 --- !u!4 &1814333741
 Transform:
   m_ObjectHideFlags: 0
@@ -8273,6 +8274,7 @@ MonoBehaviour:
   _craftingTableData: {fileID: 11400000, guid: 1fc812a57f3c9f144bdb91e364854175, type: 2}
   _craftingTableDataDefault: {fileID: 11400000, guid: 8556bafbd029f304096a42175a8fc358,
     type: 2}
+  _charactersOnMap: {fileID: 944111476}
 --- !u!4 &1888331430
 Transform:
   m_ObjectHideFlags: 0

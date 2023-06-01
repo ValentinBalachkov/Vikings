@@ -69,7 +69,7 @@ namespace Vikings.Chanacter
             await Task.Delay(time);
             craftingTableController.OpenCurrentWeapon();
             _buildingsOnMap.ClearCurrentBuilding();
-            _buildingsOnMap.UpdateCurrentBuilding();
+            _buildingsOnMap.UpdateCurrentBuilding(_characterStateMachine);
         }
 
         private async Task StartTimer(int craftingTime)

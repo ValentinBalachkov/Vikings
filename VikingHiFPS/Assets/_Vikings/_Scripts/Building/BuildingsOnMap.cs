@@ -101,7 +101,10 @@ namespace Vikings.Building
                 }
             }
 
-            UpdateCurrentBuilding();
+            foreach (var character in _charactersOnMap.CharactersList)
+            {
+                UpdateCurrentBuilding(character);
+            }
         }
 
         public void SetStorageUpgradeState(ItemData itemData)
@@ -109,13 +112,20 @@ namespace Vikings.Building
             var storage =
                 _storageControllers.FirstOrDefault(x => x.BuildingData.StorageData.ItemType.ID == itemData.ID);
             _currentStorageToUpgrade = storage;
-            UpdateCurrentBuilding();
+            foreach (var character in _charactersOnMap.CharactersList)
+            {
+                UpdateCurrentBuilding(character);
+            }
         }
 
         public void SetCraftingTableToUpgrade()
         {
             _currentStorageToUpgrade = _craftingTableController;
-            UpdateCurrentBuilding();
+
+            foreach (var character in _charactersOnMap.CharactersList)
+            {
+                UpdateCurrentBuilding(character);
+            }
         }
 
         public CraftingTableController GetCraftingTable()
@@ -128,70 +138,67 @@ namespace Vikings.Building
             return _craftingTableController;
         }
 
-        public void UpdateCurrentBuilding(bool isCraftTable = false, bool isItemCalling = false)
+        public void UpdateCurrentBuilding(CharacterStateMachine character, bool isCraftTable = false,
+            bool isItemCalling = false)
         {
-            foreach (var character in _charactersOnMap.CharactersList)
+            if (isItemCalling && character.CurrentState is CraftingState || isItemCalling && _itemQueue.Count > 0)
             {
+                return;
+            }
 
-                if (isItemCalling && character.CurrentState is CraftingState || isItemCalling && _itemQueue.Count > 0)
-                {
-                    continue;
-                }
+            if (_currentBuilding != null && _currentBuilding is BuildingController or CraftingTableController &&
+                _currentBuilding.IsFullStorage() &&
+                character.CurrentState is not CraftingState || (_currentBuilding != null &&
+                                                                _currentBuilding.isUpgradeState &&
+                                                                _currentBuilding.IsFullStorage()))
+            {
+                character.SetState<CraftingState>();
+                return;
+            }
 
-                if (_currentBuilding != null && _currentBuilding is BuildingController or CraftingTableController &&
-                    _currentBuilding.IsFullStorage() &&
-                    character.CurrentState is not CraftingState || (_currentBuilding != null &&
-                                                                    _currentBuilding.isUpgradeState &&
-                                                                    _currentBuilding.IsFullStorage()))
+            if (isCraftTable)
+            {
+                _currentBuilding = GetCraftingTable();
+                if (_craftingTableController == null)
                 {
-                    character.SetState<CraftingState>();
-                    continue;
+                    (_currentBuilding as CraftingTableController).Init(_craftingTableDefault.buildingData);
                 }
-
-                if (isCraftTable)
-                {
-                    _currentBuilding = GetCraftingTable();
-                    if (_craftingTableController == null)
-                    {
-                        (_currentBuilding as CraftingTableController).Init(_craftingTableDefault.buildingData);
-                    }
-                }
-                else if (_storageControllers.Any(x => x.isUpgradeState))
-                {
-                    _currentBuilding = _storageControllers.FirstOrDefault(x => x.isUpgradeState);
-                }
-                else
-                {
-                    _currentBuilding =
-                        _buildingControllers.FirstOrDefault(x => x is CraftingTableController && !x.IsFullStorage());
-                    if (_currentBuilding == null)
-                    {
-                        _currentBuilding =
-                            _buildingControllers.FirstOrDefault(x => !x.IsFullStorage() && x is BuildingController);
-                        if (_currentBuilding == null)
-                        {
-                            _currentBuilding = _buildingControllers.FirstOrDefault(x => !x.IsFullStorage());
-                        }
-                    }
-                }
-
-                if (_currentStorageToUpgrade != null)
-                {
-                    _currentStorageToUpgrade.SetUpgradeState();
-                    _currentBuilding = _currentStorageToUpgrade;
-                    _currentStorageToUpgrade = null;
-                }
-
-                _itemQueue.Clear();
-
+            }
+            else if (_storageControllers.Any(x => x.isUpgradeState))
+            {
+                _currentBuilding = _storageControllers.FirstOrDefault(x => x.isUpgradeState);
+            }
+            else
+            {
+                _currentBuilding =
+                    _buildingControllers.FirstOrDefault(x => x is CraftingTableController && !x.IsFullStorage());
                 if (_currentBuilding == null)
                 {
-                    character.SetState<IdleState>();
-                    continue;
+                    _currentBuilding =
+                        _buildingControllers.FirstOrDefault(x => !x.IsFullStorage() && x is BuildingController);
+                    if (_currentBuilding == null)
+                    {
+                        _currentBuilding = _buildingControllers.FirstOrDefault(x => !x.IsFullStorage());
+                    }
                 }
-
-                UpdateItemsQueue(_currentBuilding.GetCurrentPriceToUpgrades());
             }
+
+            if (_currentStorageToUpgrade != null)
+            {
+                _currentStorageToUpgrade.SetUpgradeState();
+                _currentBuilding = _currentStorageToUpgrade;
+                _currentStorageToUpgrade = null;
+            }
+
+            _itemQueue.Clear();
+
+            if (_currentBuilding == null)
+            {
+                character.SetState<IdleState>();
+                return;
+            }
+
+            UpdateItemsQueue(_currentBuilding.GetCurrentPriceToUpgrades());
         }
 
         private void UpdateItemsQueue(PriceToUpgrade[] priceToUpgrades)
@@ -235,7 +242,7 @@ namespace Vikings.Building
             if (_currentBuilding != null)
             {
                 _currentBuilding.ChangeStorageCount(characterStateMachine.InventoryController.SetItemToStorage());
-                UpdateCurrentBuilding();
+                UpdateCurrentBuilding(characterStateMachine);
             }
         }
 
@@ -251,6 +258,7 @@ namespace Vikings.Building
                     return item;
                 }
             }
+
             return items[0];
         }
 
@@ -277,7 +285,11 @@ namespace Vikings.Building
             {
                 _currentBuilding.UpgradeStorage();
                 _currentBuilding = null;
-                UpdateCurrentBuilding();
+                foreach (var character in _charactersOnMap.CharactersList)
+                {
+                    UpdateCurrentBuilding(character);
+                }
+
                 return;
             }
             else
@@ -299,7 +311,10 @@ namespace Vikings.Building
 
             _buildingControllers.Remove(data.buildingData.BuildingController);
 
-            UpdateCurrentBuilding();
+            foreach (var character in _charactersOnMap.CharactersList)
+            {
+                UpdateCurrentBuilding(character);
+            }
         }
     }
 
