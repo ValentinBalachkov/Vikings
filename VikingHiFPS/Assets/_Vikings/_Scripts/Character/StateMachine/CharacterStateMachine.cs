@@ -7,6 +7,9 @@ namespace Vikings.Chanacter
 {
     public class CharacterStateMachine : StateMachine
     {
+        public AbstractBuilding currentBuilding;
+        public AbstractBuilding currentStorageToUpgrade;
+        public List<IGetItem> itemQueue = new();
         public BaseState CurrentState => _currentState;
         public InventoryController InventoryController => _inventoryController;
 
@@ -29,9 +32,15 @@ namespace Vikings.Chanacter
         private List<BaseState> _states = new();
         private BaseState _currentState;
 
+
         public void SpawnCharacter(Transform position)
         {
             _playerController = Instantiate(_playerPrefab, position);
+        }
+
+        public void SetCraftingStateOff()
+        {
+            _craftingState.isCrafting = true;
         }
 
         public void Init(BuildingsOnMap buildingsOnMap, BoneFireController boneFireController)

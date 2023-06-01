@@ -6834,8 +6834,8 @@ MonoBehaviour:
   - buildingData: {fileID: 11400000, guid: f2392d6c41d9cfc4e81358fd46c6c695, type: 2}
     spawnPoint: {fileID: 292437008}
   _charactersOnMap: {fileID: 944111476}
-  _inventoryView: {fileID: 0}
-  _menu: {fileID: 0}
+  _inventoryView: {fileID: 202872590}
+  _menu: {fileID: 330603313}
   _craftingTable: {fileID: 11400000, guid: f2392d6c41d9cfc4e81358fd46c6c695, type: 2}
   _craftingTableDefault:
     buildingData: {fileID: 11400000, guid: 286bb1c6aed69f04490fb374cf130e8f, type: 2}

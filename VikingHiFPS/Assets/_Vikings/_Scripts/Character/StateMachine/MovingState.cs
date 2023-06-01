@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using Vikings.Building;
+﻿using Vikings.Building;
 
 namespace Vikings.Chanacter
 {
@@ -24,7 +23,8 @@ namespace Vikings.Chanacter
         public override void Enter()
         {
             base.Enter();
-            _currentPoint = _buildingsOnMap.GetElementPosition(_playerPrefab.transform);
+            _currentPoint = _buildingsOnMap.GetElementPosition(_playerPrefab.transform, _stateMachine);
+            if(_currentPoint == null) return;
             _inventoryController.SetItem(_currentPoint);
             _playerPrefab.SetMoveAnimation();
             _playerPrefab.SetStoppingDistance(OFFSET_DISTANCE);
