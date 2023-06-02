@@ -38,9 +38,9 @@ namespace Vikings.Chanacter
             _playerController = Instantiate(_playerPrefab, position);
         }
 
-        public void SetCraftingStateOff()
+        public void SetCraftingStateOff(bool isCanCrafting)
         {
-            _craftingState.isCrafting = true;
+            _craftingState.isAlreadyCrafting = isCanCrafting;
         }
 
         public void Init(BuildingsOnMap buildingsOnMap, BoneFireController boneFireController)

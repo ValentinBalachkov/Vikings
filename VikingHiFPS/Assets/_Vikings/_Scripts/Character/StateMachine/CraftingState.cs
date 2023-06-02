@@ -7,6 +7,7 @@ namespace Vikings.Chanacter
     public class CraftingState : BaseState
     {
         public bool isCrafting;
+        public bool isAlreadyCrafting;
         private BuildingsOnMap _buildingsOnMap;
         private PlayerController _playerController;
         private const float OFFSET_DISTANCE = 1f;
@@ -33,6 +34,11 @@ namespace Vikings.Chanacter
 
         private void OnGetPoint()
         {
+            if (isAlreadyCrafting)
+            {
+                _playerController.SetCraftingAnimation();
+                return;
+            }
             if (!isCrafting && _buildingsOnMap.GetCurrentBuilding(_characterStateMachine) is CraftingTableController)
             {
                 CraftingTableController craftingTableController =
@@ -58,32 +64,30 @@ namespace Vikings.Chanacter
                 CraftingIndicatorView.Instance.Setup(time, _buildingsOnMap.GetCurrentBuilding(_characterStateMachine).transform);
                 StartTimer((int)_buildingsOnMap.GetCurrentBuilding(_characterStateMachine).BuildingData.StorageData.BuildTime);
             }
-            else
-            {
-                _playerController.SetCraftingAnimation();
-            }
         }
 
         private async Task StartTimerCraftingTable(CraftingTableController craftingTableController)
         {
             _playerController.SetCraftingAnimation();
-            _buildingsOnMap.OffCraftingStateAllCharacters();
+            _buildingsOnMap.OffCraftingStateAllCharacters(true);
             var defaultTime = (int)craftingTableController.CraftingTableData.TableBuildingTime * 1000;
             int time = (int)(defaultTime + (defaultTime * (_charactersConfig.SpeedWork / 100)));
             await Task.Delay(time);
             craftingTableController.OpenCurrentWeapon();
             _buildingsOnMap.ClearCurrentBuilding();
             _buildingsOnMap.UpdateCurrentBuilding(_characterStateMachine);
+            _buildingsOnMap.OffCraftingStateAllCharacters(false);
         }
 
         private async Task StartTimer(int craftingTime)
         {
             _playerController.SetCraftingAnimation();
-            _buildingsOnMap.OffCraftingStateAllCharacters();
+            _buildingsOnMap.OffCraftingStateAllCharacters(true);
             var defaultTime = craftingTime * 1000;
             int time = (int)(defaultTime + (defaultTime * (_charactersConfig.SpeedWork / 100)));
             await Task.Delay(time);
             _buildingsOnMap.UpgradeBuildingToStorage(_characterStateMachine);
+            _buildingsOnMap.OffCraftingStateAllCharacters(false);
         }
 
     }

@@ -65,10 +65,17 @@ namespace Vikings.Items
 
                             itemOnScene.Init(item.item);
                             _allItems.Add(itemOnScene);
-                            foreach (var character in _charactersOnMap.CharactersList)
+                            itemOnScene.OnEnable = null;
+                            
+                            itemOnScene.OnEnable += () =>
                             {
-                                itemOnScene.OnEnable += () => _buildingsOnMap.UpdateCurrentBuilding(character,false, true);
-                            }
+                                foreach (var character in _charactersOnMap.CharactersList)
+                                {
+                                    DebugLogger.SendMessage("UpdateCharPath", Color.blue);
+                                    _buildingsOnMap.UpdateCurrentBuilding(character, false, true);
+                                }
+                            };
+                            
                             
                             if (item.item.IsOpen)
                             {
@@ -99,10 +106,14 @@ namespace Vikings.Items
 
                             itemOnScene.Init(item.item);
                             _allItems.Add(itemOnScene);
-                            foreach (var character in _charactersOnMap.CharactersList)
+                            itemOnScene.OnEnable += () =>
                             {
-                                itemOnScene.OnEnable += () => _buildingsOnMap.UpdateCurrentBuilding(character, false, true);
-                            }
+                                foreach (var character in _charactersOnMap.CharactersList)
+                                {
+                                    DebugLogger.SendMessage("UpdateCharPath", Color.blue);
+                                    _buildingsOnMap.UpdateCurrentBuilding(character, false, true);
+                                }
+                            };
                             
                             if (item.item.IsOpen)
                             {

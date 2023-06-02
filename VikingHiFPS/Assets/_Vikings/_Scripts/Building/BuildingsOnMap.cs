@@ -271,11 +271,11 @@ namespace Vikings.Building
             _menu.EnableButtons(true);
         }
 
-        public void OffCraftingStateAllCharacters()
+        public void OffCraftingStateAllCharacters(bool isCanCrafting)
         {
             foreach (var character in _charactersOnMap.CharactersList)
             {
-                character.SetCraftingStateOff();
+                character.SetCraftingStateOff(isCanCrafting);
             }
         }
 
@@ -323,6 +323,8 @@ namespace Vikings.Building
             
             foreach (var c in _charactersOnMap.CharactersList)
             {
+                DebugLogger.SendMessage("WE DID IT", Color.green);
+            
                 c.currentBuilding = null;
                 UpdateCurrentBuilding(c);
             }
