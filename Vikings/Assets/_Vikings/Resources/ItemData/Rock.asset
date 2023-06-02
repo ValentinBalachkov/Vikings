@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 168a22c003ac4607ab6e9c704435d4d1, type: 3}
+  m_Name: Rock
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 9c86f890a9ca36241abf6cb6c592a6e6, type: 3}
+  nameText: 
+  description: Description
+  _id: 2
+  _prefab: {fileID: 6806352097513530124, guid: 265b88c448f749b4aaa70377c927eddb, type: 3}
+  _dropCount: 1
+  _itemName: Rock
+  _isOpen: 1
+  _collectTime: 0.7
