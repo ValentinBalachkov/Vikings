@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4806180808365549510}
   - component: {fileID: 8500222480784558202}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BoneFire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,17 +115,17 @@ PrefabInstance:
     - target: {fileID: 2229090435493039037, guid: 0c5993819cb7afb4fa05f2bdba724364,
         type: 3}
       propertyPath: ShapeModule.radius.value
-      value: 0.04
+      value: 0.12
       objectReference: {fileID: 0}
     - target: {fileID: 2229090435493039037, guid: 0c5993819cb7afb4fa05f2bdba724364,
         type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.4
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 2229090435493039037, guid: 0c5993819cb7afb4fa05f2bdba724364,
         type: 3}
       propertyPath: InitialModule.startSize.minScalar
-      value: 0.2
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 2229090435493039037, guid: 0c5993819cb7afb4fa05f2bdba724364,
         type: 3}
@@ -145,7 +145,7 @@ PrefabInstance:
     - target: {fileID: 2229090435493039039, guid: 0c5993819cb7afb4fa05f2bdba724364,
         type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2229090435493039039, guid: 0c5993819cb7afb4fa05f2bdba724364,
         type: 3}

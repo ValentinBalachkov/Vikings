@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charactersCount: 2
   houseLevel: 2
-  speedMove: 2
+  speedMove: 1
   speedMoveLevel: 2
   speedMoveCost: 14
   speedWork: 1
