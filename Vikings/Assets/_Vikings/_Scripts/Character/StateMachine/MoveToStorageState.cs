@@ -24,7 +24,7 @@ namespace Vikings.Chanacter
             _playerPrefab.OnEndAnimation += OnSetItemAnimation;
             _playerPrefab.SetStoppingDistance(OFFSET_DISTANCE);
             _playerPrefab.SetActionOnGetPosition(OnGetPoint);
-            _playerPrefab.MoveToPoint(_buildingsOnMap.GetCurrentBuildingPosition());
+            _playerPrefab.MoveToPoint(_buildingsOnMap.GetCurrentBuildingPosition(_stateMachine));
         }
 
         public override void Exit()

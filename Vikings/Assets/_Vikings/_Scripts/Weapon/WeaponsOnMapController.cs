@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Vikings.Building;
+using Vikings.Chanacter;
 using Vikings.Items;
 
 namespace Vikings.Weapon
@@ -16,6 +17,7 @@ namespace Vikings.Weapon
         
         [SerializeField] private CraftingTableData _craftingTableData;
         [SerializeField] private CraftingTableData _craftingTableDataDefault;
+        [SerializeField] private CharactersOnMap _charactersOnMap;
 
 
         private void Start()
@@ -42,7 +44,11 @@ namespace Vikings.Weapon
             if (_craftingTableData.currentItemsCount.Count > 0 || _craftingTableDataDefault.currentItemsCount.Count > 0)
             {
                 _buildingsOnMap.GetCraftingTable().SetupCraftWeapon(_weaponsList.FirstOrDefault(x => x.id == weaponId));
-                _buildingsOnMap.UpdateCurrentBuilding(true);
+                foreach (var character in _charactersOnMap.CharactersList)
+                {
+                    _buildingsOnMap.UpdateCurrentBuilding(character,true);
+                }
+               
                 _menuButtonsManager.EnableButtons(false);
             }
         }
@@ -50,7 +56,12 @@ namespace Vikings.Weapon
         public void StartCraftWeapon(int index)
         {
             _buildingsOnMap.GetCraftingTable().SetupCraftWeapon(_weaponsList[index]);
-            _buildingsOnMap.UpdateCurrentBuilding(true);
+            foreach (var character in _charactersOnMap.CharactersList)
+            {
+                _buildingsOnMap.UpdateCurrentBuilding(character,true);
+            }
+
+           
             _menuButtonsManager.EnableButtons(false);
         }
 
