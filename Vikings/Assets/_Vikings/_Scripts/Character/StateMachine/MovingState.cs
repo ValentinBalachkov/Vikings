@@ -24,7 +24,7 @@ namespace Vikings.Chanacter
         public override void Enter()
         {
             base.Enter();
-            _currentPoint = _buildingsOnMap.GetElementPosition(_playerPrefab.transform);
+            _currentPoint = _buildingsOnMap.GetElementPosition(_playerPrefab.transform, _stateMachine);
             _inventoryController.SetItem(_currentPoint);
             _playerPrefab.SetMoveAnimation();
             _playerPrefab.SetStoppingDistance(OFFSET_DISTANCE);

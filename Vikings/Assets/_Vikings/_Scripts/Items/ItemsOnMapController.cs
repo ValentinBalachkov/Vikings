@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Vikings.Building;
@@ -17,6 +16,7 @@ namespace Vikings.Items
 
         [SerializeField] private BoneFireController _boneFireController;
         [SerializeField] private BuildingsOnMap _buildingsOnMap;
+        [SerializeField] private CharactersOnMap _charactersOnMap;
 
         private List<ItemController> _itemsList = new();
 
@@ -63,7 +63,18 @@ namespace Vikings.Items
 
                             itemOnScene.Init(item.item);
                             _allItems.Add(itemOnScene);
-                            itemOnScene.OnEnable += () => _buildingsOnMap.UpdateCurrentBuilding(false, true);
+                            itemOnScene.OnEnable = null;
+                            
+                            itemOnScene.OnEnable += () =>
+                            {
+                                foreach (var character in _charactersOnMap.CharactersList)
+                                {
+                                    DebugLogger.SendMessage("UpdateCharPath", Color.blue);
+                                    _buildingsOnMap.UpdateCurrentBuilding(character, false, true);
+                                }
+                            };
+                            
+                            
                             if (item.item.IsOpen)
                             {
                                 _itemsList.Add(itemOnScene);
@@ -93,7 +104,15 @@ namespace Vikings.Items
 
                             itemOnScene.Init(item.item);
                             _allItems.Add(itemOnScene);
-                            itemOnScene.OnEnable += () => _buildingsOnMap.UpdateCurrentBuilding(false, true);
+                            itemOnScene.OnEnable += () =>
+                            {
+                                foreach (var character in _charactersOnMap.CharactersList)
+                                {
+                                    DebugLogger.SendMessage("UpdateCharPath", Color.blue);
+                                    _buildingsOnMap.UpdateCurrentBuilding(character, false, true);
+                                }
+                            };
+                            
                             if (item.item.IsOpen)
                             {
                                 _itemsList.Add(itemOnScene);
