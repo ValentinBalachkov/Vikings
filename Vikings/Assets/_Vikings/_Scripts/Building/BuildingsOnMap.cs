@@ -260,6 +260,9 @@ namespace Vikings.Building
             }
 
             character.SetState<IdleState>();
+            character.currentBuilding = null;
+            character.currentStorageToUpgrade = null;
+            character.itemQueue.Clear();
             return null;
         }
 
