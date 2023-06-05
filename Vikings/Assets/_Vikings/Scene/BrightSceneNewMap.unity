@@ -1124,7 +1124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eb6156dc0a745ccba2745c393661e22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _camera: {fileID: 0}
+  _camera: {fileID: 253388662}
   _charactersOnMap: {fileID: 944111476}
   _charactersConfig: {fileID: 11400000, guid: 556d7956795907442b7227389da83726, type: 2}
   _houseCameraPosition:
@@ -6701,8 +6701,8 @@ MonoBehaviour:
   - buildingData: {fileID: 11400000, guid: f2392d6c41d9cfc4e81358fd46c6c695, type: 2}
     spawnPoint: {fileID: 292437008}
   _charactersOnMap: {fileID: 944111476}
-  _inventoryView: {fileID: 0}
-  _menu: {fileID: 0}
+  _inventoryView: {fileID: 202872590}
+  _menu: {fileID: 330603313}
   _craftingTable: {fileID: 11400000, guid: f2392d6c41d9cfc4e81358fd46c6c695, type: 2}
   _craftingTableDefault:
     buildingData: {fileID: 11400000, guid: 286bb1c6aed69f04490fb374cf130e8f, type: 2}
@@ -6874,6 +6874,7 @@ MonoBehaviour:
   _charactersConfig: {fileID: 11400000, guid: 556d7956795907442b7227389da83726, type: 2}
   _boneFireController: {fileID: 973209295}
   _buildingsOnMap: {fileID: 1788616209}
+  _charactersOnMap: {fileID: 944111476}
 --- !u!4 &1814333741
 Transform:
   m_ObjectHideFlags: 0
@@ -7545,10 +7546,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a0a9de7740517a5488d545315fa8ee3a, type: 2}
   - {fileID: 11400000, guid: 9ef76be828f44a046a074450ec192bf0, type: 2}
   _buildingsOnMap: {fileID: 1788616209}
-  _menuButtonsManager: {fileID: 0}
+  _menuButtonsManager: {fileID: 330603313}
   _craftingTableData: {fileID: 11400000, guid: 1fc812a57f3c9f144bdb91e364854175, type: 2}
   _craftingTableDataDefault: {fileID: 11400000, guid: 8556bafbd029f304096a42175a8fc358,
     type: 2}
+  _charactersOnMap: {fileID: 944111476}
 --- !u!4 &1888331430
 Transform:
   m_ObjectHideFlags: 0
