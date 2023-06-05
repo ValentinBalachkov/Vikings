@@ -43,7 +43,8 @@ namespace Vikings.Weapon
 
             if (_craftingTableData.currentItemsCount.Count > 0 || _craftingTableDataDefault.currentItemsCount.Count > 0)
             {
-                _buildingsOnMap.GetCraftingTable().SetupCraftWeapon(_weaponsList.FirstOrDefault(x => x.id == weaponId));
+                var weapon = _weaponsList.FirstOrDefault(x => x.id == weaponId);
+                _buildingsOnMap.GetCraftingTable().SetupCraftWeapon(weapon, weapon.IsOpen);
                 foreach (var character in _charactersOnMap.CharactersList)
                 {
                     _buildingsOnMap.UpdateCurrentBuilding(character,true);
@@ -55,7 +56,7 @@ namespace Vikings.Weapon
 
         public void StartCraftWeapon(int index)
         {
-            _buildingsOnMap.GetCraftingTable().SetupCraftWeapon(_weaponsList[index]);
+            _buildingsOnMap.GetCraftingTable().SetupCraftWeapon(_weaponsList[index], _weaponsList[index].IsOpen);
             foreach (var character in _charactersOnMap.CharactersList)
             {
                 _buildingsOnMap.UpdateCurrentBuilding(character,true);
