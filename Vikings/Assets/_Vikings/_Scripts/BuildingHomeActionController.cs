@@ -30,6 +30,8 @@ namespace Vikings.Building
             {
                 StartCoroutine(MoveCameraCoroutine(_houseCameraPosition[_charactersConfig.houseLevel]));
             }
+
+            CollectingResourceView.Instance.camera = _camera;
         }
 
         public void OnHomeBuilding()

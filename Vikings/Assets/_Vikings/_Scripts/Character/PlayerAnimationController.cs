@@ -7,7 +7,7 @@ public class PlayerAnimationController : MonoBehaviour
 
     private Animator _animator;
 
-    void Start()
+    void Awake()
     {
         _animator = GetComponent<Animator>();
         _animator.runtimeAnimatorController = _baseController;
@@ -15,7 +15,6 @@ public class PlayerAnimationController : MonoBehaviour
         _animator.SetFloat("Speed", speed);
     }
 
-    // Update is called once per frame
     public void ChangeAnimatorController(AnimatorOverrideController animatroController)
     {
         _animator.runtimeAnimatorController = animatroController;
