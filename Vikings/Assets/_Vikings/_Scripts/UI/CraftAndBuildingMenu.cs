@@ -110,8 +110,8 @@ namespace Vikings.UI
                 {
                     if (_weaponsOnMapController.WeaponsData[i].IsOpen)
                     {
-                        weapon.SetEnable(_storageDatas[0].CurrentLevel > 0 && !_weaponsOnMapController.WeaponsData[i].IsOpen,
-                            $"COMING SOON");
+                        weapon.SetEnable(_storageDatas[0].CurrentLevel > 0 && _craftingTableData.currentLevel > _weaponsOnMapController.WeaponsData[i].level,
+                            $"REQUIRED:  {_weaponsOnMapController.WeaponsData[i].required} LEVEL{_craftingTableData.currentLevel + 1}");
                     }
                     else
                     {
@@ -123,8 +123,8 @@ namespace Vikings.UI
                 {
                     if (_weaponsOnMapController.WeaponsData[i].IsOpen)
                     {
-                        weapon.SetEnable(_craftingTableData.currentLevel == 2 && !_weaponsOnMapController.WeaponsData[i].IsOpen, 
-                            $"COMING SOON");
+                        weapon.SetEnable(_craftingTableData.currentLevel == 2 && _craftingTableData.currentLevel > _weaponsOnMapController.WeaponsData[i].level, 
+                            $"REQUIRED:  {_weaponsOnMapController.WeaponsData[i].required} LEVEL{_craftingTableData.currentLevel + 1}");
                     }
                     else
                     {

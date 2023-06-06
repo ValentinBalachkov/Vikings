@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using Vikings.Building;
+﻿using Vikings.Building;
 
 namespace Vikings.Chanacter
 {

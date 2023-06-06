@@ -4,7 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/_Vikings/Scene/BrightSceneNewMap.unity
+    guid: 353fff911b0c39548aad955c53a770b5
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 1689602e5be03e148929cd24f7c92e03,
       type: 2}

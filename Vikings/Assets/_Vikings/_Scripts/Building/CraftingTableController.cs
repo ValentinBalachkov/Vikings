@@ -17,14 +17,16 @@ namespace Vikings.Building
         
 
         private WeaponData _currentWeapon;
+        private bool _isUpgradeWeapon;
 
-        public void SetupCraftWeapon(WeaponData weaponData)
+        public void SetupCraftWeapon(WeaponData weaponData, bool isUpgrade)
         {
+            _isUpgradeWeapon = isUpgrade;
             _currentWeapon = weaponData;
             _craftingTableData.Setup(_currentWeapon.PriceToBuy, (int)_currentWeapon.CraftingTime, _currentWeapon.level, weaponData.id);
             CollectingResourceView.Instance.Setup(weaponData.nameText, _craftingTableData.currentItemsCount.ToArray(), _craftingTableData.priceToUpgradeCraftingTable.ToArray(), transform);
         }
-
+        
         public override void SetUpgradeState()
         {
             for (int i = 0; i < _craftingTableData.PriceToUpgrade.Count; i++)
@@ -75,7 +77,13 @@ namespace Vikings.Building
 
         public void OpenCurrentWeapon()
         {
-            if (!isUpgradeState)
+            if (_isUpgradeWeapon)
+            {
+                _currentWeapon.level++;
+                _isUpgradeWeapon = false;
+            }
+
+            else if (!isUpgradeState)
             {
                 _currentWeapon.IsOpen = true;
                 _currentWeapon.ItemData.IsOpen = true;
