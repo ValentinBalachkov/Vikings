@@ -19,6 +19,7 @@ namespace Vikings.Building
         {
             Priority = 0;
             this.buildingData = buildingData;
+            EnableToGet = true;
             if (!isSaveInit)
             {
                 buildingData.StorageData.CurrentLevel++;

@@ -15278,13 +15278,22 @@ GameObject:
   m_Component:
   - component: {fileID: 525715328456486198}
   - component: {fileID: 211836339863327189}
+  - component: {fileID: 7228717089712792340}
   m_Layer: 0
   m_Name: ActiveCamera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!81 &7228717089712792340
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7228717089712792339}
+  m_Enabled: 1
 --- !u!23 &7233370787016944005
 MeshRenderer:
   m_ObjectHideFlags: 0

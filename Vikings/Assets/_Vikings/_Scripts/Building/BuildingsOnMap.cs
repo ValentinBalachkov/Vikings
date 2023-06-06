@@ -252,17 +252,17 @@ namespace Vikings.Building
                 .ThenBy(x => Vector3.Distance(x.GetItemPosition().position, playerPos.position)).ToList();
             foreach (var item in items)
             {
+                DebugLogger.SendMessage($"{item.GetItemData().ItemName}", Color.red);
                 if (item.EnableToGet)
                 {
                     item.EnableToGet = false;
                     return item;
                 }
             }
-
-            character.SetState<IdleState>();
             character.currentBuilding = null;
             character.currentStorageToUpgrade = null;
             character.itemQueue.Clear();
+            character.SetState<IdleState>();
             return null;
         }
 
