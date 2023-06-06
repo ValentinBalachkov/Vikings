@@ -46,6 +46,7 @@ namespace Vikings.Items
         private IEnumerator GetItemCoroutine()
         {
             _isEnable = false;
+            EnableToGet = false;
             _model.SetActive(_isEnable);
             yield return new WaitForSeconds(DELAY_ENABLE);
             DebugLogger.SendMessage($"{_itemData.ItemName}", Color.magenta);

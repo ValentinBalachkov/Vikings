@@ -24,9 +24,12 @@ namespace Vikings.Chanacter
 
         private void Update()
         {
-            var targetRotation = Quaternion.LookRotation(_navMeshAgent.destination - _thisTransform.position);
-            transform.rotation = Quaternion.Slerp(_thisTransform.rotation, targetRotation, _rotateSpeed * Time.deltaTime);
-
+            var rotate = _navMeshAgent.destination - _thisTransform.position;
+            if (rotate != Vector3.zero)
+            {
+                var targetRotation = Quaternion.LookRotation(rotate);
+                transform.rotation = Quaternion.Slerp(_thisTransform.rotation, targetRotation, _rotateSpeed * Time.deltaTime);
+            }
             if (CheckDestinationReached() && !_onPosition)
             {
                 _onGetPosition?.Invoke();
@@ -38,7 +41,7 @@ namespace Vikings.Chanacter
         {
             float distanceToTarget = Vector3.Distance(_thisTransform.position, _currentPoint.position);
             
-            if (Math.Round(distanceToTarget, 1) <= _navMeshAgent.stoppingDistance + 0.2f)
+            if (Math.Round(distanceToTarget, 1) <= Math.Round(_navMeshAgent.stoppingDistance + 0.5f, 1))
             {
                 return true;
             }

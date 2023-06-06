@@ -20,6 +20,7 @@ MonoBehaviour:
   required: 
   currentWeaponId: 0
   tableBuildingTime: 8
+  priority: 0
   _buildingData: {fileID: 0}
   currentItemsCount: []
   priceToUpgradeCraftingTable:

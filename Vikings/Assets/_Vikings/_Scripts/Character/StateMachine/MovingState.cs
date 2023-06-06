@@ -24,6 +24,7 @@ namespace Vikings.Chanacter
         {
             base.Enter();
             _currentPoint = _buildingsOnMap.GetElementPosition(_playerPrefab.transform, _stateMachine);
+            if(_currentPoint == null) return;
             _inventoryController.SetItem(_currentPoint);
             _playerPrefab.SetMoveAnimation();
             _playerPrefab.SetStoppingDistance(OFFSET_DISTANCE);

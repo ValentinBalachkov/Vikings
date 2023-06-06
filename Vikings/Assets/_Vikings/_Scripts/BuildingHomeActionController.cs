@@ -37,7 +37,7 @@ namespace Vikings.Building
 
         public void OnHomeBuilding()
         {
-            _charactersOnMap.AddCharacterOnMap(1);
+            _charactersOnMap.AddCharacterOnMap(0);
             _charactersConfig.charactersCount++;
             if (_charactersConfig.houseLevel >= 10) return;
             _charactersConfig.houseLevel++;

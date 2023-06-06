@@ -312,7 +312,7 @@ namespace Vikings.Building
             else
             {
                 var item = Instantiate(data.buildingData.StorageData.StorageController, data.spawnPoint);
-
+               
                 _storageControllers.Add(item);
                 _buildingControllers.Add(item);
                 item.Init(data.buildingData);

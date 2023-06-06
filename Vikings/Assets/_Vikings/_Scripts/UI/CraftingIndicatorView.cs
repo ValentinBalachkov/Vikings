@@ -22,7 +22,7 @@ public class CraftingIndicatorView : MonoBehaviour
 
     public void Setup(int maxCount, Transform pos)
     {
-        _rectTransform.position = Camera.main.WorldToScreenPoint(new Vector3(pos.position.x, pos.position.y, pos.position.z - 1f));
+        _rectTransform.position = Camera.main.WorldToScreenPoint(new Vector3(pos.position.x, pos.position.y, pos.position.z - 4f));
         gameObject.SetActive(true);
         _indicatorImage.fillAmount = 0;
         _maxCount = maxCount;
