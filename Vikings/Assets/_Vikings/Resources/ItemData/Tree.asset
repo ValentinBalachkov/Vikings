@@ -16,7 +16,7 @@ MonoBehaviour:
   nameText: 
   description: Description
   _id: 3
-  _prefab: {fileID: 7538969506033860327, guid: 20fea90cb2e56224181e0836c9433b81, type: 3}
+  _prefab: {fileID: 8222135434574805582, guid: 20fea90cb2e56224181e0836c9433b81, type: 3}
   _dropCount: 3
   _itemName: Three
   _isOpen: 0
