@@ -20,6 +20,7 @@ MonoBehaviour:
   required: Wood storage
   id: 0
   level: 0
+  priority: 2
   _itemData: {fileID: 11400000, guid: aa71cd7377003654ab1aad130b722e73, type: 2}
   _isOpen: 0
   _priceToBuy:

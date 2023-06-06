@@ -4,6 +4,7 @@ using System.Linq;
 using SecondChanceSystem.SaveSystem;
 using UnityEngine;
 using Vikings.Items;
+using Vikings.UI;
 
 namespace Vikings.Building
 {
@@ -17,8 +18,10 @@ namespace Vikings.Building
         public string description;
         public string required;
         public bool isDefaultOpen;
+        public int priority;
         
-       
+
+
         public ItemData ItemType => _itemType;
 
         public int Count
@@ -115,6 +118,8 @@ namespace Vikings.Building
                 _currentLevel = data._currentLevel;
             }
         }
+
+       
     }
 
 }

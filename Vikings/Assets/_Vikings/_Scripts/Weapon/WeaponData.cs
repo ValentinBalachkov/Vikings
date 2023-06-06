@@ -17,6 +17,7 @@ namespace Vikings.Weapon
         public string required;
         public int id;
         public int level;
+        public int priority;
         
         public bool IsOpen
         {

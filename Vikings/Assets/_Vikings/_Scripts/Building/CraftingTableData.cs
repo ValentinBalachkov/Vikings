@@ -16,6 +16,7 @@ namespace Vikings.Building
         public string required;
         public int currentWeaponId;
         public int tableBuildingTime;
+        public int priority;
 
         [SerializeField] private BuildingData _buildingData;
         

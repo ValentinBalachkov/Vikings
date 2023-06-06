@@ -18,6 +18,7 @@ MonoBehaviour:
   description: Allows storing stone. Upgrade to increase the capacity
   required: Workbench
   isDefaultOpen: 0
+  priority: 4
   _itemType: {fileID: 11400000, guid: 8b782c2617e0b8048985ef732675d1be, type: 2}
   _count: 0
   _maxStorageCount: 10

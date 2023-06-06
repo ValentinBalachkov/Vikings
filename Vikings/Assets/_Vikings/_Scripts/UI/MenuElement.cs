@@ -9,6 +9,7 @@ namespace Vikings.UI
 {
     public class MenuElement : MonoBehaviour
     {
+        public int priority;
         [SerializeField] private TMP_Text _name;
         [SerializeField] private TMP_Text _description;
         [SerializeField] private TMP_Text _level;
@@ -18,13 +19,15 @@ namespace Vikings.UI
         [SerializeField] private TMP_Text[] _priceForUpgradeCount;
         [SerializeField] private TMP_Text _buttonDescription;
         [SerializeField] private TMP_Text _requiredText;
-        
+
         [SerializeField] private Sprite _activeSprite;
         [SerializeField] private Sprite _defaultSprite;
-        
 
-        public void UpdateUI(string itemName, string description, int level, Sprite icon, PriceToUpgrade[] priceToUpgrades)
+
+        public void UpdateUI(string itemName, string description, int level, Sprite icon,
+            PriceToUpgrade[] priceToUpgrades, int priority)
         {
+            this.priority = priority;
             _name.text = itemName;
             _description.text = description;
             _level.text = $"lvl:{level}";
@@ -40,7 +43,7 @@ namespace Vikings.UI
         {
             _buttonDescription.text = isCreate ? "Create" : "Upgrade";
         }
-        
+
 
         public void SetEnable(bool isEnable, string requiredText)
         {

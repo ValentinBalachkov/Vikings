@@ -21,6 +21,7 @@ MonoBehaviour:
   required: Axe
   currentWeaponId: 0
   tableBuildingTime: 8
+  priority: 3
   _buildingData: {fileID: 11400000, guid: f2392d6c41d9cfc4e81358fd46c6c695, type: 2}
   currentItemsCount: []
   priceToUpgradeCraftingTable: []

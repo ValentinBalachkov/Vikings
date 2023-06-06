@@ -18,6 +18,7 @@ MonoBehaviour:
   description: Allows you to store food. Upgrade to increase the capacity
   required: Workbench
   isDefaultOpen: 0
+  priority: 6
   _itemType: {fileID: 11400000, guid: b90d6cdefc2ad7e4cbdd899ef9e419e5, type: 2}
   _count: 0
   _maxStorageCount: 20

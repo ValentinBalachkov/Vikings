@@ -18,6 +18,7 @@ MonoBehaviour:
   description: Allows storing wood. Upgrade to increase the capacity
   required: Workbench
   isDefaultOpen: 1
+  priority: 1
   _itemType: {fileID: 11400000, guid: 842ec8fe0ff14054fb025a7b78239191, type: 2}
   _count: 0
   _maxStorageCount: 10
