@@ -116,7 +116,7 @@ Transform:
   - {fileID: 8878915513354809118}
   - {fileID: 5646521237311796523}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2187595118771098226
 MonoBehaviour:
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c893d1c300340d39a7c04eb25ee7145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _model: {fileID: 0}
+  _model: {fileID: 2187595118771098228}
 --- !u!1 &3930658862315653048
 GameObject:
   m_ObjectHideFlags: 0

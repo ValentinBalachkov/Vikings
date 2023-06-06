@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 853066057134369838}
   - component: {fileID: 8812609488824614039}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BuildingPlace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ PrefabInstance:
     - target: {fileID: 1302474674170400103, guid: 86e210be5e8b5304fa8032d510cdbc6b,
         type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1302474674170400103, guid: 86e210be5e8b5304fa8032d510cdbc6b,
         type: 3}

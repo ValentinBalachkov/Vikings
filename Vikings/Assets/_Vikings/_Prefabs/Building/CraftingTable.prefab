@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3752727426206892558}
   - component: {fileID: 3752727427173915836}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CraftingTable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
