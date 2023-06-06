@@ -31,7 +31,7 @@ Transform:
   m_Children:
   - {fileID: 1979917505808506589}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7538969506033860327
 MonoBehaviour:
@@ -118,6 +118,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1874505503613722483, guid: cd7c686a779d3954fbedaedcf0c4d28c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1874505503613722483, guid: cd7c686a779d3954fbedaedcf0c4d28c,
         type: 3}

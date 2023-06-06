@@ -7,7 +7,7 @@ namespace Vikings.Chanacter
     {
         private BoneFireController _boneFireController;
         private PlayerController _playerPrefab;
-        private const float OFFSET_DISTANCE = 0.8f;
+        private const float OFFSET_DISTANCE = 2f;
         private CharacterStateMachine _stateMachine;
         private StorageData _storageData;
         private bool _isStopMove;
