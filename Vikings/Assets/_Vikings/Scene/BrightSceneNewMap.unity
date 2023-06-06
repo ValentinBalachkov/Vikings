@@ -1125,6 +1125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 211836339863327189}
+  _cameraPassive: {fileID: 253388662}
   _charactersOnMap: {fileID: 944111476}
   _charactersConfig: {fileID: 11400000, guid: 556d7956795907442b7227389da83726, type: 2}
   _houseCameraPosition:

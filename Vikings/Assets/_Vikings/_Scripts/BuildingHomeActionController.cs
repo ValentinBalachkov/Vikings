@@ -51,6 +51,7 @@ namespace Vikings.Building
             while (_camera.orthographicSize < positionInfo.size)
             {
                 _camera.orthographicSize += 0.01f;
+                _cameraPassive.orthographicSize += 0.01f;
                 yield return null;
             }
         }
