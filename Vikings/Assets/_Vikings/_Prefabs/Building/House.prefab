@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8480261106038355648}
   - component: {fileID: -1726127725469879221}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: House
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ PrefabInstance:
     - target: {fileID: 4689781032241002758, guid: d92e46fb74fe4ca42a704a1340508f9f,
         type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4689781032241002758, guid: d92e46fb74fe4ca42a704a1340508f9f,
         type: 3}

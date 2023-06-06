@@ -149,7 +149,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 15068432}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.49, y: 0.1, z: -22.73}
+  m_LocalPosition: {x: -0.8, y: 0.1, z: -22.1}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -1124,7 +1124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eb6156dc0a745ccba2745c393661e22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _camera: {fileID: 253388662}
+  _camera: {fileID: 211836339863327189}
   _charactersOnMap: {fileID: 944111476}
   _charactersConfig: {fileID: 11400000, guid: 556d7956795907442b7227389da83726, type: 2}
   _houseCameraPosition:
@@ -1158,7 +1158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 253388663}
   - component: {fileID: 253388662}
-  - component: {fileID: 253388661}
+  - component: {fileID: 253388664}
   m_Layer: 0
   m_Name: PassiveCamera
   m_TagString: Untagged
@@ -1166,14 +1166,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &253388661
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 253388660}
-  m_Enabled: 0
 --- !u!20 &253388662
 Camera:
   m_ObjectHideFlags: 0
@@ -1213,7 +1205,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 64
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1225,15 +1217,15 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!4 &253388663
-Transform:
+--- !u!224 &253388663
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 253388660}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 82.8, y: 43.7, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1241,6 +1233,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 540, y: 960}
+  m_SizeDelta: {x: 1080, y: 1920}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &253388664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253388660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b44ebb9900a3743ba7a1c65283d6ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ReferenceResolution: {x: 1080, y: 1920}
+  Mode: 1
+  MatchWidthOrHeight: 0.5
 --- !u!1 &273849131
 GameObject:
   m_ObjectHideFlags: 0
@@ -2106,7 +2118,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 517399747}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.77, y: 0.317, z: 10.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2772,7 +2784,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 706509301}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.59, y: 0.317, z: 1.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2980,7 +2992,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 717905654}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.62, y: 0.317, z: 13.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3747,7 +3759,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 903704329}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.85, y: 0.317, z: 6.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4314,7 +4326,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1037037812}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0.7, z: 1}
   m_LocalScale: {x: 0.13, y: 0.13, z: 0.13}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -4427,14 +4439,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1085554694}
-  m_LocalRotation: {x: 0, y: 0.5, z: 0, w: 0.8660254}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.508, y: 0.317, z: 5.164}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1558337249}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 60, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1116511181
 GameObject:
   m_ObjectHideFlags: 0
@@ -5359,7 +5371,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22400762, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000061035156
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22426080, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
       propertyPath: m_AnchorMax.x
@@ -5805,7 +5817,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1389997998}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.35, y: 0.317, z: 7.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5983,7 +5995,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1457301696}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.666, y: 0.317, z: 2.138}
+  m_LocalPosition: {x: 1.666, y: 0.317, z: 1.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6163,6 +6175,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 5538276083724054241, guid: d94480821f052d94fbcd2c0cad25f482,
+        type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 253388662}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7171,7 +7188,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1875601777}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.305, y: 0.317, z: 2.234}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7338,7 +7355,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1881670437}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.076, y: 0.317, z: 3.297}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8188,7 +8205,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2072033738}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.67, y: 0.317, z: 8.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8268,12 +8285,12 @@ GameObject:
   - component: {fileID: 264813305508765466}
   - component: {fileID: 250215268558403174}
   - component: {fileID: 247665099847909147}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tree_big_boxy_bevel_2.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &27284129251406780
 MeshRenderer:
@@ -8429,12 +8446,12 @@ GameObject:
   - component: {fileID: 1869707236662131491}
   - component: {fileID: 7386874908068703680}
   - component: {fileID: 7332629855771579530}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_9_bevel.021
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &137812326764684425
 MeshRenderer:
@@ -8573,12 +8590,12 @@ GameObject:
   - component: {fileID: 2464367906170080339}
   - component: {fileID: 3336610630383490505}
   - component: {fileID: 3683115247318340260}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tree_big_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!20 &211836339863327189
 Camera:
@@ -8916,12 +8933,12 @@ GameObject:
   - component: {fileID: 5966512320284968053}
   - component: {fileID: 5801357844083717827}
   - component: {fileID: 5273945805855445089}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cylinder.009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &348177972598396382
 MeshRenderer:
@@ -8976,12 +8993,12 @@ GameObject:
   - component: {fileID: 8268699094392588508}
   - component: {fileID: 6933487497836499052}
   - component: {fileID: 8954530776931544754}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tree_big_boxy_bevel_2.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &476194025533967804
 MeshRenderer:
@@ -9105,14 +9122,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7228717089712792339}
-  m_LocalRotation: {x: 0.0007155239, y: -0.9152114, z: 0.39936516, w: -0.053806935}
-  m_LocalPosition: {x: -1.620385, y: 13.328224, z: 7.6465645}
+  m_LocalRotation: {x: 0, y: 0.9171853, z: -0.39846092, w: 0}
+  m_LocalPosition: {x: -0.34, y: 13.32, z: 9.14}
   m_LocalScale: {x: 111.85782, y: 111.85782, z: 111.85783}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5233266981084091513}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 46.964, y: 180, z: 0}
 --- !u!33 &528341987292019164
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -9216,12 +9233,12 @@ GameObject:
   - component: {fileID: 3464328679321693897}
   - component: {fileID: 2993632023087390863}
   - component: {fileID: 4847660101466774829}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_Wall_05.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &757663607089347665
 Transform:
@@ -9249,12 +9266,12 @@ GameObject:
   - component: {fileID: 7118092369719680139}
   - component: {fileID: 1730403600618811228}
   - component: {fileID: 6424408862422949496}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tree_big_boxy_bevel_3.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &847434760490447524
 MeshRenderer:
@@ -9310,12 +9327,12 @@ GameObject:
   - component: {fileID: 4601399621379090341}
   - component: {fileID: 8963176622612014497}
   - component: {fileID: 5664272659440031979}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_9_bevel.022
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1 &960535760855525201
 GameObject:
@@ -9328,12 +9345,12 @@ GameObject:
   - component: {fileID: 2608353327447394391}
   - component: {fileID: 8567348106036652031}
   - component: {fileID: 7233370787016944005}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_13_bevel.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1 &969582171314624896
 GameObject:
@@ -9346,12 +9363,12 @@ GameObject:
   - component: {fileID: 6880557786087970830}
   - component: {fileID: 1162307479092372541}
   - component: {fileID: 168183857261411532}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1017642938560540556
 Transform:
@@ -9478,12 +9495,12 @@ GameObject:
   - component: {fileID: 3130071745343115902}
   - component: {fileID: 6005513340336899623}
   - component: {fileID: 1837686062409023977}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_9_bevel.018
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1160784872878900191
 Transform:
@@ -9577,12 +9594,12 @@ GameObject:
   - component: {fileID: 3057277001271997766}
   - component: {fileID: 5584089492931975855}
   - component: {fileID: 1309923705569219250}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!33 &1193232692561341278
 MeshFilter:
@@ -9727,12 +9744,12 @@ GameObject:
   - component: {fileID: 3679165210976126525}
   - component: {fileID: 4689963447736926385}
   - component: {fileID: 7032731704114748881}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_9_bevel.015
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &1309923705569219250
 MeshRenderer:
@@ -9791,12 +9808,12 @@ GameObject:
   - component: {fileID: 757663607089347665}
   - component: {fileID: 7861881359905036251}
   - component: {fileID: 106869103176462167}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_Flat_m_08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1 &1435778327189800030
 GameObject:
@@ -9809,12 +9826,12 @@ GameObject:
   - component: {fileID: 4307996283448238686}
   - component: {fileID: 6780496112637003599}
   - component: {fileID: 3849134165502646448}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tree_big_3.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1 &1454439621267547482
 GameObject:
@@ -9827,12 +9844,12 @@ GameObject:
   - component: {fileID: 8259223310446281102}
   - component: {fileID: 6783797104550500307}
   - component: {fileID: 8962453027814661869}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_8_bevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1456198729112696431
 Transform:
@@ -9875,12 +9892,12 @@ GameObject:
   - component: {fileID: 8104914552175850456}
   - component: {fileID: 3042653043281312412}
   - component: {fileID: 4279682762969709998}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_8_bevel.012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1 &1553498515447558199
 GameObject:
@@ -9893,12 +9910,12 @@ GameObject:
   - component: {fileID: 8387530887237029077}
   - component: {fileID: 633211560158206379}
   - component: {fileID: 3335329900816272559}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_8_bevel.011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &1660731274787546663
 MeshRenderer:
@@ -10018,12 +10035,12 @@ GameObject:
   - component: {fileID: 1160784872878900191}
   - component: {fileID: 1174933450982803136}
   - component: {fileID: 8751410778685128353}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_14_bevel.009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!33 &1730403600618811228
 MeshFilter:
@@ -10044,12 +10061,12 @@ GameObject:
   - component: {fileID: 7327571475439552967}
   - component: {fileID: 8017664448940766183}
   - component: {fileID: 6861458172398245735}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_13_bevel.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &1837686062409023977
 MeshRenderer:
@@ -10244,12 +10261,12 @@ GameObject:
   - component: {fileID: 5602609903521054469}
   - component: {fileID: 5477248326306397309}
   - component: {fileID: 7421474926220752409}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_9_bevel.008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1 &1988804042937643173
 GameObject:
@@ -10262,12 +10279,12 @@ GameObject:
   - component: {fileID: 4342630746366520252}
   - component: {fileID: 3662978106112197666}
   - component: {fileID: 3600133268668538303}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_14_bevel.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1993415491613157875
 Transform:
@@ -10304,12 +10321,12 @@ GameObject:
   - component: {fileID: 6634753739088178386}
   - component: {fileID: 5330268082884464383}
   - component: {fileID: 1081010349527652206}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1 &2049857681655884031
 GameObject:
@@ -10322,12 +10339,12 @@ GameObject:
   - component: {fileID: 4290513986433662228}
   - component: {fileID: 1198771304307172006}
   - component: {fileID: 5198066676111469921}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_Flat_m_08.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2178127773699530434
 Transform:
@@ -10355,12 +10372,12 @@ GameObject:
   - component: {fileID: 1843633545936767964}
   - component: {fileID: 2351848317484575465}
   - component: {fileID: 4895899250328878066}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tree_big_3.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!33 &2282079357484025465
 MeshFilter:
@@ -10682,12 +10699,12 @@ GameObject:
   - component: {fileID: 493374990642428344}
   - component: {fileID: 1873834581731036145}
   - component: {fileID: 27284129251406780}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_9_bevel.017
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1 &2579619247581091432
 GameObject:
@@ -10700,12 +10717,12 @@ GameObject:
   - component: {fileID: 8987361778638575649}
   - component: {fileID: 4056151672889926957}
   - component: {fileID: 7531451946450692666}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plane.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2608353327447394391
 Transform:
@@ -10733,12 +10750,12 @@ GameObject:
   - component: {fileID: 1993415491613157875}
   - component: {fileID: 6847397856955651193}
   - component: {fileID: 6575331739816552446}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_Flat_m_08.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1 &2660363117747873138
 GameObject:
@@ -10751,12 +10768,12 @@ GameObject:
   - component: {fileID: 1920238271010579303}
   - component: {fileID: 6292897979252553485}
   - component: {fileID: 7772790928875636851}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_Flat_crk_m_03.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!33 &2699847837572546834
 MeshFilter:
@@ -10800,12 +10817,12 @@ GameObject:
   - component: {fileID: 4092093017362089830}
   - component: {fileID: 8075059961537417490}
   - component: {fileID: 1680372092453674357}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_Flat_crk_m_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2745177255863760911
 Transform:
@@ -10841,12 +10858,12 @@ GameObject:
   - component: {fileID: 8495105950304824556}
   - component: {fileID: 6801427600629544716}
   - component: {fileID: 293422321042919128}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_Wall_06.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!33 &2800332031436666952
 MeshFilter:
@@ -10867,12 +10884,12 @@ GameObject:
   - component: {fileID: 2713056496943463959}
   - component: {fileID: 3492561670829361169}
   - component: {fileID: 137812326764684425}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_Wall_07.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &2840198421755494206
 MeshRenderer:
@@ -11068,12 +11085,12 @@ GameObject:
   - component: {fileID: 2360246950022316644}
   - component: {fileID: 45922988194101396}
   - component: {fileID: 7217511715109838165}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_13_bevel.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!33 &3087414191061281155
 MeshFilter:
@@ -11109,12 +11126,12 @@ GameObject:
   - component: {fileID: 2897295035311492162}
   - component: {fileID: 60970314035892944}
   - component: {fileID: 847434760490447524}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_9_bevel.023
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1 &3279192883233251310
 GameObject:
@@ -11127,12 +11144,12 @@ GameObject:
   - component: {fileID: 7662998340625569936}
   - component: {fileID: 2521609763037210040}
   - component: {fileID: 6894998159765481209}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_13_bevel.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3306365525284197895
 Transform:
@@ -11227,12 +11244,12 @@ GameObject:
   - component: {fileID: 5444789885401096737}
   - component: {fileID: 292433166446877521}
   - component: {fileID: 4849325782472406964}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_Wall_06.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &3345957416460631115
 MeshRenderer:
@@ -11499,12 +11516,12 @@ GameObject:
   - component: {fileID: 5963695809920105855}
   - component: {fileID: 7859421476704675513}
   - component: {fileID: 2461843064441292099}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_9_bevel.014
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!33 &3662978106112197666
 MeshFilter:
@@ -11639,12 +11656,12 @@ GameObject:
   - component: {fileID: 1114166335617455763}
   - component: {fileID: 6360878599855442670}
   - component: {fileID: 2840198421755494206}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_9_bevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &3822856100730401225
 MeshRenderer:
@@ -11699,12 +11716,12 @@ GameObject:
   - component: {fileID: 4045060813563699626}
   - component: {fileID: 6193694113501435321}
   - component: {fileID: 3674619519067876520}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_Flat_crk_m_01.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &3849134165502646448
 MeshRenderer:
@@ -11774,12 +11791,12 @@ GameObject:
   - component: {fileID: 1456198729112696431}
   - component: {fileID: 2282079357484025465}
   - component: {fileID: 4894592014140632218}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_8_bevel.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3995230057324447462
 Transform:
@@ -11946,12 +11963,12 @@ GameObject:
   - component: {fileID: 1683531659430086552}
   - component: {fileID: 7866499179625763228}
   - component: {fileID: 6993182332142014929}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_9_bevel.012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1 &4174137254498227560
 GameObject:
@@ -11964,12 +11981,12 @@ GameObject:
   - component: {fileID: 3467113952540113716}
   - component: {fileID: 7374372410639551546}
   - component: {fileID: 8457806852404778879}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_14_bevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &4224551622788390303
 MeshRenderer:
@@ -12353,12 +12370,12 @@ GameObject:
   - component: {fileID: 1017642938560540556}
   - component: {fileID: 7185404197720937496}
   - component: {fileID: 99714511151609947}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plane.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1 &4594252945916445138
 GameObject:
@@ -12371,12 +12388,12 @@ GameObject:
   - component: {fileID: 8112246290574828579}
   - component: {fileID: 332793211759263879}
   - component: {fileID: 1851856042568052299}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_9_bevel.019
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4601399621379090341
 Transform:
@@ -12493,12 +12510,12 @@ GameObject:
   - component: {fileID: 4021058055376734159}
   - component: {fileID: 6679388556116050891}
   - component: {fileID: 5874912781237559005}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_Wall_07.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!33 &4735809176529752886
 MeshFilter:
@@ -12569,12 +12586,12 @@ GameObject:
   - component: {fileID: 714771577053474341}
   - component: {fileID: 6650681698307517168}
   - component: {fileID: 5340995579258715354}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_9_bevel.011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4805800187878913551
 Transform:
@@ -12729,12 +12746,12 @@ GameObject:
   - component: {fileID: 5298725354534830357}
   - component: {fileID: 5524642580665932394}
   - component: {fileID: 5882859040239653786}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tree_big_3.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &4894592014140632218
 MeshRenderer:
@@ -12832,12 +12849,12 @@ GameObject:
   - component: {fileID: 721662968866369283}
   - component: {fileID: 3087414191061281155}
   - component: {fileID: 6386273238756277741}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_9_bevel.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &4941317933278059417
 MeshRenderer:
@@ -12915,12 +12932,12 @@ GameObject:
   - component: {fileID: 4267829324460002497}
   - component: {fileID: 8142751047499517081}
   - component: {fileID: 194342102300705914}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tree_big_2.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5077202237631013504
 Transform:
@@ -13079,12 +13096,12 @@ GameObject:
   - component: {fileID: 3432342269941504083}
   - component: {fileID: 9127054196669570275}
   - component: {fileID: 348177972598396382}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_Flat_crk_m_01.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5233266981084091513
 Transform:
@@ -13201,12 +13218,12 @@ GameObject:
   - component: {fileID: 8182985883876917689}
   - component: {fileID: 7223907012908049544}
   - component: {fileID: 1275695154101167985}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_13_bevel.008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!33 &5330268082884464383
 MeshFilter:
@@ -13270,12 +13287,12 @@ GameObject:
   - component: {fileID: 5085285165860520362}
   - component: {fileID: 8177910372986859728}
   - component: {fileID: 8362323417644055301}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_14_bevel.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &5384923848357469753
 MeshRenderer:
@@ -13418,12 +13435,12 @@ GameObject:
   - component: {fileID: 1461438649446190298}
   - component: {fileID: 9019686543732161414}
   - component: {fileID: 2947534213428931235}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_13_bevel.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!33 &5507636929418372176
 MeshFilter:
@@ -13452,12 +13469,12 @@ GameObject:
   - component: {fileID: 3995230057324447462}
   - component: {fileID: 6139516304362120462}
   - component: {fileID: 5619020228271726076}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_Flat_crk_m_03.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!33 &5561073191406341828
 MeshFilter:
@@ -13609,12 +13626,12 @@ GameObject:
   - component: {fileID: 3690464547439255507}
   - component: {fileID: 3307043824495708165}
   - component: {fileID: 3345957416460631115}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_Wall_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &5619020228271726076
 MeshRenderer:
@@ -13669,12 +13686,12 @@ GameObject:
   - component: {fileID: 5000757975388274170}
   - component: {fileID: 7985251357950513737}
   - component: {fileID: 4299601984426862178}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_14_bevel.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &5664272659440031979
 MeshRenderer:
@@ -13745,12 +13762,12 @@ GameObject:
   - component: {fileID: 4805800187878913551}
   - component: {fileID: 5996304589102876806}
   - component: {fileID: 4486495843310905268}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_8_bevel.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!33 &5690580328795299855
 MeshFilter:
@@ -13794,12 +13811,12 @@ GameObject:
   - component: {fileID: 4668613797797548713}
   - component: {fileID: 4302536194234108947}
   - component: {fileID: 3454531991393527133}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_Wall_05.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!33 &5801357844083717827
 MeshFilter:
@@ -13828,12 +13845,12 @@ GameObject:
   - component: {fileID: 7153415990556871601}
   - component: {fileID: 5185808699100280304}
   - component: {fileID: 8483462421963364002}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_Wall_07.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &5874912781237559005
 MeshRenderer:
@@ -13888,12 +13905,12 @@ GameObject:
   - component: {fileID: 8498219796393160113}
   - component: {fileID: 2714052438108732318}
   - component: {fileID: 4941317933278059417}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tree_big_boxy_bevel_3.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &5882859040239653786
 MeshRenderer:
@@ -13956,12 +13973,12 @@ GameObject:
   - component: {fileID: 2400124031507707299}
   - component: {fileID: 1663182951141792910}
   - component: {fileID: 7153744012529409688}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tree_big_boxy_bevel_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1 &5949330996641501462
 GameObject:
@@ -13974,12 +13991,12 @@ GameObject:
   - component: {fileID: 482707091954123187}
   - component: {fileID: 9068906080621001095}
   - component: {fileID: 1660731274787546663}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_Wall_07.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!33 &5958888125115100002
 MeshFilter:
@@ -14046,12 +14063,12 @@ GameObject:
   - component: {fileID: 4360449265841015900}
   - component: {fileID: 1184313864579912705}
   - component: {fileID: 6110890481729824679}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_8_bevel.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!33 &6005513340336899623
 MeshFilter:
@@ -14177,12 +14194,12 @@ GameObject:
   - component: {fileID: 5604482406246160469}
   - component: {fileID: 236638462055408135}
   - component: {fileID: 4649027283897531529}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_8_bevel.008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!33 &6360878599855442670
 MeshFilter:
@@ -14203,12 +14220,12 @@ GameObject:
   - component: {fileID: 5703593538195449362}
   - component: {fileID: 5921344377377790351}
   - component: {fileID: 5568224522919098938}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tree_big_boxy_bevel_3.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &6386273238756277741
 MeshRenderer:
@@ -14321,12 +14338,12 @@ GameObject:
   - component: {fileID: 5306086100084463098}
   - component: {fileID: 5583188480763935195}
   - component: {fileID: 5485703679773724781}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_Flat_crk_m_03.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!33 &6453973414268882311
 MeshFilter:
@@ -14543,12 +14560,12 @@ GameObject:
   - component: {fileID: 5077202237631013504}
   - component: {fileID: 2022736813920479086}
   - component: {fileID: 2510369561898634004}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_8_bevel.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &6778869539138783545
 MeshRenderer:
@@ -14643,12 +14660,12 @@ GameObject:
   - component: {fileID: 8313729298853573323}
   - component: {fileID: 528341987292019164}
   - component: {fileID: 7796120101755239060}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_Wall_05.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &6843678990292601289
 MeshRenderer:
@@ -14762,12 +14779,12 @@ GameObject:
   - component: {fileID: 663096122724024113}
   - component: {fileID: 8877001607143334708}
   - component: {fileID: 4149518890064712965}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_13_bevel.010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6880557786087970830
 Transform:
@@ -14846,12 +14863,12 @@ GameObject:
   - component: {fileID: 3306365525284197895}
   - component: {fileID: 5958888125115100002}
   - component: {fileID: 2947012816732771128}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_13_bevel.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &6993182332142014929
 MeshRenderer:
@@ -14907,12 +14924,12 @@ GameObject:
   - component: {fileID: 1268153401423007866}
   - component: {fileID: 2752292707129988441}
   - component: {fileID: 8217076719875996861}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_14_bevel.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &7032731704114748881
 MeshRenderer:
@@ -14987,8 +15004,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7528200152639522862}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.00013677526, y: 0.03923468, z: 0.0000000050058575, w: 0.99923}
+  m_LocalPosition: {x: -0.11, y: 0, z: 0.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -15100,7 +15117,7 @@ Transform:
   - {fileID: 8498219796393160113}
   m_Father: {fileID: 5233266981084091513}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.016, y: 4.497, z: 0.001}
 --- !u!4 &7153415990556871601
 Transform:
   m_ObjectHideFlags: 0
@@ -15235,12 +15252,12 @@ GameObject:
   - component: {fileID: 3906327755180836395}
   - component: {fileID: 2699847837572546834}
   - component: {fileID: 5196629350132262726}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_14_bevel.008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!33 &7223907012908049544
 MeshFilter:
@@ -15261,12 +15278,12 @@ GameObject:
   - component: {fileID: 5671729253596999365}
   - component: {fileID: 7256598477435014102}
   - component: {fileID: 476194025533967804}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_8_bevel.009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1 &7228717089712792339
 GameObject:
@@ -15279,6 +15296,7 @@ GameObject:
   - component: {fileID: 525715328456486198}
   - component: {fileID: 211836339863327189}
   - component: {fileID: 7228717089712792340}
+  - component: {fileID: 7228717089712792341}
   m_Layer: 0
   m_Name: ActiveCamera
   m_TagString: MainCamera
@@ -15286,7 +15304,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &7228717089712792340
+--- !u!114 &7228717089712792340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7228717089712792339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b44ebb9900a3743ba7a1c65283d6ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ReferenceResolution: {x: 1080, y: 1920}
+  Mode: 1
+  MatchWidthOrHeight: 0.5
+--- !u!81 &7228717089712792341
 AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15371,12 +15404,12 @@ GameObject:
   - component: {fileID: 328680744909056653}
   - component: {fileID: 657408358814835042}
   - component: {fileID: 6778869539138783545}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_8_bevel.010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1 &7325025322382766685
 GameObject:
@@ -15389,12 +15422,12 @@ GameObject:
   - component: {fileID: 2178127773699530434}
   - component: {fileID: 3323089713017629430}
   - component: {fileID: 1040414800749137187}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_Wall_07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7327571475439552967
 Transform:
@@ -15597,12 +15630,12 @@ GameObject:
   - component: {fileID: 7186402063243685497}
   - component: {fileID: 5819246175040609331}
   - component: {fileID: 3822856100730401225}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_Wall_07.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1 &7429312975843711963
 GameObject:
@@ -15615,12 +15648,12 @@ GameObject:
   - component: {fileID: 6240496896136362980}
   - component: {fileID: 5507636929418372176}
   - component: {fileID: 4761185975158953160}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plane.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1 &7431486482657631809
 GameObject:
@@ -15633,12 +15666,12 @@ GameObject:
   - component: {fileID: 2520096138983742540}
   - component: {fileID: 2986710068107680114}
   - component: {fileID: 280236742417079130}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_13_bevel.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1 &7444935950151414184
 GameObject:
@@ -15651,12 +15684,12 @@ GameObject:
   - component: {fileID: 8633409236526643431}
   - component: {fileID: 8704634998163411648}
   - component: {fileID: 7657061728559507805}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube.008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1 &7484997382798312460
 GameObject:
@@ -15669,12 +15702,12 @@ GameObject:
   - component: {fileID: 2518157448572918623}
   - component: {fileID: 4660059366600493924}
   - component: {fileID: 1237016040537289249}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_Flat_crk_m_01.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1 &7528200152639522862
 GameObject:
@@ -15685,12 +15718,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7147875113829831316}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 0
 --- !u!23 &7531451946450692666
 MeshRenderer:
@@ -15753,12 +15786,12 @@ GameObject:
   - component: {fileID: 3414948205659755072}
   - component: {fileID: 5709521549874665692}
   - component: {fileID: 277677547579992868}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_Wall_06.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7604595881830668468
 Transform:
@@ -15786,12 +15819,12 @@ GameObject:
   - component: {fileID: 4268441722798107133}
   - component: {fileID: 4735809176529752886}
   - component: {fileID: 523097157375593033}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tree_big_2.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &7657061728559507805
 MeshRenderer:
@@ -15863,12 +15896,12 @@ GameObject:
   - component: {fileID: 8660129185358507720}
   - component: {fileID: 6713916148705137709}
   - component: {fileID: 7783956385948312478}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock_Wall_06.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1 &7715443907159203859
 GameObject:
@@ -15881,12 +15914,12 @@ GameObject:
   - component: {fileID: 7426764164258753852}
   - component: {fileID: 5690580328795299855}
   - component: {fileID: 6568576912393291754}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_13_bevel.009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &7719617251241185365
 MeshRenderer:
@@ -15942,12 +15975,12 @@ GameObject:
   - component: {fileID: 6457737286691649435}
   - component: {fileID: 4787584649009250327}
   - component: {fileID: 7785980919031985375}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tree_big_boxy_bevel_2.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1 &7761514200105872205
 GameObject:
@@ -15960,12 +15993,12 @@ GameObject:
   - component: {fileID: 8345146350816864624}
   - component: {fileID: 7771511453355576470}
   - component: {fileID: 8168912899035063985}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tree_big_boxy_bevel_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!33 &7771511453355576470
 MeshFilter:
@@ -16028,12 +16061,12 @@ GameObject:
   - component: {fileID: 8233762383261689696}
   - component: {fileID: 6453973414268882311}
   - component: {fileID: 4342862510391139156}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_14_bevel.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &7783956385948312478
 MeshRenderer:
@@ -16196,12 +16229,12 @@ GameObject:
   - component: {fileID: 5255549733738779758}
   - component: {fileID: 2337274357794701592}
   - component: {fileID: 5578945501186028099}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_8_bevel.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1 &7981800152853968504
 GameObject:
@@ -16214,12 +16247,12 @@ GameObject:
   - component: {fileID: 8938731269596718483}
   - component: {fileID: 5561073191406341828}
   - component: {fileID: 2340148731530852190}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tree_big_boxy_bevel_2.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!33 &7985251357950513737
 MeshFilter:
@@ -16240,12 +16273,12 @@ GameObject:
   - component: {fileID: 6288146691414788593}
   - component: {fileID: 3368320376182341487}
   - component: {fileID: 6609208799210415024}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!33 &8017664448940766183
 MeshFilter:
@@ -16377,12 +16410,12 @@ GameObject:
   - component: {fileID: 4231025747811374753}
   - component: {fileID: 604863955706145084}
   - component: {fileID: 4224551622788390303}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_14_bevel.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &8217076719875996861
 MeshRenderer:
@@ -16496,12 +16529,12 @@ GameObject:
   - component: {fileID: 6817004260377105027}
   - component: {fileID: 5146765160896944279}
   - component: {fileID: 6843678990292601289}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tree_big_2.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8259223310446281102
 Transform:
@@ -16617,12 +16650,12 @@ GameObject:
   - component: {fileID: 5494215773421820071}
   - component: {fileID: 1203499732066151789}
   - component: {fileID: 8983577406542411132}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_13_bevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8379767667286651352
 Transform:
@@ -16680,12 +16713,12 @@ GameObject:
   - component: {fileID: 6425997479709781874}
   - component: {fileID: 8462924460502560213}
   - component: {fileID: 5384923848357469753}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tree_big_2.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!23 &8457806852404778879
 MeshRenderer:
@@ -16844,12 +16877,12 @@ GameObject:
   - component: {fileID: 7604595881830668468}
   - component: {fileID: 5493662603873658397}
   - component: {fileID: 1933921011298842594}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_8_bevel.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!33 &8658697424369696720
 MeshFilter:
@@ -16885,12 +16918,12 @@ GameObject:
   - component: {fileID: 732911038593060511}
   - component: {fileID: 1229371645128839764}
   - component: {fileID: 1183856455757028353}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1 &8693588526738577285
 GameObject:
@@ -16903,12 +16936,12 @@ GameObject:
   - component: {fileID: 8398847694628754700}
   - component: {fileID: 7541881647123776446}
   - component: {fileID: 4047630726887523755}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_8_bevel.013
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!33 &8704634998163411648
 MeshFilter:
@@ -16972,12 +17005,12 @@ GameObject:
   - component: {fileID: 6697997885588711481}
   - component: {fileID: 1193232692561341278}
   - component: {fileID: 223205284008758037}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_8_bevel.014
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1 &8830309788557005811
 GameObject:
@@ -16990,12 +17023,12 @@ GameObject:
   - component: {fileID: 2464146315418991938}
   - component: {fileID: 8658697424369696720}
   - component: {fileID: 2430846351269393700}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_9_bevel.009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1 &8842911840303640465
 GameObject:
@@ -17008,12 +17041,12 @@ GameObject:
   - component: {fileID: 2745177255863760911}
   - component: {fileID: 3612090555689376526}
   - component: {fileID: 7719617251241185365}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_14_bevel.010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8851373143061952348
 Transform:
@@ -17041,12 +17074,12 @@ GameObject:
   - component: {fileID: 4680871142867079142}
   - component: {fileID: 7111632219688080917}
   - component: {fileID: 8257943092008200402}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_14_bevel.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1 &8874726014187186291
 GameObject:
@@ -17059,12 +17092,12 @@ GameObject:
   - component: {fileID: 5165450201886341369}
   - component: {fileID: 5988309330584096136}
   - component: {fileID: 3463133843254452211}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_9_bevel.020
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!33 &8877001607143334708
 MeshFilter:
@@ -17251,12 +17284,12 @@ GameObject:
   - component: {fileID: 8851373143061952348}
   - component: {fileID: 6863144253014523440}
   - component: {fileID: 9189122622900061997}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_9_bevel.024
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1 &8995257984532684233
 GameObject:
@@ -17269,12 +17302,12 @@ GameObject:
   - component: {fileID: 7274769255427666862}
   - component: {fileID: 2800332031436666952}
   - component: {fileID: 7370040445932108910}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_9_bevel.013
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!33 &9019686543732161414
 MeshFilter:
@@ -17295,12 +17328,12 @@ GameObject:
   - component: {fileID: 8379767667286651352}
   - component: {fileID: 5027745145697046869}
   - component: {fileID: 4852267505085087641}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pine_skewed_8_bevel.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!33 &9068906080621001095
 MeshFilter:
@@ -17500,10 +17533,10 @@ GameObject:
   - component: {fileID: 7409560536286157076}
   - component: {fileID: 6165066894035817616}
   - component: {fileID: 4296962807949007615}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tree_big_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1

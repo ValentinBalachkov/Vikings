@@ -1,0 +1,13 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: WoodCollect
+  m_Controller: {fileID: 9100000, guid: 79c1896dba113bb44853a0610984ba4e, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: dff9491a2fcb72249b2b8fc27de43bde, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 66b269faf7d77284291beb6f88fdfb86, type: 2}

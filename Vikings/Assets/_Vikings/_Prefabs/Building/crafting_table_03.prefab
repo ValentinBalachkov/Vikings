@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4799103235931976464}
   - component: {fileID: 8445952866344516789}
   - component: {fileID: 5968107522269694079}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: crafting_table_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
