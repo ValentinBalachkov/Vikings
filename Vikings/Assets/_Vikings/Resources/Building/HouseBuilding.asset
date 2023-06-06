@@ -23,9 +23,9 @@ MonoBehaviour:
   _isBuild: 0
   _priceToUpgrades:
   - itemData: {fileID: 11400000, guid: 842ec8fe0ff14054fb025a7b78239191, type: 2}
-    count: 15
+    count: 1
   - itemData: {fileID: 11400000, guid: 8b782c2617e0b8048985ef732675d1be, type: 2}
-    count: 12
+    count: 1
   _buildingName: HouseBuilding
   _buildingController: {fileID: 750211685007338083, guid: 2f4e4d9fa3086fe4ead3aec48daa69ca,
     type: 3}
