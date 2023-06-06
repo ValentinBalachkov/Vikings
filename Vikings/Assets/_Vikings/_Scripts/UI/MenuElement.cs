@@ -30,7 +30,7 @@ namespace Vikings.UI
             this.priority = priority;
             _name.text = itemName;
             _description.text = description;
-            _level.text = $"lvl:{level}";
+            _level.text = level == 0 ? "lvl:1" : $"lvl:{level}";
             _icon.sprite = icon;
             for (int i = 0; i < _priceForUpgradeImage.Length; i++)
             {

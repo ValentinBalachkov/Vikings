@@ -57,7 +57,7 @@ namespace Vikings.UI
 
                 var item = Instantiate(_menuElement, _content);
                 _menuElements.Add(item);
-                item.UpdateUI(_storageDatas[i].nameText, _storageDatas[i].description, _storageDatas[i].CurrentLevel + 1, _storageDatas[i].icon,
+                item.UpdateUI(_storageDatas[i].nameText, _storageDatas[i].description, _storageDatas[i].CurrentLevel, _storageDatas[i].icon,
                     _storageDatas[i].PriceToUpgrade.ToArray(),_storageDatas[i].priority);
                 item.SetButtonDescription(_storageDatas[i].CurrentLevel == 0);
                 item.SetEnable((_craftingTableData.currentLevel - _storageDatas[i].CurrentLevel == k) ||
@@ -85,7 +85,7 @@ namespace Vikings.UI
 
             var craftingTable = Instantiate(_menuElement, _content);
             _menuElements.Add(craftingTable);
-            craftingTable.UpdateUI(_craftingTableData.nameText, _craftingTableData.description, _craftingTableData.currentLevel + 1,
+            craftingTable.UpdateUI(_craftingTableData.nameText, _craftingTableData.description, _craftingTableData.currentLevel,
                 _craftingTableData.icon, _craftingTableBuildingData.PriceToUpgrades, _craftingTableData.priority);
             craftingTable.SetButtonDescription(_craftingTableData.currentLevel == 0);
             craftingTable.SetEnable(_weaponsOnMapController.WeaponsData[0].IsOpen, $"REQUIRED:  {_craftingTableData.required} LEVEL{1}");
@@ -112,7 +112,7 @@ namespace Vikings.UI
                 var weapon = Instantiate(_menuElement, _content);
                 _menuElements.Add(weapon);
                 weapon.UpdateUI(_weaponsOnMapController.WeaponsData[i].nameText,
-                    _weaponsOnMapController.WeaponsData[i].description, 1,
+                    _weaponsOnMapController.WeaponsData[i].description, _weaponsOnMapController.WeaponsData[i].level,
                     _weaponsOnMapController.WeaponsData[i].icon,
                     _weaponsOnMapController.WeaponsData[i].PriceToBuy.ToArray(), _weaponsOnMapController.WeaponsData[i].priority);
                 weapon.SetButtonDescription(!_weaponsOnMapController.WeaponsData[i].IsOpen);

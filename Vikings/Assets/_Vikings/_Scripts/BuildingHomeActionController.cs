@@ -10,6 +10,7 @@ namespace Vikings.Building
         public static BuildingHomeActionController Instance => _instance;
         private static BuildingHomeActionController _instance;
         [SerializeField] private Camera _camera;
+        [SerializeField] private Camera _cameraPassive;
         [SerializeField] private CharactersOnMap _charactersOnMap;
         [SerializeField] private CharactersConfig _charactersConfig;
         [SerializeField] private HouseCameraPositionInfo[] _houseCameraPosition;
