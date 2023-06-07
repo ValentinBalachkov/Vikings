@@ -27,6 +27,6 @@ MonoBehaviour:
   priceToUpgradeCraftingTable: []
   currentItemsPriceToUpgrade:
   - itemData: {fileID: 11400000, guid: 842ec8fe0ff14054fb025a7b78239191, type: 2}
-    count: 0
+    count: 16
   - itemData: {fileID: 11400000, guid: 8b782c2617e0b8048985ef732675d1be, type: 2}
-    count: 0
+    count: 14

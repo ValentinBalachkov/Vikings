@@ -202,7 +202,7 @@ Transform:
   - {fileID: 8611254030291407023}
   - {fileID: 7139392589121862493}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8222135434574805582
 MonoBehaviour:
@@ -341,7 +341,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.1, y: 1.304, z: 0.1}
+  m_Extents: {x: 0.31, y: 1.304, z: 0.31}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
