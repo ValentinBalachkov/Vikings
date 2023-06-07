@@ -8,6 +8,8 @@ namespace Vikings.Chanacter
     {
         public bool isAlreadyCrafting;
         public bool isCrafting;
+
+        
         private BuildingsOnMap _buildingsOnMap;
         private PlayerController _playerController;
         private const float OFFSET_DISTANCE = 1f;
@@ -20,6 +22,7 @@ namespace Vikings.Chanacter
             _playerController = playerController;
             _charactersConfig = charactersConfig;
             _characterStateMachine = stateMachine;
+             
         }
         
         public override void Enter()
@@ -54,6 +57,7 @@ namespace Vikings.Chanacter
             {
                 var defaultTime = _buildingsOnMap.GetCurrentBuilding(_characterStateMachine).BuildingData.craftingTableCrateTime;
                 int time = (int)(defaultTime + (defaultTime * (_charactersConfig.SpeedWork / 100)));
+               
                 CraftingIndicatorView.Instance.Setup(time, _buildingsOnMap.GetCurrentBuilding(_characterStateMachine).transform);
                 StartTimer(_buildingsOnMap.GetCurrentBuilding(_characterStateMachine).BuildingData.craftingTableCrateTime);
             }
@@ -61,6 +65,7 @@ namespace Vikings.Chanacter
             {
                 var defaultTime = (int)_buildingsOnMap.GetCurrentBuilding(_characterStateMachine).BuildingData.StorageData.BuildTime;
                 int time = (int)(defaultTime + (defaultTime * (_charactersConfig.SpeedWork / 100)));
+               
                 CraftingIndicatorView.Instance.Setup(time, _buildingsOnMap.GetCurrentBuilding(_characterStateMachine).transform);
                 StartTimer((int)_buildingsOnMap.GetCurrentBuilding(_characterStateMachine).BuildingData.StorageData.BuildTime);
             }
@@ -82,10 +87,12 @@ namespace Vikings.Chanacter
         private async Task StartTimer(int craftingTime)
         {
             _playerController.SetCraftingAnimation();
+           
             _buildingsOnMap.OffCraftingStateAllCharacters(true);
             var defaultTime = craftingTime * 1000;
             int time = (int)(defaultTime + (defaultTime * (_charactersConfig.SpeedWork / 100)));
             await Task.Delay(time);
+           
             _buildingsOnMap.UpgradeBuildingToStorage(_characterStateMachine);
             _buildingsOnMap.OffCraftingStateAllCharacters(false);
         }

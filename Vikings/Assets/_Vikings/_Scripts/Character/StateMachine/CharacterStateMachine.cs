@@ -13,6 +13,7 @@ namespace Vikings.Chanacter
         public BaseState CurrentState => _currentState;
         public InventoryController InventoryController => _inventoryController;
 
+       
         [SerializeField] private PlayerController _playerPrefab;
         [SerializeField] private InventoryController _inventoryController;
         [SerializeField] private CharactersConfig _charactersConfig;

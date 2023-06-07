@@ -341,5 +341,6 @@ namespace Vikings.Building
     {
         public BuildingData buildingData;
         public Transform spawnPoint;
+        public ParticleSystem buildingParticle;
     }
 }
