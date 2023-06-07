@@ -11,6 +11,9 @@ namespace Vikings.Building
     {
         public Action<ItemData> OnChangeCountStorage;
         public Action<int, int> OnUpgradeStorage;
+
+        [SerializeField] private Sprite[] _buildingsSprites;
+        [SerializeField] private SpriteRenderer _spriteBuilding;
         public int Priority { get; set; }
         public bool DisableToGet { get; set; }
 
