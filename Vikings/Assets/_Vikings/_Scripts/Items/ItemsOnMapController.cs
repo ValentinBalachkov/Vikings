@@ -79,8 +79,7 @@ namespace Vikings.Items
                             {
                                 _itemsList.Add(itemOnScene);
                             }
-
-                            itemOnScene.EnableToGet = true;
+                            
                         }
                     }
                 }
@@ -120,7 +119,6 @@ namespace Vikings.Items
                                 _itemsList.Add(itemOnScene);
                             }
                             
-                            itemOnScene.EnableToGet = true;
                         }
                     }
                 }

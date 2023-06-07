@@ -24,6 +24,9 @@ namespace Vikings.Building
         [SerializeField] private CraftingTableData _craftingTableData;
         [SerializeField] private WeaponsOnMapController _weaponsOnMapController;
 
+        [SerializeField] private ParticleSystem[] _particles;
+        
+
         private List<AbstractBuilding> _buildingControllers = new();
         private List<StorageController> _storageControllers = new();
 
@@ -204,6 +207,10 @@ namespace Vikings.Building
 
         private void UpdateItemsQueue(PriceToUpgrade[] priceToUpgrades, CharacterStateMachine character)
         {
+            foreach (var item in character.itemQueue)
+            {
+                item.DisableToGet = false;
+            }
             character.itemQueue.Clear();
             foreach (var price in priceToUpgrades)
             {
@@ -253,9 +260,9 @@ namespace Vikings.Building
             foreach (var item in items)
             {
                 DebugLogger.SendMessage($"{item.GetItemData().ItemName}", Color.red);
-                if (item.EnableToGet)
+                if (!item.DisableToGet)
                 {
-                    item.EnableToGet = false;
+                    item.DisableToGet = true;
                     return item;
                 }
             }
@@ -282,6 +289,22 @@ namespace Vikings.Building
             {
                 character.SetCraftingStateOff(isCanCrafting);
             }
+        }
+
+        public void StopAllParticles()
+        {
+            foreach (var particle in _particles)
+            {
+                particle.Stop();
+            }
+        }
+
+        public void PlayBuildingParticle(BuildingData buildingData)
+        {
+            var building = _storageData.FirstOrDefault(x => x.buildingData == buildingData);
+            if(building == null) return;
+            building.buildingParticle.Stop();
+            building.buildingParticle.Play();
         }
 
         public void UpgradeBuildingToStorage(CharacterStateMachine character)

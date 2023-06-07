@@ -12,14 +12,13 @@ namespace Vikings.Building
         public Action<ItemData> OnChangeCountStorage;
         public Action<int, int> OnUpgradeStorage;
         public int Priority { get; set; }
-        public bool EnableToGet { get; set; }
+        public bool DisableToGet { get; set; }
 
 
         public override void Init(BuildingData buildingData, bool isSaveInit = false)
         {
             Priority = 0;
             this.buildingData = buildingData;
-            EnableToGet = true;
             if (!isSaveInit)
             {
                 buildingData.StorageData.CurrentLevel++;
@@ -144,7 +143,7 @@ namespace Vikings.Building
         public void TakeItem()
         {
             buildingData.StorageData.Count -= buildingData.StorageData.ItemType.DropCount;
-            EnableToGet = true;
+            DisableToGet = false;
             OnChangeCountStorage?.Invoke(buildingData.StorageData.ItemType);
         }
 

@@ -11,7 +11,7 @@ namespace Vikings.Items
         public bool IsEnable => _isEnable;
         public ItemData Item => _itemData;
         public int Priority { get; set; }
-        public bool EnableToGet { get; set; }
+        public bool DisableToGet { get; set; }
 
         [SerializeField] private GameObject _model;
 
@@ -25,7 +25,6 @@ namespace Vikings.Items
             Priority = 1;
             _itemData = itemData;
             _isEnable = true;
-            EnableToGet = true;
         }
 
         public Transform GetItemPosition()
@@ -46,11 +45,11 @@ namespace Vikings.Items
         private IEnumerator GetItemCoroutine()
         {
             _isEnable = false;
-            EnableToGet = false;
+            DisableToGet = true;
             _model.SetActive(_isEnable);
             yield return new WaitForSeconds(DELAY_ENABLE);
             DebugLogger.SendMessage($"{_itemData.ItemName}", Color.magenta);
-            EnableToGet = true;
+            DisableToGet = false;
             _isEnable = true;
             _model.SetActive(_isEnable);
             OnEnable?.Invoke();
