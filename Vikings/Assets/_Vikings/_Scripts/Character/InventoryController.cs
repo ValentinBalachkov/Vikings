@@ -70,7 +70,7 @@ namespace Vikings.Chanacter
                 yield return new WaitForSeconds(1f);
                 if (_charactersConfig.ItemsCount > _count && _count < item.DropCount)
                 {
-                    _count+= weaponData.level;
+                    _count += weaponData.level;
                 }
                 else
                 {

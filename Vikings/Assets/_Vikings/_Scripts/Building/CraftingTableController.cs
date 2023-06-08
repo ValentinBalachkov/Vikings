@@ -87,6 +87,7 @@ namespace Vikings.Building
 
             else if (!isUpgradeState)
             {
+                _currentWeapon.level = 1;
                 _currentWeapon.IsOpen = true;
                 _currentWeapon.ItemData.IsOpen = true;
             }
