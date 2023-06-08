@@ -1,4 +1,6 @@
-﻿using Vikings.Building;
+﻿using System.Collections.Generic;
+using Vikings.Building;
+using Vikings.Weapon;
 
 namespace Vikings.Chanacter
 {
@@ -8,7 +10,7 @@ namespace Vikings.Chanacter
         private BuildingsOnMap _buildingsOnMap;
         private InventoryController _inventoryController;
         private PlayerController _playerController;
-        
+
         public CollectState(CharacterStateMachine stateMachine, PlayerController playerController,
             BuildingsOnMap buildingsOnMap, InventoryController inventoryController) : base("Collect", stateMachine)
         {
@@ -21,6 +23,13 @@ namespace Vikings.Chanacter
         public override void Enter()
         {
             base.Enter();
+
+            var animationOverride = _inventoryController.CurrentItem.GetItemData().AnimatorOverride;
+
+            if (animationOverride != null)
+            {
+                _playerController.PlayerAnimationController.ChangeAnimatorController(animationOverride);
+            }
             
             _playerController.SetCollectAnimation();
 
@@ -28,9 +37,12 @@ namespace Vikings.Chanacter
            
             _inventoryController.CollectItem();
         }
+        
 
         private void ChangeState()
         {
+            _playerController.GetComponentInChildren<PlayerAnimationEvent>().DisableEffects();
+            _playerController.PlayerAnimationController.ReturnBaseAnimator();
             _inventoryController.OnCollect -= ChangeState;
             _stateMachine.SetState<MoveToStorageState>();
         }

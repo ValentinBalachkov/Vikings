@@ -45,6 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _charactersConfig: {fileID: 11400000, guid: 556d7956795907442b7227389da83726, type: 2}
+  _weaponsData:
+  - {fileID: 11400000, guid: a0a9de7740517a5488d545315fa8ee3a, type: 2}
+  - {fileID: 11400000, guid: 9ef76be828f44a046a074450ec192bf0, type: 2}
 --- !u!1 &8764964683291248277
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,7 +96,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentBuilding: {fileID: 0}
   currentStorageToUpgrade: {fileID: 0}
-  _craftParticle: {fileID: 2232640535348304744}
   _playerPrefab: {fileID: 6806918535392211542, guid: c36a170aed7712a42b71a6f07aa9db45,
     type: 3}
   _inventoryController: {fileID: 28}
@@ -174,12 +176,6 @@ PrefabInstance:
 --- !u!4 &1694527429254211990 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 769729400619715745, guid: e7449d83040a3854e8afe28c071eaf34,
-    type: 3}
-  m_PrefabInstance: {fileID: 2101645522623702327}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &2232640535348304744 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 275112975458926175, guid: e7449d83040a3854e8afe28c071eaf34,
     type: 3}
   m_PrefabInstance: {fileID: 2101645522623702327}
   m_PrefabAsset: {fileID: 0}

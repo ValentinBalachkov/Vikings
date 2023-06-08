@@ -194,6 +194,11 @@ namespace Vikings.Building
                 character.currentStorageToUpgrade = null;
             }
 
+            foreach (var item in character.itemQueue)
+            {
+                item.DisableToGet = false;
+            }
+            
             character.itemQueue.Clear();
 
             if (character.currentBuilding == null)
@@ -268,6 +273,10 @@ namespace Vikings.Building
             }
             character.currentBuilding = null;
             character.currentStorageToUpgrade = null;
+            foreach (var item in character.itemQueue)
+            {
+                item.DisableToGet = false;
+            }
             character.itemQueue.Clear();
             character.SetState<IdleState>();
             return null;

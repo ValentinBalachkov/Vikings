@@ -6,11 +6,13 @@ namespace Vikings.Items
     [CreateAssetMenu(fileName = "ItemData", menuName = "Data/ItemData", order = 1)]
     public class ItemData : ScriptableObject, IData
     {
+        public AnimatorOverrideController AnimatorOverride => _animatorOverride;
         
         public Sprite icon;
         public string nameText;
         public string description;
-        
+
+
         public bool IsOpen
         {
             get => _isOpen;
@@ -22,11 +24,11 @@ namespace Vikings.Items
         public string ItemName => _itemName;
 
         public int DropCount => _dropCount;
-        
+
         public ItemController Prefab => _prefab;
 
         public float CollectTime => _collectTime;
-        
+
         [SerializeField] private int _id;
 
         [SerializeField] private ItemController _prefab;
@@ -38,6 +40,8 @@ namespace Vikings.Items
         [SerializeField] private bool _isOpen;
 
         [SerializeField] private float _collectTime;
+
+        [SerializeField] private AnimatorOverrideController _animatorOverride;
 
 
         public void Save()

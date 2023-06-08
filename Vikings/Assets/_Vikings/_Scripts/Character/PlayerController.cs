@@ -8,10 +8,13 @@ namespace Vikings.Chanacter
     public class PlayerController : MonoBehaviour
     {
         public Action OnEndAnimation;
+        public PlayerAnimationController PlayerAnimationController => _playerAnimationController;
+        
         [SerializeField] private NavMeshAgent _navMeshAgent;
         [SerializeField] private float _rotateSpeed = 10;
         [SerializeField] private CharactersConfig _charactersConfig;
         [SerializeField] private PlayerAnimationController _playerAnimationController;
+
 
         private Action _onGetPosition;
         private bool _onPosition;
