@@ -2191,25 +2191,17 @@ MonoBehaviour:
   _charactersConfig: {fileID: 11400000, guid: 556d7956795907442b7227389da83726, type: 2}
   _houseCameraPosition:
   - position: {x: 0, y: 0, z: 0}
-    size: 3.5
-  - position: {x: 0, y: 0, z: 0}
-    size: 4
-  - position: {x: 0, y: 0, z: 0}
-    size: 4.5
-  - position: {x: 0, y: 0, z: 0}
     size: 4.5
   - position: {x: 0, y: 0, z: 0}
     size: 5
   - position: {x: 0, y: 0, z: 0}
+    size: 5
+  - position: {x: 0, y: 0, z: 0}
+    size: 5.5
+  - position: {x: 0, y: 0, z: 0}
+    size: 5.5
+  - position: {x: 0, y: 0, z: 0}
     size: 6
-  - position: {x: 0, y: 0, z: 0}
-    size: 7
-  - position: {x: 0, y: 0, z: 0}
-    size: 9
-  - position: {x: 0, y: 0, z: 0}
-    size: 9
-  - position: {x: 0, y: 0, z: 0}
-    size: 9.5
   _allRespawnPointTransform:
   - {fileID: 1457301697}
   - {fileID: 994750694}
@@ -2698,7 +2690,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 292437007}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.717, y: 0.3, z: 6.347}
+  m_LocalPosition: {x: 0.328, y: 0.3, z: 6.916}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4413,7 +4405,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &510598404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9606,7 +9598,7 @@ GameObject:
   m_Component:
   - component: {fileID: 994750694}
   m_Layer: 0
-  m_Name: tree_w_food_t_01_Pos.2
+  m_Name: tree_w_food_t_01_Pos.2_LV0
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -18543,7 +18535,7 @@ MonoBehaviour:
   - position:
     - position:
       - {fileID: 1875601778}
-      - {fileID: 1085554695}
+      - {fileID: 903704330}
       level: 0
     - position:
       - {fileID: 2072033739}
@@ -18566,9 +18558,6 @@ MonoBehaviour:
     - position:
       - {fileID: 1843440020}
       level: 5
-    - position:
-      - {fileID: 871176360}
-      level: 6
     item: {fileID: 11400000, guid: b90d6cdefc2ad7e4cbdd899ef9e419e5, type: 2}
   - position:
     - position:
@@ -18594,18 +18583,18 @@ MonoBehaviour:
       level: 5
     - position:
       - {fileID: 215760031}
-      level: 6
+      level: 5
     - position:
       - {fileID: 1571368798}
       - {fileID: 1885291190}
       - {fileID: 983396582}
       - {fileID: 988676599}
-      level: 7
+      level: 5
     - position:
       - {fileID: 54259549}
       - {fileID: 1311322863}
       - {fileID: 1981411551}
-      level: 8
+      level: 5
     - position:
       - {fileID: 568845711}
       - {fileID: 769247763}
@@ -18619,7 +18608,7 @@ MonoBehaviour:
       - {fileID: 1116758099}
       - {fileID: 1160348764}
       - {fileID: 1308650493}
-      level: 9
+      level: 5
     item: {fileID: 11400000, guid: aa71cd7377003654ab1aad130b722e73, type: 2}
   - position:
     - position:
@@ -19415,7 +19404,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1875601778}
   m_Layer: 0
-  m_Name: rock_flat_t_03_Pos.1
+  m_Name: rock_flat_t_03_Pos.1LV0
   m_TagString: Untagged
   m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0

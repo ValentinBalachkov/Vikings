@@ -26,7 +26,7 @@ namespace Vikings.Building
             {
                 _instance = this;
             }
-           
+
 
             _cameraScale = _camera.orthographicSize / _cameraPassive.orthographicSize;
         }
@@ -39,12 +39,12 @@ namespace Vikings.Building
             }
 
             CollectingResourceView.Instance.camera = _camera;
-            
+
             float scaleMove = _houseCameraPosition[0].size / _houseCameraPosition[_charactersConfig.houseLevel].size;
             foreach (var transform in _allRespawnPointTransform)
             {
                 Debug.Log(scaleMove.ToString());
-                transform.localScale*=scaleMove;
+                transform.localScale *= scaleMove;
             }
         }
 
@@ -52,26 +52,28 @@ namespace Vikings.Building
         {
             _charactersOnMap.AddCharacterOnMap(0);
             _charactersConfig.charactersCount++;
-            if (_charactersConfig.houseLevel >= 10) return;
+            if (_charactersConfig.houseLevel >= 5) return;
             _charactersConfig.houseLevel++;
             OnHomeLevelUp?.Invoke(_charactersConfig.houseLevel);
             StartCoroutine(MoveCameraCoroutine(_houseCameraPosition[_charactersConfig.houseLevel]));
-           
+
         }
 
         private IEnumerator MoveCameraCoroutine(HouseCameraPositionInfo positionInfo)
         {
-            while (_camera.orthographicSize < positionInfo.size)
+            while (_cameraPassive.orthographicSize < positionInfo.size)
             {
                 float startSize = _camera.orthographicSize;
                 _camera.orthographicSize += 0.01f;
-                _cameraPassive.orthographicSize = _camera.orthographicSize/_cameraScale;
+                _cameraPassive.orthographicSize = _camera.orthographicSize / _cameraScale;
                 float scaleMove = startSize / _camera.orthographicSize;
-               
+
                 foreach (var transform in _allRespawnPointTransform)
                 {
-                    transform.localScale.Set(transform.localScale.x*scaleMove,transform.localScale.y*scaleMove,transform.localScale.z*scaleMove);
+                    transform.localScale.Set(transform.localScale.x * scaleMove, transform.localScale.y * scaleMove,
+                        transform.localScale.z * scaleMove);
                 }
+
                 yield return null;
             }
         }

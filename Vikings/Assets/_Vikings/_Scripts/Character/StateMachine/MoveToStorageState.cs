@@ -6,7 +6,7 @@ namespace Vikings.Chanacter
     {
         private BuildingsOnMap _buildingsOnMap;
         private PlayerController _playerPrefab;
-        private const float OFFSET_DISTANCE = 4f;
+        private const float OFFSET_DISTANCE = 1f;
         private CharacterStateMachine _stateMachine;
 
         public MoveToStorageState(CharacterStateMachine stateMachine, BuildingsOnMap buildingsOnMap, PlayerController playerPrefab) : 
