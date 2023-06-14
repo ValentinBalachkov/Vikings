@@ -9,19 +9,8 @@ namespace Vikings.Chanacter
     {
         public int charactersCount;
         public int houseLevel;
-        
-         public float SpeedMove
-        {
-            get
-            {
-                if (speedMoveLevel == 1)
-                {
-                    return speedMove;
-                }
 
-                return Mathf.Sqrt(speedMoveLevel) / 2 + 0.5f;
-            }
-        }
+        public float SpeedMove => (Mathf.Sqrt(speedMoveLevel) / 2 + 0.5f) * speedMove;
 
         public int SpeedMoveCost
         {
@@ -31,10 +20,11 @@ namespace Vikings.Chanacter
                 {
                     return speedMoveCost;
                 }
+
                 return (int)(Mathf.Pow(speedMoveLevel, 5) + ((speedMoveCost - 1) * speedMoveLevel));
             }
         }
-        
+
 
         public int ItemsCount
         {
@@ -48,7 +38,7 @@ namespace Vikings.Chanacter
                 return itemsCountLevel + 1;
             }
         }
-        
+
         public int ItemsCountCost
         {
             get
@@ -57,6 +47,7 @@ namespace Vikings.Chanacter
                 {
                     return itemsCountCost;
                 }
+
                 return (int)(Mathf.Pow(itemsCountLevel, 5) + ((itemsCountCost - 1) * itemsCountLevel));
             }
         }
@@ -73,7 +64,7 @@ namespace Vikings.Chanacter
                 return 4 / (speedWorkLevel + 3);
             }
         }
-        
+
         public int SpeedWorkCost
         {
             get
@@ -82,6 +73,7 @@ namespace Vikings.Chanacter
                 {
                     return speedWorkCost;
                 }
+
                 return (int)(Mathf.Pow(speedWorkLevel, 5) + ((speedWorkCost - 1) * speedWorkLevel));
             }
         }
@@ -114,8 +106,8 @@ namespace Vikings.Chanacter
                     break;
             }
         }
-       
-        
+
+
         public void Save()
         {
             SaveLoadSystem.SaveData(this);
@@ -131,7 +123,6 @@ namespace Vikings.Chanacter
                 speedMoveLevel = data.speedMoveLevel;
                 speedWorkLevel = data.speedWorkLevel;
                 itemsCountLevel = data.itemsCountLevel;
-
             }
         }
     }

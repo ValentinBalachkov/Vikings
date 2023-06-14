@@ -10,7 +10,7 @@ namespace Vikings.Chanacter
 
         private IGetItem _currentPoint;
         private PlayerController _playerPrefab;
-        private const float OFFSET_DISTANCE = 1f;
+        private float OFFSET_DISTANCE = 1f;
         public MovingState(CharacterStateMachine stateMachine, BuildingsOnMap buildingsOnMap, PlayerController playerPrefab, InventoryController inventoryController) : base("Moving",
             stateMachine)
         {
@@ -25,6 +25,7 @@ namespace Vikings.Chanacter
             base.Enter();
             _currentPoint = _buildingsOnMap.GetElementPosition(_playerPrefab.transform, _stateMachine);
             if(_currentPoint == null) return;
+            OFFSET_DISTANCE = _currentPoint.GetItemData().DropCount > 1 ? 2 : 1;
             _inventoryController.SetItem(_currentPoint);
             _playerPrefab.SetMoveAnimation();
             _playerPrefab.SetStoppingDistance(OFFSET_DISTANCE);
