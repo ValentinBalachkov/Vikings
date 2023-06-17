@@ -90,6 +90,15 @@ namespace Vikings.Chanacter
         public int itemsCountLevel = 1;
         public int itemsCountCost = 10;
 
+        public void ClearData()
+        {
+            speedMoveLevel = 1;
+            speedWorkLevel = 1;
+            itemsCountLevel = 1;
+            charactersCount = 0;
+            houseLevel = 0;
+        }
+
 
         public void Upgrade(UpgradeCharacterEnum upgradeCharacterEnum)
         {
