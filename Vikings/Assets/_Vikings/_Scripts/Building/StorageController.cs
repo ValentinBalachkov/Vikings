@@ -14,6 +14,7 @@ namespace Vikings.Building
 
         [SerializeField] private Sprite[] _buildingsSprites;
         [SerializeField] private SpriteRenderer _spriteBuilding;
+        public bool IsEngaged { get; set; }
         public int Priority { get; set; }
         public bool DisableToGet { get; set; }
 

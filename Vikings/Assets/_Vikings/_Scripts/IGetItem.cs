@@ -5,12 +5,11 @@ namespace Vikings.Building
 {
     public interface IGetItem
     {
-        public int Priority { get; set; }
-        public bool DisableToGet { get; set; }
-        public Transform GetItemPosition();
-
-        public void TakeItem();
-
-        public ItemData GetItemData();
+        bool IsEngaged { get; set; }
+        int Priority { get; set; }
+        bool DisableToGet { get; set; }
+        Transform GetItemPosition();
+        void TakeItem();
+        ItemData GetItemData();
     }
 }

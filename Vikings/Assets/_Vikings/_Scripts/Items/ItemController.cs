@@ -9,6 +9,7 @@ namespace Vikings.Items
     {
         public Action OnEnable;
         public bool IsEnable => _isEnable;
+        public bool IsEngaged { get; set; }
         public ItemData Item => _itemData;
         public int Priority { get; set; }
         public bool DisableToGet { get; set; }
@@ -44,6 +45,7 @@ namespace Vikings.Items
 
         private IEnumerator GetItemCoroutine()
         {
+            IsEngaged = false;
             _isEnable = false;
             DisableToGet = true;
             _model.SetActive(_isEnable);

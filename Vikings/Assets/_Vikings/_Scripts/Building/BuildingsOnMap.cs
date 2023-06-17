@@ -219,11 +219,22 @@ namespace Vikings.Building
             character.itemQueue.Clear();
             foreach (var price in priceToUpgrades)
             {
-                var item = _itemsOnMapController.ItemsList.Where(x => x.Item.ID == price.itemData.ID && x.IsEnable);
+                for (int i = 0; i < _itemsOnMapController.ItemsList.Count; i++)
+                {
+                    if (_itemsOnMapController.ItemsList[i].Item.ID == price.itemData.ID
+                        && _itemsOnMapController.ItemsList[i].IsEnable
+                        && !_itemsOnMapController.ItemsList[i].IsEngaged)
+                    {
+                        _itemQueue.Add(_itemsOnMapController.ItemsList[i]);
+                    }
+                }
+                
+                var item = _itemsOnMapController.ItemsList.Where(x => x.Item.ID == price.itemData.ID && x.IsEnable && !x.IsEngaged);
                 var storages = _storageControllers.Where(x =>
                     x.BuildingData.StorageData.ItemType.ID == price.itemData.ID &&
                     x.BuildingData != character.currentBuilding.BuildingData &&
                     x.IsAvailableToGetItem());
+
                 character.itemQueue.AddRange(item);
                 character.itemQueue.AddRange(storages);
             }
@@ -265,8 +276,9 @@ namespace Vikings.Building
             foreach (var item in items)
             {
                 DebugLogger.SendMessage($"{item.GetItemData().ItemName}", Color.red);
-                if (!item.DisableToGet)
+                if (!item.DisableToGet && _itemQueue.Contains(item))
                 {
+                    item.IsEngaged = true;
                     item.DisableToGet = true;
                     _itemQueue.Remove(item);
                     return item;
