@@ -30,7 +30,7 @@ namespace Vikings.Building
         private List<AbstractBuilding> _buildingControllers = new();
         private List<StorageController> _storageControllers = new();
 
-        private List<IGetItem> _itemQueue = new();
+        private List<IGetItem> _itemQueue = new List<IGetItem>();
         private AbstractBuilding _currentBuilding;
         private CraftingTableController _craftingTableController;
         private CraftingTableController _craftingTableControllerOnStartGame;
@@ -268,6 +268,7 @@ namespace Vikings.Building
                 if (!item.DisableToGet)
                 {
                     item.DisableToGet = true;
+                    _itemQueue.Remove(item);
                     return item;
                 }
             }

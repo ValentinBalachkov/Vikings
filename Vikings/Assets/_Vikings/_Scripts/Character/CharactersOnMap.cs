@@ -17,8 +17,6 @@ namespace Vikings.Chanacter
         [SerializeField] private CharacterStateMachine[] _characterStateMachine;
 
         private List<CharacterStateMachine> _charactersOnMap = new();
-        
-
 
         private void Start()
         {

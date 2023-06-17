@@ -14,8 +14,7 @@ namespace Vikings.Chanacter
         [SerializeField] private float _rotateSpeed = 10;
         [SerializeField] private CharactersConfig _charactersConfig;
         [SerializeField] private PlayerAnimationController _playerAnimationController;
-
-
+        
         private Action _onGetPosition;
         private bool _onPosition;
         private Transform _currentPoint, _thisTransform;

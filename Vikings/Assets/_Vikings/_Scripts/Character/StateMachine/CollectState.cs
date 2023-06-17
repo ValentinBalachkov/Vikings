@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using Vikings.Building;
-using Vikings.Weapon;
+﻿using Vikings.Building;
 
 namespace Vikings.Chanacter
 {
