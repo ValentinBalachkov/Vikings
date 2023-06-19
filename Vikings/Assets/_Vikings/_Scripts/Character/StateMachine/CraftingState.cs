@@ -73,6 +73,7 @@ namespace Vikings.Chanacter
         private async Task StartTimerCraftingTable(CraftingTableController craftingTableController)
         {
             _buildingsOnMap.PlayBuildingParticle(_buildingsOnMap.GetCurrentBuilding(_characterStateMachine).BuildingData);
+            _buildingsOnMap.PlayCraftingAudio();
             _playerController.SetCraftingAnimation();
             _buildingsOnMap.OffCraftingStateAllCharacters(true);
             var defaultTime = (int)craftingTableController.CraftingTableData.TableBuildingTime * 1000;
@@ -88,6 +89,7 @@ namespace Vikings.Chanacter
         private async Task StartTimer(int craftingTime)
         {
             _buildingsOnMap.PlayBuildingParticle(_buildingsOnMap.GetCurrentBuilding(_characterStateMachine).BuildingData);
+            _buildingsOnMap.PlayCraftingAudio();
             _playerController.SetCraftingAnimation();
             _buildingsOnMap.OffCraftingStateAllCharacters(true);
             var defaultTime = craftingTime * 1000;

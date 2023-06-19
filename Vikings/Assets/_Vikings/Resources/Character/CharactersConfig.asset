@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CharactersConfig
   m_EditorClassIdentifier: 
   charactersCount: 2
-  houseLevel: 0
+  houseLevel: 5
   speedMove: 5
   speedMoveLevel: 1
   speedMoveCost: 14

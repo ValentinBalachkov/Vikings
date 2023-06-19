@@ -13,6 +13,8 @@ namespace Vikings.UI
         [SerializeField] private Transform _content;
         [SerializeField] private CharactersConfig _charactersConfig;
         [SerializeField] private StorageData _storageData;
+        [SerializeField] private AudioSource _audioSourceBtnClick;
+        
 
         private List<CharacterMenuElement> _characterMenuElements = new();
 
@@ -48,6 +50,7 @@ namespace Vikings.UI
                 var index = i;
                 element.AddBtnListener(() =>
                 {
+                    _audioSourceBtnClick.Play();
                     UpdateItemsCount(_characterUpgradeUIData[index].upgradeCharacterEnum);
                     _charactersConfig.Upgrade(_characterUpgradeUIData[index].upgradeCharacterEnum); 
                     UpdateUI();

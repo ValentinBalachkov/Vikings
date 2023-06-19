@@ -25,8 +25,10 @@ namespace Vikings.Building
         [SerializeField] private WeaponsOnMapController _weaponsOnMapController;
 
         [SerializeField] private ParticleSystem[] _particles;
+        [SerializeField] private AudioSource _audioSourceBuildingSound;
+        [SerializeField] private AudioSource _actionCrafted;
+        [SerializeField] private AudioSource _actionCraftedHome;
         
-
         private List<AbstractBuilding> _buildingControllers = new();
         private List<StorageController> _storageControllers = new();
 
@@ -345,10 +347,16 @@ namespace Vikings.Building
 
         public void StopAllParticles()
         {
+            _audioSourceBuildingSound.Stop();
             foreach (var particle in _particles)
             {
                 particle.Stop();
             }
+        }
+
+        public void PlayCraftingAudio()
+        {
+            _audioSourceBuildingSound.Play();
         }
 
         public void PlayBuildingParticle(BuildingData buildingData)
@@ -371,10 +379,28 @@ namespace Vikings.Building
                 _buildingControllers.Add(_craftingTableController);
                 data.buildingData.IsBuild = true;
                 _craftingTableController.Init(_craftingTable);
+                if (data.buildingData.StorageData.ItemType.ID != 1)
+                {
+                    _actionCrafted.Play();
+                }
+                else
+                {
+                    _actionCraftedHome.Play();
+                }
+                
             }
             else if (character.currentBuilding.isUpgradeState)
             {
                 character.currentBuilding.UpgradeStorage();
+                if (character.currentBuilding.BuildingData.StorageData != null &&
+                    character.currentBuilding.BuildingData.StorageData.ItemType.ID == 1)
+                {
+                    _actionCraftedHome.Play();
+                }
+                else
+                {
+                    _actionCrafted.Play();
+                }
 
                 foreach (var c in _charactersOnMap.CharactersList)
                 {
@@ -394,6 +420,7 @@ namespace Vikings.Building
                 item.Init(data.buildingData);
                 data.buildingData.IsBuild = true;
                 _inventoryView.AddStorageController(item);
+                _actionCrafted.Play();
             }
 
             data.buildingData.BuildingController.OnChangeCount = null;

@@ -16,6 +16,8 @@ namespace Vikings.UI
         [SerializeField] private CraftingTableData _craftingTableData;
         [SerializeField] private BuildingData _craftingTableBuildingData;
         [SerializeField] private WeaponsOnMapController _weaponsOnMapController;
+        [SerializeField] private AudioSource _audioSourceBtnClick;
+        
 
         private List<MenuElement> _menuElements = new();
 
@@ -68,6 +70,7 @@ namespace Vikings.UI
                 {
                     item.AddOnClickListener(() =>
                     {
+                        _audioSourceBtnClick.Play();
                         _buildingsOnMap.SpawnStorage(index);
                         gameObject.SetActive(false);
                     });
@@ -76,6 +79,7 @@ namespace Vikings.UI
                 {
                     item.AddOnClickListener(() =>
                     {
+                        _audioSourceBtnClick.Play();
                         _buildingsOnMap.SetStorageUpgradeState(_storageDatas[index].ItemType);
                         gameObject.SetActive(false);
                     });
@@ -93,6 +97,7 @@ namespace Vikings.UI
             {
                 craftingTable.AddOnClickListener(() =>
                 {
+                    _audioSourceBtnClick.Play();
                     _buildingsOnMap.SpawnStorage(3);
                     gameObject.SetActive(false);
                 });
@@ -101,6 +106,7 @@ namespace Vikings.UI
             {
                 craftingTable.AddOnClickListener(() =>
                 {
+                    _audioSourceBtnClick.Play();
                     _buildingsOnMap.SetCraftingTableToUpgrade();
                     gameObject.SetActive(false);
                 });
@@ -147,6 +153,7 @@ namespace Vikings.UI
                 var index = i;
                 weapon.AddOnClickListener(() =>
                 {
+                    _audioSourceBtnClick.Play();
                     _weaponsOnMapController.StartCraftWeapon(index);
                     gameObject.SetActive(false);
                 });
