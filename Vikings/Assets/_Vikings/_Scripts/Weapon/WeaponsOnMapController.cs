@@ -59,6 +59,10 @@ namespace Vikings.Weapon
             _buildingsOnMap.GetCraftingTable().SetupCraftWeapon(_weaponsList[index], _weaponsList[index].IsOpen);
             foreach (var character in _charactersOnMap.CharactersList)
             {
+                foreach (var item in character.itemQueue)
+                {
+                    item.IsEngaged = false;
+                }
                 _buildingsOnMap.UpdateCurrentBuilding(character,true);
             }
 

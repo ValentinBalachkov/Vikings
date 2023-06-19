@@ -10,7 +10,7 @@ namespace Vikings.Chanacter
         public int charactersCount;
         public int houseLevel;
 
-        public float SpeedMove => (Mathf.Sqrt(speedMoveLevel) / 2 + 0.5f) * speedMove;
+        public float SpeedMove => ((Mathf.Sqrt(speedMoveLevel) / 2 + 0.5f) * speedMove) + Random.Range(0, 0.6f);
 
         public int SpeedMoveCost
         {

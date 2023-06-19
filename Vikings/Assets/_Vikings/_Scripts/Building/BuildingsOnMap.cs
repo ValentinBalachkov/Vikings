@@ -106,6 +106,10 @@ namespace Vikings.Building
 
             foreach (var character in _charactersOnMap.CharactersList)
             {
+                foreach (var item in character.itemQueue)
+                {
+                    item.IsEngaged = false;
+                }
                 UpdateCurrentBuilding(character);
             }
         }
@@ -118,6 +122,10 @@ namespace Vikings.Building
             foreach (var character in _charactersOnMap.CharactersList)
             {
                 character.currentStorageToUpgrade = storage;
+                foreach (var item in character.itemQueue)
+                {
+                    item.IsEngaged = false;
+                }
                 UpdateCurrentBuilding(character);
             }
         }
@@ -127,6 +135,10 @@ namespace Vikings.Building
             foreach (var character in _charactersOnMap.CharactersList)
             {
                 character.currentStorageToUpgrade = _craftingTableController;
+                foreach (var item in character.itemQueue)
+                {
+                    item.IsEngaged = false;
+                }
                 UpdateCurrentBuilding(character);
             }
         }
@@ -225,7 +237,17 @@ namespace Vikings.Building
                         && _itemsOnMapController.ItemsList[i].IsEnable
                         && !_itemsOnMapController.ItemsList[i].IsEngaged)
                     {
+                        
                         _itemQueue.Add(_itemsOnMapController.ItemsList[i]);
+                    }
+                }
+                
+                for (int i = 0; i < _storageControllers.Count; i++)
+                {
+                    if (_storageControllers[i].GetItemData().ID == price.itemData.ID
+                        && !_storageControllers[i].IsEngaged)
+                    {
+                        _itemQueue.Add(_storageControllers[i]);
                     }
                 }
                 
@@ -275,7 +297,6 @@ namespace Vikings.Building
                 .ThenBy(x => Vector3.Distance(x.GetItemPosition().position, playerPos.position)).ToList();
             foreach (var item in items)
             {
-                DebugLogger.SendMessage($"{item.GetItemData().ItemName}", Color.red);
                 if (!item.DisableToGet && _itemQueue.Contains(item))
                 {
                     item.IsEngaged = true;
@@ -310,7 +331,16 @@ namespace Vikings.Building
             foreach (var character in _charactersOnMap.CharactersList)
             {
                 character.SetCraftingStateOff(isCanCrafting);
+                if (!isCanCrafting)
+                {
+                    foreach (var item in character.itemQueue)
+                    {
+                        item.IsEngaged = false;
+                    }
+                    UpdateCurrentBuilding(character);
+                }
             }
+            
         }
 
         public void StopAllParticles()
@@ -331,6 +361,7 @@ namespace Vikings.Building
 
         public void UpgradeBuildingToStorage(CharacterStateMachine character)
         {
+            
             _menu.EnableButtons(true);
             var data = _storageData.FirstOrDefault(x => x.buildingData == character.currentBuilding.BuildingData);
             if (data == null) return;
@@ -373,8 +404,6 @@ namespace Vikings.Building
             
             foreach (var c in _charactersOnMap.CharactersList)
             {
-                DebugLogger.SendMessage("WE DID IT", Color.green);
-            
                 c.currentBuilding = null;
                 UpdateCurrentBuilding(c);
             }

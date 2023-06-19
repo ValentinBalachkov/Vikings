@@ -7,7 +7,7 @@ namespace Vikings.Chanacter
     {
         private BoneFireController _boneFireController;
         private PlayerController _playerPrefab;
-        private const float OFFSET_DISTANCE = 2f;
+        private  float OFFSET_DISTANCE = 2f;
         private CharacterStateMachine _stateMachine;
         private StorageData _storageData;
         private bool _isStopMove;
@@ -24,9 +24,11 @@ namespace Vikings.Chanacter
         {
             base.Enter();
             _isStopMove = false;
+            OFFSET_DISTANCE = Random.Range(2f, 4f);
             _playerPrefab.SetMoveAnimation();
             _playerPrefab.SetStoppingDistance(OFFSET_DISTANCE);
             _playerPrefab.SetActionOnGetPosition(OnGetPath);
+            
             _playerPrefab.MoveToPoint(_boneFireController.GetCurrentPosition());
         }
         

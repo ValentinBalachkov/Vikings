@@ -23,7 +23,7 @@ MonoBehaviour:
   _count: 0
   _maxStorageCount: 20
   _currentLevel: 0
-  _storageController: {fileID: -1726127725469879221, guid: c434ae09455d2844d9c2f4f9377b77bd,
+  _storageController: {fileID: 8737843808197191884, guid: c434ae09455d2844d9c2f4f9377b77bd,
     type: 3}
   _priceToUpgrade:
   - itemData: {fileID: 11400000, guid: 842ec8fe0ff14054fb025a7b78239191, type: 2}

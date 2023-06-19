@@ -31,7 +31,6 @@ namespace Vikings.Building
 
         public override void SetUpgradeState()
         {
-
             for (int i = 0; i < buildingData.StorageData.PriceToUpgrade.Count; i++)
             {
                 buildingData.currentItemsCount[i].count = 0;
@@ -88,7 +87,8 @@ namespace Vikings.Building
 
             buildingData.StorageData.CurrentLevel++;
             buildingData.StorageData.MaxStorageCount = (int)(Mathf.Pow(buildingData.StorageData.CurrentLevel, 5f)
-                                                             + Mathf.Pow(buildingData.StorageData.CurrentLevel, buildingData.StorageData.CurrentLevel - 1)
+                                                             + Mathf.Pow(buildingData.StorageData.CurrentLevel,
+                                                                 buildingData.StorageData.CurrentLevel - 1)
                                                              + 20);
             CollectingResourceView.Instance.gameObject.SetActive(false);
         }
@@ -106,7 +106,7 @@ namespace Vikings.Building
                 PriceToUpgrade[] priceToUpgrades = { price };
                 return priceToUpgrades;
             }
-            
+
             List<PriceToUpgrade> priceUpgrade = new();
             for (int i = 0; i < buildingData.StorageData.PriceToUpgrade.Count; i++)
             {
@@ -146,7 +146,12 @@ namespace Vikings.Building
 
         public void TakeItem()
         {
-            buildingData.StorageData.Count -= buildingData.StorageData.ItemType.DropCount;
+            IsEngaged = false;
+            if (buildingData.StorageData.Count > 0)
+            {
+                buildingData.StorageData.Count -= buildingData.StorageData.ItemType.DropCount;
+            }
+               
             DisableToGet = false;
             OnChangeCountStorage?.Invoke(buildingData.StorageData.ItemType);
         }

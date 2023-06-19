@@ -21,3 +21,4 @@ MonoBehaviour:
   _itemName: Eat
   _isOpen: 1
   _collectTime: 4
+  _animatorOverride: {fileID: 0}

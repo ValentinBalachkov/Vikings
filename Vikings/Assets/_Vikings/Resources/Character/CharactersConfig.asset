@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61d3f19d657d472686872f187ff8d525, type: 3}
   m_Name: CharactersConfig
   m_EditorClassIdentifier: 
-  charactersCount: 0
+  charactersCount: 2
   houseLevel: 0
   speedMove: 5
   speedMoveLevel: 1
