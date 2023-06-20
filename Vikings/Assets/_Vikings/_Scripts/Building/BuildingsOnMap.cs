@@ -328,7 +328,7 @@ namespace Vikings.Building
             _menu.EnableButtons(true);
         }
 
-        public void OffCraftingStateAllCharacters(bool isCanCrafting)
+        public void OffCraftingStateAllCharacters(bool isCanCrafting, CharacterStateMachine characterStateMachine = null)
         {
             foreach (var character in _charactersOnMap.CharactersList)
             {
@@ -339,7 +339,11 @@ namespace Vikings.Building
                     {
                         item.IsEngaged = false;
                     }
-                    UpdateCurrentBuilding(character);
+
+                    if (characterStateMachine != character)
+                    {
+                        UpdateCurrentBuilding(character);
+                    }
                 }
             }
             
@@ -379,14 +383,7 @@ namespace Vikings.Building
                 _buildingControllers.Add(_craftingTableController);
                 data.buildingData.IsBuild = true;
                 _craftingTableController.Init(_craftingTable);
-                if (data.buildingData.StorageData.ItemType.ID != 1)
-                {
-                    _actionCrafted.Play();
-                }
-                else
-                {
-                    _actionCraftedHome.Play();
-                }
+                _actionCrafted.Play();
                 
             }
             else if (character.currentBuilding.isUpgradeState)
