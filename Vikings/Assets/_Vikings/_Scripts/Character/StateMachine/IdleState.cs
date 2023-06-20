@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using Vikings.Building;
+﻿using Vikings.Building;
 
 namespace Vikings.Chanacter
 {
@@ -7,10 +6,11 @@ namespace Vikings.Chanacter
     {
         private BoneFireController _boneFireController;
         private PlayerController _playerPrefab;
-        private  float OFFSET_DISTANCE = 2f;
+        private  float OFFSET_DISTANCE = 1f;
         private CharacterStateMachine _stateMachine;
         private StorageData _storageData;
         private bool _isStopMove;
+        private BoneFirePositionData _currentPositionData;
         
         public IdleState(CharacterStateMachine stateMachine, BoneFireController boneFireController, PlayerController playerPrefab) : 
             base("Idle state", stateMachine)
@@ -23,17 +23,26 @@ namespace Vikings.Chanacter
         public override void Enter()
         {
             base.Enter();
+            _currentPositionData = _boneFireController.GetCurrentPosition();
             _isStopMove = false;
-            OFFSET_DISTANCE = Random.Range(2f, 4f);
             _playerPrefab.SetMoveAnimation();
             _playerPrefab.SetStoppingDistance(OFFSET_DISTANCE);
             _playerPrefab.SetActionOnGetPosition(OnGetPath);
             
-            _playerPrefab.MoveToPoint(_boneFireController.GetCurrentPosition());
+            _playerPrefab.MoveToPoint(_currentPositionData.point);
+        }
+
+        public override void Exit()
+        {
+            _boneFireController.ResetPos(_currentPositionData.id);
+            base.Exit();
         }
         
+        
+
         private void OnGetPath()
         {
+            _playerPrefab.ResetDestinationForLook(_boneFireController.BoneFire.transform);
             _playerPrefab.SetIdleAnimation();
         }
         

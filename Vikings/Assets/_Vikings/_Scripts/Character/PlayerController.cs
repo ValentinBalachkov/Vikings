@@ -19,6 +19,7 @@ namespace Vikings.Chanacter
         private Action _onGetPosition;
         private bool _onPosition;
         private Transform _currentPoint, _thisTransform;
+        private Vector3 _currentDestination;
 
         private void Awake()
         {
@@ -27,7 +28,7 @@ namespace Vikings.Chanacter
 
         private void Update()
         {
-            var rotate = _navMeshAgent.destination - _thisTransform.position;
+            var rotate = _currentDestination - _thisTransform.position;
             if (rotate != Vector3.zero)
             {
                 var targetRotation = Quaternion.LookRotation(rotate);
@@ -64,6 +65,12 @@ namespace Vikings.Chanacter
             _navMeshAgent.speed = _charactersConfig.SpeedMove;
             _currentPoint = point;
             _navMeshAgent.SetDestination(point.position);
+            _currentDestination = _navMeshAgent.destination;
+        }
+
+        public void ResetDestinationForLook(Transform newDestination)
+        {
+            _currentDestination = newDestination.position;
         }
 
         public void SetStoppingDistance(float distance)
