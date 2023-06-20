@@ -14,6 +14,8 @@ namespace Vikings.Building
         [SerializeField] private Sprite[] _buildingsSprites;
         [SerializeField] private SpriteRenderer _spriteBuilding;
         
+        [SerializeField] private AudioSource _audioSourceToStorage;
+        
         [SerializeField] private CraftingTableData _craftingTableData;
         [SerializeField] private GameObject _model;
         
@@ -44,6 +46,7 @@ namespace Vikings.Building
 
         public override void ChangeStorageCount(PriceToUpgrade price)
         {
+            _audioSourceToStorage.Play();
             if (isUpgradeState)
             {
                 var itemUpg = _craftingTableData.currentItemsPriceToUpgrade.FirstOrDefault(x => x.itemData.ID == price.itemData.ID);

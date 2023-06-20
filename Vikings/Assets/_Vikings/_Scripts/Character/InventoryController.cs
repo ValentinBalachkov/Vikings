@@ -13,6 +13,12 @@ namespace Vikings.Chanacter
         public IGetItem CurrentItem => _currentItem;
         [SerializeField] private CharactersConfig _charactersConfig;
         [SerializeField] private WeaponData[] _weaponsData;
+
+        [SerializeField] private AudioSource _audioSourceTree;
+        [SerializeField] private AudioSource _audioSourceStone;
+        [SerializeField] private AudioSource _audioSourceEat;
+        [SerializeField] private AudioSource _audioSourceDefaultItem;
+        
         
         private IGetItem _currentItem;
 
@@ -41,7 +47,6 @@ namespace Vikings.Chanacter
         
         public PriceToUpgrade SetItemToStorage()
         {
-            Debug.Log(_currentItem);
             var price = new PriceToUpgrade
             {
                 count = _count,
@@ -55,7 +60,14 @@ namespace Vikings.Chanacter
         private IEnumerator CollectItemsCoroutine()
         {
             var item = _currentItem.GetItemData();
-            yield return new WaitForSeconds(item.CollectTime);
+            var currentAudioSource = _currentItem.GetItemData().ID == 1 ? _audioSourceEat : _audioSourceDefaultItem;
+            for (int i = 0; i < item.CollectTime; i++)
+            {
+                currentAudioSource.Play();
+                yield return new WaitForSeconds(1f);
+            }
+            
+            //yield return new WaitForSeconds(item.CollectTime);
             _count = _charactersConfig.ItemsCount < item.DropCount ? _charactersConfig.ItemsCount : item.DropCount;
             _currentItem.TakeItem();
             OnCollect?.Invoke();
@@ -68,6 +80,16 @@ namespace Vikings.Chanacter
             for (int i = 0; i < item.CollectTime; i++)
             {
                 yield return new WaitForSeconds(1f);
+
+                if (weaponData.ItemData.ID == 3)
+                {
+                    _audioSourceTree.Play();
+                }
+                else if (weaponData.ItemData.ID == 2)
+                {
+                    _audioSourceStone.Play();
+                }
+                
                 if (_charactersConfig.ItemsCount > _count && _count < item.DropCount)
                 {
                     _count += weaponData.level;

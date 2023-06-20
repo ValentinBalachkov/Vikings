@@ -25,7 +25,6 @@ public class PlayerAnimationEvent : MonoBehaviour
 
     public void WoodParticle()
     {
-        Debug.Log("Wood");
         _axe.SetActive(true);
         pick.SetActive(false);
        
@@ -35,8 +34,6 @@ public class PlayerAnimationEvent : MonoBehaviour
     
     public void StoneParticle()
     {
-        
-        Debug.Log("Stone");
         _axe.SetActive(false);
         pick.SetActive(true);
         

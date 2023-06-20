@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Vikings.Building
 {
     public class BuildingController : AbstractBuilding
     {
+        [SerializeField] private AudioSource _audioSourceToStorage;
         public Action<BuildingData> OnChangeCount;
 
         public override void ChangeStorageCount(PriceToUpgrade price)
         {
+            _audioSourceToStorage.Play();
             var item = buildingData.PriceToUpgrades.FirstOrDefault(x => x.itemData.ID == price.itemData.ID);
             var currentItem = buildingData.currentItemsCount.FirstOrDefault(x => x.itemData.ID == price.itemData.ID);
             if (price.count + currentItem.count <= item.count)

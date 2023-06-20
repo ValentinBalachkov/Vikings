@@ -14,6 +14,9 @@ namespace Vikings.Building
 
         [SerializeField] private Sprite[] _buildingsSprites;
         [SerializeField] private SpriteRenderer _spriteBuilding;
+
+        [SerializeField] private AudioSource _audioSourceToStorage;
+
         public bool IsEngaged { get; set; }
         public int Priority { get; set; }
         public bool DisableToGet { get; set; }
@@ -48,6 +51,7 @@ namespace Vikings.Building
 
         public override void ChangeStorageCount(PriceToUpgrade priceToUpgrade)
         {
+            _audioSourceToStorage.Play();
             if (!isUpgradeState)
             {
                 if (buildingData.StorageData.Count + priceToUpgrade.count > buildingData.StorageData.MaxStorageCount)
@@ -76,6 +80,8 @@ namespace Vikings.Building
             {
                 item.count += priceToUpgrade.count;
             }
+            
+            
 
             CollectingResourceView.Instance.UpdateView(buildingData.currentItemsCount,
                 buildingData.StorageData.PriceToUpgrade.ToArray());
