@@ -136,7 +136,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0f1ac8e103eaa714882f600b0cba5350, type: 3}
   - {fileID: 21300000, guid: 02fa1a9e5b536504283d87ef7aae4902, type: 3}
   - {fileID: 21300000, guid: 7bf4255628e1d254888afda45ee967eb, type: 3}
-  _spriteBuilding: {fileID: 0}
+  _spriteBuilding: {fileID: 5921868027142438033}
   _audioSourceToStorage: {fileID: 4283528624655023808}
   _craftingTableData: {fileID: 11400000, guid: 8556bafbd029f304096a42175a8fc358, type: 2}
   _model: {fileID: 8275611074021766352}

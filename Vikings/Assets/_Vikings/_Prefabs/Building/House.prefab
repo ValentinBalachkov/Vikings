@@ -264,7 +264,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7d4719ca3b08c8444940fa008faf3615, type: 3}
   - {fileID: 21300000, guid: b8243749e37f7d04a85b19adb7906a95, type: 3}
   - {fileID: 21300000, guid: 1ecc92c28a51922498f798a218e023ee, type: 3}
-  _spriteBuilding: {fileID: 0}
+  _spriteBuilding: {fileID: 3349669739900818068}
   _audioSourceToStorage: {fileID: 1809140626422450850}
 --- !u!1 &7215562053902316779
 GameObject:

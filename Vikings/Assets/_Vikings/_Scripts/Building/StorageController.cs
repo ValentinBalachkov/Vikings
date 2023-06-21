@@ -30,6 +30,8 @@ namespace Vikings.Building
             {
                 buildingData.StorageData.CurrentLevel++;
             }
+
+            SetupSprite(buildingData.StorageData.CurrentLevel);
         }
 
         public override void SetUpgradeState()
@@ -97,6 +99,7 @@ namespace Vikings.Building
                                                                  buildingData.StorageData.CurrentLevel - 1)
                                                              + 20);
             CollectingResourceView.Instance.gameObject.SetActive(false);
+            SetupSprite(buildingData.StorageData.CurrentLevel);
         }
 
         public override PriceToUpgrade[] GetCurrentPriceToUpgrades()
@@ -165,6 +168,17 @@ namespace Vikings.Building
         public ItemData GetItemData()
         {
             return buildingData.StorageData.ItemType;
+        }
+        
+        private void SetupSprite(int lvl)
+        {
+            _spriteBuilding.sprite = lvl switch
+            {
+                1 => _buildingsSprites[0],
+                2 => _buildingsSprites[1],
+                3 => _buildingsSprites[2],
+                _ => _buildingsSprites[2]
+            };
         }
     }
 }

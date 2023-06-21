@@ -108,6 +108,8 @@ namespace Vikings.Building
             {
                 _craftingTableData.currentLevel++;
             }
+            
+            SetupSprite(_craftingTableData.currentLevel);
         }
 
         public override bool IsFullStorage()
@@ -145,6 +147,7 @@ namespace Vikings.Building
         public override void UpgradeStorage()
         {
             _craftingTableData.currentLevel++;
+            SetupSprite(_craftingTableData.currentLevel);
             isUpgradeState = false;
         }
 
@@ -174,6 +177,17 @@ namespace Vikings.Building
             }
 
             return price.ToArray();
+        }
+
+        private void SetupSprite(int lvl)
+        {
+            _spriteBuilding.sprite = lvl switch
+            {
+                1 => _buildingsSprites[0],
+                2 => _buildingsSprites[1],
+                3 => _buildingsSprites[2],
+                _ => _buildingsSprites[2]
+            };
         }
     }
 }
