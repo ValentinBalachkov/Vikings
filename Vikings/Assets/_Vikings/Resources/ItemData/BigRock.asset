@@ -19,6 +19,6 @@ MonoBehaviour:
   _prefab: {fileID: 5574324935936413242, guid: 4234d00f95c98b641b16e0204d9d10e3, type: 3}
   _dropCount: 3
   _itemName: BigRock
-  _isOpen: 0
+  _isOpen: 1
   _collectTime: 5
   _animatorOverride: {fileID: 22100000, guid: a992cebe9fd7e624c9e713fbbf32a2da, type: 2}

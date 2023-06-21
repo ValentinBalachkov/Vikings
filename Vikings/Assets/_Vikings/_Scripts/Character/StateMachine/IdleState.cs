@@ -35,6 +35,7 @@ namespace Vikings.Chanacter
         public override void Exit()
         {
             _boneFireController.ResetPos(_currentPositionData.id);
+            _playerPrefab.ResetIdleFlag();
             base.Exit();
         }
         

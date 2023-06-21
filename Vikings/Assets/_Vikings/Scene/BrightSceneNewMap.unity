@@ -4738,7 +4738,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &510598404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19019,10 +19019,10 @@ MonoBehaviour:
       level: 0
     - position:
       - {fileID: 1457301697}
-      level: 1
+      level: 0
     - position:
       - {fileID: 1843440020}
-      level: 5
+      level: 0
     item: {fileID: 11400000, guid: b90d6cdefc2ad7e4cbdd899ef9e419e5, type: 2}
   - position:
     - position:
