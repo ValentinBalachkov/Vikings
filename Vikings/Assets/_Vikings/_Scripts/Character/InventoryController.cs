@@ -13,9 +13,7 @@ namespace Vikings.Chanacter
         public IGetItem CurrentItem => _currentItem;
         [SerializeField] private CharactersConfig _charactersConfig;
         [SerializeField] private WeaponData[] _weaponsData;
-
-        [SerializeField] private AudioSource _audioSourceTree;
-        [SerializeField] private AudioSource _audioSourceStone;
+        
         [SerializeField] private AudioSource _audioSourceEat;
         [SerializeField] private AudioSource _audioSourceDefaultItem;
         
@@ -81,15 +79,6 @@ namespace Vikings.Chanacter
             {
                 yield return new WaitForSeconds(1f);
 
-                if (weaponData.ItemData.ID == 3)
-                {
-                    _audioSourceTree.Play();
-                }
-                else if (weaponData.ItemData.ID == 2)
-                {
-                    _audioSourceStone.Play();
-                }
-                
                 if (_charactersConfig.ItemsCount > _count && _count < item.DropCount)
                 {
                     _count += weaponData.level;

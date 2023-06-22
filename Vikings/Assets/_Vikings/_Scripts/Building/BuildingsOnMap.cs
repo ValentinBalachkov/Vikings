@@ -363,10 +363,19 @@ namespace Vikings.Building
             _audioSourceBuildingSound.Play();
         }
 
+        public void PlayInventoryParticle()
+        {
+            _craftingTableDefault.buildingParticle.Stop();
+            _craftingTableDefault.buildingParticle.Play();
+        }
+
         public void PlayBuildingParticle(BuildingData buildingData)
         {
             var building = _storageData.FirstOrDefault(x => x.buildingData == buildingData);
-            if(building == null) return;
+            if (building == null)
+            {
+                return;
+            }
             building.buildingParticle.Stop();
             building.buildingParticle.Play();
         }

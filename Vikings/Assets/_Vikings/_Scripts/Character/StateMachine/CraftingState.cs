@@ -72,42 +72,44 @@ namespace Vikings.Chanacter
 
         private async Task StartTimerCraftingTable(CraftingTableController craftingTableController)
         {
-            _buildingsOnMap.PlayBuildingParticle(_buildingsOnMap.GetCurrentBuilding(_characterStateMachine).BuildingData);
+            _buildingsOnMap.PlayInventoryParticle();
             _buildingsOnMap.PlayCraftingAudio();
             _playerController.SetCraftingAnimation();
             _buildingsOnMap.OffCraftingStateAllCharacters(true);
             var defaultTime = (int)craftingTableController.CraftingTableData.TableBuildingTime * 1000;
             int time = (int)(defaultTime + (defaultTime * (_charactersConfig.SpeedWork / 100)));
             await Task.Delay(time);
-            DebugLogger.SendMessage("-1", Color.red);
+           
             craftingTableController.OpenCurrentWeapon();
-            DebugLogger.SendMessage("0", Color.red);
+           
             _buildingsOnMap.ClearCurrentBuilding();
-            DebugLogger.SendMessage("1", Color.red);
+           
             _buildingsOnMap.UpdateCurrentBuilding(_characterStateMachine);
-            DebugLogger.SendMessage("2", Color.red);
+          
             _buildingsOnMap.OffCraftingStateAllCharacters(false, _characterStateMachine);
-            DebugLogger.SendMessage("3", Color.red);
+           
             _buildingsOnMap.StopAllParticles();
-            DebugLogger.SendMessage("4", Color.red);
+          
         }
 
         private async Task StartTimer(int craftingTime)
         {
+            DebugLogger.SendMessage("0", Color.green);
             _buildingsOnMap.PlayBuildingParticle(_buildingsOnMap.GetCurrentBuilding(_characterStateMachine).BuildingData);
+            DebugLogger.SendMessage("1", Color.green);
             _buildingsOnMap.PlayCraftingAudio();
             _playerController.SetCraftingAnimation();
             _buildingsOnMap.OffCraftingStateAllCharacters(true);
             var defaultTime = craftingTime * 1000;
             int time = (int)(defaultTime + (defaultTime * (_charactersConfig.SpeedWork / 100)));
             await Task.Delay(time);
-            DebugLogger.SendMessage("-1", Color.red);
+           
             _buildingsOnMap.UpgradeBuildingToStorage(_characterStateMachine);
-            DebugLogger.SendMessage("0", Color.red);
+          
             _buildingsOnMap.OffCraftingStateAllCharacters(false, _characterStateMachine);
-            DebugLogger.SendMessage("1", Color.red);
+          
             _buildingsOnMap.StopAllParticles();
-            DebugLogger.SendMessage("2", Color.red);
+           
         }
 
     }

@@ -13693,7 +13693,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1457301696}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.666, y: 0.317, z: 1.68}
+  m_LocalPosition: {x: -1.05, y: 0.317, z: 10.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16796,7 +16796,7 @@ MonoBehaviour:
   _craftingTableDefault:
     buildingData: {fileID: 11400000, guid: 286bb1c6aed69f04490fb374cf130e8f, type: 2}
     spawnPoint: {fileID: 292437008}
-    buildingParticle: {fileID: 0}
+    buildingParticle: {fileID: 1008333902}
   _craftingTableData: {fileID: 11400000, guid: 1fc812a57f3c9f144bdb91e364854175, type: 2}
   _weaponsOnMapController: {fileID: 1888331429}
   _particles:

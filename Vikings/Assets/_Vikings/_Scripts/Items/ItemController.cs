@@ -15,6 +15,8 @@ namespace Vikings.Items
         public bool DisableToGet { get; set; }
 
         [SerializeField] private GameObject _model;
+        [SerializeField] private AudioSource _audioSource;
+        
 
         private const float DELAY_ENABLE = 5f;
         private ItemData _itemData;
@@ -49,6 +51,11 @@ namespace Vikings.Items
             _isEnable = false;
             DisableToGet = true;
             _model.SetActive(_isEnable);
+            if (_audioSource != null)
+            {
+                _audioSource.Play();
+            }
+            
             yield return new WaitForSeconds(DELAY_ENABLE);
             DebugLogger.SendMessage($"{_itemData.ItemName}", Color.magenta);
             DisableToGet = false;
