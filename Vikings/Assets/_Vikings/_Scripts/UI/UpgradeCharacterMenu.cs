@@ -14,7 +14,13 @@ namespace Vikings.UI
         [SerializeField] private CharactersConfig _charactersConfig;
         [SerializeField] private StorageData _storageData;
         [SerializeField] private AudioSource _audioSourceBtnClick;
+
+        [SerializeField] private CharactersOnMap _charactersOnMap;
+        [SerializeField] private BuildingsOnMap _buildingsOnMap;
+        [SerializeField] private InventoryView _inventoryView;
         
+        
+
 
         private List<CharacterMenuElement> _characterMenuElements = new();
 
@@ -86,6 +92,15 @@ namespace Vikings.UI
                     _storageData.Count -= _charactersConfig.SpeedWorkCost;
                     break;
             }
+
+            foreach (var character in _charactersOnMap.CharactersList)
+            {
+                if (character.CurrentState is IdleState)
+                {
+                    _buildingsOnMap.UpdateCurrentBuilding(character);
+                }
+            }
+            _inventoryView.UpdateUI(null);
         }
 
         private void UpdateUI()

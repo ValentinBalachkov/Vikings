@@ -90,7 +90,7 @@ namespace Vikings.UI
             var craftingTable = Instantiate(_menuElement, _content);
             _menuElements.Add(craftingTable);
             craftingTable.UpdateUI(_craftingTableData.nameText, _craftingTableData.description, _craftingTableData.currentLevel,
-                _craftingTableData.icon, _craftingTableBuildingData.PriceToUpgrades, _craftingTableData.priority);
+                _craftingTableData.icon, _craftingTableData.PriceToUpgrade.ToArray(), _craftingTableData.priority);
             craftingTable.SetButtonDescription(_craftingTableData.currentLevel == 0);
             craftingTable.SetEnable(_weaponsOnMapController.WeaponsData[0].IsOpen, $"REQUIRED:  {_craftingTableData.required} LEVEL{1}");
             if (_craftingTableData.currentLevel == 0)
