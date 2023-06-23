@@ -64,7 +64,7 @@ namespace Vikings.Weapon
                     float p = 0;
                     for (int i = 2; i <= level + 1; i++)
                     {
-                        p += Mathf.Pow(i, 4) + ((a * i) - Mathf.Pow(i, 3));
+                        p += (Mathf.Pow(i, 4) + ((a * i) - Mathf.Pow(i, 3)))/i;
                         a = (int)p;
                     }
                         

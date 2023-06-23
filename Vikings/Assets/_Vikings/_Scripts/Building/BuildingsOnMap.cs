@@ -127,6 +127,7 @@ namespace Vikings.Building
                 foreach (var item in character.itemQueue)
                 {
                     item.IsEngaged = false;
+                    item.DisableToGet = false;
                 }
                 UpdateCurrentBuilding(character);
             }
@@ -140,6 +141,7 @@ namespace Vikings.Building
                 foreach (var item in character.itemQueue)
                 {
                     item.IsEngaged = false;
+                    item.DisableToGet = false;
                 }
                 UpdateCurrentBuilding(character);
             }

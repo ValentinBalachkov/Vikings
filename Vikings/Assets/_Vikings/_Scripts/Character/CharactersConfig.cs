@@ -21,7 +21,20 @@ namespace Vikings.Chanacter
                     return speedMoveCost;
                 }
 
-                return (int)(Mathf.Pow(speedMoveLevel, 5) + ((speedMoveCost - 1) * speedMoveLevel));
+
+                float newPrice = 0;
+                var a = speedMoveCost - 1;
+                for (int i = 2; i <= speedMoveLevel + 1; i++)
+                {
+                    newPrice += (Mathf.Pow(i, 4) + ((a * i) - Mathf.Pow(i, 3))) / i;
+                    a = (int)newPrice;
+                    DebugLogger.SendMessage($"{a} SpeedMoveCost (level: {i}", Color.green);
+                }
+                
+
+
+                // return (int)(Mathf.Pow(speedMoveLevel, 5) + ((speedMoveCost - 1) * speedMoveLevel));
+                return (int)newPrice;
             }
         }
 
@@ -43,12 +56,26 @@ namespace Vikings.Chanacter
         {
             get
             {
+
                 if (itemsCountLevel == 1)
                 {
                     return itemsCountCost;
                 }
 
-                return (int)(Mathf.Pow(itemsCountLevel, 5) + ((itemsCountCost - 1) * itemsCountLevel));
+
+                float newPrice = 0;
+                var a = itemsCountCost - 1;
+                for (int i = 2; i <= itemsCountLevel + 1; i++)
+                {
+                    newPrice += (Mathf.Pow(i, 4) + ((a * i) - Mathf.Pow(i, 3))) / i;
+                    a = (int)newPrice;
+                    DebugLogger.SendMessage($"{a} ItemsCountCost (level: {i}", Color.green);
+                }
+                
+
+
+                //return (int)(Mathf.Pow(itemsCountLevel, 5) + ((itemsCountCost - 1) * itemsCountLevel));
+                return (int)newPrice;
             }
         }
 
@@ -74,7 +101,20 @@ namespace Vikings.Chanacter
                     return speedWorkCost;
                 }
 
-                return (int)(Mathf.Pow(speedWorkLevel, 5) + ((speedWorkCost - 1) * speedWorkLevel));
+
+                float newPrice = 0;
+                var a = speedWorkCost - 1;
+                for (int i = 2; i <= speedWorkLevel + 1; i++)
+                {
+                    newPrice += (Mathf.Pow(i, 4) + ((a * i) - Mathf.Pow(i, 3))) / i;
+                    a = (int)newPrice;
+                    DebugLogger.SendMessage($"{a} SpeedWorkCost (level: {i}", Color.green);
+                }
+                
+
+
+                // return (int)(Mathf.Pow(speedWorkLevel, 5) + ((speedWorkCost - 1) * speedWorkLevel));
+                return (int)newPrice;
             }
         }
 
@@ -84,7 +124,7 @@ namespace Vikings.Chanacter
 
         public int speedWork = 1;
         public int speedWorkLevel = 1;
-        public int speedWorkCost = 18;
+        public int speedWorkCost = 17;
 
         public int itemsCount = 2;
         public int itemsCountLevel = 1;
@@ -115,6 +155,7 @@ namespace Vikings.Chanacter
                     break;
             }
         }
+        
 
 
         public void Save()

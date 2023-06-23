@@ -62,9 +62,16 @@ namespace Vikings.UI
                 item.UpdateUI(_storageDatas[i].nameText, _storageDatas[i].description, _storageDatas[i].CurrentLevel, _storageDatas[i].icon,
                     _storageDatas[i].PriceToUpgrade.ToArray(),_storageDatas[i].priority);
                 item.SetButtonDescription(_storageDatas[i].CurrentLevel == 0);
-                item.SetEnable((_craftingTableData.currentLevel - _storageDatas[i].CurrentLevel == k) ||
-                               (_storageDatas[i].isDefaultOpen && _storageDatas[i].CurrentLevel == 0),
-                    $"REQUIRED:  {_storageDatas[i].required} LEVEL{_craftingTableData.currentLevel + 1}");
+                string requiredText =
+                    $"REQUIRED:  {_storageDatas[i].required} LEVEL{_craftingTableData.currentLevel + 1}";
+                if (i == 2 && _storageDatas[i].CurrentLevel >= 5)
+                {
+                    requiredText = "MAX LEVEL";
+                }
+                item.SetEnable((_craftingTableData.currentLevel - _storageDatas[i].CurrentLevel >= k) ||
+                               (_storageDatas[i].isDefaultOpen && _storageDatas[i].CurrentLevel == 0 ||
+                                ((i == 2 && _storageDatas[i].CurrentLevel < 5) && (_craftingTableData.currentLevel - _storageDatas[i].CurrentLevel >= k))),
+                    requiredText);
                 var index = i;
                 if (_storageDatas[i].CurrentLevel == 0)
                 {
@@ -139,12 +146,12 @@ namespace Vikings.UI
                 {
                     if (_weaponsOnMapController.WeaponsData[i].IsOpen)
                     {
-                        weapon.SetEnable(_craftingTableData.currentLevel == 2 && _craftingTableData.currentLevel > _weaponsOnMapController.WeaponsData[i].level, 
+                        weapon.SetEnable(_craftingTableData.currentLevel >= 2 && _craftingTableData.currentLevel > _weaponsOnMapController.WeaponsData[i].level, 
                             $"REQUIRED:  {_weaponsOnMapController.WeaponsData[i].required} LEVEL{_craftingTableData.currentLevel + 1}");
                     }
                     else
                     {
-                        weapon.SetEnable(_craftingTableData.currentLevel == 2 && !_weaponsOnMapController.WeaponsData[i].IsOpen, 
+                        weapon.SetEnable(_craftingTableData.currentLevel >= 2 && !_weaponsOnMapController.WeaponsData[i].IsOpen, 
                             $"REQUIRED:  {_weaponsOnMapController.WeaponsData[i].required} LEVEL{2}");
                     }
                     

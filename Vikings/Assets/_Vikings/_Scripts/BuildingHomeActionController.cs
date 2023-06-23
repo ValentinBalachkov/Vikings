@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Vikings.Chanacter;
+using Vikings.UI;
 
 namespace Vikings.Building
 {
@@ -16,6 +17,8 @@ namespace Vikings.Building
         [SerializeField] private CharactersConfig _charactersConfig;
         [SerializeField] private HouseCameraPositionInfo[] _houseCameraPosition;
         [SerializeField] private List<Transform> _allRespawnPointTransform = new();
+        [SerializeField] private InventoryView _inventoryView;
+        
         private float _cameraScale;
         public Action<int> OnHomeLevelUp;
 
@@ -50,12 +53,14 @@ namespace Vikings.Building
 
         public void OnHomeBuilding()
         {
+            if (_charactersConfig.houseLevel >= 5) return;
             _charactersOnMap.AddCharacterOnMap(0);
             _charactersConfig.charactersCount++;
-            if (_charactersConfig.houseLevel >= 5) return;
             _charactersConfig.houseLevel++;
             OnHomeLevelUp?.Invoke(_charactersConfig.houseLevel);
             StartCoroutine(MoveCameraCoroutine(_houseCameraPosition[_charactersConfig.houseLevel]));
+
+            _inventoryView.UpdateUI(null);
 
         }
 

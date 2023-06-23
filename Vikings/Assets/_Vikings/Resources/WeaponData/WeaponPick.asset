@@ -19,10 +19,10 @@ MonoBehaviour:
     you get
   required: Workbench
   id: 1
-  level: 1
+  level: 0
   priority: 5
   _itemData: {fileID: 11400000, guid: cbe7421b5bd4c3b4fb2fab3fb3cb57f0, type: 2}
-  _isOpen: 1
+  _isOpen: 0
   _priceToBuy:
   - itemData: {fileID: 11400000, guid: 842ec8fe0ff14054fb025a7b78239191, type: 2}
     count: 15

@@ -82,8 +82,7 @@ namespace Vikings.Building
             {
                 item.count += priceToUpgrade.count;
             }
-            
-            
+
 
             CollectingResourceView.Instance.UpdateView(buildingData.currentItemsCount,
                 buildingData.StorageData.PriceToUpgrade.ToArray());
@@ -94,10 +93,8 @@ namespace Vikings.Building
             isUpgradeState = false;
 
             buildingData.StorageData.CurrentLevel++;
-            buildingData.StorageData.MaxStorageCount = (int)(Mathf.Pow(buildingData.StorageData.CurrentLevel, 5f)
-                                                             + Mathf.Pow(buildingData.StorageData.CurrentLevel,
-                                                                 buildingData.StorageData.CurrentLevel - 1)
-                                                             + 20);
+            buildingData.StorageData.MaxStorageCount = (int)((Mathf.Pow(buildingData.StorageData.CurrentLevel, 3) + Mathf.Pow(2, buildingData.StorageData.CurrentLevel) + 
+                                                             (Mathf.Pow(4, buildingData.StorageData.CurrentLevel - 1))) + 15);
             CollectingResourceView.Instance.gameObject.SetActive(false);
             SetupSprite(buildingData.StorageData.CurrentLevel);
         }
@@ -160,7 +157,7 @@ namespace Vikings.Building
             {
                 buildingData.StorageData.Count -= buildingData.StorageData.ItemType.DropCount;
             }
-               
+
             DisableToGet = false;
             OnChangeCountStorage?.Invoke(buildingData.StorageData.ItemType);
         }
@@ -169,7 +166,7 @@ namespace Vikings.Building
         {
             return buildingData.StorageData.ItemType;
         }
-        
+
         private void SetupSprite(int lvl)
         {
             _spriteBuilding.sprite = lvl switch

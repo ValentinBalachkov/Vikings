@@ -70,7 +70,7 @@ namespace Vikings.Building
                     float p = 0;
                     for (int i = 2; i <= _currentLevel + 1; i++)
                     {
-                        p += Mathf.Pow(i, 4) + ((a * i) - Mathf.Pow(i, 3));
+                        p += (Mathf.Pow(i, 4) + ((a * i) - Mathf.Pow(i, 3)))/i;
                         a = (int)p;
                     }
                         
