@@ -12,8 +12,8 @@ namespace Vikings.Building
         public Action<ItemData> OnChangeCountStorage;
         public Action<int, int> OnUpgradeStorage;
 
-        [SerializeField] private Sprite[] _buildingsSprites;
-        [SerializeField] private SpriteRenderer _spriteBuilding;
+        [SerializeField] private Sprite[] _buildingsSprites, _spritesShadows;
+        [SerializeField] private SpriteRenderer _spriteBuilding, _spriteShadow;
 
         [SerializeField] private AudioSource _audioSourceToStorage;
 
