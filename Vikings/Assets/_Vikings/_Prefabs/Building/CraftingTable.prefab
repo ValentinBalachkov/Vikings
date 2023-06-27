@@ -111,7 +111,7 @@ Transform:
   m_GameObject: {fileID: 3752727426206892552}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1770182687573246230}
@@ -136,7 +136,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0f1ac8e103eaa714882f600b0cba5350, type: 3}
   - {fileID: 21300000, guid: 02fa1a9e5b536504283d87ef7aae4902, type: 3}
   - {fileID: 21300000, guid: 7bf4255628e1d254888afda45ee967eb, type: 3}
+  _shadowsRenders: []
   _spriteBuilding: {fileID: 7732865386531763479}
+  _shadowRender: {fileID: 0}
   _audioSourceToStorage: {fileID: 9035472193015112366}
   _craftingTableData: {fileID: 11400000, guid: 1fc812a57f3c9f144bdb91e364854175, type: 2}
   _model: {fileID: 1430776245111085996}
