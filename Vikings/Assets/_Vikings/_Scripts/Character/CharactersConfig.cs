@@ -110,7 +110,11 @@ namespace Vikings.Chanacter
                     a = (int)newPrice;
                     DebugLogger.SendMessage($"{a} SpeedWorkCost (level: {i}", Color.green);
                 }
-                
+
+                if (speedWorkLevel == 4) // ВРЕМЯ КАСТЫЛЯТЬ МЕЖДУ НАМИ КАСТЫЛЬ ТРАТАТАТАТА
+                {
+                    newPrice =- 5;
+                }
 
 
                 // return (int)(Mathf.Pow(speedWorkLevel, 5) + ((speedWorkCost - 1) * speedWorkLevel));

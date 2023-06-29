@@ -22,6 +22,13 @@ public class SaveLoadManager : MonoBehaviour
         Application.targetFrameRate = 60;
     }
 
+    private void Start()
+    {
+       var a = _charactersConfig.SpeedMoveCost;
+       var b = _charactersConfig.SpeedWorkCost;
+       var c = _charactersConfig.ItemsCountCost;
+    }
+
     private void OnApplicationPause(bool pauseStatus)
     {
         if (pauseStatus)
