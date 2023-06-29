@@ -94,9 +94,7 @@ namespace Vikings.Chanacter
 
         private async Task StartTimer(int craftingTime)
         {
-            DebugLogger.SendMessage("0", Color.green);
             _buildingsOnMap.PlayBuildingParticle(_buildingsOnMap.GetCurrentBuilding(_characterStateMachine).BuildingData);
-            DebugLogger.SendMessage("1", Color.green);
             _buildingsOnMap.PlayCraftingAudio();
             _playerController.SetCraftingAnimation();
             _buildingsOnMap.OffCraftingStateAllCharacters(true);

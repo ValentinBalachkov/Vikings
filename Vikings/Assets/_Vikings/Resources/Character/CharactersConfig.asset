@@ -15,11 +15,11 @@ MonoBehaviour:
   charactersCount: 0
   houseLevel: 0
   speedMove: 5
-  speedMoveLevel: 5
+  speedMoveLevel: 1
   speedMoveCost: 14
   speedWork: 1
-  speedWorkLevel: 5
+  speedWorkLevel: 1
   speedWorkCost: 17
   itemsCount: 1
-  itemsCountLevel: 5
+  itemsCountLevel: 1
   itemsCountCost: 10

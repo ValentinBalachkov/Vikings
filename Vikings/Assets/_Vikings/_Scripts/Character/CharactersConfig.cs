@@ -28,7 +28,6 @@ namespace Vikings.Chanacter
                 {
                     newPrice += (Mathf.Pow(i, 4) + ((a * i) - Mathf.Pow(i, 3))) / i;
                     a = (int)newPrice;
-                    DebugLogger.SendMessage($"{a} SpeedMoveCost (level: {i}", Color.green);
                 }
                 
 
@@ -69,7 +68,6 @@ namespace Vikings.Chanacter
                 {
                     newPrice += (Mathf.Pow(i, 4) + ((a * i) - Mathf.Pow(i, 3))) / i;
                     a = (int)newPrice;
-                    DebugLogger.SendMessage($"{a} ItemsCountCost (level: {i}", Color.green);
                 }
                 
 
@@ -108,12 +106,11 @@ namespace Vikings.Chanacter
                 {
                     newPrice += (Mathf.Pow(i, 4) + ((a * i) - Mathf.Pow(i, 3))) / i;
                     a = (int)newPrice;
-                    DebugLogger.SendMessage($"{a} SpeedWorkCost (level: {i}", Color.green);
                 }
 
-                if (speedWorkLevel == 4) // ВРЕМЯ КАСТЫЛЯТЬ МЕЖДУ НАМИ КАСТЫЛЬ ТРАТАТАТАТА
+                if (speedWorkLevel == 3) // ВРЕМЯ КАСТЫЛЯТЬ МЕЖДУ НАМИ КАСТЫЛЬ ТРАТАТАТАТА
                 {
-                    newPrice =- 5;
+                    newPrice -= 5;
                 }
 
 

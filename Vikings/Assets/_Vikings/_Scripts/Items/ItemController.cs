@@ -57,7 +57,6 @@ namespace Vikings.Items
             }
             
             yield return new WaitForSeconds(DELAY_ENABLE);
-            DebugLogger.SendMessage($"{_itemData.ItemName}", Color.magenta);
             DisableToGet = false;
             _isEnable = true;
             _model.SetActive(_isEnable);
