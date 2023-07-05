@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c28eeb759f94304bae33740cbfab451, type: 3}
   m_Name: HouseStorage
   m_EditorClassIdentifier: 
-  isOpen: 0
+  isOpen: 1
   icon: {fileID: 21300000, guid: 498d0cf39d9c5144899187bf2ac77ceb, type: 3}
   nameText: House
   description: Allows you to store food. Upgrade to increase the capacity
@@ -22,7 +22,7 @@ MonoBehaviour:
   _itemType: {fileID: 11400000, guid: b90d6cdefc2ad7e4cbdd899ef9e419e5, type: 2}
   _count: 0
   _maxStorageCount: 20
-  _currentLevel: 0
+  _currentLevel: 1
   _storageController: {fileID: 3154466124258282570, guid: c434ae09455d2844d9c2f4f9377b77bd,
     type: 3}
   _priceToUpgrade:

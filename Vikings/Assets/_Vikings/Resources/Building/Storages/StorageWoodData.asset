@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c28eeb759f94304bae33740cbfab451, type: 3}
   m_Name: StorageWoodData
   m_EditorClassIdentifier: 
-  isOpen: 0
+  isOpen: 1
   icon: {fileID: 21300000, guid: d42c25b164dd2eb47af2e2ae8c09f46b, type: 3}
   nameText: Wood storage
   description: Allows storing wood. Upgrade to increase the capacity
@@ -22,7 +22,7 @@ MonoBehaviour:
   _itemType: {fileID: 11400000, guid: 842ec8fe0ff14054fb025a7b78239191, type: 2}
   _count: 0
   _maxStorageCount: 10
-  _currentLevel: 0
+  _currentLevel: 1
   _storageController: {fileID: 4209929905379352358, guid: f037e5ca64d9edf41b7c108fb73e1532,
     type: 3}
   _priceToUpgrade:
