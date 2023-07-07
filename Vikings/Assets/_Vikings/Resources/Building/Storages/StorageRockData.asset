@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c28eeb759f94304bae33740cbfab451, type: 3}
   m_Name: StorageRockData
   m_EditorClassIdentifier: 
-  isOpen: 1
+  isOpen: 0
   icon: {fileID: 21300000, guid: e8ff7fab8368d754c9416581c2b9d338, type: 3}
   nameText: Stone storage
   description: Allows storing stone. Upgrade to increase the capacity
@@ -22,7 +22,7 @@ MonoBehaviour:
   _itemType: {fileID: 11400000, guid: 8b782c2617e0b8048985ef732675d1be, type: 2}
   _count: 0
   _maxStorageCount: 10
-  _currentLevel: 1
+  _currentLevel: 0
   _storageController: {fileID: 5848039463236887081, guid: 7e5ac4c674ac44240bc671b01e446abd,
     type: 3}
   _priceToUpgrade:
