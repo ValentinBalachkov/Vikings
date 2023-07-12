@@ -30,6 +30,7 @@ namespace Vikings.Chanacter
         public override void Exit()
         {
             _playerPrefab.OnEndAnimation -= OnSetItemAnimation;
+            _playerPrefab.ClearAction();
         }
 
         private void OnGetPoint()

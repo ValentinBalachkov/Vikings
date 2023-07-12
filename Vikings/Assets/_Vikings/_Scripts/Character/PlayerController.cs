@@ -65,6 +65,12 @@ namespace Vikings.Chanacter
             _onGetPosition = action;
         }
 
+        public void ClearAction()
+        {
+            _onGetPosition = null;
+            _onPosition = true;
+        }
+
         public void MoveToPoint(Transform point)
         {
             _navMeshAgent.speed = _charactersConfig.SpeedMove;
