@@ -160,6 +160,7 @@ namespace Vikings.Building
         public void UpdateCurrentBuilding(CharacterStateMachine character, bool isCraftTable = false,
             bool isItemCalling = false)
         {
+            Debug.Log("AAAAAAA UpdateCurrentBuilding!!!!!");
             if (isItemCalling && character.CurrentState is CraftingState || isItemCalling && character.itemQueue.Count > 0)
             {
                 return;
@@ -192,13 +193,21 @@ namespace Vikings.Building
             {
                 character.currentBuilding =
                     _buildingControllers.FirstOrDefault(x => x is CraftingTableController && !x.IsFullStorage());
+                Debug.Log("BuildingsIdleState - 1!");
                 if (character.currentBuilding == null)
                 {
                     character.currentBuilding =
                         _buildingControllers.FirstOrDefault(x => !x.IsFullStorage() && x is BuildingController);
+                    Debug.Log("BuildingsIdleState - 2!");
                     if (character.currentBuilding == null)
                     {
-                        character.currentBuilding = _buildingControllers.FirstOrDefault(x => !x.IsFullStorage());
+                        character.currentBuilding = _storageControllers.FirstOrDefault(x => !x.IsFullStorage());
+                        foreach (var c in _storageControllers)
+                        {
+                            if(c.BuildingData != null)
+                            Debug.Log($"{c.IsFullStorage()} Upgrade state {c.BuildingData.StorageData}");
+                        }
+                        Debug.Log("BuildingsIdleState - 3!");
                     }
                 }
             }
@@ -219,6 +228,7 @@ namespace Vikings.Building
 
             if (character.currentBuilding == null)
             {
+                Debug.Log("BuildingsIdleState");
                 character.SetState<IdleState>();
                 return;
             }
@@ -272,6 +282,7 @@ namespace Vikings.Building
                 return;
             }
 
+            Debug.Log("ItemsIdleState");
             character.SetState<IdleState>();
         }
 
@@ -410,12 +421,24 @@ namespace Vikings.Building
                     _actionCrafted.Play();
                 }
 
+                foreach (var controller in _buildingControllers)
+                {
+                    controller.isUpgradeState = false;
+                }
+
                 foreach (var c in _charactersOnMap.CharactersList)
                 {
                     c.currentBuilding = null;
+                    c.currentStorageToUpgrade = null;
+                    foreach (var item in c.itemQueue)
+                    {
+                        item.IsEngaged = false;
+                        item.DisableToGet = false;
+                    }
                     UpdateCurrentBuilding(c);
                 }
                 
+                _inventoryView.UpdateUI(null);
 
                 return;
             }
@@ -440,6 +463,12 @@ namespace Vikings.Building
             foreach (var c in _charactersOnMap.CharactersList)
             {
                 c.currentBuilding = null;
+                c.currentStorageToUpgrade = null;
+                foreach (var item in c.itemQueue)
+                {
+                    item.IsEngaged = false;
+                    item.DisableToGet = false;
+                }
                 UpdateCurrentBuilding(c);
             }
         }

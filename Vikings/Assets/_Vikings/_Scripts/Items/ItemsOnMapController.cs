@@ -69,7 +69,6 @@ namespace Vikings.Items
                             {
                                 foreach (var character in _charactersOnMap.CharactersList)
                                 {
-                                    DebugLogger.SendMessage("UpdateCharPath", Color.blue);
                                     _buildingsOnMap.UpdateCurrentBuilding(character, false, true);
                                 }
                             };
@@ -109,7 +108,6 @@ namespace Vikings.Items
                             {
                                 foreach (var character in _charactersOnMap.CharactersList)
                                 {
-                                    DebugLogger.SendMessage("UpdateCharPath", Color.blue);
                                     _buildingsOnMap.UpdateCurrentBuilding(character, false, true);
                                 }
                             };

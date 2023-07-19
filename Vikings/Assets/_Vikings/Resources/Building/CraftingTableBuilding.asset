@@ -29,5 +29,5 @@ MonoBehaviour:
   _buildingName: CraftingTableBuilding
   _buildingController: {fileID: 8812609488824614039, guid: f41d7e963e0ceda4487ee1daec913e9e,
     type: 3}
-  _craftingTableController: {fileID: 3752727427173915836, guid: b5e1a7e4b8754d7488b82b6200a6799b,
+  _craftingTableController: {fileID: 2245470426442643691, guid: b5e1a7e4b8754d7488b82b6200a6799b,
     type: 3}

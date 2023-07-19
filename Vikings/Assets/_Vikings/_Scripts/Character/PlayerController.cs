@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using Random = UnityEngine.Random;
 
 namespace Vikings.Chanacter
 {
@@ -63,6 +62,12 @@ namespace Vikings.Chanacter
             _onGetPosition = null;
             _onPosition = false;
             _onGetPosition = action;
+        }
+
+        public void ClearAction()
+        {
+            _onGetPosition = null;
+            _onPosition = true;
         }
 
         public void MoveToPoint(Transform point)

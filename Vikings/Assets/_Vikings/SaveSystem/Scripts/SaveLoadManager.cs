@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using Vikings.Building;
 using Vikings.Chanacter;
@@ -14,12 +15,14 @@ public class SaveLoadManager : MonoBehaviour
     [SerializeField] private List<WeaponData> _weaponData = new();
     [SerializeField] private List<CraftingTableData> _craftingTableData = new();
     [SerializeField] private CharactersConfig _charactersConfig;
+    [SerializeField] private TMP_Text _versionText;
     
 
     private void Awake()
     {
         LoadAll();
         Application.targetFrameRate = 60;
+        _versionText.text = $"v{Application.version}";
     }
 
     private void OnApplicationPause(bool pauseStatus)

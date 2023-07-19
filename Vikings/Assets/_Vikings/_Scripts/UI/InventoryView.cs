@@ -12,7 +12,7 @@ namespace Vikings.UI
         [SerializeField] private BuildingsOnMap _buildingsOnMap;
         [SerializeField] private InventoryViewTextData[] _itemsCountText;
         [SerializeField] private StorageData[] _storagesData;
-        
+
 
         private List<StorageController> _storageControllers = new();
 

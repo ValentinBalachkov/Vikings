@@ -11,8 +11,8 @@ namespace Vikings.Building
         public GameObject Model => _model;
         public Action<PriceToUpgrade[], PriceToUpgrade[]> OnChangeCount;
         public CraftingTableData CraftingTableData => _craftingTableData;
-        [SerializeField] private Sprite[] _buildingsSprites;
-        [SerializeField] private SpriteRenderer _spriteBuilding;
+        [SerializeField] private Sprite[] _buildingsSprites, _shadowsRenders;
+        [SerializeField] private SpriteRenderer _spriteBuilding, _shadowRender;
         
         [SerializeField] private AudioSource _audioSourceToStorage;
         

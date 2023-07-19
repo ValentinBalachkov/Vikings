@@ -34,7 +34,6 @@ namespace SecondChanceSystem.SaveSystem
             else
             {
                 string json = File.ReadAllText(loadPath);
-                DebugLogger.SendMessage($"{loadData.name} - {json}", Color.green);
                 JsonUtility.FromJsonOverwrite(json, loadData);
                 return loadData;
             }
