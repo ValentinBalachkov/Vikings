@@ -2,7 +2,7 @@
   <packages>
     <package>com.android.installreferrer:installreferrer:2.1</package>
     <package>com.applovin.mediation:facebook-adapter:[6.14.0.0]</package>
-    <package>com.applovin.mediation:ironsource-adapter:7.3.1.0.0</package>
+    <package>com.applovin.mediation:ironsource-adapter:7.3.1.1.0</package>
     <package>com.applovin:applovin-sdk:11.10.1</package>
     <package>com.appsflyer:af-android-sdk:6.10.3</package>
     <package>com.appsflyer:unity-wrapper:6.10.30</package>
@@ -42,7 +42,7 @@
     <file>Assets/Plugins/Android/com.android.installreferrer.installreferrer-2.1.aar</file>
     <file>Assets/Plugins/Android/com.applovin.applovin-sdk-11.10.1.aar</file>
     <file>Assets/Plugins/Android/com.applovin.mediation.facebook-adapter-6.14.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.applovin.mediation.ironsource-adapter-7.3.1.0.0.aar</file>
+    <file>Assets/Plugins/Android/com.applovin.mediation.ironsource-adapter-7.3.1.1.0.aar</file>
     <file>Assets/Plugins/Android/com.appsflyer.af-android-sdk-6.10.3.aar</file>
     <file>Assets/Plugins/Android/com.appsflyer.unity-wrapper-6.10.30.aar</file>
     <file>Assets/Plugins/Android/com.facebook.android.audience-network-sdk-6.14.0.aar</file>
@@ -52,7 +52,7 @@
     <file>Assets/Plugins/Android/com.google.android.gms.play-services-basement-18.1.0.aar</file>
     <file>Assets/Plugins/Android/com.google.android.gms.play-services-tasks-17.2.1.aar</file>
     <file>Assets/Plugins/Android/com.ironsource.adapters.applovinadapter-4.3.39.aar</file>
-    <file>Assets/Plugins/Android/com.ironsource.sdk.mediationsdk-7.3.1.aar</file>
+    <file>Assets/Plugins/Android/com.ironsource.sdk.mediationsdk-7.3.1.1.aar</file>
     <file>Assets/Plugins/Android/org.jetbrains.annotations-13.0.jar</file>
     <file>Assets/Plugins/Android/org.jetbrains.kotlin.kotlin-stdlib-1.6.20.jar</file>
     <file>Assets/Plugins/Android/org.jetbrains.kotlin.kotlin-stdlib-common-1.6.20.jar</file>
@@ -60,7 +60,7 @@
     <file>Assets/Plugins/Android/org.jetbrains.kotlin.kotlin-stdlib-jdk8-1.6.20.jar</file>
   </files>
   <settings>
-    <setting name="androidAbis" value="armeabi-v7a" />
+    <setting name="androidAbis" value="arm64-v8a,armeabi-v7a" />
     <setting name="bundleId" value="com.TaynayaKomnata.IDLEVikingsconquest" />
     <setting name="explodeAars" value="True" />
     <setting name="gradleBuildEnabled" value="True" />

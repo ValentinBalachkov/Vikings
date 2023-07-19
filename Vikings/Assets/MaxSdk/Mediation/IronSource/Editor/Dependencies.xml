@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <dependencies>
     <androidPackages>
-        <androidPackage spec="com.applovin.mediation:ironsource-adapter:7.3.1.0.0">
+        <androidPackage spec="com.applovin.mediation:ironsource-adapter:7.3.1.1.0">
             <repositories>
                 <repository>https://android-sdk.is.com/</repository>
             </repositories>
