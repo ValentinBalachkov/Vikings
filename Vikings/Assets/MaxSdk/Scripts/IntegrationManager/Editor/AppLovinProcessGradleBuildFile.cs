@@ -117,8 +117,12 @@ namespace AppLovinMax.Scripts.IntegrationManager.Editor
         protected bool AddPluginToRootGradleBuildFile(string rootGradleBuildFile)
         {
             var lines = File.ReadAllLines(rootGradleBuildFile).ToList();
+            
+            // Check if the plugin is already added to the file.
+            var pluginAdded = lines.Any(line => line.Contains(QualityServicePluginRoot));
+            if (pluginAdded) return true;
+
             var outputLines = new List<string>();
-            var pluginAdded = false;
             var insidePluginsClosure = false;
             foreach (var line in lines)
             {

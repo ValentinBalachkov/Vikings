@@ -1387,7 +1387,13 @@ public class MaxSdkUnityEditor : MaxSdkBase
     /// Refer to AppLovin logs for the IDFA/GAID of your current device.
     /// </summary>
     /// <param name="advertisingIdentifiers">String list of advertising identifiers from devices to receive test ads.</param>
-    public static void SetTestDeviceAdvertisingIdentifiers(string[] advertisingIdentifiers) { }
+    public static void SetTestDeviceAdvertisingIdentifiers(string[] advertisingIdentifiers)
+    { 
+        if (IsInitialized())
+        {
+            MaxSdkLogger.UserError("Test Device Advertising Identifiers must be set before SDK initialization.");
+        }
+    }
 
     /// <summary>
     /// Whether or not the native AppLovin SDKs listen to exceptions. Defaults to <c>true</c>.

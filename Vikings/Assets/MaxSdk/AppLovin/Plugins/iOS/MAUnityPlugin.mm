@@ -76,6 +76,55 @@ extern "C"
         return array;
     }
 
+
+    ALSdkSettings * generateSDKSettings(const char *serializedAdUnitIdentifiers, const char *serializedMetaData)
+    {
+        ALSdkSettings *settings = [[ALSdkSettings alloc] init];
+        
+        if ( _testDeviceIdentifiersToSet )
+        {
+            settings.testDeviceAdvertisingIdentifiers = _testDeviceIdentifiersToSet;
+            _testDeviceIdentifiersToSet = nil;
+        }
+        
+        if ( _verboseLoggingToSet )
+        {
+            settings.verboseLoggingEnabled = _verboseLoggingToSet.boolValue;
+            _verboseLoggingToSet = nil;
+        }
+
+        if ( _creativeDebuggerEnabledToSet )
+        {
+            settings.creativeDebuggerEnabled = _creativeDebuggerEnabledToSet.boolValue;
+            _creativeDebuggerEnabledToSet = nil;
+        }
+
+        if ( _exceptionHandlerEnabledToSet )
+        {
+            settings.exceptionHandlerEnabled = _exceptionHandlerEnabledToSet.boolValue;
+            _exceptionHandlerEnabledToSet = nil;
+        }
+        
+        if ( _locationCollectionEnabledToSet )
+        {
+            settings.locationCollectionEnabled = _locationCollectionEnabledToSet.boolValue;
+            _locationCollectionEnabledToSet = nil;
+        }
+        
+        settings.initializationAdUnitIdentifiers = [[NSString stringWithUTF8String: serializedAdUnitIdentifiers] componentsSeparatedByString: @","];
+        
+        NSDictionary<NSString *, id> *unityMetaData = [MAUnityAdManager deserializeParameters: [NSString stringWithUTF8String: serializedMetaData]];
+        
+        // Set the meta data to settings.
+        NSMutableDictionary<NSString *, NSString *> *metaDataDict = [settings valueForKey: @"metaData"];
+        for ( NSString *key in unityMetaData )
+        {
+            metaDataDict[key] = unityMetaData[key];
+        }
+        
+        return settings;
+    }
+
     ALGender getAppLovinGender(NSString *genderString)
     {
         if ( [@"F" al_isEqualToStringIgnoringCase: genderString] )
@@ -146,10 +195,9 @@ extern "C"
     {
         maybeInitializePlugin();
         
-        _sdk = [_adManager initializeSdkWithAdUnitIdentifiers: NSSTRING(serializedAdUnitIdentifiers)
-                                                     metaData: NSSTRING(serializedMetaData)
-                                           backgroundCallback: backgroundCallback
-                                         andCompletionHandler:^(ALSdkConfiguration *configuration) {
+        _sdk = [_adManager initializeSdkWithSettings: generateSDKSettings(serializedAdUnitIdentifiers, serializedMetaData)
+                                  backgroundCallback: backgroundCallback
+                                andCompletionHandler:^(ALSdkConfiguration *configuration) {
             _sdkConfiguration = configuration;
             _isSdkInitialized = true;
         }];
@@ -164,36 +212,6 @@ extern "C"
         {
             _sdk.userSegment.name = _userSegmentNameToSet;
             _userSegmentNameToSet = nil;
-        }
-        
-        if ( _testDeviceIdentifiersToSet )
-        {
-            _sdk.settings.testDeviceAdvertisingIdentifiers = _testDeviceIdentifiersToSet;
-            _testDeviceIdentifiersToSet = nil;
-        }
-        
-        if ( _verboseLoggingToSet )
-        {
-            _sdk.settings.verboseLoggingEnabled = _verboseLoggingToSet.boolValue;
-            _verboseLoggingToSet = nil;
-        }
-
-        if ( _creativeDebuggerEnabledToSet )
-        {
-            _sdk.settings.creativeDebuggerEnabled = _creativeDebuggerEnabledToSet.boolValue;
-            _creativeDebuggerEnabledToSet = nil;
-        }
-
-        if ( _exceptionHandlerEnabledToSet )
-        {
-            _sdk.settings.exceptionHandlerEnabled = _exceptionHandlerEnabledToSet.boolValue;
-            _exceptionHandlerEnabledToSet = nil;
-        }
-        
-        if ( _locationCollectionEnabledToSet )
-        {
-            _sdk.settings.locationCollectionEnabled = _locationCollectionEnabledToSet.boolValue;
-            _locationCollectionEnabledToSet = nil;
         }
         
         if ( _targetingYearOfBirth )
@@ -979,16 +997,7 @@ extern "C"
     void _MaxSetTestDeviceAdvertisingIdentifiers(char **advertisingIdentifiers, int size)
     {
         NSArray<NSString *> *advertisingIdentifiersArray = toStringArray(advertisingIdentifiers, size);
-        
-        if ( _sdk )
-        {
-            _sdk.settings.testDeviceAdvertisingIdentifiers = advertisingIdentifiersArray;
-            _testDeviceIdentifiersToSet = nil;
-        }
-        else
-        {
-            _testDeviceIdentifiersToSet = advertisingIdentifiersArray;
-        }
+        _testDeviceIdentifiersToSet = advertisingIdentifiersArray;
     }
 
     void _MaxSetCreativeDebuggerEnabled(bool enabled)

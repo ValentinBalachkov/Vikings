@@ -504,6 +504,26 @@ public abstract class MaxSdkBase
         return new Rect(originX, originY, width, height);
     }
 
+    /// <summary>
+    /// Handles forwarding callbacks from native to C#.
+    /// </summary>
+    /// <param name="propsStr">A prop string with the event data</param>
+    protected static void HandleBackgroundCallback(string propsStr)
+    {
+        try
+        {
+            MaxSdkCallbacks.Instance.ForwardEvent(propsStr);
+        }
+        catch (Exception exception)
+        {
+            var eventProps = Json.Deserialize(propsStr) as Dictionary<string, object>;
+            if (eventProps == null) return;
+
+            var eventName = MaxSdkUtils.GetStringFromDictionary(eventProps, "name", "");
+            MaxSdkLogger.UserError("Unable to notify ad delegate due to an error in the publisher callback '" + eventName + "' due to exception: " + exception.Message);
+        }
+    }
+
     [Obsolete("This API has been deprecated and will be removed in a future release.")]
     public enum ConsentDialogState
     {

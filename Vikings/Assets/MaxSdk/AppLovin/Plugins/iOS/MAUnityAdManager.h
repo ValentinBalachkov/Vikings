@@ -12,7 +12,7 @@ typedef void (*ALUnityBackgroundCallback)(const char* args);
 
 @interface MAUnityAdManager : NSObject
 
-- (ALSdk *)initializeSdkWithAdUnitIdentifiers:(NSString *)serializedAdUnitIdentifiers metaData:(NSString *)serializedMetaData backgroundCallback:(ALUnityBackgroundCallback)unityBackgroundCallback andCompletionHandler:(ALSdkInitializationCompletionHandler)completionHandler;
+- (ALSdk *)initializeSdkWithSettings:(ALSdkSettings *)settings backgroundCallback:(ALUnityBackgroundCallback)unityBackgroundCallback andCompletionHandler:(ALSdkInitializationCompletionHandler)completionHandler;
 
 - (void)createBannerWithAdUnitIdentifier:(NSString *)adUnitIdentifier atPosition:(NSString *)bannerPosition;
 - (void)createBannerWithAdUnitIdentifier:(NSString *)adUnitIdentifier x:(CGFloat)xOffset y:(CGFloat)yOffset;
@@ -98,6 +98,7 @@ typedef void (*ALUnityBackgroundCallback)(const char* args);
 
 // Utils
 + (NSString *)serializeParameters:(NSDictionary<NSString *, id> *)dict;
++ (NSDictionary<NSString *, id> *)deserializeParameters:(NSString *)serialized;
 
 /**
  * Creates an instance of @c MAUnityAdManager if needed and returns the singleton instance.

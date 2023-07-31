@@ -1103,6 +1103,12 @@ public class MaxSdkAndroid : MaxSdkBase
     /// <param name="advertisingIdentifiers">String list of advertising identifiers from devices to receive test ads.</param>
     public static void SetTestDeviceAdvertisingIdentifiers(string[] advertisingIdentifiers)
     {
+        if (IsInitialized())
+        {
+            MaxSdkLogger.UserError("Test Device Advertising Identifiers must be set before SDK initialization.");
+            return;
+        }
+
         // Wrap the string array in an object array, so the compiler does not split into multiple strings.
         object[] arguments = {advertisingIdentifiers};
         MaxUnityPluginClass.CallStatic("setTestDeviceAdvertisingIds", arguments);
@@ -1224,14 +1230,7 @@ public class MaxSdkAndroid : MaxSdkBase
 
         public void onEvent(string propsStr)
         {
-            try
-            {
-                MaxSdkCallbacks.Instance.ForwardEvent(propsStr);
-            }
-            catch (Exception exception)
-            {
-                MaxSdkLogger.UserError("Unable to notify ad delegate due to exception: " + exception.Message);
-            }
+            HandleBackgroundCallback(propsStr);
         }
     }
 }

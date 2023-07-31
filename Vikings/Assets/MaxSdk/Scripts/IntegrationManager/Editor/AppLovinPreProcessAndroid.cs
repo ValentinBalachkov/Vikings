@@ -80,7 +80,11 @@ namespace AppLovinMax.Scripts.IntegrationManager.Editor
         {
             // Check if consent flow is enabled. No need to create the applovin_consent_flow_settings.json if consent flow is disabled.
             var consentFlowEnabled = AppLovinInternalSettings.Instance.ConsentFlowEnabled;
-            if (!consentFlowEnabled) return;
+            if (!consentFlowEnabled)
+            {
+                RemoveAppLovinSettingsRawResourceFileIfNeeded(rawResourceDirectory);
+                return;
+            }
 
             var privacyPolicyUrl = AppLovinInternalSettings.Instance.ConsentFlowPrivacyPolicyUrl;
             if (string.IsNullOrEmpty(privacyPolicyUrl))
@@ -128,13 +132,14 @@ namespace AppLovinMax.Scripts.IntegrationManager.Editor
         {
             if (AppLovinSettings.Instance.ShowInternalSettingsInIntegrationManager) return;
 
-            // Check if terms flow is enabled. No need to create the applovin_consent_flow_settings.json if consent flow is disabled.
+            // Check if terms flow is enabled for this format. No need to create the applovin_consent_flow_settings.json if consent flow is disabled.
             var consentFlowEnabled = AppLovinSettings.Instance.ConsentFlowEnabled;
-            if (!consentFlowEnabled) return;
-
-            // Check if terms flow is enabled for this format.
             var consentFlowPlatform = AppLovinSettings.Instance.ConsentFlowPlatform;
-            if (consentFlowPlatform != Platform.All && consentFlowPlatform != Platform.Android) return;
+            if (!consentFlowEnabled || (consentFlowPlatform != Platform.All && consentFlowPlatform != Platform.Android))
+            {
+                RemoveAppLovinSettingsRawResourceFileIfNeeded(rawResourceDirectory);
+                return;
+            }
 
             var privacyPolicyUrl = AppLovinSettings.Instance.ConsentFlowPrivacyPolicyUrl;
             if (string.IsNullOrEmpty(privacyPolicyUrl))
@@ -177,6 +182,26 @@ namespace AppLovinMax.Scripts.IntegrationManager.Editor
             catch (Exception exception)
             {
                 MaxSdkLogger.UserError("applovin_settings.json file write failed due to: " + exception.Message);
+                Console.WriteLine(exception);
+            }
+        }
+
+        /// <summary>
+        /// Removes the applovin_settings json file from the build if it exists.
+        /// </summary>
+        /// <param name="rawResourceDirectory">The raw resource directory that holds the json file</param>
+        private static void RemoveAppLovinSettingsRawResourceFileIfNeeded(string rawResourceDirectory)
+        {
+            var consentFlowSettingsFilePath = Path.Combine(rawResourceDirectory, AppLovinSettingsFileName);
+            if (!File.Exists(consentFlowSettingsFilePath)) return;
+
+            try
+            {
+                File.Delete(consentFlowSettingsFilePath);
+            }
+            catch (Exception exception)
+            {
+                MaxSdkLogger.UserError("Deleting applovin_settings.json failed due to: " + exception.Message);
                 Console.WriteLine(exception);
             }
         }
