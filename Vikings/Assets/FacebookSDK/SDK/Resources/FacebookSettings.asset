@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedAppIndex: 0
   clientTokens:
-  - 
+  - 2fca81dc5b45558f7b2c48b0d8e6dbc9
   appIds:
-  - 0
+  - 669893558331268
   appLabels:
-  - App Name
+  - IDLE Vikings conquest
   cookie: 1
   logging: 1
   status: 1
