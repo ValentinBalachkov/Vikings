@@ -90,7 +90,8 @@ public class IronSourceController : MonoBehaviour
 
     private IEnumerator RewardDelayCoroutine()
     {
-        yield return new WaitForSeconds(300f);
+        // yield return new WaitForSeconds(300f);
+        yield return new WaitForSeconds(15f);
 
         while (!IronSource.Agent.isRewardedVideoAvailable())
         {
