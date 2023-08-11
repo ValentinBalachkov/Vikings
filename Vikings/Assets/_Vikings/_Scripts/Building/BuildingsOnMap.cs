@@ -38,8 +38,12 @@ namespace Vikings.Building
         private CraftingTableController _craftingTableControllerOnStartGame;
         private AbstractBuilding _currentStorageToUpgrade;
 
+        private int levelIndex = 1;
+
         private void Start()
         {
+            AppMetricaEvents.SendLevelStartedEvent();
+            
             var storageData = _craftingTableDefault;
             _craftingTableControllerOnStartGame = Instantiate(storageData.buildingData.CraftingTableController,
                 storageData.spawnPoint);
@@ -70,6 +74,13 @@ namespace Vikings.Building
 
         public void SpawnStorage(int index, bool isSave = false)
         {
+            AppMetricaEvents.SendLevelFinishedEvent();
+            
+            int currentLevelIndex = PlayerPrefs.GetInt("current_level_index");
+            PlayerPrefs.SetInt("current_level_index", ++currentLevelIndex);
+            
+            AppMetricaEvents.SendLevelStartedEvent();
+            
             if (_storageData[index].buildingData.IsBuild)
             {
                 if (_storageData[index].buildingData.StorageData == null)
