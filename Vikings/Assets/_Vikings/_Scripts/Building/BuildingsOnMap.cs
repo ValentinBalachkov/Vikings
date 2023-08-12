@@ -129,6 +129,13 @@ namespace Vikings.Building
 
         public void SetStorageUpgradeState(ItemData itemData)
         {
+            AppMetricaEvents.SendLevelFinishedEvent();
+            
+            int currentLevelIndex = PlayerPrefs.GetInt("current_level_index");
+            PlayerPrefs.SetInt("current_level_index", ++currentLevelIndex);
+            
+            AppMetricaEvents.SendLevelStartedEvent();
+            
             var storage =
                 _storageControllers.FirstOrDefault(x => x.BuildingData.StorageData.ItemType.ID == itemData.ID);
 

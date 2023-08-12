@@ -24,7 +24,7 @@ MonoBehaviour:
   status: 1
   xfbml: 0
   frictionlessRequests: 1
-  androidKeystorePath: C:\Users\Valentin\Desktop\user.keystore
+  androidKeystorePath: user.keystore
   iosURLSuffix: 
   appLinkSchemes:
   - list: []
