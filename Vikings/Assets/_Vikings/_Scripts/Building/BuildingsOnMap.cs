@@ -160,7 +160,6 @@ namespace Vikings.Building
         public void UpdateCurrentBuilding(CharacterStateMachine character, bool isCraftTable = false,
             bool isItemCalling = false)
         {
-            Debug.Log("AAAAAAA UpdateCurrentBuilding!!!!!");
             if (isItemCalling && character.CurrentState is CraftingState || isItemCalling && character.itemQueue.Count > 0)
             {
                 return;
