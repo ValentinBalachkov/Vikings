@@ -50,6 +50,7 @@ namespace Vikings.Building
                 }
                 return (0.5f * Mathf.Pow(_currentLevel + 1, 2)) + _buildTime;
             }
+            set => _buildTime = value;
         }
 
         public StorageController StorageController => _storageController;

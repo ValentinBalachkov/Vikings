@@ -192,21 +192,20 @@ namespace Vikings.Building
             {
                 character.currentBuilding =
                     _buildingControllers.FirstOrDefault(x => x is CraftingTableController && !x.IsFullStorage());
-                Debug.Log("BuildingsIdleState - 1!");
                 if (character.currentBuilding == null)
                 {
                     character.currentBuilding =
                         _buildingControllers.FirstOrDefault(x => !x.IsFullStorage() && x is BuildingController);
-                    Debug.Log("BuildingsIdleState - 2!");
                     if (character.currentBuilding == null)
                     {
                         character.currentBuilding = _storageControllers.FirstOrDefault(x => !x.IsFullStorage());
                         foreach (var c in _storageControllers)
                         {
-                            if(c.BuildingData != null)
-                            Debug.Log($"{c.IsFullStorage()} Upgrade state {c.BuildingData.StorageData}");
+                            if (c.BuildingData != null)
+                            {
+                                
+                            }
                         }
-                        Debug.Log("BuildingsIdleState - 3!");
                     }
                 }
             }
@@ -227,7 +226,6 @@ namespace Vikings.Building
 
             if (character.currentBuilding == null)
             {
-                Debug.Log("BuildingsIdleState");
                 character.SetState<IdleState>();
                 return;
             }
@@ -280,8 +278,7 @@ namespace Vikings.Building
                 character.SetState<MovingState>();
                 return;
             }
-
-            Debug.Log("ItemsIdleState");
+            
             character.SetState<IdleState>();
         }
 

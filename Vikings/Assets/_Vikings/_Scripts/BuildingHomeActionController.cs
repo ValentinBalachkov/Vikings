@@ -46,7 +46,6 @@ namespace Vikings.Building
             float scaleMove = _houseCameraPosition[0].size / _houseCameraPosition[_charactersConfig.houseLevel].size;
             foreach (var transform in _allRespawnPointTransform)
             {
-                Debug.Log(scaleMove.ToString());
                 transform.localScale *= scaleMove;
             }
         }

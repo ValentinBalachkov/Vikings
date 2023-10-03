@@ -130,7 +130,6 @@ namespace Vikings.Building
             if (!isUpgradeState)
             {
                 bool isFullStorage = buildingData.StorageData.Count >= buildingData.StorageData.MaxStorageCount;
-                Debug.Log(isFullStorage);
                 return isFullStorage;
             }
 
