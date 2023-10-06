@@ -66,8 +66,9 @@ namespace Vikings.Building
                 return (0.5f * Mathf.Pow(currentLevel + 1, 2)) + tableBuildingTime;
             }
         }
+        
 
-        private int _craftingTime;
+        public int craftingTime;
         private int _weaponLevel;
 
         private PriceToUpgrade[] _currentItemsCountArray;
@@ -77,6 +78,9 @@ namespace Vikings.Building
         {
             currentWeaponId = weaponId;
             _weaponLevel = weaponLevel;
+            
+            priceToUpgradeCraftingTable.Clear();
+            currentItemsCount.Clear();
             
             foreach (var item in price)
             {
@@ -95,13 +99,13 @@ namespace Vikings.Building
                     itemData = item.itemData
                 });
             }
-            _craftingTime = time;
+            craftingTime = time;
         }
 
         public void Clear()
         {
             currentItemsCount.Clear();
-            _craftingTime = 0;
+            craftingTime = 0;
         }
 
         public void Save()
@@ -119,10 +123,12 @@ namespace Vikings.Building
                 currentLevel = data.currentLevel;
                 if (data._currentItemsCountArray != null)
                 {
+                    currentItemsCount.Clear();
+                    priceToUpgradeCraftingTable.Clear();
                     currentItemsCount = data._currentItemsCountArray.ToList();
                     priceToUpgradeCraftingTable = data._priceToUpgradeCraftingTableArray.ToList();
                 }
-                _craftingTime = data._craftingTime;
+                craftingTime = data.craftingTime;
             }
         }
     }

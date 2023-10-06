@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OfflineFarmView : MonoBehaviour
 {
@@ -10,10 +11,12 @@ public class OfflineFarmView : MonoBehaviour
     [SerializeField] private GameObject _buildingPanel;
     [SerializeField] private GameObject _resourcesPanel;
     [SerializeField] private TMP_Text _buildingDescriptionText;
+    [SerializeField] private Image _buildingIcon;
+    
     
     
 
-    public void OpenWindow(Dictionary<int, int> itemsDict, string craftName, int level)
+    public void OpenWindow(Dictionary<int, int> itemsDict, string craftName, int level, Sprite sprite = null)
     {
         DebugLogger.SendMessage($"{itemsDict.Count}, {level}", Color.cyan);
         
@@ -46,6 +49,7 @@ public class OfflineFarmView : MonoBehaviour
 
         if (level != 0)
         {
+            _buildingIcon.sprite = sprite;
             _buildingDescriptionText.text = $"{craftName} lvl {level}";
             _buildingPanel.SetActive(true);
         }

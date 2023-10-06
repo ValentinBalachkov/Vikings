@@ -36,17 +36,13 @@ public class SaveLoadManager : MonoBehaviour
         if (pauseStatus)
         {
             SaveAll();
-            
         }
-        
-        
     }
 
     private void OnApplicationFocus(bool hasFocus)
     {
         if (hasFocus)
         {
-            
         }
         else
         {
@@ -77,15 +73,30 @@ public class SaveLoadManager : MonoBehaviour
         float wEat = GetCharactersCapacity(charCount,
             GetRouteTime(_charactersConfig.SpeedMove), _itemData[1].CollectTime, _charactersConfig.ItemsCount,
             _charactersConfig.ItemsCount);
-        
+
         var currentBuilding = _buildingData.FirstOrDefault(x => x.isSetOnMap && !x.IsBuild);
 
         string craftName = "";
         int level = 0;
+        Sprite sprite = null;
 
         if (currentBuilding != null)
         {
-            CalculateResourceBuilding(ref time, currentBuilding, wRock, wWood, ref craftName, ref level);
+            CalculateResourceBuilding(ref time, currentBuilding, wRock, wWood, ref craftName, ref level, ref sprite);
+        }
+        else if (_craftingTableData[0].currentItemsCount.Count > 0)
+        {
+            int weaponId = _craftingTableData[0].currentWeaponId;
+            var weapon = _weaponData.FirstOrDefault(x => x.id == weaponId);
+            CalculateResourceCraftingTable(ref time, _craftingTableData[0], weapon, wRock, wWood, ref craftName,
+                ref level, ref sprite);
+        }
+        else if (_craftingTableData[1].currentItemsCount.Count > 0)
+        {
+            int weaponId = _craftingTableData[1].currentWeaponId;
+            var weapon = _weaponData.FirstOrDefault(x => x.id == weaponId);
+            CalculateResourceCraftingTable(ref time, _craftingTableData[1], weapon, wRock, wWood, ref craftName,
+                ref level, ref sprite);
         }
 
         var storagesData = _storageData
@@ -109,19 +120,20 @@ public class SaveLoadManager : MonoBehaviour
                     wList.Add(wWood);
                     break;
             }
-        } 
-        
+        }
+
         Dictionary<int, int> resourcesDict = new Dictionary<int, int>();
 
         if (time > 0)
         {
             CalculateResourceStorage(ref time, storagesData, wList.ToArray(), ref resourcesDict);
         }
-        
+
         _offlineFarmView.OpenWindow(resourcesDict, craftName, level);
     }
 
-    private void CalculateResourceBuilding(ref float time, BuildingData buildingData, float wRock, float wWood, ref string buildingName, ref int level)
+    private void CalculateResourceBuilding(ref float time, BuildingData buildingData, float wRock, float wWood,
+        ref string buildingName, ref int level, ref Sprite sprite)
     {
         var stick = buildingData.currentItemsCount[0];
         var rock = buildingData.currentItemsCount[1];
@@ -135,9 +147,8 @@ public class SaveLoadManager : MonoBehaviour
             int currentCount = i == 0 ? stick.count : rock.count;
 
             var m = buildingData.PriceToUpgrades[i].count - currentCount;
-            
-            
-            
+
+
             if (i > 0)
             {
                 time = timesIteration[i - 1] - (m / w);
@@ -146,7 +157,7 @@ public class SaveLoadManager : MonoBehaviour
             {
                 time -= (m / w);
             }
-            
+
             DebugLogger.SendMessage($"Building: iteration(i) - {i}, w = {w}, T[{i}] = {time}", Color.green);
 
             timesIteration.Add(time);
@@ -177,9 +188,12 @@ public class SaveLoadManager : MonoBehaviour
             {
                 buildingData.isSetOnMap = true;
                 buildingData.IsBuild = true;
+                buildingData.StorageData.CurrentLevel++;
                 time -= (int)buildingData.StorageData.BuildTime;
                 buildingName = buildingData.StorageData.nameText;
+                DebugLogger.SendMessage($"{buildingData.StorageData.CurrentLevel}", Color.red);
                 level = buildingData.StorageData.CurrentLevel;
+                sprite = buildingData.StorageData.icon;
             }
             else
             {
@@ -196,6 +210,7 @@ public class SaveLoadManager : MonoBehaviour
                 time -= buildingData.craftingTableCrateTime;
                 buildingName = buildingData.CraftingTableController.CraftingTableData.nameText;
                 level = buildingData.CraftingTableController.CraftingTableData.currentLevel;
+                sprite = buildingData.CraftingTableController.CraftingTableData.icon;
             }
             else
             {
@@ -205,7 +220,77 @@ public class SaveLoadManager : MonoBehaviour
         }
     }
 
-    private void CalculateResourceStorage(ref float time, StorageData[] storagesData, float[] w, ref Dictionary<int,int> resourceDict)
+    private void CalculateResourceCraftingTable(ref float time, CraftingTableData craftingTableData,
+        WeaponData weaponData, float wRock,
+        float wWood, ref string buildingName, ref int level, ref Sprite sprite)
+    {
+        var stick = craftingTableData.currentItemsCount[0];
+        var rock = craftingTableData.currentItemsCount[1];
+
+        List<float> timesIteration = new();
+
+
+        for (int i = 0; i < 2; i++)
+        {
+            float w = i == 0 ? wWood : wRock;
+            int currentCount = i == 0 ? stick.count : rock.count;
+
+            var m = craftingTableData.priceToUpgradeCraftingTable[i].count - currentCount;
+
+
+            if (i > 0)
+            {
+                time = timesIteration[i - 1] - (m / w);
+            }
+            else
+            {
+                time -= (m / w);
+            }
+
+            DebugLogger.SendMessage($"CraftingTable: iteration(i) - {i}, w = {w}, T[{i}] = {time}", Color.green);
+
+            timesIteration.Add(time);
+
+            if (time > 0)
+            {
+                craftingTableData.currentItemsCount[i].count += m;
+            }
+            else
+            {
+                if (i > 0)
+                {
+                    float t = timesIteration[i - 1] - Mathf.Abs(timesIteration[i]);
+                    craftingTableData.currentItemsCount[i].count += (int)(t * w);
+                }
+                else
+                {
+                    craftingTableData.currentItemsCount[i].count += (int)(Mathf.Abs(timesIteration[i]) * w);
+                }
+
+                return;
+            }
+        }
+
+
+        if (craftingTableData.craftingTime < time)
+        {
+            time -= craftingTableData.craftingTime;
+            weaponData.level++;
+            weaponData.IsOpen = true;
+            craftingTableData.Clear();
+            buildingName = weaponData.nameText;
+            level = weaponData.level;
+            sprite = weaponData.icon;
+        }
+        else
+        {
+            craftingTableData.craftingTime -= (int)time;
+            time = 0;
+        }
+    }
+
+    private void CalculateResourceStorage(ref float time, StorageData[] storagesData, float[] w,
+        ref Dictionary<int, int> resourceDict)
     {
         List<float> timesIteration = new();
 
@@ -222,7 +307,7 @@ public class SaveLoadManager : MonoBehaviour
             {
                 time -= (m / w[i]);
             }
-            
+
             DebugLogger.SendMessage($"Storages: iteration(i) - {i}, w = {w}, T[{i}] = {time}", Color.green);
 
             timesIteration.Add(time);
@@ -276,7 +361,6 @@ public class SaveLoadManager : MonoBehaviour
     private float GetCharactersCapacity(int charactersCount, float routeTime, float workTime, int backspaceVolume,
         int weaponsPower)
     {
-
         if (backspaceVolume >= weaponsPower)
         {
             return charactersCount / ((routeTime / backspaceVolume) + (workTime / backspaceVolume));
@@ -343,7 +427,7 @@ public class SaveLoadManager : MonoBehaviour
         }
 
         _charactersConfig.Load();
-        
+
         GetResources();
     }
 }
