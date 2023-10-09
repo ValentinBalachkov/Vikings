@@ -79,6 +79,17 @@ namespace Vikings.Building
 
         public override void SetUpgradeState()
         {
+            
+        }
+
+        public override bool GetUpgradeState()
+        {
+            return false;
+        }
+
+        public override void SetUpgradeState(bool isUpgrade)
+        {
+            
         }
     }
 }

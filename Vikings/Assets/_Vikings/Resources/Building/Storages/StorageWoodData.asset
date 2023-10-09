@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpen: 0
   icon: {fileID: 21300000, guid: d42c25b164dd2eb47af2e2ae8c09f46b, type: 3}
+  iconOfflineFarm: {fileID: 21300000, guid: 9d17be8424e2177469bd61508a573bd5, type: 3}
   nameText: Wood storage
   description: Allows storing wood. Upgrade to increase the capacity
   required: Workbench
   isDefaultOpen: 1
   priority: 1
+  isUpgrade: 0
   _itemType: {fileID: 11400000, guid: 842ec8fe0ff14054fb025a7b78239191, type: 2}
   _count: 0
   _maxStorageCount: 10

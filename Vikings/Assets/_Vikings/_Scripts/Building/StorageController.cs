@@ -43,7 +43,17 @@ namespace Vikings.Building
 
             CollectingResourceView.Instance.Setup(buildingData.StorageData.nameText, buildingData.currentItemsCount,
                 buildingData.StorageData.PriceToUpgrade.ToArray(), transform);
-            isUpgradeState = true;
+            buildingData.StorageData.isUpgrade = true;
+        }
+
+        public override bool GetUpgradeState()
+        {
+            return buildingData.StorageData.isUpgrade;
+        }
+
+        public override void SetUpgradeState(bool isUpgrade)
+        {
+            buildingData.StorageData.isUpgrade = isUpgrade;
         }
 
         public bool IsAvailableToGetItem()
@@ -54,7 +64,7 @@ namespace Vikings.Building
         public override void ChangeStorageCount(PriceToUpgrade priceToUpgrade)
         {
             _audioSourceToStorage.Play();
-            if (!isUpgradeState)
+            if (!buildingData.StorageData.isUpgrade)
             {
                 if (buildingData.StorageData.Count + priceToUpgrade.count > buildingData.StorageData.MaxStorageCount)
                 {
@@ -90,7 +100,7 @@ namespace Vikings.Building
 
         public override void UpgradeStorage()
         {
-            isUpgradeState = false;
+            buildingData.StorageData.isUpgrade = false;
 
             buildingData.StorageData.CurrentLevel++;
             buildingData.StorageData.MaxStorageCount = (int)((Mathf.Pow(buildingData.StorageData.CurrentLevel, 3) + Mathf.Pow(2, buildingData.StorageData.CurrentLevel) + 
@@ -101,7 +111,7 @@ namespace Vikings.Building
 
         public override PriceToUpgrade[] GetCurrentPriceToUpgrades()
         {
-            if (!isUpgradeState)
+            if (!buildingData.StorageData.isUpgrade)
             {
                 PriceToUpgrade price = new PriceToUpgrade()
                 {
@@ -127,7 +137,7 @@ namespace Vikings.Building
 
         public override bool IsFullStorage()
         {
-            if (!isUpgradeState)
+            if (!buildingData.StorageData.isUpgrade)
             {
                 bool isFullStorage = buildingData.StorageData.Count >= buildingData.StorageData.MaxStorageCount;
                 return isFullStorage;

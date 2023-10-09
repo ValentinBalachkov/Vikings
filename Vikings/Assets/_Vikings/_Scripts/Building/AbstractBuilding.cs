@@ -14,8 +14,12 @@ namespace Vikings.Building
 
         public abstract PriceToUpgrade[] GetCurrentPriceToUpgrades();
         
-        public bool isUpgradeState;
+        //public bool isUpgradeState;
         
         public abstract void SetUpgradeState();
+
+        public abstract bool GetUpgradeState();
+
+        public abstract void SetUpgradeState(bool isUpgrade);
     }
 }

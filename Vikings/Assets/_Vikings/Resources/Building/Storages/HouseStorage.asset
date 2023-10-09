@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpen: 0
   icon: {fileID: 21300000, guid: 498d0cf39d9c5144899187bf2ac77ceb, type: 3}
+  iconOfflineFarm: {fileID: 21300000, guid: 4cdd5e87f38283f4d95670ff20d6f279, type: 3}
   nameText: House
   description: Allows you to store food. Upgrade to increase the capacity
   required: Workbench
   isDefaultOpen: 0
   priority: 6
+  isUpgrade: 0
   _itemType: {fileID: 11400000, guid: b90d6cdefc2ad7e4cbdd899ef9e419e5, type: 2}
   _count: 0
   _maxStorageCount: 20

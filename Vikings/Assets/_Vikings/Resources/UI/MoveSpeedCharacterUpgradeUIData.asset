@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: MoveSpeedCharacterUpgradeUIData
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 7bbb3c7b52e028d48bd6277dd98f6292, type: 3}
+  iconOfflineFarm: {fileID: 21300000, guid: e1860a05b2cedbe47969a9c6a2c83c60, type: 3}
   upgradeName: Move speed
   description: Upgrade move speed
   upgradeCharacterEnum: 0

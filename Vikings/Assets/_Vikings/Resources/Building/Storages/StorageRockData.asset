@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpen: 0
   icon: {fileID: 21300000, guid: e8ff7fab8368d754c9416581c2b9d338, type: 3}
+  iconOfflineFarm: {fileID: 21300000, guid: 9b0178f44ecb8284cbc69151cd5dcd18, type: 3}
   nameText: Stone storage
   description: Allows storing stone. Upgrade to increase the capacity
   required: Workbench
   isDefaultOpen: 0
   priority: 4
+  isUpgrade: 0
   _itemType: {fileID: 11400000, guid: 8b782c2617e0b8048985ef732675d1be, type: 2}
   _count: 0
   _maxStorageCount: 10

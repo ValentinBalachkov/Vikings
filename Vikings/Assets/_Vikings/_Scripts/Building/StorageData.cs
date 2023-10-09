@@ -4,7 +4,6 @@ using System.Linq;
 using SecondChanceSystem.SaveSystem;
 using UnityEngine;
 using Vikings.Items;
-using Vikings.UI;
 
 namespace Vikings.Building
 {
@@ -14,11 +13,13 @@ namespace Vikings.Building
         public Action OnUpdateCount;
         public bool isOpen;
         public Sprite icon;
+        public Sprite iconOfflineFarm;
         public string nameText;
         public string description;
         public string required;
         public bool isDefaultOpen;
         public int priority;
+        public bool isUpgrade;
         
 
 
@@ -117,6 +118,7 @@ namespace Vikings.Building
                 _count = data._count;
                 _maxStorageCount = data._maxStorageCount;
                 _currentLevel = data._currentLevel;
+                isUpgrade = data.isUpgrade;
             }
         }
 

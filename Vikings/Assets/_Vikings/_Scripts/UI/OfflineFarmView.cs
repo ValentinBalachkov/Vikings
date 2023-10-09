@@ -10,7 +10,8 @@ public class OfflineFarmView : MonoBehaviour
     [SerializeField] private OfflineIconsData[] _icons;
     [SerializeField] private GameObject _buildingPanel;
     [SerializeField] private GameObject _resourcesPanel;
-    [SerializeField] private TMP_Text _buildingDescriptionText;
+    [SerializeField] private TMP_Text _buildingNameText;
+    [SerializeField] private TMP_Text _buildingLevelText;
     [SerializeField] private Image _buildingIcon;
     
     
@@ -50,7 +51,8 @@ public class OfflineFarmView : MonoBehaviour
         if (level != 0)
         {
             _buildingIcon.sprite = sprite;
-            _buildingDescriptionText.text = $"{craftName} lvl {level}";
+            _buildingNameText.text = $"{craftName}";
+            _buildingLevelText.text = $"lvl:{level}";
             _buildingPanel.SetActive(true);
         }
         else

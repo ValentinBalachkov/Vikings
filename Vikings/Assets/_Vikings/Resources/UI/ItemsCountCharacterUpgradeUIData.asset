@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: ItemsCountCharacterUpgradeUIData
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 1dcf0509cc4f9ea4c853750c37907425, type: 3}
+  iconOfflineFarm: {fileID: 21300000, guid: 3ec270bdfcb701d43882893e1bddb3af, type: 3}
   upgradeName: Items count
   description: upgrade Items count
   upgradeCharacterEnum: 1

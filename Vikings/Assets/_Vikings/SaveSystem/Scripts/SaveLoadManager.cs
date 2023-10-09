@@ -76,11 +76,24 @@ public class SaveLoadManager : MonoBehaviour
 
         var currentBuilding = _buildingData.FirstOrDefault(x => x.isSetOnMap && !x.IsBuild);
 
+        var currentBuildingUpgrade =
+            _buildingData.FirstOrDefault(x => x.StorageData != null && x.StorageData.isUpgrade);
+
         string craftName = "";
         int level = 0;
         Sprite sprite = null;
 
-        if (currentBuilding != null)
+        if (_craftingTableData[0].isUpgrade)
+        {
+            CalculateResourceBuilding(ref time, _buildingData[0], wRock, wWood, ref craftName, ref level,
+                ref sprite);
+        }
+        else if (currentBuildingUpgrade != null)
+        {
+            CalculateResourceBuilding(ref time, currentBuildingUpgrade, wRock, wWood, ref craftName, ref level,
+                ref sprite);
+        }
+        else if (currentBuilding != null)
         {
             CalculateResourceBuilding(ref time, currentBuilding, wRock, wWood, ref craftName, ref level, ref sprite);
         }
@@ -129,56 +142,110 @@ public class SaveLoadManager : MonoBehaviour
             CalculateResourceStorage(ref time, storagesData, wList.ToArray(), ref resourcesDict);
         }
 
-        _offlineFarmView.OpenWindow(resourcesDict, craftName, level);
+
+        _offlineFarmView.OpenWindow(resourcesDict, craftName, level, sprite);
     }
 
     private void CalculateResourceBuilding(ref float time, BuildingData buildingData, float wRock, float wWood,
         ref string buildingName, ref int level, ref Sprite sprite)
     {
-        var stick = buildingData.currentItemsCount[0];
-        var rock = buildingData.currentItemsCount[1];
 
-        List<float> timesIteration = new();
-
-
-        for (int i = 0; i < 2; i++)
+        if (_craftingTableData[0].isUpgrade)
         {
-            float w = i == 0 ? wWood : wRock;
-            int currentCount = i == 0 ? stick.count : rock.count;
+            var stick = _craftingTableData[0].PriceToUpgrade[0];
+            var rock = _craftingTableData[0].PriceToUpgrade[0];
 
-            var m = buildingData.PriceToUpgrades[i].count - currentCount;
+            List<float> timesIteration = new();
 
 
-            if (i > 0)
+            for (int i = 0; i < 2; i++)
             {
-                time = timesIteration[i - 1] - (m / w);
-            }
-            else
-            {
-                time -= (m / w);
-            }
+                float w = i == 0 ? wWood : wRock;
+                int currentCount = i == 0 ? stick.count : rock.count;
 
-            DebugLogger.SendMessage($"Building: iteration(i) - {i}, w = {w}, T[{i}] = {time}", Color.green);
+                var m = _craftingTableData[0].currentItemsPriceToUpgrade[i].count - currentCount;
 
-            timesIteration.Add(time);
 
-            if (time > 0)
-            {
-                buildingData.currentItemsCount[i].count += m;
-            }
-            else
-            {
                 if (i > 0)
                 {
-                    float t = timesIteration[i - 1] - Mathf.Abs(timesIteration[i]);
-                    buildingData.currentItemsCount[i].count += (int)(t * w);
+                    time = timesIteration[i - 1] - (m / w);
                 }
                 else
                 {
-                    buildingData.currentItemsCount[i].count += (int)(Mathf.Abs(timesIteration[i]) * w);
+                    time -= (m / w);
                 }
 
-                return;
+                DebugLogger.SendMessage($"Building: iteration(i) - {i}, w = {w}, T[{i}] = {time}", Color.green);
+
+                timesIteration.Add(time);
+
+                if (time > 0)
+                {
+                    _craftingTableData[0].currentItemsPriceToUpgrade[i].count += m;
+                }
+                else
+                {
+                    if (i > 0)
+                    {
+                        float t = timesIteration[i - 1] - Mathf.Abs(timesIteration[i]);
+                        _craftingTableData[0].currentItemsPriceToUpgrade[i].count += (int)(t * w);
+                    }
+                    else
+                    {
+                        _craftingTableData[0].currentItemsPriceToUpgrade[i].count += (int)(Mathf.Abs(timesIteration[i]) * w);
+                    }
+
+                    return;
+                }
+            }
+        }
+        else
+        {
+            var stick = buildingData.currentItemsCount[0];
+            var rock = buildingData.currentItemsCount[1];
+
+            List<float> timesIteration = new();
+
+
+            for (int i = 0; i < 2; i++)
+            {
+                float w = i == 0 ? wWood : wRock;
+                int currentCount = i == 0 ? stick.count : rock.count;
+
+                var m = buildingData.PriceToUpgrades[i].count - currentCount;
+
+
+                if (i > 0)
+                {
+                    time = timesIteration[i - 1] - (m / w);
+                }
+                else
+                {
+                    time -= (m / w);
+                }
+
+                DebugLogger.SendMessage($"Building: iteration(i) - {i}, w = {w}, T[{i}] = {time}", Color.green);
+
+                timesIteration.Add(time);
+
+                if (time > 0)
+                {
+                    buildingData.currentItemsCount[i].count += m;
+                }
+                else
+                {
+                    if (i > 0)
+                    {
+                        float t = timesIteration[i - 1] - Mathf.Abs(timesIteration[i]);
+                        buildingData.currentItemsCount[i].count += (int)(t * w);
+                    }
+                    else
+                    {
+                        buildingData.currentItemsCount[i].count += (int)(Mathf.Abs(timesIteration[i]) * w);
+                    }
+
+                    return;
+                }
             }
         }
 
@@ -186,18 +253,25 @@ public class SaveLoadManager : MonoBehaviour
         {
             if (buildingData.StorageData.BuildTime < time)
             {
-                buildingData.isSetOnMap = true;
-                buildingData.IsBuild = true;
+                if (buildingData.StorageData.isUpgrade)
+                {
+                    buildingData.StorageData.isUpgrade = false;
+                }
+                else
+                {
+                    buildingData.isSetOnMap = true;
+                    buildingData.IsBuild = true;
+                }
+
                 buildingData.StorageData.CurrentLevel++;
                 time -= (int)buildingData.StorageData.BuildTime;
                 buildingName = buildingData.StorageData.nameText;
-                DebugLogger.SendMessage($"{buildingData.StorageData.CurrentLevel}", Color.red);
                 level = buildingData.StorageData.CurrentLevel;
-                sprite = buildingData.StorageData.icon;
+                sprite = buildingData.StorageData.iconOfflineFarm;
             }
             else
             {
-                buildingData.StorageData.BuildTime -= time;
+                //buildingData.StorageData.BuildTime -= time;
                 time = 0;
             }
         }
@@ -205,16 +279,25 @@ public class SaveLoadManager : MonoBehaviour
         {
             if (buildingData.craftingTableCrateTime < time)
             {
-                buildingData.isSetOnMap = true;
-                buildingData.IsBuild = true;
+                if (_craftingTableData[0].isUpgrade)
+                {
+                    _craftingTableData[0].isUpgrade = false;
+                }
+                else
+                {
+                    buildingData.isSetOnMap = true;
+                    buildingData.IsBuild = true;
+                }
+
+                _craftingTableData[0].currentLevel++;
                 time -= buildingData.craftingTableCrateTime;
-                buildingName = buildingData.CraftingTableController.CraftingTableData.nameText;
-                level = buildingData.CraftingTableController.CraftingTableData.currentLevel;
-                sprite = buildingData.CraftingTableController.CraftingTableData.icon;
+                buildingName = _craftingTableData[0].nameText;
+                level = _craftingTableData[0].currentLevel;
+                sprite = _craftingTableData[0].iconOfflineFarm;
             }
             else
             {
-                buildingData.StorageData.BuildTime -= time;
+                //_craftingTableData[0].tableBuildingTime -= (int)time;
                 time = 0;
             }
         }
@@ -277,10 +360,16 @@ public class SaveLoadManager : MonoBehaviour
             time -= craftingTableData.craftingTime;
             weaponData.level++;
             weaponData.IsOpen = true;
+            var items = _itemData.Where(x => x.ID == weaponData.ItemData.ID).ToList();
+            foreach (var item in items)
+            {
+                item.IsOpen = true;
+            }
+
             craftingTableData.Clear();
             buildingName = weaponData.nameText;
             level = weaponData.level;
-            sprite = weaponData.icon;
+            sprite = weaponData.iconOfflineFarm;
         }
         else
         {

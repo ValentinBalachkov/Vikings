@@ -11,12 +11,14 @@ namespace Vikings.Building
         public bool isOpen;
         public int currentLevel;
         public Sprite icon;
+        public Sprite iconOfflineFarm;
         public string nameText;
         public string description;
         public string required;
         public int currentWeaponId;
         public int tableBuildingTime;
         public int priority;
+        public bool isUpgrade;
 
         [SerializeField] private BuildingData _buildingData;
         
@@ -121,6 +123,7 @@ namespace Vikings.Building
             if (data != null)
             {
                 currentLevel = data.currentLevel;
+                isUpgrade = data.isUpgrade;
                 if (data._currentItemsCountArray != null)
                 {
                     currentItemsCount.Clear();

@@ -6,6 +6,7 @@ namespace Vikings.UI
     public class CharacterUpgradeUIData : ScriptableObject
     {
         public Sprite icon;
+        public Sprite iconOfflineFarm;
         public string upgradeName;
         public string description;
         public UpgradeCharacterEnum upgradeCharacterEnum;

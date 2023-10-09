@@ -12,6 +12,7 @@ namespace Vikings.Weapon
     {
         public bool isOpenForCrafting;
         public Sprite icon;
+        public Sprite iconOfflineFarm;
         public string nameText;
         public string description;
         public string required;

@@ -41,13 +41,23 @@ namespace Vikings.Building
             CollectingResourceView.Instance.Setup(_craftingTableData.nameText,_craftingTableData.currentItemsPriceToUpgrade.ToArray(), 
                 _craftingTableData.PriceToUpgrade.ToArray(), transform);
 
-            isUpgradeState = true;
+            _craftingTableData.isUpgrade = true;
+        }
+
+        public override bool GetUpgradeState()
+        {
+            return _craftingTableData.isUpgrade;
+        }
+
+        public override void SetUpgradeState(bool isUpgrade)
+        {
+            _craftingTableData.isUpgrade = isUpgrade;
         }
 
         public override void ChangeStorageCount(PriceToUpgrade price)
         {
             _audioSourceToStorage.Play();
-            if (isUpgradeState)
+            if (_craftingTableData.isUpgrade)
             {
                 var itemUpg = _craftingTableData.currentItemsPriceToUpgrade.FirstOrDefault(x => x.itemData.ID == price.itemData.ID);
                 var defaultItemUpg = _craftingTableData.PriceToUpgrade.FirstOrDefault(x => x.itemData.ID == price.itemData.ID);
@@ -88,7 +98,7 @@ namespace Vikings.Building
                 _isUpgradeWeapon = false;
             }
 
-            else if (!isUpgradeState)
+            else if (!_craftingTableData.isUpgrade)
             {
                 _currentWeapon.level = 1;
                 _currentWeapon.IsOpen = true;
@@ -114,7 +124,7 @@ namespace Vikings.Building
 
         public override bool IsFullStorage()
         {
-            if (isUpgradeState)
+            if (_craftingTableData.isUpgrade)
             {
                 for (int i = 0; i < _craftingTableData.PriceToUpgrade.Count; i++)
                 {
@@ -148,12 +158,12 @@ namespace Vikings.Building
         {
             _craftingTableData.currentLevel++;
             SetupSprite(_craftingTableData.currentLevel);
-            isUpgradeState = false;
+            _craftingTableData.isUpgrade = false;
         }
 
         public override PriceToUpgrade[] GetCurrentPriceToUpgrades()
         {
-            if (isUpgradeState)
+            if (_craftingTableData.isUpgrade)
             {
                 List<PriceToUpgrade> priceUpgrade = new();
                 for (int i = 0; i < _craftingTableData.PriceToUpgrade.Count; i++)

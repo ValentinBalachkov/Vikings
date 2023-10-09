@@ -15,6 +15,7 @@ MonoBehaviour:
   isOpen: 0
   currentLevel: 0
   icon: {fileID: 21300000, guid: bf5558c6a1680954698420e85333ead7, type: 3}
+  iconOfflineFarm: {fileID: 21300000, guid: 77f9782e323686143a53ad0436cff1e2, type: 3}
   nameText: Workbench
   description: Allows you to create tools and buildings. Upgrade to reduce the amount
     of wood and stone needed for crafting
@@ -22,6 +23,7 @@ MonoBehaviour:
   currentWeaponId: 0
   tableBuildingTime: 8
   priority: 3
+  isUpgrade: 0
   _buildingData: {fileID: 11400000, guid: f2392d6c41d9cfc4e81358fd46c6c695, type: 2}
   currentItemsCount: []
   priceToUpgradeCraftingTable: []
@@ -30,3 +32,4 @@ MonoBehaviour:
     count: 8
   - itemData: {fileID: 11400000, guid: 8b782c2617e0b8048985ef732675d1be, type: 2}
     count: 7
+  craftingTime: 0
