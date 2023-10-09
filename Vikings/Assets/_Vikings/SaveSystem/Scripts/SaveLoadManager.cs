@@ -21,7 +21,39 @@ public class SaveLoadManager : MonoBehaviour
     [SerializeField] private DateTimeData _dateTimeData;
     [SerializeField] private OfflineFarmView _offlineFarmView;
 
+    [SerializeField] private TMP_InputField _timeCheatIF;
+    [SerializeField] private TMP_InputField _constCheatIF;
+
+
     private const int TIME_CONST = 10;
+
+    public void CheatTimeSave()
+    {
+        int time;
+        
+        if (Int32.TryParse(_timeCheatIF.text, out time))
+        {
+            _dateTimeData.cheatTime = time;
+            _dateTimeData.Save();
+            DebugLogger.SendMessage($"Save Time {_dateTimeData.cheatTime} sec", Color.green);
+            return;
+        }
+        DebugLogger.SendMessage("Incorrect Input", Color.red);
+    }
+    
+    public void CheatConstSave()
+    {
+        int time;
+        
+        if (Int32.TryParse(_constCheatIF.text, out time))
+        {
+            _dateTimeData.timeConst = time;
+            _dateTimeData.Save();
+            DebugLogger.SendMessage($"Save Const {_dateTimeData.timeConst}", Color.green);
+            return;
+        }
+        DebugLogger.SendMessage("Incorrect Input", Color.red);
+    }
 
 
     private void Awake()
@@ -46,14 +78,17 @@ public class SaveLoadManager : MonoBehaviour
         }
         else
         {
-            _dateTimeData.currentDateTime = DateTime.Now.ToString();
-            _dateTimeData.Save();
+            // _dateTimeData.currentDateTime = DateTime.Now.ToString();
+            // _dateTimeData.Save();
         }
     }
 
     private void GetResources()
     {
-        var time = GetTimeAfterRestart();
+        DebugLogger.SendMessage($"Current const: {_dateTimeData.timeConst} \n Current loaded time: {_dateTimeData.cheatTime}sec", Color.yellow);
+        
+        //var time = GetTimeAfterRestart();
+        var time = (float)_dateTimeData.cheatTime;
 
         if (time == 0)
         {
@@ -149,7 +184,6 @@ public class SaveLoadManager : MonoBehaviour
     private void CalculateResourceBuilding(ref float time, BuildingData buildingData, float wRock, float wWood,
         ref string buildingName, ref int level, ref Sprite sprite)
     {
-
         if (_craftingTableData[0].isUpgrade)
         {
             var stick = _craftingTableData[0].PriceToUpgrade[0];
@@ -192,7 +226,8 @@ public class SaveLoadManager : MonoBehaviour
                     }
                     else
                     {
-                        _craftingTableData[0].currentItemsPriceToUpgrade[i].count += (int)(Mathf.Abs(timesIteration[i]) * w);
+                        _craftingTableData[0].currentItemsPriceToUpgrade[i].count +=
+                            (int)(Mathf.Abs(timesIteration[i]) * w);
                     }
 
                     return;
@@ -397,7 +432,7 @@ public class SaveLoadManager : MonoBehaviour
                 time -= (m / w[i]);
             }
 
-            DebugLogger.SendMessage($"Storages: iteration(i) - {i}, w = {w}, T[{i}] = {time}", Color.green);
+            DebugLogger.SendMessage($"Storages: iteration(i) - {i}, w = {w[i]}, T[{i}] = {time}", Color.green);
 
             timesIteration.Add(time);
 
@@ -427,6 +462,13 @@ public class SaveLoadManager : MonoBehaviour
         }
     }
 
+    public void ClearAllCheatData()
+    {
+        _dateTimeData.timeConst = TIME_CONST;
+        _dateTimeData.cheatTime = 0;
+        _dateTimeData.Save();
+    }
+
     private float GetTimeAfterRestart()
     {
         _dateTimeData.Load();
@@ -444,7 +486,8 @@ public class SaveLoadManager : MonoBehaviour
 
     private float GetRouteTime(float moveSpeed)
     {
-        return TIME_CONST / moveSpeed;
+        //return TIME_CONST / moveSpeed;
+        return _dateTimeData.timeConst / moveSpeed;
     }
 
     private float GetCharactersCapacity(int charactersCount, float routeTime, float workTime, int backspaceVolume,
@@ -516,6 +559,9 @@ public class SaveLoadManager : MonoBehaviour
         }
 
         _charactersConfig.Load();
+        
+        _dateTimeData.Load();
+        
 
         GetResources();
     }

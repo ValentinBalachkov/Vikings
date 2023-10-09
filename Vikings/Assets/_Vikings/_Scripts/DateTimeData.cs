@@ -8,6 +8,8 @@ namespace Vikings.Building
     public class DateTimeData : ScriptableObject, IData
     {
         public string  currentDateTime;
+        public int cheatTime;
+        public int timeConst;
         
         public void Save()
         {
@@ -20,6 +22,8 @@ namespace Vikings.Building
             if (data != null)
             {
                 currentDateTime = data.currentDateTime;
+                cheatTime = data.cheatTime;
+                timeConst = data.timeConst;
             }
         }
     }
