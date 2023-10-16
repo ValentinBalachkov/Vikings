@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38522c9c68986884699ee2651c3e4ada, type: 3}
+  m_Name: TaskData 4
+  m_EditorClassIdentifier: 
+  id: 5
+  taskStatus: 1
+  accessDone: 0
+  reward:
+  - itemData: {fileID: 11400000, guid: b90d6cdefc2ad7e4cbdd899ef9e419e5, type: 2}
+    count: 20
+  icon: {fileID: 21300000, guid: 4cdd5e87f38283f4d95670ff20d6f279, type: 3}
+  descriptionNewTask: It's time to think about putting a roof over your head. We
+    need to craft a hut.
+  descriptionCurrentTask: Open the "craft" menu and select a House. We will collect
+    materials and build it.
+  descriptionReward: Great, now we can house another survivor and we have somewhere
+    to store food!

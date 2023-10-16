@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: CraftingTableData
   m_EditorClassIdentifier: 
   isOpen: 0
-  currentLevel: 0
   icon: {fileID: 21300000, guid: bf5558c6a1680954698420e85333ead7, type: 3}
   iconOfflineFarm: {fileID: 21300000, guid: 77f9782e323686143a53ad0436cff1e2, type: 3}
   nameText: Workbench
@@ -25,6 +24,7 @@ MonoBehaviour:
   priority: 3
   isUpgrade: 0
   _buildingData: {fileID: 11400000, guid: f2392d6c41d9cfc4e81358fd46c6c695, type: 2}
+  _taskData: {fileID: 11400000, guid: 18b0ffe85c7f8a740ba6cdbec9edd96f, type: 2}
   currentItemsCount: []
   priceToUpgradeCraftingTable: []
   currentItemsPriceToUpgrade:

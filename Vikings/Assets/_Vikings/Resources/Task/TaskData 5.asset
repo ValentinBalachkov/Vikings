@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38522c9c68986884699ee2651c3e4ada, type: 3}
+  m_Name: TaskData 5
+  m_EditorClassIdentifier: 
+  id: 6
+  taskStatus: 1
+  accessDone: 0
+  reward:
+  - itemData: {fileID: 11400000, guid: b90d6cdefc2ad7e4cbdd899ef9e419e5, type: 2}
+    count: 20
+  icon: {fileID: 21300000, guid: 3ec270bdfcb701d43882893e1bddb3af, type: 3}
+  descriptionNewTask: With a backpack we can carry more resources.
+  descriptionCurrentTask: Open the "Upgrade People" menu and select a Items count.
+  descriptionReward: Great, now the work will go faster!

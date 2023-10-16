@@ -20,7 +20,9 @@ namespace Vikings.Building
         public bool isDefaultOpen;
         public int priority;
         public bool isUpgrade;
-        
+
+        [SerializeField] private TaskData _taskData;
+
 
 
         public ItemData ItemType => _itemType;
@@ -90,7 +92,18 @@ namespace Vikings.Building
         public int CurrentLevel
         {
             get => _currentLevel;
-            set => _currentLevel = value;
+            set
+            {
+                _currentLevel = value;
+                if (_currentLevel == 1 && _taskData != null)
+                {
+                    _taskData.accessDone = true;
+                    if (_taskData.taskStatus == TaskStatus.InProcess)
+                    {
+                        TaskManager.taskChangeStatusCallback?.Invoke(_taskData, TaskStatus.TakeReward);
+                    }
+                }
+            }
         }
 
         [SerializeField] private ItemData _itemType;

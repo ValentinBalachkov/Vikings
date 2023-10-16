@@ -15,6 +15,7 @@ public class SaveLoadManager : MonoBehaviour
     [SerializeField] private List<ItemData> _itemData = new();
     [SerializeField] private List<WeaponData> _weaponData = new();
     [SerializeField] private List<CraftingTableData> _craftingTableData = new();
+    [SerializeField] private List<TaskData> _tasksData = new();
     [SerializeField] private CharactersConfig _charactersConfig;
     [SerializeField] private TMP_Text _versionText;
 
@@ -23,6 +24,7 @@ public class SaveLoadManager : MonoBehaviour
 
     [SerializeField] private TMP_InputField _timeCheatIF;
     [SerializeField] private TMP_InputField _constCheatIF;
+    
 
 
     private const int TIME_CONST = 10;
@@ -528,6 +530,11 @@ public class SaveLoadManager : MonoBehaviour
             data.Save();
         }
 
+        foreach (var data in _tasksData)
+        {
+            data.Save();
+        }
+
         _charactersConfig.Save();
     }
 
@@ -554,6 +561,11 @@ public class SaveLoadManager : MonoBehaviour
         }
 
         foreach (var data in _craftingTableData)
+        {
+            data.Load();
+        }
+        
+        foreach (var data in _tasksData)
         {
             data.Load();
         }

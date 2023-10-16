@@ -9,7 +9,23 @@ namespace Vikings.Building
     public class CraftingTableData : ScriptableObject, IData
     {
         public bool isOpen;
-        public int currentLevel;
+        public int currentLevel
+        {
+            get => _currentLevel;
+            set
+            {
+                _currentLevel = value;
+                if (_currentLevel == 1 && _taskData != null)
+                {
+                    _taskData.accessDone = true;
+                    if (_taskData.taskStatus == TaskStatus.InProcess)
+                    {
+                        TaskManager.taskChangeStatusCallback?.Invoke(_taskData, TaskStatus.TakeReward);
+                    }
+                }
+            }
+        }
+        private int _currentLevel;
         public Sprite icon;
         public Sprite iconOfflineFarm;
         public string nameText;
@@ -21,6 +37,7 @@ namespace Vikings.Building
         public bool isUpgrade;
 
         [SerializeField] private BuildingData _buildingData;
+        [SerializeField] private TaskData _taskData;
         
         public List<PriceToUpgrade> currentItemsCount = new();
         public List<PriceToUpgrade> priceToUpgradeCraftingTable = new();
@@ -122,7 +139,7 @@ namespace Vikings.Building
             var data = SaveLoadSystem.LoadData(this) as CraftingTableData;
             if (data != null)
             {
-                currentLevel = data.currentLevel;
+                _currentLevel = data._currentLevel;
                 isUpgrade = data.isUpgrade;
                 if (data._currentItemsCountArray != null)
                 {

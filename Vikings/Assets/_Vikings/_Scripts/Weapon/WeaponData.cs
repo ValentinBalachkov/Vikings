@@ -17,8 +17,26 @@ namespace Vikings.Weapon
         public string description;
         public string required;
         public int id;
-        public int level;
+        public int level
+        {
+            get => _level;
+            set
+            {
+                _level = value;
+                if (_level == 1 && _taskData != null)
+                {
+                    _taskData.accessDone = true;
+                    if (_taskData.taskStatus == TaskStatus.InProcess)
+                    {
+                        TaskManager.taskChangeStatusCallback?.Invoke(_taskData, TaskStatus.TakeReward);
+                    }
+                }
+            }
+        }
         public int priority;
+        [SerializeField] private TaskData _taskData;
+
+        private int _level;
         
         public bool IsOpen
         {

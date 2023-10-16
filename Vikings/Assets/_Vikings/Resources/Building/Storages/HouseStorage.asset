@@ -21,6 +21,7 @@ MonoBehaviour:
   isDefaultOpen: 0
   priority: 6
   isUpgrade: 0
+  _taskData: {fileID: 11400000, guid: 47321345684f25c4d8e4e1d2978056cf, type: 2}
   _itemType: {fileID: 11400000, guid: b90d6cdefc2ad7e4cbdd899ef9e419e5, type: 2}
   _count: 0
   _maxStorageCount: 20

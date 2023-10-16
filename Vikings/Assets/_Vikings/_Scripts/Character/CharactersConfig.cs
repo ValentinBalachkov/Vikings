@@ -10,6 +10,8 @@ namespace Vikings.Chanacter
         public int charactersCount;
         public int houseLevel;
 
+        [SerializeField] private TaskData _taskDataBackpack;
+
         public float SpeedMove => ((Mathf.Sqrt(speedMoveLevel) / 2 + 0.5f) * speedMove) + Random.Range(0, 0.6f);
 
         public int SpeedMoveCost
@@ -76,6 +78,23 @@ namespace Vikings.Chanacter
                 return (int)newPrice;
             }
         }
+        
+        public int itemsCountLevel
+        {
+            get => _itemsCountLevel;
+            set
+            {
+                _itemsCountLevel = value;
+                if (_itemsCountLevel == 1 && _taskDataBackpack != null)
+                {
+                    _taskDataBackpack.accessDone = true;
+                    if (_taskDataBackpack.taskStatus == TaskStatus.InProcess)
+                    {
+                        TaskManager.taskChangeStatusCallback?.Invoke(_taskDataBackpack, TaskStatus.TakeReward);
+                    }
+                }
+            }
+        }
 
         public float SpeedWork
         {
@@ -128,14 +147,14 @@ namespace Vikings.Chanacter
         public int speedWorkCost = 17;
 
         public int itemsCount = 2;
-        public int itemsCountLevel = 1;
+        public int _itemsCountLevel = 1;
         public int itemsCountCost = 10;
 
         public void ClearData()
         {
             speedMoveLevel = 1;
             speedWorkLevel = 1;
-            itemsCountLevel = 1;
+            _itemsCountLevel = 1;
             charactersCount = 0;
             houseLevel = 0;
         }
@@ -149,7 +168,7 @@ namespace Vikings.Chanacter
                     speedMoveLevel++;
                     break;
                 case UpgradeCharacterEnum.ItemsCount:
-                    itemsCountLevel++;
+                    _itemsCountLevel++;
                     break;
                 case UpgradeCharacterEnum.SpeedWork:
                     speedWorkLevel++;
@@ -173,7 +192,7 @@ namespace Vikings.Chanacter
                 houseLevel = data.houseLevel;
                 speedMoveLevel = data.speedMoveLevel;
                 speedWorkLevel = data.speedWorkLevel;
-                itemsCountLevel = data.itemsCountLevel;
+                _itemsCountLevel = data._itemsCountLevel;
             }
         }
     }

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charactersCount: 0
   houseLevel: 0
+  _taskDataBackpack: {fileID: 11400000, guid: 540c20a5168b5444c9001bf4e1f04521, type: 2}
   speedMove: 5
   speedMoveLevel: 1
   speedMoveCost: 14
@@ -21,5 +22,5 @@ MonoBehaviour:
   speedWorkLevel: 1
   speedWorkCost: 17
   itemsCount: 1
-  itemsCountLevel: 1
+  _itemsCountLevel: 1
   itemsCountCost: 10
