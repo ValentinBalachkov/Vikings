@@ -16,9 +16,11 @@ public class TaskManager : MonoBehaviour
     {
         var tasks = _tasksData.Where(x => x.taskStatus != TaskStatus.Done && x.taskStatus != TaskStatus.NotAdded).OrderBy(x => x.taskStatus).ToList();
 
+        DebugLogger.SendMessage(tasks.Count.ToString(), Color.cyan);
+        
         foreach (var task in _tasksData)
         {
-            task.taskDoneCallback += SetInProgressStatus;
+            task.taskDoneCallback += SetSuccessStatus;
         }
 
         for (int i = 0; i < tasks.Count; i++)
@@ -30,20 +32,25 @@ public class TaskManager : MonoBehaviour
 
         if (!PlayerPrefs.HasKey("FirstLoading"))
         {
+            DebugLogger.SendMessage("Task 1", Color.cyan);
             var task = _tasksData.FirstOrDefault(x => x.id == 2);
-            taskChangeStatusCallback?.Invoke(task, TaskStatus.InProcess);
+            taskChangeStatusCallback?.Invoke(task, TaskStatus.IsSuccess);
             PlayerPrefs.SetInt( "FirstLoading", 1);
+        }
+        if(tasks.Count > 0)
+        {
+            _trayView.UpdateTrayPanel(_taskQueue);
         }
     }
 
-    private void SetInProgressStatus(TaskData taskData)
+    private void SetSuccessStatus(TaskData taskData)
     {
         var data = _tasksData.FirstOrDefault(x => x.id == taskData.id + 1);
         if (data == null)
         {
             return;
         }
-        taskChangeStatusCallback?.Invoke(data, TaskStatus.InProcess);
+        taskChangeStatusCallback?.Invoke(data, TaskStatus.IsSuccess);
     }
 
     private void OnDestroy()
@@ -58,6 +65,7 @@ public class TaskManager : MonoBehaviour
 
     private void AddTaskToQueue(TaskData taskData)
     {
+        DebugLogger.SendMessage("Task 3", Color.cyan);
         _taskQueue.Add(taskData);
     }
     private void RemoveTaskFromQueue(TaskData taskData)
@@ -68,11 +76,9 @@ public class TaskManager : MonoBehaviour
     private void OnTaskChangeStatus(TaskData taskData, TaskStatus status)
     {
         taskData.taskStatus = status;
-
+        DebugLogger.SendMessage("Task 2", Color.cyan);
         switch (taskData.taskStatus)
         {
-            case TaskStatus.NotAdded:
-                break;
             case TaskStatus.IsSuccess:
                 AddTaskToQueue(taskData);
                 break;
@@ -82,15 +88,12 @@ public class TaskManager : MonoBehaviour
                     taskChangeStatusCallback?.Invoke(taskData, TaskStatus.TakeReward);
                 }
                 break;
-            case TaskStatus.TakeReward:
-                
-                break;
             case TaskStatus.Done:
                 taskData.taskDoneCallback?.Invoke(taskData);
                 RemoveTaskFromQueue(taskData);
                 break;
         }
-        
+        DebugLogger.SendMessage("Task 2 1", Color.cyan);
         _trayView.UpdateTrayPanel(_taskQueue);
     }
 

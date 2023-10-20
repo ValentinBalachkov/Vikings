@@ -32,7 +32,8 @@ namespace Vikings.Building
             get => _count;
             set
             {
-                _count = value;
+                _count = value > _maxStorageCount ? _maxStorageCount : value;
+
                 OnUpdateCount?.Invoke();
             } 
         }

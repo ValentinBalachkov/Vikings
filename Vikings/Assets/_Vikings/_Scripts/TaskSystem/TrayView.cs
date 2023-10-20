@@ -19,7 +19,6 @@ public class TrayView : MonoBehaviour
     public void UpdateTrayPanel(List<TaskData> tasksData)
     {
         ClearElements();
-
         foreach (var task in tasksData)
         {
             var taskObject = Instantiate(_trayElement, _content);
@@ -53,6 +52,7 @@ public class TrayView : MonoBehaviour
     {
         if (_trayElements.Count == 0)
         {
+            
             return;
         }
 
@@ -60,6 +60,7 @@ public class TrayView : MonoBehaviour
         {
             Destroy(element.gameObject);
         }
+        _trayElements.Clear();
     }
 
 

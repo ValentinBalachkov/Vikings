@@ -1,13 +1,16 @@
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Vikings.Building;
+using Vikings.UI;
 
 public class QuestPanelView : MonoBehaviour
 {
     [SerializeField] private TMP_Text _header;
     [SerializeField] private TMP_Text _description;
     [SerializeField] private TMP_Text _descriptionReward;
-    
+
     [SerializeField] private Image _icon;
     [SerializeField] private Image _iconReward;
     [SerializeField] private TMP_Text _rewardCount;
@@ -16,7 +19,10 @@ public class QuestPanelView : MonoBehaviour
     [SerializeField] private Button _acceptBtn;
     [SerializeField] private TMP_Text _acceptBtnText;
     [SerializeField] private Button _closeRewardBtn;
-    
+
+    [SerializeField] private InventoryView _inventoryView;
+    [SerializeField] private StorageData[] _storagesData;
+
 
     public void SetNewQuest(TaskData taskData)
     {
@@ -34,8 +40,9 @@ public class QuestPanelView : MonoBehaviour
             TaskManager.taskChangeStatusCallback?.Invoke(taskData, TaskStatus.InProcess);
             CloseWindow();
         }));
+        gameObject.SetActive(true);
     }
-    
+
     public void SetCurrentQuest(TaskData taskData)
     {
         _closeBtn.onClick.AddListener(CloseWindow);
@@ -48,6 +55,7 @@ public class QuestPanelView : MonoBehaviour
         _closeRewardBtn.gameObject.SetActive(false);
         _acceptBtnText.text = "Ok";
         _acceptBtn.onClick.AddListener(CloseWindow);
+        gameObject.SetActive(true);
     }
 
     public void SetReward(TaskData taskData)
@@ -63,11 +71,15 @@ public class QuestPanelView : MonoBehaviour
         _acceptBtnText.text = "Accept";
         _acceptBtn.onClick.AddListener((() =>
         {
+            var storage = _storagesData.FirstOrDefault(x => x.ItemType.ID == taskData.reward[0].itemData.ID);
+            storage.Count += taskData.reward[0].count;
+            _inventoryView.UpdateUI(storage.ItemType);
             TaskManager.taskChangeStatusCallback?.Invoke(taskData, TaskStatus.Done);
             CloseWindow();
         }));
-        
+
         _closeRewardBtn.onClick.AddListener(CloseWindow);
+        gameObject.SetActive(true);
     }
 
     private void CloseWindow()
