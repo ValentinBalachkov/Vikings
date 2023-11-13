@@ -17,4 +17,10 @@ public class TrayElement : MonoBehaviour
         _taskData = taskData;
         _button.onClick.AddListener(onClick);
     }
+    
+    public void Init(Sprite sprite, UnityAction onClick)
+    {
+        _icon.sprite = sprite;
+        _button.onClick.AddListener(onClick);
+    }
 }

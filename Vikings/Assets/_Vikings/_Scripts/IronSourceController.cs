@@ -1,48 +1,95 @@
 using System.Collections;
 using UnityEngine;
+using Vikings.Chanacter;
 
 public class IronSourceController : MonoBehaviour
 {
     public string appKey;
 
+    private const int TIMER_ON_START = 30;
+    private const int TIMER = 180;
+    private const int EFFECT_TIME = 10;
+    private const float EFFECT = 2f;
+
+    [SerializeField] private TrayView _trayView;
+    [SerializeField] private CharactersConfig _charactersConfig;
+
     private void Awake()
     {
-        IronSource.Agent.init(appKey);
+        IronSource.Agent.init(appKey, IronSourceAdUnits.REWARDED_VIDEO);
+        IronSource.Agent.shouldTrackNetworkState(true);
+        
+        //Add AdInfo Rewarded Video Events
+        IronSourceRewardedVideoEvents.onAdOpenedEvent += RewardedVideoOnAdOpenedEvent;
+        IronSourceRewardedVideoEvents.onAdClosedEvent += RewardedVideoOnAdClosedEvent;
+        IronSourceRewardedVideoEvents.onAdAvailableEvent += RewardedVideoOnAdAvailable;
+        IronSourceRewardedVideoEvents.onAdUnavailableEvent += RewardedVideoOnAdUnavailable;
+        IronSourceRewardedVideoEvents.onAdShowFailedEvent += RewardedVideoOnAdShowFailedEvent;
+        IronSourceRewardedVideoEvents.onAdRewardedEvent += RewardedVideoOnAdRewardedEvent;
+        IronSourceRewardedVideoEvents.onAdClickedEvent += RewardedVideoOnAdClickedEvent;
+
+        _charactersConfig.speed_up = 1;
+
     }
 
     private void Start()
     {
-        //Add AdInfo Rewarded Video Events
-
-        IronSource.Agent.shouldTrackNetworkState(true);
-
-        IronSourceEvents.onRewardedVideoAvailabilityChangedEvent += OnRewardedVideoAvailabilityChangedEvent;
-        IronSourceEvents.onRewardedVideoAdClosedEvent += AdClosedEvent;
-
-        StartCoroutine(RewardDelayCoroutine());
+        StartCoroutine(RewardDelayCoroutineOnStart(TIMER_ON_START));
     }
 
-    private void OnDestroy()
+    public void ShowRewardVideo()
     {
-        IronSourceEvents.onRewardedVideoAvailabilityChangedEvent -= OnRewardedVideoAvailabilityChangedEvent;
-        IronSourceEvents.onRewardedVideoAdClosedEvent -= AdClosedEvent;
+        IronSource.Agent.showRewardedVideo();
     }
 
-    private void OnRewardedVideoAvailabilityChangedEvent(bool isAvailable)
+
+    private IEnumerator RewardDelayCoroutineOnStart(int time)
     {
-        bool available = isAvailable;
+         yield return new WaitForSeconds(time);
+         _trayView.AddAdvertisementOnPanel();
     }
 
-    private void AdClosedEvent()
+    private IEnumerator AddEffectCoroutine(int time)
     {
-        IronSource.Agent.init(appKey, IronSourceAdUnits.REWARDED_VIDEO);
-        IronSource.Agent.shouldTrackNetworkState(true);
+        _charactersConfig.speed_up = EFFECT;
+        yield return new WaitForSeconds(time);
+        _charactersConfig.speed_up = 1;
     }
-
-
-    private IEnumerator RewardDelayCoroutine()
+    
+    
+/************* RewardedVideo AdInfo Delegates *************/
+// Indicates that there’s an available ad.
+// The adInfo object includes information about the ad that was loaded successfully
+// This replaces the RewardedVideoAvailabilityChangedEvent(true) event
+    void RewardedVideoOnAdAvailable(IronSourceAdInfo adInfo) {
+    }
+// Indicates that no ads are available to be displayed
+// This replaces the RewardedVideoAvailabilityChangedEvent(false) event
+    void RewardedVideoOnAdUnavailable() {
+    }
+// The Rewarded Video ad view has opened. Your activity will loose focus.
+    void RewardedVideoOnAdOpenedEvent(IronSourceAdInfo adInfo){
+        StopAllCoroutines();
+        _trayView.RemoveAdvertisementOnPanel();
+        StartCoroutine(RewardDelayCoroutineOnStart(TIMER));
+    }
+// The Rewarded Video ad view is about to be closed. Your activity will regain its focus.
+    void RewardedVideoOnAdClosedEvent(IronSourceAdInfo adInfo){
+    }
+// The user completed to watch the video, and should be rewarded.
+// The placement parameter will include the reward data.
+// When using server-to-server callbacks, you may ignore this event and wait for the ironSource server callback.
+    void RewardedVideoOnAdRewardedEvent(IronSourcePlacement placement, IronSourceAdInfo adInfo)
     {
-         yield return new WaitForSeconds(300f);
-         IronSource.Agent.showRewardedVideo();
+        StartCoroutine(AddEffectCoroutine(EFFECT_TIME));
     }
+// The rewarded video ad was failed to show.
+    void RewardedVideoOnAdShowFailedEvent(IronSourceError error, IronSourceAdInfo adInfo){
+    }
+// Invoked when the video ad was clicked.
+// This callback is not supported by all networks, and we recommend using it only if
+// it’s supported by all networks you included in your build.
+    void RewardedVideoOnAdClickedEvent(IronSourcePlacement placement, IronSourceAdInfo adInfo){
+    }
+
 }

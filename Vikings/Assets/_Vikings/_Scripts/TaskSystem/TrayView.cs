@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TrayView : MonoBehaviour
 {
@@ -11,10 +13,31 @@ public class TrayView : MonoBehaviour
     [SerializeField] private Sprite _processImage;
     [SerializeField] private Sprite _rewardImage;
     
-    [SerializeField] private QuestPanelView _questPanelView;
+    [SerializeField] private Sprite _advertisementImage;
     
+    [SerializeField] private QuestPanelView _questPanelView;
+
+    [SerializeField] private GameObject _advertisementPanel;
+    [SerializeField] private Button _advertisementButton;
+
+    [SerializeField] private IronSourceController _ironSourceController;
 
     private List<TrayElement> _trayElements = new();
+
+    private TrayElement _advertisementOnTray;
+
+    private void Start()
+    {
+        _advertisementButton.onClick.AddListener((() =>
+        {
+            _ironSourceController.ShowRewardVideo();
+        }));
+    }
+
+    private void OnDestroy()
+    {
+        _advertisementButton.onClick.RemoveAllListeners();
+    }
 
     public void UpdateTrayPanel(List<TaskData> tasksData)
     {
@@ -46,6 +69,22 @@ public class TrayView : MonoBehaviour
                     break;
             }
         }
+    }
+
+    public void AddAdvertisementOnPanel()
+    {
+        _advertisementOnTray = Instantiate(_trayElement, _content);
+        _advertisementOnTray.Init(_successImage, (() =>
+        {
+            _advertisementPanel.SetActive(true);
+        }));
+    }
+    
+    public void RemoveAdvertisementOnPanel()
+    {
+        _advertisementPanel.SetActive(false);
+       Destroy(_advertisementOnTray.gameObject);
+       _advertisementOnTray = null;
     }
 
     private void ClearElements()

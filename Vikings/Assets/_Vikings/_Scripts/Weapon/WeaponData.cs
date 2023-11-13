@@ -102,6 +102,7 @@ namespace Vikings.Weapon
         [SerializeField] private bool _isOpen;
         [SerializeField] private List<PriceToUpgrade> _priceToBuy = new();
         [SerializeField] private int _craftingTime;
+        
         public void Save()
         {
             SaveLoadSystem.SaveData(this);

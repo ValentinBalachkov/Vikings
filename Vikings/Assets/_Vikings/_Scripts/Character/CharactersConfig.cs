@@ -7,12 +7,13 @@ namespace Vikings.Chanacter
     [CreateAssetMenu(fileName = "CharactersConfig", menuName = "Data/CharactersConfig", order = 9)]
     public class CharactersConfig : ScriptableObject, IData
     {
+        public float speed_up;
         public int charactersCount;
         public int houseLevel;
 
         [SerializeField] private TaskData _taskDataBackpack;
 
-        public float SpeedMove => ((Mathf.Sqrt(speedMoveLevel) / 2 + 0.5f) * speedMove) + Random.Range(0, 0.6f);
+        public float SpeedMove => (((Mathf.Sqrt(speedMoveLevel) / 2 + 0.5f) * speedMove) + Random.Range(0, 0.6f))*speed_up;
 
         public int SpeedMoveCost
         {
@@ -102,10 +103,10 @@ namespace Vikings.Chanacter
             {
                 if (speedWorkLevel == 1)
                 {
-                    return speedWork;
+                    return speedWork/speed_up;
                 }
 
-                return 4 / (speedWorkLevel + 3);
+                return (4 / (speedWorkLevel + 3))/speed_up;
             }
         }
 
