@@ -74,7 +74,7 @@ public class TrayView : MonoBehaviour
     public void AddAdvertisementOnPanel()
     {
         _advertisementOnTray = Instantiate(_trayElement, _content);
-        _advertisementOnTray.Init(_successImage, (() =>
+        _advertisementOnTray.Init(_advertisementImage, (() =>
         {
             _advertisementPanel.SetActive(true);
         }));
@@ -82,6 +82,10 @@ public class TrayView : MonoBehaviour
     
     public void RemoveAdvertisementOnPanel()
     {
+        if (_advertisementOnTray == null)
+        {
+            return;
+        }
         _advertisementPanel.SetActive(false);
        Destroy(_advertisementOnTray.gameObject);
        _advertisementOnTray = null;

@@ -21,10 +21,11 @@ public class TaskData : ScriptableObject, IData
     public string descriptionCurrentTask;
     public string descriptionReward;
 
-    private int _taskStatusId;
+   [SerializeField] private int _taskStatusId;
 
     public void Save()
     {
+        DebugLogger.SendMessage($"{taskStatus}, {(int)taskStatus}", Color.yellow);
         _taskStatusId = (int)taskStatus;
         SaveLoadSystem.SaveData(this);
     }
@@ -36,6 +37,7 @@ public class TaskData : ScriptableObject, IData
         {
             accessDone = data.accessDone;
             taskStatus = (TaskStatus)data._taskStatusId;
+            DebugLogger.SendMessage($"{taskStatus}, {data._taskStatusId}", Color.magenta);
         }
     }
 }
