@@ -86,7 +86,7 @@ namespace Vikings.Chanacter
             set
             {
                 _itemsCountLevel = value;
-                if (_itemsCountLevel == 1 && _taskDataBackpack != null)
+                if (_itemsCountLevel == 2 && _taskDataBackpack != null)
                 {
                     _taskDataBackpack.accessDone = true;
                     if (_taskDataBackpack.taskStatus == TaskStatus.InProcess)
@@ -169,7 +169,7 @@ namespace Vikings.Chanacter
                     speedMoveLevel++;
                     break;
                 case UpgradeCharacterEnum.ItemsCount:
-                    _itemsCountLevel++;
+                    itemsCountLevel++;
                     break;
                 case UpgradeCharacterEnum.SpeedWork:
                     speedWorkLevel++;

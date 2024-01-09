@@ -24,6 +24,9 @@ public class SaveLoadManager : MonoBehaviour
 
     [SerializeField] private TMP_InputField _timeCheatIF;
     [SerializeField] private TMP_InputField _constCheatIF;
+
+    [SerializeField] private TaskManager _taskManager;
+    
     
 
 
@@ -60,6 +63,7 @@ public class SaveLoadManager : MonoBehaviour
 
     private void Awake()
     {
+        _taskManager.SubscribeChangeStatusEvent();
         LoadAll();
         Application.targetFrameRate = 60;
         _versionText.text = $"v{Application.version}";
@@ -305,6 +309,10 @@ public class SaveLoadManager : MonoBehaviour
                 buildingName = buildingData.StorageData.nameText;
                 level = buildingData.StorageData.CurrentLevel;
                 sprite = buildingData.StorageData.iconOfflineFarm;
+                if (buildingData.StorageData.ItemType.ID == 1 && _charactersConfig.houseLevel < 5)
+                {
+                    _charactersConfig.charactersCount++;
+                }
             }
             else
             {

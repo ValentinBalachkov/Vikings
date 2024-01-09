@@ -11,12 +11,12 @@ public class TaskManager : MonoBehaviour
     [SerializeField] private TrayView _trayView;
 
     private List<TaskData> _taskQueue = new();
+    
 
     private void Start()
     {
         var tasks = _tasksData.Where(x => x.taskStatus != TaskStatus.Done && x.taskStatus != TaskStatus.NotAdded).OrderBy(x => x.taskStatus).ToList();
-
-        DebugLogger.SendMessage(tasks.Count.ToString(), Color.cyan);
+        
         
         foreach (var task in _tasksData)
         {
@@ -28,11 +28,10 @@ public class TaskManager : MonoBehaviour
             AddTaskToQueue(tasks[i]);
         }
 
-        taskChangeStatusCallback += OnTaskChangeStatus;
+        
 
         if (!PlayerPrefs.HasKey("FirstLoading"))
         {
-            DebugLogger.SendMessage("Task 1", Color.cyan);
             var task = _tasksData.FirstOrDefault(x => x.id == 2);
             taskChangeStatusCallback?.Invoke(task, TaskStatus.IsSuccess);
             PlayerPrefs.SetInt( "FirstLoading", 1);
@@ -41,6 +40,11 @@ public class TaskManager : MonoBehaviour
         {
             _trayView.UpdateTrayPanel(_taskQueue);
         }
+    }
+
+    public void SubscribeChangeStatusEvent()
+    {
+        taskChangeStatusCallback += OnTaskChangeStatus;
     }
 
     private void SetSuccessStatus(TaskData taskData)
@@ -76,7 +80,7 @@ public class TaskManager : MonoBehaviour
     private void OnTaskChangeStatus(TaskData taskData, TaskStatus status)
     {
         taskData.taskStatus = status;
-        DebugLogger.SendMessage("Task 2", Color.cyan);
+      
         switch (taskData.taskStatus)
         {
             case TaskStatus.IsSuccess:
@@ -93,7 +97,7 @@ public class TaskManager : MonoBehaviour
                 RemoveTaskFromQueue(taskData);
                 break;
         }
-        DebugLogger.SendMessage("Task 2 1", Color.cyan);
+      
         _trayView.UpdateTrayPanel(_taskQueue);
     }
 
