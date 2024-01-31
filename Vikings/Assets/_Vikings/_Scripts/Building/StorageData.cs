@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using _Vikings._Scripts.Refactoring.Objects;
 using SecondChanceSystem.SaveSystem;
 using UnityEngine;
 using Vikings.Items;
+using Vikings.Object;
 
 namespace Vikings.Building
 {
@@ -11,7 +13,6 @@ namespace Vikings.Building
     public class StorageData : ScriptableObject, IData
     {
         public Action OnUpdateCount;
-        public bool isOpen;
         public Sprite icon;
         public Sprite iconOfflineFarm;
         public string nameText;
@@ -19,10 +20,16 @@ namespace Vikings.Building
         public string required;
         public bool isDefaultOpen;
         public int priority;
-        public bool isUpgrade;
+
+        public StorageVisual storageVisual;
+
+        public List<StorageVisualSprites> storageVisualSprites;
+
+        public StorageDynamicData DynamicData;
 
         [SerializeField] private TaskData _taskData;
 
+        public TaskData TaskData => _taskData;
 
 
         public ItemData ItemType => _itemType;
@@ -59,7 +66,7 @@ namespace Vikings.Building
 
         public StorageController StorageController => _storageController;
 
-        public List<PriceToUpgrade> PriceToUpgrade
+        public List<ItemCount> PriceToUpgrade
         {
             get
             {
@@ -68,7 +75,7 @@ namespace Vikings.Building
                     return _priceToUpgrade.ToList();
                 }
 
-                List<PriceToUpgrade> newPrice = new();
+                List<ItemCount> newPrice = new();
                 foreach (var price in _priceToUpgrade)
                 {
                     var a = price.count - 1;
@@ -79,7 +86,7 @@ namespace Vikings.Building
                         a = (int)p;
                     }
                         
-                    newPrice.Add(new PriceToUpgrade
+                    newPrice.Add(new ItemCount
                     {
                         count = (int)p,
                         itemData = price.itemData
@@ -116,27 +123,30 @@ namespace Vikings.Building
         [SerializeField] private int _currentLevel;
         [SerializeField] private StorageController _storageController;
 
-        [SerializeField] private PriceToUpgrade[] _priceToUpgrade;
+        [SerializeField] private ItemCount[] _priceToUpgrade;
         
         [SerializeField] private float _buildTime;
         public void Save()
         {
-            SaveLoadSystem.SaveData(this);
+            SaveLoadSystem.SaveData(DynamicData);
         }
 
         public void Load()
         {
-            var data = SaveLoadSystem.LoadData(this) as StorageData;
+            var data = SaveLoadSystem.LoadData(DynamicData);
             if (data != null)
             {
-                _count = data._count;
-                _maxStorageCount = data._maxStorageCount;
-                _currentLevel = data._currentLevel;
-                isUpgrade = data.isUpgrade;
+                DynamicData = data;
             }
         }
 
        
+    }
+
+    [Serializable]
+    public class StorageVisualSprites
+    {
+        public Sprite buildingsSprites, shadowSprites;
     }
 
 }

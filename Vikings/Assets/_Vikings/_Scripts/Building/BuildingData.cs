@@ -1,5 +1,6 @@
 using SecondChanceSystem.SaveSystem;
 using UnityEngine;
+using Vikings.Object;
 
 namespace Vikings.Building
 {
@@ -15,18 +16,20 @@ namespace Vikings.Building
         }
 
         public CraftingTableController CraftingTableController => _craftingTableController;
-        public PriceToUpgrade[] PriceToUpgrades => _priceToUpgrades;
+        public ItemCount[] PriceToUpgrades => _priceToUpgrades;
         
-        public PriceToUpgrade[] currentItemsCount;
+        public ItemCount[] currentItemsCount;
         public BuildingController BuildingController => _buildingController;
 
         public int craftingTableCrateTime;
 
         public bool isSetOnMap;
 
+        public BuildingDynamicData BuildingDynamicData;
+
         [SerializeField] private StorageData _storageData;
         [SerializeField] private bool _isBuild;
-        [SerializeField] private PriceToUpgrade[] _priceToUpgrades;
+        [SerializeField] private ItemCount[] _priceToUpgrades;
         
         [SerializeField] private string _buildingName;
         [SerializeField] private BuildingController _buildingController;
@@ -36,17 +39,27 @@ namespace Vikings.Building
 
         public void Save()
         {
-            SaveLoadSystem.SaveData(this);
+            BuildingDynamicData.CurrentItemsCount = new int[currentItemsCount.Length];
+            
+            for (int i = 0; i < BuildingDynamicData.CurrentItemsCount.Length; i++)
+            {
+                BuildingDynamicData.CurrentItemsCount[i] = currentItemsCount[i].count;
+            }
+            
+            SaveLoadSystem.SaveData(BuildingDynamicData);
         }
 
         public void Load()
         {
-            var data = SaveLoadSystem.LoadData(this) as BuildingData;
+            var data = SaveLoadSystem.LoadData(BuildingDynamicData);
            if (data != null)
            {
-               _isBuild = data._isBuild;
-               currentItemsCount = data.currentItemsCount;
-               isSetOnMap = data.isSetOnMap;
+               BuildingDynamicData = data;
+
+               for (int i = 0; i < BuildingDynamicData.CurrentItemsCount.Length; i++)
+               {
+                   currentItemsCount[i].count = BuildingDynamicData.CurrentItemsCount[i];
+               }
            }
         }
     }

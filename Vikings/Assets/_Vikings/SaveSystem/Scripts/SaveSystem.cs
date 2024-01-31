@@ -1,35 +1,27 @@
 using System.IO;
 using UnityEngine;
+using Vikings.Object;
 
 namespace SecondChanceSystem.SaveSystem
 {
     public static class SaveLoadSystem
     {
-        /// <summary>
-        /// Метод сохранения ScriptableObject в Json
-        /// </summary>
-        /// <param name="saveData">ScriptableObject, который нужно сохранить</param>
-        public static void SaveData(ScriptableObject saveData)
+        public static void SaveData<T>(T saveData) where T : ISaveData
         {
-            string saveFileName = saveData.name + "Data.json";
+            string saveFileName = saveData.Name + "Data.json";
             string savePath = GetDataPath(saveFileName);
             string json = JsonUtility.ToJson(saveData);
             File.WriteAllText(savePath, json);
         }
-        /// <summary>
-        /// Метод загрузки ScriptableObject из Json
-        /// </summary>
-        /// <param name="loadData">ScriptableObject, который нужно загрузить</param>
-        /// <returns>Загруженный экземпляр SO</returns>
-        public static ScriptableObject LoadData(ScriptableObject loadData)
+        
+        public static T LoadData<T>(T loadData) where T : ISaveData
         {
-            string loadFileName = loadData.name + "Data.json";
+            string loadFileName = loadData.Name + "Data.json";
             string loadPath = GetDataPath(loadFileName);
 
             if (!File.Exists(loadPath))
             {
-                //Debug.Log($"{loadFileName} - LoadFromFile -> FileNotFound!");
-                return null;
+                return loadData;
             }
             else
             {

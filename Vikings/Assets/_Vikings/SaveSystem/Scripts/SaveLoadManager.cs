@@ -118,7 +118,7 @@ public class SaveLoadManager : MonoBehaviour
         var currentBuilding = _buildingData.FirstOrDefault(x => x.isSetOnMap && !x.IsBuild);
 
         var currentBuildingUpgrade =
-            _buildingData.FirstOrDefault(x => x.StorageData != null && x.StorageData.isUpgrade);
+            _buildingData.FirstOrDefault(x => x.StorageData != null && x.StorageData.DynamicData.IsUpgrade);
 
         string craftName = "";
         int level = 0;
@@ -294,9 +294,9 @@ public class SaveLoadManager : MonoBehaviour
         {
             if (buildingData.StorageData.BuildTime < time)
             {
-                if (buildingData.StorageData.isUpgrade)
+                if (buildingData.StorageData.DynamicData.IsUpgrade)
                 {
-                    buildingData.StorageData.isUpgrade = false;
+                    buildingData.StorageData.DynamicData.IsUpgrade = false;
                 }
                 else
                 {

@@ -46,16 +46,16 @@ namespace Vikings.Items
 
         public void Save()
         {
-            SaveLoadSystem.SaveData(this);
+            // SaveLoadSystem.SaveData(this);
         }
 
         public void Load()
         {
-            var data = SaveLoadSystem.LoadData(this) as ItemData;
-            if (data != null)
-            {
-                _isOpen = data._isOpen;
-            }
+            // var data = SaveLoadSystem.LoadData(this) as ItemData;
+            // if (data != null)
+            // {
+            //     _isOpen = data._isOpen;
+            // }
         }
     }
 }

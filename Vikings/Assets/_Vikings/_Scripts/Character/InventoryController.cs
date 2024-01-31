@@ -43,9 +43,9 @@ namespace Vikings.Chanacter
             StartCoroutine(CollectItemsCoroutine());
         }
         
-        public PriceToUpgrade SetItemToStorage()
+        public ItemCount SetItemToStorage()
         {
-            var price = new PriceToUpgrade
+            var price = new ItemCount
             {
                 count = _count,
                 itemData = _currentItem.GetItemData()

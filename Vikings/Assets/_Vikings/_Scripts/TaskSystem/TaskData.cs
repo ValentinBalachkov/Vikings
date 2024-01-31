@@ -12,7 +12,7 @@ public class TaskData : ScriptableObject, IData
 
     public bool accessDone;
 
-    public PriceToUpgrade[] reward;
+    public ItemCount[] reward;
 
     public Sprite icon;
     
@@ -25,19 +25,19 @@ public class TaskData : ScriptableObject, IData
 
     public void Save()
     {
-        DebugLogger.SendMessage($"{taskStatus}, {(int)taskStatus}", Color.yellow);
-        _taskStatusId = (int)taskStatus;
-        SaveLoadSystem.SaveData(this);
+        // DebugLogger.SendMessage($"{taskStatus}, {(int)taskStatus}", Color.yellow);
+        // _taskStatusId = (int)taskStatus;
+        // SaveLoadSystem.SaveData(this);
     }
 
     public void Load()
     {
-        var data = SaveLoadSystem.LoadData(this) as TaskData;
-        if (data != null)
-        {
-            accessDone = data.accessDone;
-            taskStatus = (TaskStatus)data._taskStatusId;
-            DebugLogger.SendMessage($"{taskStatus}, {data._taskStatusId}", Color.magenta);
-        }
+        // var data = SaveLoadSystem.LoadData(this) as TaskData;
+        // if (data != null)
+        // {
+        //     accessDone = data.accessDone;
+        //     taskStatus = (TaskStatus)data._taskStatusId;
+        //     DebugLogger.SendMessage($"{taskStatus}, {data._taskStatusId}", Color.magenta);
+        // }
     }
 }

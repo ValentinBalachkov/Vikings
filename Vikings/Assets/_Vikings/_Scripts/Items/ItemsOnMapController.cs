@@ -17,6 +17,7 @@ namespace Vikings.Items
         [SerializeField] private BoneFireController _boneFireController;
         [SerializeField] private BuildingsOnMap _buildingsOnMap;
         [SerializeField] private CharactersOnMap _charactersOnMap;
+        
 
         private List<ItemController> _itemsList = new();
 

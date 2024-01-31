@@ -4,7 +4,7 @@ using Vikings.Items;
 namespace Vikings.Building
 {
     [Serializable]
-    public class PriceToUpgrade
+    public class ItemCount
     {
         public ItemData itemData;
         public int count;

@@ -94,7 +94,7 @@ namespace Vikings.Building
                 _inventoryView.AddStorageController(item);
                 _storageControllers.Add(item);
                 
-                if(_storageData[index].buildingData.StorageData.isUpgrade)
+                if(_storageData[index].buildingData.StorageData.DynamicData.IsUpgrade)
                 {
                     item.SetUpgradeState();
                 }
@@ -243,7 +243,7 @@ namespace Vikings.Building
             UpdateItemsQueue(character.currentBuilding.GetCurrentPriceToUpgrades(), character);
         }
 
-        private void UpdateItemsQueue(PriceToUpgrade[] priceToUpgrades, CharacterStateMachine character)
+        private void UpdateItemsQueue(ItemCount[] priceToUpgrades, CharacterStateMachine character)
         {
             foreach (var item in character.itemQueue)
             {

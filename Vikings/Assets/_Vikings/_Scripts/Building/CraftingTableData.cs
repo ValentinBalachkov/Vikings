@@ -39,11 +39,11 @@ namespace Vikings.Building
         [SerializeField] private BuildingData _buildingData;
         [SerializeField] private TaskData _taskData;
         
-        public List<PriceToUpgrade> currentItemsCount = new();
-        public List<PriceToUpgrade> priceToUpgradeCraftingTable = new();
+        public List<ItemCount> currentItemsCount = new();
+        public List<ItemCount> priceToUpgradeCraftingTable = new();
 
-        public List<PriceToUpgrade> currentItemsPriceToUpgrade = new();
-        public List<PriceToUpgrade> PriceToUpgrade
+        public List<ItemCount> currentItemsPriceToUpgrade = new();
+        public List<ItemCount> PriceToUpgrade
         {
             get
             {
@@ -52,7 +52,7 @@ namespace Vikings.Building
                     return _buildingData.PriceToUpgrades.ToList();
                 }
 
-                List<PriceToUpgrade> newPrice = new();
+                List<ItemCount> newPrice = new();
                 foreach (var price in _buildingData.PriceToUpgrades)
                 {
                     var a = price.count - 1;
@@ -63,7 +63,7 @@ namespace Vikings.Building
                         a = (int)p;
                     }
                         
-                    newPrice.Add(new PriceToUpgrade
+                    newPrice.Add(new ItemCount
                     {
                         count = (int)p,
                         itemData = price.itemData
@@ -90,10 +90,10 @@ namespace Vikings.Building
         public int craftingTime;
         private int _weaponLevel;
 
-        private PriceToUpgrade[] _currentItemsCountArray;
-        private PriceToUpgrade[] _priceToUpgradeCraftingTableArray;
+        private ItemCount[] _currentItemsCountArray;
+        private ItemCount[] _priceToUpgradeCraftingTableArray;
 
-        public void Setup(List<PriceToUpgrade> price, int time, int weaponLevel, int weaponId)
+        public void Setup(List<ItemCount> price, int time, int weaponLevel, int weaponId)
         {
             currentWeaponId = weaponId;
             _weaponLevel = weaponLevel;
@@ -103,7 +103,7 @@ namespace Vikings.Building
             
             foreach (var item in price)
             {
-                priceToUpgradeCraftingTable.Add(new PriceToUpgrade()
+                priceToUpgradeCraftingTable.Add(new ItemCount()
                 {
                     count = item.count,
                     itemData = item.itemData
@@ -112,7 +112,7 @@ namespace Vikings.Building
             
             foreach (var item in price)
             {
-                currentItemsCount.Add(new PriceToUpgrade()
+                currentItemsCount.Add(new ItemCount()
                 {
                     count = 0,
                     itemData = item.itemData
@@ -129,27 +129,27 @@ namespace Vikings.Building
 
         public void Save()
         {
-            _currentItemsCountArray = currentItemsCount.ToArray();
-            _priceToUpgradeCraftingTableArray = priceToUpgradeCraftingTable.ToArray();
-            SaveLoadSystem.SaveData(this);
+            // _currentItemsCountArray = currentItemsCount.ToArray();
+            // _priceToUpgradeCraftingTableArray = priceToUpgradeCraftingTable.ToArray();
+            // SaveLoadSystem.SaveData(this);
         }
 
         public void Load()
         {
-            var data = SaveLoadSystem.LoadData(this) as CraftingTableData;
-            if (data != null)
-            {
-                _currentLevel = data._currentLevel;
-                isUpgrade = data.isUpgrade;
-                if (data._currentItemsCountArray != null)
-                {
-                    currentItemsCount.Clear();
-                    priceToUpgradeCraftingTable.Clear();
-                    currentItemsCount = data._currentItemsCountArray.ToList();
-                    priceToUpgradeCraftingTable = data._priceToUpgradeCraftingTableArray.ToList();
-                }
-                craftingTime = data.craftingTime;
-            }
+            // var data = SaveLoadSystem.LoadData(this) as CraftingTableData;
+            // if (data != null)
+            // {
+            //     _currentLevel = data._currentLevel;
+            //     isUpgrade = data.isUpgrade;
+            //     if (data._currentItemsCountArray != null)
+            //     {
+            //         currentItemsCount.Clear();
+            //         priceToUpgradeCraftingTable.Clear();
+            //         currentItemsCount = data._currentItemsCountArray.ToList();
+            //         priceToUpgradeCraftingTable = data._priceToUpgradeCraftingTableArray.ToList();
+            //     }
+            //     craftingTime = data.craftingTime;
+            // }
         }
     }
 

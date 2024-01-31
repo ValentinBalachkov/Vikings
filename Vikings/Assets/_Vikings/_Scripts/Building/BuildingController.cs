@@ -10,7 +10,7 @@ namespace Vikings.Building
         [SerializeField] private AudioSource _audioSourceToStorage;
         public Action<BuildingData> OnChangeCount;
 
-        public override void ChangeStorageCount(PriceToUpgrade price)
+        public override void ChangeStorageCount(ItemCount price)
         {
             _audioSourceToStorage.Play();
             var item = buildingData.PriceToUpgrades.FirstOrDefault(x => x.itemData.ID == price.itemData.ID);
@@ -59,9 +59,9 @@ namespace Vikings.Building
             return true;
         }
 
-        public override PriceToUpgrade[] GetCurrentPriceToUpgrades()
+        public override ItemCount[] GetCurrentPriceToUpgrades()
         {
-            List<PriceToUpgrade> price = new();
+            List<ItemCount> price = new();
             for (int i = 0; i < buildingData.PriceToUpgrades.Length; i++)
             {
                 if (buildingData.PriceToUpgrades[i].count > buildingData.currentItemsCount[i].count)

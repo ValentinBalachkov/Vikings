@@ -24,7 +24,7 @@ namespace Vikings.UI
 
 
         public void UpdateUI(string itemName, string description, int level, Sprite icon,
-            PriceToUpgrade[] priceToUpgrades, int priority)
+            ItemCount[] priceToUpgrades, int priority)
         {
             this.priority = priority;
             _name.text = itemName;

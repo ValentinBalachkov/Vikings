@@ -181,20 +181,20 @@ namespace Vikings.Chanacter
 
         public void Save()
         {
-            SaveLoadSystem.SaveData(this);
+            //SaveLoadSystem.SaveData(this);
         }
 
         public void Load()
         {
-            var data = SaveLoadSystem.LoadData(this) as CharactersConfig;
-            if (data != null)
-            {
-                charactersCount = data.charactersCount;
-                houseLevel = data.houseLevel;
-                speedMoveLevel = data.speedMoveLevel;
-                speedWorkLevel = data.speedWorkLevel;
-                _itemsCountLevel = data._itemsCountLevel;
-            }
+            // var data = SaveLoadSystem.LoadData(this) as CharactersConfig;
+            // if (data != null)
+            // {
+            //     charactersCount = data.charactersCount;
+            //     houseLevel = data.houseLevel;
+            //     speedMoveLevel = data.speedMoveLevel;
+            //     speedWorkLevel = data.speedWorkLevel;
+            //     _itemsCountLevel = data._itemsCountLevel;
+            // }
         }
     }
 }

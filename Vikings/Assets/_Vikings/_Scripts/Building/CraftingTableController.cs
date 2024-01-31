@@ -9,7 +9,7 @@ namespace Vikings.Building
     public class CraftingTableController : AbstractBuilding
     {
         public GameObject Model => _model;
-        public Action<PriceToUpgrade[], PriceToUpgrade[]> OnChangeCount;
+        public Action<ItemCount[], ItemCount[]> OnChangeCount;
         public CraftingTableData CraftingTableData => _craftingTableData;
         [SerializeField] private Sprite[] _buildingsSprites, _shadowsRenders;
         [SerializeField] private SpriteRenderer _spriteBuilding, _shadowRender;
@@ -54,7 +54,7 @@ namespace Vikings.Building
             _craftingTableData.isUpgrade = isUpgrade;
         }
 
-        public override void ChangeStorageCount(PriceToUpgrade price)
+        public override void ChangeStorageCount(ItemCount price)
         {
             _audioSourceToStorage.Play();
             if (_craftingTableData.isUpgrade)
@@ -161,11 +161,11 @@ namespace Vikings.Building
             _craftingTableData.isUpgrade = false;
         }
 
-        public override PriceToUpgrade[] GetCurrentPriceToUpgrades()
+        public override ItemCount[] GetCurrentPriceToUpgrades()
         {
             if (_craftingTableData.isUpgrade)
             {
-                List<PriceToUpgrade> priceUpgrade = new();
+                List<ItemCount> priceUpgrade = new();
                 for (int i = 0; i < _craftingTableData.PriceToUpgrade.Count; i++)
                 {
                     if (_craftingTableData.PriceToUpgrade[i].count > _craftingTableData.currentItemsPriceToUpgrade[i].count)
@@ -177,7 +177,7 @@ namespace Vikings.Building
                 return priceUpgrade.ToArray();
             }
             
-            List<PriceToUpgrade> price = new();
+            List<ItemCount> price = new();
             for (int i = 0; i < _currentWeapon.PriceToBuy.Count; i++)
             {
                 if (_currentWeapon.PriceToBuy[i].count > _craftingTableData.currentItemsCount[i].count)
