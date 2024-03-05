@@ -1,4 +1,4 @@
-﻿using SecondChanceSystem.SaveSystem;
+﻿using Vikings.SaveSystem;
 using UnityEngine;
 using Vikings.UI;
 
@@ -10,6 +10,8 @@ namespace Vikings.Chanacter
         public float speed_up;
         public int charactersCount;
         public int houseLevel;
+
+        public PlayerController playerController;
 
         [SerializeField] private TaskData _taskDataBackpack;
 

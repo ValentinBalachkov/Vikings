@@ -2,33 +2,32 @@ using System.IO;
 using UnityEngine;
 using Vikings.Object;
 
-namespace SecondChanceSystem.SaveSystem
+namespace Vikings.SaveSystem
 {
     public static class SaveLoadSystem
     {
-        public static void SaveData<T>(T saveData) where T : ISaveData
+        public static void SaveData<T>(T dynamicData, string dataKey)
         {
-            string saveFileName = saveData.Name + "Data.json";
+            string saveFileName = dataKey + "Data.json";
             string savePath = GetDataPath(saveFileName);
-            string json = JsonUtility.ToJson(saveData);
+            string json = JsonUtility.ToJson(dynamicData);
             File.WriteAllText(savePath, json);
         }
         
-        public static T LoadData<T>(T loadData) where T : ISaveData
+        public static T LoadData<T>(T dynamicData, string dataKey)
         {
-            string loadFileName = loadData.Name + "Data.json";
+            string loadFileName = dataKey + "Data.json";
             string loadPath = GetDataPath(loadFileName);
 
             if (!File.Exists(loadPath))
             {
-                return loadData;
+                DebugLogger.SendMessage($"Data not fount from path {loadPath}", Color.red);
+                return dynamicData;
             }
-            else
-            {
-                string json = File.ReadAllText(loadPath);
-                JsonUtility.FromJsonOverwrite(json, loadData);
-                return loadData;
-            }
+
+            string json = File.ReadAllText(loadPath);
+            JsonUtility.FromJsonOverwrite(json, dynamicData);
+            return dynamicData;
         }
 
         private static string GetDataPath(string saveFileName)

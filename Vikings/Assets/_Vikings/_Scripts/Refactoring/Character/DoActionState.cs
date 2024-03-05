@@ -1,16 +1,21 @@
-﻿using Vikings.Chanacter;
+﻿using System;
+using Vikings.Object;
 
 namespace _Vikings.Refactoring.Character
 {
-    public class DoActionState : BaseState
+    public class DoActionState : BaseCharacterState
     {
-        public DoActionState(string stateName, StateMachine stateMachine) : base(stateName, stateMachine)
+        private Action<CharacterStateMachine> _onCharacterAction;
+        public DoActionState(string stateName, CharacterStateMachine stateMachine, Action<CharacterStateMachine> OnCharacterAction) : base(stateName, stateMachine)
         {
+            _onCharacterAction = OnCharacterAction;
         }
 
-        public override void Enter()
+        public override void Enter(AbstractObject abstractObject)
         {
-            base.Enter();
+            base.Enter(abstractObject);
+            abstractObject.CharacterAction(stateMachine);
+            _onCharacterAction?.Invoke(stateMachine);
         }
 
         public override void Exit()

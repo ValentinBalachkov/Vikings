@@ -7,11 +7,11 @@ namespace Vikings.Building
     {
         [SerializeField] private TMP_Text _countText;
         [SerializeField] private TMP_Text _levelText;
-        [SerializeField] private StorageController _storageController;
+       // [SerializeField] private StorageController _storageController;
 
         private void Start()
         {
-            _storageController.OnUpgradeStorage += UpdateUIUpgrade;
+            //_storageController.OnUpgradeStorage += UpdateUIUpgrade;
         }
         private void UpdateUIUpgrade(int maxCount, int level)
         {

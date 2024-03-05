@@ -15,8 +15,8 @@ namespace Vikings.UI
         [SerializeField] private StorageData _storageData;
         [SerializeField] private AudioSource _audioSourceBtnClick;
 
-        [SerializeField] private CharactersOnMap _charactersOnMap;
-        [SerializeField] private BuildingsOnMap _buildingsOnMap;
+        //[SerializeField] private CharactersOnMap _charactersOnMap;
+      //  [SerializeField] private BuildingsOnMap _buildingsOnMap;
         [SerializeField] private InventoryView _inventoryView;
         
         
@@ -93,13 +93,13 @@ namespace Vikings.UI
                     break;
             }
 
-            foreach (var character in _charactersOnMap.CharactersList)
-            {
-                if (character.CurrentState is IdleState)
-                {
-                    _buildingsOnMap.UpdateCurrentBuilding(character);
-                }
-            }
+            // foreach (var character in _charactersOnMap.CharactersList)
+            // {
+            //     // if (character.CurrentState is IdleState)
+            //     // {
+            //     //     //_buildingsOnMap.UpdateCurrentBuilding(character);
+            //     // }
+            // }
             _inventoryView.UpdateUI(null);
         }
 

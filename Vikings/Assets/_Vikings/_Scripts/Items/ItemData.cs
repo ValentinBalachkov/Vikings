@@ -1,16 +1,23 @@
-﻿using SecondChanceSystem.SaveSystem;
+﻿using _Vikings._Scripts.Refactoring;
+using Vikings.SaveSystem;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Vikings.Items
 {
     [CreateAssetMenu(fileName = "ItemData", menuName = "Data/ItemData", order = 1)]
-    public class ItemData : ScriptableObject, IData
+    public class ItemData : ScriptableObject, IData, IItemData
     {
         public AnimatorOverrideController AnimatorOverride => _animatorOverride;
-        
+
         public Sprite icon;
         public string nameText;
         public string description;
+
+        public GameObject view;
+
+        public AudioClip _actionSound;
+        public AudioMixerGroup _mixer;
 
 
         public bool IsOpen
@@ -23,11 +30,7 @@ namespace Vikings.Items
 
         public string ItemName => _itemName;
 
-        public int DropCount => _dropCount;
-
         public ItemController Prefab => _prefab;
-
-        public float CollectTime => _collectTime;
 
         [SerializeField] private int _id;
 
@@ -42,6 +45,24 @@ namespace Vikings.Items
         [SerializeField] private float _collectTime;
 
         [SerializeField] private AnimatorOverrideController _animatorOverride;
+
+        public int DropCount
+        {
+            get => _dropCount;
+            set => _dropCount = value;
+        }
+
+        public int Priority { get; set; }
+
+        public float CollectTime
+        {
+            get => _collectTime;
+            set => _collectTime = value;
+        }
+
+        public ResourceType ResourceType { get; set; }
+
+        public GameObject View => view;
 
 
         public void Save()

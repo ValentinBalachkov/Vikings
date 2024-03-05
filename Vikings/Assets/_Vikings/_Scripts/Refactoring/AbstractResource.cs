@@ -3,21 +3,17 @@ using Vikings.Object;
 
 namespace _Vikings._Scripts.Refactoring
 {
-    public class AbstractResource : AbstractObject
+    public abstract class AbstractResource : AbstractObject
     {
         public override Transform GetPosition()
         {
             return transform;
         }
 
-        public override void CharacterAction()
-        {
-            
-        }
+        public abstract IItemData GetItemData();
 
-        public override void Init()
-        {
-            
-        }
+        public abstract void SetItemData(IItemData itemData);
+
+        public abstract bool IsEnableToGet();
     }
 }

@@ -15,8 +15,8 @@ namespace Vikings.Chanacter
         [SerializeField] private CharactersConfig _charactersConfig;
         [SerializeField] private PlayerAnimationController _playerAnimationController;
         
-        private Action _onGetPosition;
-        private bool _onPosition;
+        public Action OnGetPosition;
+        private bool _onPosition = true;
         private Transform _currentPoint, _thisTransform;
         private bool _isIdleRotate;
         private Vector3 _currentDestination;
@@ -40,13 +40,14 @@ namespace Vikings.Chanacter
             }
             if (CheckDestinationReached() && !_onPosition)
             {
-                _onGetPosition?.Invoke();
+                OnGetPosition?.Invoke();
                 _onPosition = true;
             }
         }
 
         private bool CheckDestinationReached()
         {
+            if (_currentPoint == null) return false;
             float distanceToTarget = Vector3.Distance(_thisTransform.position, _currentPoint.position);
             
             if (Math.Round(distanceToTarget, 1) <= Math.Round(_navMeshAgent.stoppingDistance + 0.5f, 1))
@@ -59,14 +60,14 @@ namespace Vikings.Chanacter
 
         public void SetActionOnGetPosition(Action action)
         {
-            _onGetPosition = null;
+            OnGetPosition = null;
             _onPosition = false;
-            _onGetPosition = action;
+            OnGetPosition = action;
         }
 
         public void ClearAction()
         {
-            _onGetPosition = null;
+            OnGetPosition = null;
             _onPosition = true;
         }
 

@@ -1,9 +1,12 @@
 using System.Collections;
+using PanelManager.Scripts.Panels;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CraftingIndicatorView : MonoBehaviour
+public class CraftingIndicatorView : ViewBase
 {
+    public override PanelType PanelType => PanelType.Screen;
+    public override bool RememberInHistory => false;
     public static CraftingIndicatorView Instance => _instance;
     private static CraftingIndicatorView _instance;
     [SerializeField] private Image _indicatorImage;

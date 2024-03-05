@@ -1,0 +1,22 @@
+﻿using BurningKnight.PanelManager;
+
+public class #SCRIPTNAME# : PanelBase
+{
+    public override PanelType PanelType         => PanelType.Overlay;
+    public override bool      RememberInHistory => false;
+
+    protected override void OnInitialize()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void OnOpened()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void OnClosed()
+    {
+        throw new System.NotImplementedException();
+    }
+}

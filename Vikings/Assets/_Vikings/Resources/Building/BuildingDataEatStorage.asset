@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e136616cbf1273499bbb42e399abfa7, type: 3}
+  m_Name: BuildingDataEatStorage
+  m_EditorClassIdentifier: 
+  icon: {fileID: 0}
+  nameText: Home
+  description: 
+  required: 
+  buildingVisualSprites: []
+  saveKey: EatStorage
+  prefab: {fileID: 3805657028365542445, guid: b14f1d8d437c31441a92ef089e7b92df, type: 3}
+  _buildingView: {fileID: 577453752117095637, guid: d92e46fb74fe4ca42a704a1340508f9f,
+    type: 3}
+  taskData: {fileID: 0}

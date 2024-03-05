@@ -15,6 +15,9 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 9c86f890a9ca36241abf6cb6c592a6e6, type: 3}
   nameText: 
   description: Description
+  view: {fileID: 5574324935936413246, guid: 4234d00f95c98b641b16e0204d9d10e3, type: 3}
+  _actionSound: {fileID: 0}
+  _mixer: {fileID: 2643202402425112971, guid: 0d2c6481c247dac4d8ac2b384507e50b, type: 2}
   _id: 2
   _prefab: {fileID: 5574324935936413242, guid: 4234d00f95c98b641b16e0204d9d10e3, type: 3}
   _dropCount: 3

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using UnityEngine;
 
 namespace Vikings.Building
@@ -45,11 +44,5 @@ namespace Vikings.Building
         
     }
 
-    [Serializable]
-    public class BoneFirePositionData
-    {
-        public int id;
-        public Transform point;
-        public bool isDisable;
-    }
+   
 }

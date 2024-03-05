@@ -1,20 +1,29 @@
 ﻿using Vikings.Chanacter;
+using Vikings.Object;
 
 namespace _Vikings.Refactoring.Character
 {
-    public class DoMoveState : BaseState
+    public class DoMoveState : BaseCharacterState
     {
-        public DoMoveState(string stateName, StateMachine stateMachine) : base(stateName, stateMachine)
+        private PlayerController _playerController;
+        public DoMoveState(string stateName, CharacterStateMachine stateMachine, PlayerController playerController) : base(stateName, stateMachine)
         {
+            _playerController = playerController;
         }
 
-        public override void Enter()
+        public override void Enter(AbstractObject abstractObject)
         {
-            base.Enter();
+            base.Enter(abstractObject);
+            _playerController.MoveToPoint(abstractObject.GetPosition());
+            _playerController.OnGetPosition += () =>
+            {
+                stateMachine.SetState<DoActionState>(abstractObject);
+            };
         }
 
         public override void Exit()
         {
+            _playerController.OnGetPosition = null;
             base.Exit();
         }
     }

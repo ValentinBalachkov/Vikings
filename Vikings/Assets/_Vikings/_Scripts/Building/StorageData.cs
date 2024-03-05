@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using _Vikings._Scripts.Refactoring;
 using _Vikings._Scripts.Refactoring.Objects;
-using SecondChanceSystem.SaveSystem;
+using Vikings.SaveSystem;
 using UnityEngine;
 using Vikings.Items;
 using Vikings.Object;
@@ -20,16 +21,19 @@ namespace Vikings.Building
         public string required;
         public bool isDefaultOpen;
         public int priority;
+        public ResourceType resourceType;
+        public BuildingType buildingType;
 
-        public StorageVisual storageVisual;
+        public BuildingView _buildingView;
 
-        public List<StorageVisualSprites> storageVisualSprites;
+        public List<BuildingVisualSprites> storageVisualSprites;
 
         public StorageDynamicData DynamicData;
 
         [SerializeField] private TaskData _taskData;
 
         public TaskData TaskData => _taskData;
+        
 
 
         public ItemData ItemType => _itemType;
@@ -63,8 +67,7 @@ namespace Vikings.Building
             }
             set => _buildTime = value;
         }
-
-        public StorageController StorageController => _storageController;
+        
 
         public List<ItemCount> PriceToUpgrade
         {
@@ -121,30 +124,29 @@ namespace Vikings.Building
         [SerializeField] private int _maxStorageCount;
 
         [SerializeField] private int _currentLevel;
-        [SerializeField] private StorageController _storageController;
 
         [SerializeField] private ItemCount[] _priceToUpgrade;
         
         [SerializeField] private float _buildTime;
         public void Save()
         {
-            SaveLoadSystem.SaveData(DynamicData);
+            //SaveLoadSystem.SaveData(DynamicData);
         }
 
         public void Load()
         {
-            var data = SaveLoadSystem.LoadData(DynamicData);
-            if (data != null)
-            {
-                DynamicData = data;
-            }
+            // var data = SaveLoadSystem.LoadData(DynamicData);
+            // if (data != null)
+            // {
+            //     DynamicData = data;
+            // }
         }
 
        
     }
 
     [Serializable]
-    public class StorageVisualSprites
+    public class BuildingVisualSprites
     {
         public Sprite buildingsSprites, shadowSprites;
     }

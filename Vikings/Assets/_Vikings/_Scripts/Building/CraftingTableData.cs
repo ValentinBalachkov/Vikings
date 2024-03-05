@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using SecondChanceSystem.SaveSystem;
+using Vikings.SaveSystem;
 using UnityEngine;
 
 namespace Vikings.Building
@@ -36,7 +36,7 @@ namespace Vikings.Building
         public int priority;
         public bool isUpgrade;
 
-        [SerializeField] private BuildingData _buildingData;
+        //[SerializeField] private BuildingData _buildingData;
         [SerializeField] private TaskData _taskData;
         
         public List<ItemCount> currentItemsCount = new();
@@ -47,28 +47,28 @@ namespace Vikings.Building
         {
             get
             {
-                if (currentLevel == 0)
-                {
-                    return _buildingData.PriceToUpgrades.ToList();
-                }
+                // if (currentLevel == 0)
+                // {
+                //     return _buildingData.PriceToUpgrades.ToList();
+                // }
 
                 List<ItemCount> newPrice = new();
-                foreach (var price in _buildingData.PriceToUpgrades)
-                {
-                    var a = price.count - 1;
-                    float p = 0;
-                    for (int i = 2; i <= currentLevel + 1; i++)
-                    {
-                        p += (Mathf.Pow(i, 4) + ((a * i) - Mathf.Pow(i, 3)))/i;
-                        a = (int)p;
-                    }
-                        
-                    newPrice.Add(new ItemCount
-                    {
-                        count = (int)p,
-                        itemData = price.itemData
-                    });
-                }
+                // foreach (var price in _buildingData.PriceToUpgrades)
+                // {
+                //     var a = price.count - 1;
+                //     float p = 0;
+                //     for (int i = 2; i <= currentLevel + 1; i++)
+                //     {
+                //         p += (Mathf.Pow(i, 4) + ((a * i) - Mathf.Pow(i, 3)))/i;
+                //         a = (int)p;
+                //     }
+                //         
+                //     newPrice.Add(new ItemCount
+                //     {
+                //         count = (int)p,
+                //         itemData = price.itemData
+                //     });
+                // }
 
                 return newPrice;
             }

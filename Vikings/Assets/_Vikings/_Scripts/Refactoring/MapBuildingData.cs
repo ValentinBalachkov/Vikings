@@ -1,9 +1,7 @@
 ﻿using System;
 using _Vikings._Scripts.Refactoring;
-using SecondChanceSystem.SaveSystem;
 using UnityEngine;
-using Vikings.Building;
-using Vikings.Object;
+using Vikings.Items;
 using AbstractBuilding = Vikings.Object.AbstractBuilding;
 
 
@@ -12,7 +10,8 @@ namespace Vikings.Map
    [Serializable]
     public class MapResourceData
     {
-        public AbstractResource objectOnMap;
+        public AbstractResource abstractResource;
+        public ItemData resourceConfig;
         public MapResourceLevelPosition[] levelPosition;
         
         [Serializable]
@@ -28,15 +27,8 @@ namespace Vikings.Map
     [Serializable]
     public class MapBuildingData
     {
-        public AbstractBuilding abstractBuilding;
-        public MapBuildingPosition[] buildingPositions;
-        
-        [Serializable]
-        public class MapBuildingPosition
-        {
-            public BuildingType type;
-            public Transform positions;
-        }
+        public BuildingData data;
+        public Transform positions;
     }
     
     

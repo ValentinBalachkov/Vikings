@@ -1,35 +1,41 @@
 using System.Collections.Generic;
 using System.Linq;
+using PanelManager.Scripts.Panels;
 using UnityEngine;
 using Vikings.Building;
 using Vikings.Weapon;
 
 namespace Vikings.UI
 {
-    public class CraftAndBuildingMenu : MonoBehaviour
+    public class CraftAndBuildingMenu : ViewBase
     {
+        public override PanelType PanelType => PanelType.Screen;
+        public override bool RememberInHistory => false;
+        
         [SerializeField] private Transform _content;
         [SerializeField] private MenuElement _menuElement;
 
         [SerializeField] private List<StorageData> _storageDatas;
-        [SerializeField] private BuildingsOnMap _buildingsOnMap;
+      //  [SerializeField] private BuildingsOnMap _buildingsOnMap;
         [SerializeField] private CraftingTableData _craftingTableData;
-        [SerializeField] private BuildingData _craftingTableBuildingData;
+       // [SerializeField] private BuildingData _craftingTableBuildingData;
         [SerializeField] private WeaponsOnMapController _weaponsOnMapController;
         [SerializeField] private AudioSource _audioSourceBtnClick;
         
 
         private List<MenuElement> _menuElements = new();
 
-
-        private void OnEnable()
+        protected override void OnOpened()
         {
+            base.OnOpened();
             Spawn();
             SortElements();
         }
 
-        private void OnDisable()
+        protected override void OnClosed()
         {
+            base.OnClosed();
+            
             foreach (var element in _menuElements)
             {
                 Destroy(element.gameObject);
@@ -78,7 +84,7 @@ namespace Vikings.UI
                     item.AddOnClickListener(() =>
                     {
                         _audioSourceBtnClick.Play();
-                        _buildingsOnMap.SpawnStorage(index);
+                       // _buildingsOnMap.SpawnStorage(index);
                         gameObject.SetActive(false);
                     });
                 }
@@ -87,7 +93,7 @@ namespace Vikings.UI
                     item.AddOnClickListener(() =>
                     {
                         _audioSourceBtnClick.Play();
-                        _buildingsOnMap.SetStorageUpgradeState(_storageDatas[index].ItemType);
+                       // _buildingsOnMap.SetStorageUpgradeState(_storageDatas[index].ItemType);
                         gameObject.SetActive(false);
                     });
                 }
@@ -105,7 +111,7 @@ namespace Vikings.UI
                 craftingTable.AddOnClickListener(() =>
                 {
                     _audioSourceBtnClick.Play();
-                    _buildingsOnMap.SpawnStorage(3);
+                   // _buildingsOnMap.SpawnStorage(3);
                     gameObject.SetActive(false);
                 });
             }
@@ -114,7 +120,7 @@ namespace Vikings.UI
                 craftingTable.AddOnClickListener(() =>
                 {
                     _audioSourceBtnClick.Play();
-                    _buildingsOnMap.SetCraftingTableToUpgrade();
+                   // _buildingsOnMap.SetCraftingTableToUpgrade();
                     gameObject.SetActive(false);
                 });
             }
@@ -166,5 +172,7 @@ namespace Vikings.UI
                 });
             }
         }
+
+       
     }
 }

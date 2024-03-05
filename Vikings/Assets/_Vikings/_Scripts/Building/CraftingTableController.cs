@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using _Vikings._Scripts.Refactoring;
+using _Vikings.Refactoring.Character;
 using UnityEngine;
+using Vikings.Object;
 using Vikings.Weapon;
 
 namespace Vikings.Building
@@ -31,7 +34,7 @@ namespace Vikings.Building
             CollectingResourceView.Instance.Setup(weaponData.nameText, _craftingTableData.currentItemsCount.ToArray(), _craftingTableData.priceToUpgradeCraftingTable.ToArray(), transform);
         }
         
-        public override void SetUpgradeState()
+        public  void SetUpgradeState()
         {
             for (int i = 0; i < _craftingTableData.PriceToUpgrade.Count; i++)
             {
@@ -44,17 +47,17 @@ namespace Vikings.Building
             _craftingTableData.isUpgrade = true;
         }
 
-        public override bool GetUpgradeState()
+        public  bool GetUpgradeState()
         {
             return _craftingTableData.isUpgrade;
         }
 
-        public override void SetUpgradeState(bool isUpgrade)
+        public  void SetUpgradeState(bool isUpgrade)
         {
             _craftingTableData.isUpgrade = isUpgrade;
         }
 
-        public override void ChangeStorageCount(ItemCount price)
+        public  void ChangeStorageCount(ItemCount price)
         {
             _audioSourceToStorage.Play();
             if (_craftingTableData.isUpgrade)
@@ -112,17 +115,17 @@ namespace Vikings.Building
             _craftingTableData.Clear();
         }
 
-        public override void Init(BuildingData buildingData , bool isSaveInit = false)
-        {
-            if (!isSaveInit)
-            {
-                _craftingTableData.currentLevel++;
-            }
-            
-            SetupSprite(_craftingTableData.currentLevel);
-        }
+        // public override void Init(BuildingData buildingData , bool isSaveInit = false)
+        // {
+        //     if (!isSaveInit)
+        //     {
+        //         _craftingTableData.currentLevel++;
+        //     }
+        //     
+        //     SetupSprite(_craftingTableData.currentLevel);
+        // }
 
-        public override bool IsFullStorage()
+        public  bool IsFullStorage()
         {
             if (_craftingTableData.isUpgrade)
             {
@@ -154,14 +157,14 @@ namespace Vikings.Building
             return true;
         }
 
-        public override void UpgradeStorage()
+        public  void UpgradeStorage()
         {
             _craftingTableData.currentLevel++;
             SetupSprite(_craftingTableData.currentLevel);
             _craftingTableData.isUpgrade = false;
         }
 
-        public override ItemCount[] GetCurrentPriceToUpgrades()
+        public  ItemCount[] GetCurrentPriceToUpgrades()
         {
             if (_craftingTableData.isUpgrade)
             {
@@ -199,5 +202,36 @@ namespace Vikings.Building
                 _ => _buildingsSprites[2]
             };
         }
+
+        public override Transform GetPosition()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void CharacterAction(CharacterStateMachine characterStateMachine)
+        {
+            
+        }
+        
+        public override void Init()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Upgrade()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Dictionary<ResourceType, int> GetNeededItemsCount()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void SetData(BuildingData buildingData)
+        {
+            throw new NotImplementedException();
+        }
+        
     }
 }

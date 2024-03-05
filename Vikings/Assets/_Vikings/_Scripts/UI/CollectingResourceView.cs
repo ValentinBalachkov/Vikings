@@ -1,11 +1,14 @@
-using System;
+using PanelManager.Scripts.Panels;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Vikings.Building;
 
-public class CollectingResourceView : MonoBehaviour
+public class CollectingResourceView : ViewBase
 {
+    public override PanelType PanelType => PanelType.Screen;
+    public override bool RememberInHistory => false;
+    
     public static CollectingResourceView Instance => _instance;
     private static CollectingResourceView _instance;
 

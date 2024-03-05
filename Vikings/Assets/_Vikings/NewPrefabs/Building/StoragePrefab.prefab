@@ -245,7 +245,7 @@ Transform:
   - {fileID: 4524370790646162220}
   - {fileID: 3808910875666826039}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3805657028365542445
 MonoBehaviour:
@@ -261,10 +261,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentLevel:
     value: 0
-  _storageData: {fileID: 0}
-  _itemsData:
-  - {fileID: 11400000, guid: 842ec8fe0ff14054fb025a7b78239191, type: 2}
-  - {fileID: 11400000, guid: 8b782c2617e0b8048985ef732675d1be, type: 2}
   _buildingSpriteObject: {fileID: 7216879613359587854}
 --- !u!1 &2896521758792839751
 GameObject:
@@ -489,7 +485,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3808910875666826039}
-  - component: {fileID: 4048584589998005627}
   m_Layer: 8
   m_Name: BuildingHouse
   m_TagString: Untagged
@@ -514,16 +509,3 @@ Transform:
   m_Father: {fileID: 4897016215499429298}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4048584589998005627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7216879613359587854}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b11b29b1395646e18f5dfeddd1194cc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _audioSourceToStorage: {fileID: 3894698664435732477}

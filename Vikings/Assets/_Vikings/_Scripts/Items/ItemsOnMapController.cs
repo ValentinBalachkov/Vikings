@@ -15,13 +15,13 @@ namespace Vikings.Items
         [SerializeField] private CharactersConfig _charactersConfig;
 
         [SerializeField] private BoneFireController _boneFireController;
-        [SerializeField] private BuildingsOnMap _buildingsOnMap;
-        [SerializeField] private CharactersOnMap _charactersOnMap;
+       // [SerializeField] private BuildingsOnMap _buildingsOnMap;
+      //  [SerializeField] private CharactersOnMap _charactersOnMap;
         
 
         private List<ItemController> _itemsList = new();
 
-        private StorageController _storageController;
+      //  private StorageController _storageController;
         private GameObject _boneFire;
         private List<ItemController> _allItems = new();
 
@@ -68,10 +68,10 @@ namespace Vikings.Items
                             
                             itemOnScene.OnEnable += () =>
                             {
-                                foreach (var character in _charactersOnMap.CharactersList)
-                                {
-                                    _buildingsOnMap.UpdateCurrentBuilding(character, false, true);
-                                }
+                                // foreach (var character in _charactersOnMap.CharactersList)
+                                // {
+                                //     //_buildingsOnMap.UpdateCurrentBuilding(character, false, true);
+                                // }
                             };
                             
                             
@@ -107,10 +107,10 @@ namespace Vikings.Items
                             _allItems.Add(itemOnScene);
                             itemOnScene.OnEnable += () =>
                             {
-                                foreach (var character in _charactersOnMap.CharactersList)
-                                {
-                                    _buildingsOnMap.UpdateCurrentBuilding(character, false, true);
-                                }
+                                // foreach (var character in _charactersOnMap.CharactersList)
+                                // {
+                                //     //_buildingsOnMap.UpdateCurrentBuilding(character, false, true);
+                                // }
                             };
                             
                             if (item.item.IsOpen)
