@@ -82,7 +82,7 @@ public class SaveLoadManager : MonoBehaviour
         //_taskManager.SubscribeChangeStatusEvent();
         LoadAll();
         Application.targetFrameRate = 60;
-        _versionText.text = $"v{Application.version}";
+//        _versionText.text = $"v{Application.version}";
     }
 
     private void OnApplicationPause(bool pauseStatus)

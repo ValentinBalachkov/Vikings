@@ -28,7 +28,8 @@ public class BoneFire : AbstractObject, IAcceptArgs<List<BoneFirePositionData>>
 
     public override void CharacterAction(CharacterStateMachine characterStateMachine)
     {
-        
+        characterStateMachine.SetIdleAnimation();
+        characterStateMachine.ResetDestinationForLook(transform);
     }
     
 

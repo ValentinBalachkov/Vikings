@@ -17,6 +17,8 @@ namespace _Vikings._Scripts.Refactoring.Objects
         
         public void SetupSprite(int lvl)
         {
+            if(lvl == 0) return;
+            
             int index;
 
             if (lvl > _buildingData.buildingVisualSprites.Count)

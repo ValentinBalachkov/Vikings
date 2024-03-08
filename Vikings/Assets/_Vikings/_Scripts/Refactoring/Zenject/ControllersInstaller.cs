@@ -1,4 +1,5 @@
 using UnityEngine;
+using Vikings.UI;
 using Zenject;
 
 public class ControllersInstaller : MonoInstaller
@@ -10,9 +11,13 @@ public class ControllersInstaller : MonoInstaller
     {
         AddPanelManager();
     }
-    
-    
-    
+
+    public override void Start()
+    {
+        base.Start();
+        InitPanelManager();
+    }
+
     private void AddPanelManager()
     {
         Container
@@ -20,5 +25,13 @@ public class ControllersInstaller : MonoInstaller
             .FromInstance(_mainPanelManager)
             .AsSingle()
             .NonLazy();
+    }
+
+    private void InitPanelManager()
+    {
+        _mainPanelManager.Init();
+        _mainPanelManager.OpenPanel<MenuButtonsManager>();
+        _mainPanelManager.OpenPanel<InventoryView>();
+        _mainPanelManager.OpenPanel<TrayView>();
     }
 }

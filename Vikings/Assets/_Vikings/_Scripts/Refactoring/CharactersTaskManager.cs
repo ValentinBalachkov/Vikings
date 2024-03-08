@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using _Vikings.Refactoring.Character;
 using UniRx;
 using UnityEngine;
@@ -26,7 +27,12 @@ namespace _Vikings._Scripts.Refactoring
             _mapFactory = mapFactory;
             _characterFactory = characterFactory;
             setBuildingToQueue.Subscribe(OnSetBuilding).AddTo(_disposable);
+        }
 
+        private void Start()
+        {
+            _characterFactory.SpawnCharacters();
+            
             var characters = _characterFactory.GetCharacters();
 
             foreach (var character in characters)

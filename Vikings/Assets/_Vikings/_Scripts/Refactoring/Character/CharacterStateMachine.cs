@@ -31,13 +31,27 @@ namespace _Vikings.Refactoring.Character
         public void Init(Transform position, PlayerController playerController)
         {
             _inventory = new Inventory();
+            
             _playerController = Instantiate(playerController, position);
+            _playerController.Init(transform);
+            
             _doActionState = new DoActionState("DoActionState", this, OnCharacterAction);
             _doMoveState = new DoMoveState("DoMoveState", this, _playerController);
+            
             _states.Add(_doActionState);
             _states.Add(_doMoveState);
         }
 
+        public void SetIdleAnimation()
+        {
+            _playerController.SetIdleAnimation();
+        }
+
+        public void ResetDestinationForLook(Transform newDestination)
+        {
+            _playerController.ResetDestinationForLook(newDestination);
+        }
+        
         public Transform GetPosition()
         {
             return transform;

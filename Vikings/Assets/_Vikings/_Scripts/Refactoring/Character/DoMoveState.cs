@@ -15,15 +15,16 @@ namespace _Vikings.Refactoring.Character
         {
             base.Enter(abstractObject);
             _playerController.MoveToPoint(abstractObject.GetPosition());
-            _playerController.OnGetPosition += () =>
+            
+            _playerController.SetActionOnGetPosition(() =>
             {
                 stateMachine.SetState<DoActionState>(abstractObject);
-            };
+            });
         }
 
         public override void Exit()
         {
-            _playerController.OnGetPosition = null;
+            _playerController.ClearAction();
             base.Exit();
         }
     }
