@@ -9,21 +9,27 @@ namespace Vikings.Chanacter
     {
         public Action OnEndAnimation;
         public PlayerAnimationController PlayerAnimationController => _playerAnimationController;
-        
-        [SerializeField] private NavMeshAgent _navMeshAgent;
+        public Action OnGetPosition;
+
         [SerializeField] private float _rotateSpeed = 10;
         [SerializeField] private CharactersConfig _charactersConfig;
         [SerializeField] private PlayerAnimationController _playerAnimationController;
-        
-        private Action _onGetPosition;
-        private bool _onPosition;
+
+        private NavMeshAgent _navMeshAgent;
+        private bool _onPosition = true;
         private Transform _currentPoint, _thisTransform;
         private bool _isIdleRotate;
         private Vector3 _currentDestination;
 
         private void Awake()
         {
-            _thisTransform = GetComponent<Transform>();
+            
+            _navMeshAgent = GetComponentInParent<NavMeshAgent>();
+        }
+
+        public void Init(Transform transform)
+        {
+            _thisTransform = transform;
         }
 
         private void Update()
@@ -36,11 +42,11 @@ namespace Vikings.Chanacter
             if (rotate != Vector3.zero)
             {
                 var targetRotation = Quaternion.LookRotation(rotate);
-                transform.rotation = Quaternion.Slerp(_thisTransform.rotation, targetRotation, _rotateSpeed * Time.deltaTime);
+                _thisTransform.rotation = Quaternion.Slerp(_thisTransform.rotation, targetRotation, _rotateSpeed * Time.deltaTime);
             }
             if (CheckDestinationReached() && !_onPosition)
             {
-                _onGetPosition?.Invoke();
+                OnGetPosition?.Invoke();
                 _onPosition = true;
             }
         }
@@ -59,19 +65,23 @@ namespace Vikings.Chanacter
 
         public void SetActionOnGetPosition(Action action)
         {
-            _onGetPosition = null;
+            OnGetPosition = null;
             _onPosition = false;
-            _onGetPosition = action;
+            OnGetPosition = action;
         }
 
         public void ClearAction()
         {
-            _onGetPosition = null;
+            OnGetPosition = null;
             _onPosition = true;
         }
 
         public void MoveToPoint(Transform point)
         {
+            OnGetPosition = null;
+            _onPosition = false;
+            
+            DebugLogger.SendMessage(_charactersConfig.SpeedMove.ToString(), Color.green);
             _navMeshAgent.speed = _charactersConfig.SpeedMove;
             _currentPoint = point;
             _navMeshAgent.SetDestination(point.position);

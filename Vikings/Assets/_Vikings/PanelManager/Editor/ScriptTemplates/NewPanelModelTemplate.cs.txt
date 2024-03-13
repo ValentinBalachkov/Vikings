@@ -1,0 +1,19 @@
+﻿using BurningKnight.PanelManager;
+
+public class #SCRIPTNAME# : PanelModelBase
+{
+    protected override void OnInitialize()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void OnPanelOpened()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void OnPanelClosed()
+    {
+        throw new System.NotImplementedException();
+    }
+}

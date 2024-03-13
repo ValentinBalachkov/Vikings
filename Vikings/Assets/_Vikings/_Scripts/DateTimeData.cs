@@ -1,5 +1,5 @@
 ﻿using System;
-using SecondChanceSystem.SaveSystem;
+using Vikings.SaveSystem;
 using UnityEngine;
 
 namespace Vikings.Building
@@ -13,18 +13,18 @@ namespace Vikings.Building
         
         public void Save()
         {
-            SaveLoadSystem.SaveData(this);
+            //SaveLoadSystem.SaveData(this);
         }
 
         public void Load()
         {
-            var data = SaveLoadSystem.LoadData(this) as DateTimeData;
-            if (data != null)
-            {
-                currentDateTime = data.currentDateTime;
-                cheatTime = data.cheatTime;
-                timeConst = data.timeConst;
-            }
+            // var data = SaveLoadSystem.LoadData(this) as DateTimeData;
+            // if (data != null)
+            // {
+            //     currentDateTime = data.currentDateTime;
+            //     cheatTime = data.cheatTime;
+            //     timeConst = data.timeConst;
+            // }
         }
     }
 }

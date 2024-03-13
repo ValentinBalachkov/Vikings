@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e136616cbf1273499bbb42e399abfa7, type: 3}
+  m_Name: BuildingDataRockStorage
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 9b0178f44ecb8284cbc69151cd5dcd18, type: 3}
+  nameText: Rock storage
+  description: 
+  required: 
+  buildingVisualSprites:
+  - buildingsSprites: {fileID: 21300000, guid: 5df2779d9e06dc8438ae8b9249c6a501, type: 3}
+    shadowSprites: {fileID: 21300000, guid: 8aaebb528d7510445a05046949fd3c92, type: 3}
+  - buildingsSprites: {fileID: 21300000, guid: 8aed2e15a500f7e479b708c9f1068b4a, type: 3}
+    shadowSprites: {fileID: 21300000, guid: ea243df1f61511e4ca39cdaa495e70c6, type: 3}
+  - buildingsSprites: {fileID: 21300000, guid: d5281b3f5efa495419d54697a47100ee, type: 3}
+    shadowSprites: {fileID: 21300000, guid: b0d57f2ffd588204781181becdc58504, type: 3}
+  saveKey: RockStorage
+  prefab: {fileID: 3805657028365542445, guid: b14f1d8d437c31441a92ef089e7b92df, type: 3}
+  _buildingView: {fileID: 1985725270374596299, guid: 54af6bbda4542e641b33161b09dd0582,
+    type: 3}
+  priceToUpgrades: []
+  taskData: {fileID: 0}
+  priorityInMenu: 0

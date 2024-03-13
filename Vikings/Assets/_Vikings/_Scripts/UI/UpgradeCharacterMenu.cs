@@ -1,13 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using PanelManager.Scripts.Panels;
 using UnityEngine;
 using Vikings.Building;
 using Vikings.Chanacter;
 
 namespace Vikings.UI
 {
-    public class UpgradeCharacterMenu : MonoBehaviour
+    public class UpgradeCharacterMenu : ViewBase
     {
+        public override PanelType PanelType => PanelType.Screen;
+        public override bool RememberInHistory => false;
+        
         [SerializeField] private CharacterMenuElement _characterMenuElement;
         [SerializeField] private CharacterUpgradeUIData[] _characterUpgradeUIData;
         [SerializeField] private Transform _content;
@@ -15,22 +19,21 @@ namespace Vikings.UI
         [SerializeField] private StorageData _storageData;
         [SerializeField] private AudioSource _audioSourceBtnClick;
 
-        [SerializeField] private CharactersOnMap _charactersOnMap;
-        [SerializeField] private BuildingsOnMap _buildingsOnMap;
+        //[SerializeField] private CharactersOnMap _charactersOnMap;
+      //  [SerializeField] private BuildingsOnMap _buildingsOnMap;
         [SerializeField] private InventoryView _inventoryView;
-        
-        
-
 
         private List<CharacterMenuElement> _characterMenuElements = new();
 
-        private void Awake()
+        protected override void OnInitialize()
         {
+            base.OnInitialize();
             Spawn();
         }
 
-        private void OnEnable()
+        protected override void OnOpened()
         {
+            base.OnOpened();
             _storageData.OnUpdateCount += () =>
             {
                 foreach (var item in _characterMenuElements)
@@ -42,8 +45,9 @@ namespace Vikings.UI
             UpdateUI();
         }
 
-        private void OnDisable()
+        protected override void OnClosed()
         {
+            base.OnClosed();
             _storageData.OnUpdateCount = null;
         }
 
@@ -93,13 +97,13 @@ namespace Vikings.UI
                     break;
             }
 
-            foreach (var character in _charactersOnMap.CharactersList)
-            {
-                if (character.CurrentState is IdleState)
-                {
-                    _buildingsOnMap.UpdateCurrentBuilding(character);
-                }
-            }
+            // foreach (var character in _charactersOnMap.CharactersList)
+            // {
+            //     // if (character.CurrentState is IdleState)
+            //     // {
+            //     //     //_buildingsOnMap.UpdateCurrentBuilding(character);
+            //     // }
+            // }
             _inventoryView.UpdateUI(null);
         }
 
@@ -109,6 +113,8 @@ namespace Vikings.UI
             _characterMenuElements[1].UpdateUI(_charactersConfig.speedWorkLevel, _charactersConfig.SpeedWorkCost, _storageData.Count >= _charactersConfig.SpeedWorkCost);
             _characterMenuElements[2].UpdateUI(_charactersConfig.itemsCountLevel, _charactersConfig.ItemsCountCost, _storageData.Count >= _charactersConfig.ItemsCountCost);
         }
+
+        
     }
 
 }

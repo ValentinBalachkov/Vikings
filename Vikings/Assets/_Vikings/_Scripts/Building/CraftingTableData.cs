@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using SecondChanceSystem.SaveSystem;
+using Vikings.SaveSystem;
 using UnityEngine;
 
 namespace Vikings.Building
@@ -36,39 +36,39 @@ namespace Vikings.Building
         public int priority;
         public bool isUpgrade;
 
-        [SerializeField] private BuildingData _buildingData;
+        //[SerializeField] private BuildingData _buildingData;
         [SerializeField] private TaskData _taskData;
         
-        public List<PriceToUpgrade> currentItemsCount = new();
-        public List<PriceToUpgrade> priceToUpgradeCraftingTable = new();
+        public List<ItemCount> currentItemsCount = new();
+        public List<ItemCount> priceToUpgradeCraftingTable = new();
 
-        public List<PriceToUpgrade> currentItemsPriceToUpgrade = new();
-        public List<PriceToUpgrade> PriceToUpgrade
+        public List<ItemCount> currentItemsPriceToUpgrade = new();
+        public List<ItemCount> PriceToUpgrade
         {
             get
             {
-                if (currentLevel == 0)
-                {
-                    return _buildingData.PriceToUpgrades.ToList();
-                }
+                // if (currentLevel == 0)
+                // {
+                //     return _buildingData.PriceToUpgrades.ToList();
+                // }
 
-                List<PriceToUpgrade> newPrice = new();
-                foreach (var price in _buildingData.PriceToUpgrades)
-                {
-                    var a = price.count - 1;
-                    float p = 0;
-                    for (int i = 2; i <= currentLevel + 1; i++)
-                    {
-                        p += (Mathf.Pow(i, 4) + ((a * i) - Mathf.Pow(i, 3)))/i;
-                        a = (int)p;
-                    }
-                        
-                    newPrice.Add(new PriceToUpgrade
-                    {
-                        count = (int)p,
-                        itemData = price.itemData
-                    });
-                }
+                List<ItemCount> newPrice = new();
+                // foreach (var price in _buildingData.PriceToUpgrades)
+                // {
+                //     var a = price.count - 1;
+                //     float p = 0;
+                //     for (int i = 2; i <= currentLevel + 1; i++)
+                //     {
+                //         p += (Mathf.Pow(i, 4) + ((a * i) - Mathf.Pow(i, 3)))/i;
+                //         a = (int)p;
+                //     }
+                //         
+                //     newPrice.Add(new ItemCount
+                //     {
+                //         count = (int)p,
+                //         itemData = price.itemData
+                //     });
+                // }
 
                 return newPrice;
             }
@@ -90,10 +90,10 @@ namespace Vikings.Building
         public int craftingTime;
         private int _weaponLevel;
 
-        private PriceToUpgrade[] _currentItemsCountArray;
-        private PriceToUpgrade[] _priceToUpgradeCraftingTableArray;
+        private ItemCount[] _currentItemsCountArray;
+        private ItemCount[] _priceToUpgradeCraftingTableArray;
 
-        public void Setup(List<PriceToUpgrade> price, int time, int weaponLevel, int weaponId)
+        public void Setup(List<ItemCount> price, int time, int weaponLevel, int weaponId)
         {
             currentWeaponId = weaponId;
             _weaponLevel = weaponLevel;
@@ -103,7 +103,7 @@ namespace Vikings.Building
             
             foreach (var item in price)
             {
-                priceToUpgradeCraftingTable.Add(new PriceToUpgrade()
+                priceToUpgradeCraftingTable.Add(new ItemCount()
                 {
                     count = item.count,
                     itemData = item.itemData
@@ -112,7 +112,7 @@ namespace Vikings.Building
             
             foreach (var item in price)
             {
-                currentItemsCount.Add(new PriceToUpgrade()
+                currentItemsCount.Add(new ItemCount()
                 {
                     count = 0,
                     itemData = item.itemData
@@ -129,27 +129,27 @@ namespace Vikings.Building
 
         public void Save()
         {
-            _currentItemsCountArray = currentItemsCount.ToArray();
-            _priceToUpgradeCraftingTableArray = priceToUpgradeCraftingTable.ToArray();
-            SaveLoadSystem.SaveData(this);
+            // _currentItemsCountArray = currentItemsCount.ToArray();
+            // _priceToUpgradeCraftingTableArray = priceToUpgradeCraftingTable.ToArray();
+            // SaveLoadSystem.SaveData(this);
         }
 
         public void Load()
         {
-            var data = SaveLoadSystem.LoadData(this) as CraftingTableData;
-            if (data != null)
-            {
-                _currentLevel = data._currentLevel;
-                isUpgrade = data.isUpgrade;
-                if (data._currentItemsCountArray != null)
-                {
-                    currentItemsCount.Clear();
-                    priceToUpgradeCraftingTable.Clear();
-                    currentItemsCount = data._currentItemsCountArray.ToList();
-                    priceToUpgradeCraftingTable = data._priceToUpgradeCraftingTableArray.ToList();
-                }
-                craftingTime = data.craftingTime;
-            }
+            // var data = SaveLoadSystem.LoadData(this) as CraftingTableData;
+            // if (data != null)
+            // {
+            //     _currentLevel = data._currentLevel;
+            //     isUpgrade = data.isUpgrade;
+            //     if (data._currentItemsCountArray != null)
+            //     {
+            //         currentItemsCount.Clear();
+            //         priceToUpgradeCraftingTable.Clear();
+            //         currentItemsCount = data._currentItemsCountArray.ToList();
+            //         priceToUpgradeCraftingTable = data._priceToUpgradeCraftingTableArray.ToList();
+            //     }
+            //     craftingTime = data.craftingTime;
+            // }
         }
     }
 

@@ -1,4 +1,4 @@
-﻿using SecondChanceSystem.SaveSystem;
+﻿using Vikings.SaveSystem;
 using UnityEngine;
 using Vikings.UI;
 
@@ -10,6 +10,8 @@ namespace Vikings.Chanacter
         public float speed_up;
         public int charactersCount;
         public int houseLevel;
+
+        public PlayerController playerController;
 
         [SerializeField] private TaskData _taskDataBackpack;
 
@@ -181,20 +183,20 @@ namespace Vikings.Chanacter
 
         public void Save()
         {
-            SaveLoadSystem.SaveData(this);
+            //SaveLoadSystem.SaveData(this);
         }
 
         public void Load()
         {
-            var data = SaveLoadSystem.LoadData(this) as CharactersConfig;
-            if (data != null)
-            {
-                charactersCount = data.charactersCount;
-                houseLevel = data.houseLevel;
-                speedMoveLevel = data.speedMoveLevel;
-                speedWorkLevel = data.speedWorkLevel;
-                _itemsCountLevel = data._itemsCountLevel;
-            }
+            // var data = SaveLoadSystem.LoadData(this) as CharactersConfig;
+            // if (data != null)
+            // {
+            //     charactersCount = data.charactersCount;
+            //     houseLevel = data.houseLevel;
+            //     speedMoveLevel = data.speedMoveLevel;
+            //     speedWorkLevel = data.speedWorkLevel;
+            //     _itemsCountLevel = data._itemsCountLevel;
+            // }
         }
     }
 }

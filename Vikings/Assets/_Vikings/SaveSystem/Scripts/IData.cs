@@ -1,8 +1,8 @@
-﻿namespace SecondChanceSystem.SaveSystem
+﻿namespace Vikings.SaveSystem
 {
-    public interface IData //реализуется у ScriptableObject, которые должны быть сохранены
+    public interface IData 
     {
-        void Save(); //Метод сохранения
-        void Load(); //Метод сохранения
+        void Save();
+        void Load(); 
     }
 }

@@ -1,42 +1,33 @@
 using System.IO;
 using UnityEngine;
+using Vikings.Object;
 
-namespace SecondChanceSystem.SaveSystem
+namespace Vikings.SaveSystem
 {
     public static class SaveLoadSystem
     {
-        /// <summary>
-        /// Метод сохранения ScriptableObject в Json
-        /// </summary>
-        /// <param name="saveData">ScriptableObject, который нужно сохранить</param>
-        public static void SaveData(ScriptableObject saveData)
+        public static void SaveData<T>(T dynamicData, string dataKey)
         {
-            string saveFileName = saveData.name + "Data.json";
+            string saveFileName = dataKey + "Data.json";
             string savePath = GetDataPath(saveFileName);
-            string json = JsonUtility.ToJson(saveData);
+            string json = JsonUtility.ToJson(dynamicData);
             File.WriteAllText(savePath, json);
         }
-        /// <summary>
-        /// Метод загрузки ScriptableObject из Json
-        /// </summary>
-        /// <param name="loadData">ScriptableObject, который нужно загрузить</param>
-        /// <returns>Загруженный экземпляр SO</returns>
-        public static ScriptableObject LoadData(ScriptableObject loadData)
+        
+        public static T LoadData<T>(T dynamicData, string dataKey)
         {
-            string loadFileName = loadData.name + "Data.json";
+            string loadFileName = dataKey + "Data.json";
             string loadPath = GetDataPath(loadFileName);
 
             if (!File.Exists(loadPath))
             {
-                //Debug.Log($"{loadFileName} - LoadFromFile -> FileNotFound!");
-                return null;
+                DebugLogger.SendMessage($"Data not fount from path {loadPath}", Color.red);
+                return dynamicData;
             }
-            else
-            {
-                string json = File.ReadAllText(loadPath);
-                JsonUtility.FromJsonOverwrite(json, loadData);
-                return loadData;
-            }
+
+            string json = File.ReadAllText(loadPath);
+            JsonUtility.FromJsonOverwrite(json, dynamicData);
+            return dynamicData;
         }
 
         private static string GetDataPath(string saveFileName)

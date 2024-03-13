@@ -13,7 +13,7 @@ namespace Vikings.Building
         private static BuildingHomeActionController _instance;
         [SerializeField] private Camera _camera;
         [SerializeField] private Camera _cameraPassive;
-        [SerializeField] private CharactersOnMap _charactersOnMap;
+     //   [SerializeField] private CharactersOnMap _charactersOnMap;
         [SerializeField] private CharactersConfig _charactersConfig;
         [SerializeField] private HouseCameraPositionInfo[] _houseCameraPosition;
         [SerializeField] private List<Transform> _allRespawnPointTransform = new();
@@ -53,7 +53,7 @@ namespace Vikings.Building
         public void OnHomeBuilding()
         {
             if (_charactersConfig.houseLevel >= 5) return;
-            _charactersOnMap.AddCharacterOnMap(0);
+           // _charactersOnMap.AddCharacterOnMap(0);
             _charactersConfig.charactersCount++;
             _charactersConfig.houseLevel++;
             OnHomeLevelUp?.Invoke(_charactersConfig.houseLevel);

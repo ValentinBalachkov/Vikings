@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61d3f19d657d472686872f187ff8d525, type: 3}
   m_Name: CharactersConfig
   m_EditorClassIdentifier: 
-  charactersCount: 0
+  speed_up: 1
+  charactersCount: 1
   houseLevel: 0
+  playerController: {fileID: 3085575546098662736, guid: c36a170aed7712a42b71a6f07aa9db45,
+    type: 3}
   _taskDataBackpack: {fileID: 11400000, guid: 540c20a5168b5444c9001bf4e1f04521, type: 2}
   speedMove: 5
   speedMoveLevel: 1

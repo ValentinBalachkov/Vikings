@@ -1,10 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using PanelManager.Scripts.Panels;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TrayView : MonoBehaviour
+public class TrayView : ViewBase
 {
+    public override PanelType PanelType => PanelType.Overlay;
+    public override bool RememberInHistory => false;
+    
     [SerializeField] private Transform _content;
     [SerializeField] private TrayElement _trayElement;
 
@@ -28,10 +31,10 @@ public class TrayView : MonoBehaviour
 
     private void Start()
     {
-        _advertisementButton.onClick.AddListener((() =>
-        {
-            _ironSourceController.ShowRewardVideo();
-        }));
+        // _advertisementButton.onClick.AddListener((() =>
+        // {
+        //     _ironSourceController.ShowRewardVideo();
+        // }));
     }
 
     private void OnDestroy()

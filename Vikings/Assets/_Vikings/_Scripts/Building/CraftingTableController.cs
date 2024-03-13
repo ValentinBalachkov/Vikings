@@ -1,203 +1,195 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using _Vikings._Scripts.Refactoring;
+using _Vikings._Scripts.Refactoring.Objects;
+using _Vikings.Refactoring.Character;
+using UniRx;
 using UnityEngine;
+using Vikings.Object;
+using Vikings.SaveSystem;
 using Vikings.Weapon;
 
 namespace Vikings.Building
 {
     public class CraftingTableController : AbstractBuilding
     {
-        public GameObject Model => _model;
-        public Action<PriceToUpgrade[], PriceToUpgrade[]> OnChangeCount;
-        public CraftingTableData CraftingTableData => _craftingTableData;
-        [SerializeField] private Sprite[] _buildingsSprites, _shadowsRenders;
-        [SerializeField] private SpriteRenderer _spriteBuilding, _shadowRender;
-        
         [SerializeField] private AudioSource _audioSourceToStorage;
-        
-        [SerializeField] private CraftingTableData _craftingTableData;
-        [SerializeField] private GameObject _model;
-        
+
+        [SerializeField] private GameObject _buildingSpriteObject;
+
+        private BuildingData _craftingTableData;
+        private CraftingTableDynamicData _craftingTableDynamicData;
+        private BuildingView _buildingView;
+
 
         private WeaponData _currentWeapon;
         private bool _isUpgradeWeapon;
 
-        public void SetupCraftWeapon(WeaponData weaponData, bool isUpgrade)
+        public override void Init()
         {
-            _isUpgradeWeapon = isUpgrade;
-            _currentWeapon = weaponData;
-            _craftingTableData.Setup(_currentWeapon.PriceToBuy, (int)_currentWeapon.CraftingTime, _currentWeapon.level, weaponData.id);
-            CollectingResourceView.Instance.Setup(weaponData.nameText, _craftingTableData.currentItemsCount.ToArray(), _craftingTableData.priceToUpgradeCraftingTable.ToArray(), transform);
+            for (int i = 0; i < _craftingTableDynamicData.CurrentItemsCount.Length; i++)
+            {
+                currentItems.Add(_craftingTableDynamicData.CurrentItemsCount[i].resourceType,
+                    _craftingTableDynamicData.CurrentItemsCount[i].count);
+            }
+
+            CurrentLevel.Value = _craftingTableDynamicData.CurrentLevel;
+            CurrentLevel.Subscribe(OnLevelChange).AddTo(_disposable);
+            CreateModel();
+            ChangeState(_craftingTableDynamicData.State);
+            _buildingView.SetupSprite(CurrentLevel.Value);
+        }
+
+        private void OnLevelChange(int value)
+        {
+            _craftingTableDynamicData.CurrentLevel = value;
+        }
+
+        private void CreateModel()
+        {
+            _buildingView = Instantiate(_craftingTableData._buildingView, transform);
+            _buildingView.Init(_craftingTableData);
         }
         
-        public override void SetUpgradeState()
+        
+        public override Transform GetPosition()
         {
-            for (int i = 0; i < _craftingTableData.PriceToUpgrade.Count; i++)
+            return transform;
+        }
+
+        public override void CharacterAction(CharacterStateMachine characterStateMachine)
+        {
+            var item = characterStateMachine.Inventory.GetItemFromInventory();
+            ChangeCount?.Invoke(item.count, item.resourceType);
+        }
+
+        public override void Upgrade()
+        {
+            CurrentLevel.Value++;
+            _buildingView.SetupSprite(CurrentLevel.Value);
+        }
+
+        public override Dictionary<ResourceType, int> GetNeededItemsCount()
+        {
+            Dictionary<ResourceType, int> dict = new();
+
+            var maxPrice = GetPriceForUpgrade();
+
+            foreach (var price in maxPrice)
             {
-                _craftingTableData.currentItemsPriceToUpgrade[i].count = 0;
-            }
+                var currentItem =
+                    _craftingTableDynamicData.CurrentItemsCount.FirstOrDefault(x => x.resourceType == price.Key);
 
-            CollectingResourceView.Instance.Setup(_craftingTableData.nameText,_craftingTableData.currentItemsPriceToUpgrade.ToArray(), 
-                _craftingTableData.PriceToUpgrade.ToArray(), transform);
-
-            _craftingTableData.isUpgrade = true;
-        }
-
-        public override bool GetUpgradeState()
-        {
-            return _craftingTableData.isUpgrade;
-        }
-
-        public override void SetUpgradeState(bool isUpgrade)
-        {
-            _craftingTableData.isUpgrade = isUpgrade;
-        }
-
-        public override void ChangeStorageCount(PriceToUpgrade price)
-        {
-            _audioSourceToStorage.Play();
-            if (_craftingTableData.isUpgrade)
-            {
-                var itemUpg = _craftingTableData.currentItemsPriceToUpgrade.FirstOrDefault(x => x.itemData.ID == price.itemData.ID);
-                var defaultItemUpg = _craftingTableData.PriceToUpgrade.FirstOrDefault(x => x.itemData.ID == price.itemData.ID);
-
-                if (itemUpg.count + price.count >= defaultItemUpg.count)
+                if (currentItem == null)
                 {
-                    itemUpg.count = defaultItemUpg.count;
+                    Debug.LogError("GetNeededItemsCount is null");
+                    continue;
                 }
-                else
+               
+                dict.Add(price.Key, price.Value - currentItem.count);
+            }
+
+            return dict;
+        }
+
+        public override Dictionary<ResourceType, int> GetPriceForUpgrade()
+        {
+            Dictionary<ResourceType, int> dict = new();
+
+            if (CurrentLevel.Value == 0)
+            {
+                foreach (var price in _craftingTableData.priceToUpgrades)
                 {
-                    itemUpg.count += price.count;
+                    dict.Add(price.resourceType, price.count);
                 }
-                CollectingResourceView.Instance.UpdateView(_craftingTableData.currentItemsPriceToUpgrade.ToArray(), _craftingTableData.PriceToUpgrade.ToArray());
-                return;
+
+                return dict;
             }
             
-            var item = _currentWeapon.PriceToBuy.FirstOrDefault(x => x.itemData.ID == price.itemData.ID);
-            var currentItem = _craftingTableData.currentItemsCount.FirstOrDefault(x => x.itemData.ID == price.itemData.ID);
-            if (price.count + currentItem.count <= item.count)
+            foreach (var price in _craftingTableData.priceToUpgrades)
             {
-                currentItem.count += price.count;
-            }
-            else
-            {
-                currentItem.count = item.count;
-            }
-            
-            CollectingResourceView.Instance.UpdateView(_craftingTableData.currentItemsCount.ToArray(), _currentWeapon.PriceToBuy.ToArray());
-            OnChangeCount?.Invoke(_currentWeapon.PriceToBuy.ToArray(), _craftingTableData.currentItemsCount.ToArray());
-
-        }
-
-        public void OpenCurrentWeapon()
-        {
-            if (_isUpgradeWeapon)
-            {
-                _currentWeapon.level++;
-                _isUpgradeWeapon = false;
-            }
-
-            else if (!_craftingTableData.isUpgrade)
-            {
-                _currentWeapon.level = 1;
-                _currentWeapon.IsOpen = true;
-                _currentWeapon.ItemData.IsOpen = true;
-            }
-            else
-            {
-                UpgradeStorage();
-            }
-            
-            _craftingTableData.Clear();
-        }
-
-        public override void Init(BuildingData buildingData , bool isSaveInit = false)
-        {
-            if (!isSaveInit)
-            {
-                _craftingTableData.currentLevel++;
-            }
-            
-            SetupSprite(_craftingTableData.currentLevel);
-        }
-
-        public override bool IsFullStorage()
-        {
-            if (_craftingTableData.isUpgrade)
-            {
-                for (int i = 0; i < _craftingTableData.PriceToUpgrade.Count; i++)
+                var a = price.count - 1;
+                float p = 0;
+                for (int i = 2; i <= CurrentLevel.Value + 1; i++)
                 {
-                    if ( _craftingTableData.PriceToUpgrade[i].count > _craftingTableData.currentItemsPriceToUpgrade[i].count)
-                    {
-                        return false;
-                    }
-                }
-            
-                CollectingResourceView.Instance.gameObject.SetActive(false);
-                return true;
-            }
-            
-            if (_currentWeapon == null || _craftingTableData.currentItemsCount.Count == 0)
-            {
-                return true;
-            }
-            
-            for (int i = 0; i < _currentWeapon.PriceToBuy.Count; i++)
-            {
-                if (_currentWeapon.PriceToBuy[i].count > _craftingTableData.currentItemsCount[i].count)
-                {
-                    return false;
-                }
-            }
-            CollectingResourceView.Instance.gameObject.SetActive(false);
-            return true;
-        }
-
-        public override void UpgradeStorage()
-        {
-            _craftingTableData.currentLevel++;
-            SetupSprite(_craftingTableData.currentLevel);
-            _craftingTableData.isUpgrade = false;
-        }
-
-        public override PriceToUpgrade[] GetCurrentPriceToUpgrades()
-        {
-            if (_craftingTableData.isUpgrade)
-            {
-                List<PriceToUpgrade> priceUpgrade = new();
-                for (int i = 0; i < _craftingTableData.PriceToUpgrade.Count; i++)
-                {
-                    if (_craftingTableData.PriceToUpgrade[i].count > _craftingTableData.currentItemsPriceToUpgrade[i].count)
-                    {
-                        priceUpgrade.Add(_craftingTableData.currentItemsPriceToUpgrade[i]);
-                    }
+                    p += (Mathf.Pow(i, 4) + ((a * i) - Mathf.Pow(i, 3)))/i;
+                    a = (int)p;
                 }
                 
-                return priceUpgrade.ToArray();
-            }
-            
-            List<PriceToUpgrade> price = new();
-            for (int i = 0; i < _currentWeapon.PriceToBuy.Count; i++)
-            {
-                if (_currentWeapon.PriceToBuy[i].count > _craftingTableData.currentItemsCount[i].count)
-                {
-                    price.Add(_craftingTableData.currentItemsCount[i]);
-                }
+                dict.Add(price.resourceType, (int)p);
             }
 
-            return price.ToArray();
+            return dict;
         }
 
-        private void SetupSprite(int lvl)
+        public override void SetData(BuildingData buildingData)
         {
-            _spriteBuilding.sprite = lvl switch
+            _craftingTableData = buildingData;
+
+            _craftingTableDynamicData = new();
+            _craftingTableDynamicData = SaveLoadSystem.LoadData(_craftingTableDynamicData, buildingData.saveKey);
+        }
+
+        public override (bool, string) IsEnableToBuild<T>(T arg)
+        {
+            var weapon = arg as WeaponData;
+            string text = $"REQUIRED:  {_craftingTableData.required} LEVEL{1}";
+            bool isEnable = weapon.IsOpen;
+
+            return (isEnable, text);
+        }
+
+        public override BuildingData GetData()
+        {
+            return _craftingTableData;
+        }
+
+        public override void ChangeState(BuildingState state)
+        {
+            base.ChangeState(state);
+            _craftingTableDynamicData.State = state;
+            
+            switch (state)
             {
-                1 => _buildingsSprites[0],
-                2 => _buildingsSprites[1],
-                3 => _buildingsSprites[2],
-                _ => _buildingsSprites[2]
-            };
+                case BuildingState.NotSet:
+                    _buildingSpriteObject.SetActive(false);
+                    _buildingView.gameObject.SetActive(false);
+                    break;
+                case BuildingState.InProgress:
+                    ChangeSpriteObject(true);
+                    ChangeCount = OnCountChangeInProgressState;
+                    break;
+                case BuildingState.Ready:
+                    ChangeSpriteObject(false);
+                    ChangeCount = OnCountChangeWeaponState;
+                    break;
+            }
+        }
+        
+        private void ChangeSpriteObject(bool isBuilding)
+        {
+            _buildingSpriteObject.SetActive(isBuilding);
+            _buildingView.gameObject.SetActive(!isBuilding);
+        }
+
+
+        private void OnCountChangeInProgressState(int value, ResourceType itemType)
+        {
+            var priceDict = GetPriceForUpgrade();
+
+            if (currentItems[itemType] + value >= priceDict[itemType])
+            {
+                currentItems[itemType] = priceDict[itemType];
+            }
+            else
+            {
+                currentItems[itemType] += value;
+            }
+        }
+        
+        private void OnCountChangeWeaponState(int value, ResourceType itemType)
+        {
+            
         }
     }
 }

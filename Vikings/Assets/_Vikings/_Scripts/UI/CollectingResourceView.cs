@@ -1,11 +1,14 @@
-using System;
+using PanelManager.Scripts.Panels;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Vikings.Building;
 
-public class CollectingResourceView : MonoBehaviour
+public class CollectingResourceView : ViewBase
 {
+    public override PanelType PanelType => PanelType.Screen;
+    public override bool RememberInHistory => false;
+    
     public static CollectingResourceView Instance => _instance;
     private static CollectingResourceView _instance;
 
@@ -28,7 +31,7 @@ public class CollectingResourceView : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void Setup(string nameBuilding, PriceToUpgrade[] current, PriceToUpgrade[] all, Transform pos)
+    public void Setup(string nameBuilding, ItemCount[] current, ItemCount[] all, Transform pos)
     {
         _woodCount.text = $"{current[0].count}/{all[0].count}";
         _rockCount.text = $"{current[1].count}/{all[1].count}";
@@ -49,7 +52,7 @@ public class CollectingResourceView : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    public void UpdateView(PriceToUpgrade[] current, PriceToUpgrade[] all)
+    public void UpdateView(ItemCount[] current, ItemCount[] all)
     {
         _woodCount.text = $"{current[0].count}/{all[0].count}";
         _rockCount.text = $"{current[1].count}/{all[1].count}";

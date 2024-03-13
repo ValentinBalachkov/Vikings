@@ -12,12 +12,12 @@ namespace Vikings.Weapon
         public List<WeaponData> WeaponsData => _weaponsList;
         [SerializeField] private ItemsOnMapController _itemsOnMapController;
         [SerializeField] private List<WeaponData> _weaponsList = new();
-        [SerializeField] private BuildingsOnMap _buildingsOnMap;
+        //[SerializeField] private BuildingsOnMap _buildingsOnMap;
         [SerializeField] private MenuButtonsManager _menuButtonsManager;
         
         [SerializeField] private CraftingTableData _craftingTableData;
         [SerializeField] private CraftingTableData _craftingTableDataDefault;
-        [SerializeField] private CharactersOnMap _charactersOnMap;
+      //  [SerializeField] private CharactersOnMap _charactersOnMap;
 
 
         private void Start()
@@ -44,11 +44,11 @@ namespace Vikings.Weapon
             if (_craftingTableData.currentItemsCount.Count > 0 || _craftingTableDataDefault.currentItemsCount.Count > 0)
             {
                 var weapon = _weaponsList.FirstOrDefault(x => x.id == weaponId);
-                _buildingsOnMap.GetCraftingTable().SetupCraftWeapon(weapon, weapon.IsOpen);
-                foreach (var character in _charactersOnMap.CharactersList)
-                {
-                    _buildingsOnMap.UpdateCurrentBuilding(character,true);
-                }
+                //_buildingsOnMap.GetCraftingTable().SetupCraftWeapon(weapon, weapon.IsOpen);
+                // foreach (var character in _charactersOnMap.CharactersList)
+                // {
+                //  //   _buildingsOnMap.UpdateCurrentBuilding(character,true);
+                // }
                
                 _menuButtonsManager.EnableButtons(false);
             }
@@ -56,15 +56,15 @@ namespace Vikings.Weapon
 
         public void StartCraftWeapon(int index)
         {
-            _buildingsOnMap.GetCraftingTable().SetupCraftWeapon(_weaponsList[index], _weaponsList[index].IsOpen);
-            foreach (var character in _charactersOnMap.CharactersList)
-            {
-                foreach (var item in character.itemQueue)
-                {
-                    item.IsEngaged = false;
-                }
-                _buildingsOnMap.UpdateCurrentBuilding(character,true);
-            }
+           // _buildingsOnMap.GetCraftingTable().SetupCraftWeapon(_weaponsList[index], _weaponsList[index].IsOpen);
+            // foreach (var character in _charactersOnMap.CharactersList)
+            // {
+            //     foreach (var item in character.itemQueue)
+            //     {
+            //         item.IsEngaged = false;
+            //     }
+            //    // _buildingsOnMap.UpdateCurrentBuilding(character,true);
+            // }
 
            
             _menuButtonsManager.EnableButtons(false);

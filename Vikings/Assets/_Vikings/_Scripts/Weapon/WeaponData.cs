@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using SecondChanceSystem.SaveSystem;
+using Vikings.SaveSystem;
 using UnityEngine;
 using Vikings.Building;
 using Vikings.Items;
@@ -67,7 +67,7 @@ namespace Vikings.Weapon
             }
         }
 
-        public List<PriceToUpgrade> PriceToBuy
+        public List<ItemCount> PriceToBuy
         {
             get
             {
@@ -76,7 +76,7 @@ namespace Vikings.Weapon
                     return _priceToBuy;
                 }
 
-                List<PriceToUpgrade> newPrice = new();
+                List<ItemCount> newPrice = new();
                 foreach (var price in _priceToBuy)
                 {
                     var a = price.count - 1;
@@ -87,7 +87,7 @@ namespace Vikings.Weapon
                         a = (int)p;
                     }
                         
-                    newPrice.Add(new PriceToUpgrade
+                    newPrice.Add(new ItemCount
                     {
                         count = (int)p,
                         itemData = price.itemData
@@ -100,22 +100,22 @@ namespace Vikings.Weapon
 
         [SerializeField] private ItemData _itemData;
         [SerializeField] private bool _isOpen;
-        [SerializeField] private List<PriceToUpgrade> _priceToBuy = new();
+        [SerializeField] private List<ItemCount> _priceToBuy = new();
         [SerializeField] private int _craftingTime;
         
         public void Save()
         {
-            SaveLoadSystem.SaveData(this);
+            //SaveLoadSystem.SaveData(this);
         }
 
         public void Load()
         {
-            var data = SaveLoadSystem.LoadData(this) as WeaponData;
-            if (data != null)
-            {
-                _isOpen = data._isOpen;
-                level = data.level;
-            }
+            // var data = SaveLoadSystem.LoadData(this) as WeaponData;
+            // if (data != null)
+            // {
+            //     _isOpen = data._isOpen;
+            //     level = data.level;
+            // }
         }
     }
 }

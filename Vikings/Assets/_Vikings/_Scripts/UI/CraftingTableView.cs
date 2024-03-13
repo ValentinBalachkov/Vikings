@@ -15,7 +15,7 @@ namespace Vikings.UI
 
         private void Awake()
         {
-            _craftingTableController.OnChangeCount += UpdateUI;
+            //_craftingTableController.OnChangeCount += UpdateUI;
         }
 
         public void UpgradeProgressBar()
@@ -23,7 +23,7 @@ namespace Vikings.UI
             
         }
 
-        private void UpdateUI(PriceToUpgrade[] priceList, PriceToUpgrade[] currentItems)
+        private void UpdateUI(ItemCount[] priceList, ItemCount[] currentItems)
         {
             _count.text = "";
 

@@ -1,12 +1,16 @@
 using System.Linq;
+using PanelManager.Scripts.Panels;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Vikings.Building;
 using Vikings.UI;
 
-public class QuestPanelView : MonoBehaviour
+public class QuestPanelView : ViewBase
 {
+    public override PanelType PanelType => PanelType.Screen;
+    public override bool RememberInHistory => false;
+    
     [SerializeField] private TMP_Text _header;
     [SerializeField] private TMP_Text _description;
     [SerializeField] private TMP_Text _descriptionReward;

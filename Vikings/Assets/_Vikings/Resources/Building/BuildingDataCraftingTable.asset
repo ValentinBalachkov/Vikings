@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e136616cbf1273499bbb42e399abfa7, type: 3}
+  m_Name: BuildingDataCraftingTable
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 77f9782e323686143a53ad0436cff1e2, type: 3}
+  nameText: Crafting table
+  description: 
+  required: 
+  buildingVisualSprites:
+  - buildingsSprites: {fileID: 21300000, guid: 0f1ac8e103eaa714882f600b0cba5350, type: 3}
+    shadowSprites: {fileID: 21300000, guid: 33ce05d98047d8a498d47e54a739aee4, type: 3}
+  - buildingsSprites: {fileID: 21300000, guid: 02fa1a9e5b536504283d87ef7aae4902, type: 3}
+    shadowSprites: {fileID: 21300000, guid: 124b464587824a6468de4ecaedd64a6d, type: 3}
+  - buildingsSprites: {fileID: 21300000, guid: 7bf4255628e1d254888afda45ee967eb, type: 3}
+    shadowSprites: {fileID: 21300000, guid: 22376aac9b54de043a912622815080ee, type: 3}
+  saveKey: WoodStorage
+  prefab: {fileID: 3805657028365542445, guid: b14f1d8d437c31441a92ef089e7b92df, type: 3}
+  _buildingView: {fileID: 6687050115691606054, guid: 8f7f3106a14dc7342b35dde7ea3a46ec,
+    type: 3}
+  priceToUpgrades: []
+  taskData: {fileID: 0}
+  priorityInMenu: 0
