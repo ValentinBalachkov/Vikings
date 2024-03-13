@@ -214,7 +214,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec651637b9e128e4cbff035f2a3b0852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _order: 0
   _craftButton: {fileID: 6646777543476999910}
+  _upgradeButton: {fileID: 2725404337505266371}
 --- !u!1 &2549632658503588536
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,7 +462,7 @@ GameObject:
   - component: {fileID: 2725404337505266371}
   - component: {fileID: 3177347327246096864}
   m_Layer: 5
-  m_Name: Btn_Craft_and_Build
+  m_Name: Btn_Upgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

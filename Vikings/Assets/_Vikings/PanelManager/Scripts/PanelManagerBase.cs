@@ -4,6 +4,7 @@ using System.Linq;
 using PanelManager.PanelAnimations;
 using PanelManager.Scripts.Interfaces;
 using PanelManager.Scripts.Panels;
+using UniRx;
 using UnityEngine;
 
 namespace PanelManager.Scripts
@@ -12,34 +13,37 @@ namespace PanelManager.Scripts
     {
         #region Scene references
 
-        [Header("Base")]
-        [SerializeField] private PanelManagerSettings _settings;
+        [Header("Base")] [SerializeField] private PanelManagerSettings _settings;
         [SerializeField] private Canvas _canvas;
         [SerializeField] private Transform _panelsParent;
-        
+
         #endregion
 
         protected List<IView> Panels => _panels.Values.ToList();
 
-        private readonly Dictionary<Type, IView>         _panels = new Dictionary<Type, IView>();
+        private readonly Dictionary<Type, IView> _panels = new Dictionary<Type, IView>();
         private readonly Dictionary<Type, PanelModelBase> _models = new Dictionary<Type, PanelModelBase>();
 
         private readonly Stack<IView> _history = new Stack<IView>();
 
-        private bool      _panelContainersCreated;
-        private IView    _currentView;
+        private bool _panelContainersCreated;
+        private IView _currentView;
         private Transform _screensParent;
         private Transform _overlaysParent;
         private bool _panelAnimationPlaying;
+        private CompositeDisposable _disposable = new();
 
         #region IPanelManager
+
+        public CompositeDisposable Disposable => _disposable;
+
 
         public Canvas Canvas => _canvas;
 
         public void OpenPanel<T>() where T : ViewBase
         {
-            if(_panelAnimationPlaying) return;
-            
+            if (_panelAnimationPlaying) return;
+
             var panel = GetPanel<T>();
             OpenPanel(panel, true);
         }
@@ -47,7 +51,7 @@ namespace PanelManager.Scripts
         public void OpenPanel(IView view)
         {
             var type = view.GetType();
-            
+
             if (_panels.TryGetValue(type, out var panel) == false)
             {
                 throw new ArgumentException($"Panel <{type}> not found!");
@@ -56,10 +60,27 @@ namespace PanelManager.Scripts
             OpenPanel(panel, true);
         }
 
+        public void ActiveOverlay(bool isActive)
+        {
+            var overlayPanels = _panels.Where(x => x.Value.PanelType == PanelType.Overlay).ToList();
+
+            foreach (var panel in overlayPanels)
+            {
+                if (isActive)
+                {
+                    panel.Value.Open();
+                }
+                else
+                {
+                    panel.Value.Close();
+                }
+            }
+        }
+
         public void OpenPanel<TP, TY>(TY arg) where TP : ViewBase, IAcceptArg<TY>
         {
-            if(_panelAnimationPlaying) return;
-            
+            if (_panelAnimationPlaying) return;
+
             var panel = GetPanel<TP>();
             panel.AcceptArg(arg);
             OpenPanel(panel, true);
@@ -67,8 +88,8 @@ namespace PanelManager.Scripts
 
         public void ClosePanel<T>() where T : ViewBase
         {
-            if(_panelAnimationPlaying) return;
-            
+            if (_panelAnimationPlaying) return;
+
             var panel = GetPanel<T>();
 
             if (panel is ViewAnimationBase panelAnimationBase)
@@ -76,7 +97,7 @@ namespace PanelManager.Scripts
                 panelAnimationBase.AnimationClose(ClosePanelAnimationEnd);
                 return;
             }
-            
+
             panel.Close();
         }
 
@@ -102,14 +123,16 @@ namespace PanelManager.Scripts
 
         #region Protected API
 
-        protected virtual void DefineModels(Dictionary<Type, PanelModelBase> map) {}
+        protected virtual void DefineModels(Dictionary<Type, PanelModelBase> map)
+        {
+        }
 
         protected void CreatePanelsFromSettings()
         {
             DefineModels(_models);
 
             var orderedPanels = _settings.Panels.OrderBy(p => p.Order);
-            
+
             foreach (var panelPrefab in orderedPanels)
             {
                 if (panelPrefab is ViewWithModelBase panelWithModel)
@@ -125,7 +148,7 @@ namespace PanelManager.Scripts
         }
 
         #endregion
-  
+
         #region Private API
 
         private T CreatePanel<T>(T panelPrefab) where T : ViewBase
@@ -165,6 +188,7 @@ namespace PanelManager.Scripts
 
                 _currentView = view;
             }
+
             OpenNextPanel(view);
         }
 
@@ -176,7 +200,7 @@ namespace PanelManager.Scripts
                 panelAnimationBase.AnimationOpen(OpenPanelAnimationEnd);
                 return;
             }
-                
+
             view.Open();
         }
 
@@ -189,25 +213,25 @@ namespace PanelManager.Scripts
                 panelAnimationBase.AnimationClose(ClosePanelAnimationEnd);
                 return;
             }
-                
+
             closeView.Close();
             OpenNextPanel(nextView);
         }
-        
+
         private void ClosePanelAnimationEnd(ViewAnimationBase view)
         {
             view.Close();
             _panelAnimationPlaying = false;
-            if(view.PanelType == PanelType.Overlay) return;
+            if (view.PanelType == PanelType.Overlay) return;
             OpenNextPanel(_currentView);
         }
-        
+
         private void OpenPanelAnimationEnd(ViewAnimationBase view)
         {
             view.Open();
             _panelAnimationPlaying = false;
         }
-        
+
         private T GetPanel<T>() where T : ViewBase
         {
             var type = typeof(T);
@@ -217,7 +241,7 @@ namespace PanelManager.Scripts
                 throw new ArgumentException($"Panel <{type}> not found!");
             }
 
-            return (T) panel;
+            return (T)panel;
         }
 
         private Transform GetPanelParent(ViewBase prefab)
@@ -231,9 +255,9 @@ namespace PanelManager.Scripts
 
             var parent = prefab.PanelType switch
             {
-                PanelType.Screen  => _screensParent,
+                PanelType.Screen => _screensParent,
                 PanelType.Overlay => _overlaysParent,
-                _                 => throw new ArgumentOutOfRangeException()
+                _ => throw new ArgumentOutOfRangeException()
             };
 
             return parent;
@@ -247,16 +271,16 @@ namespace PanelManager.Scripts
             Transform SetupContainer(string containerName)
             {
                 var containerParent = _panelsParent.transform;
-                var tr              = new GameObject(containerName, typeof(RectTransform)).transform;
+                var tr = new GameObject(containerName, typeof(RectTransform)).transform;
 
                 tr.SetParent(containerParent, false);
                 tr.SetAsLastSibling();
 
                 var rt = tr.GetComponent<RectTransform>();
 
-                rt.anchorMin        = Vector2.zero;
-                rt.anchorMax        = Vector2.one;
-                rt.sizeDelta        = Vector2.zero;
+                rt.anchorMin = Vector2.zero;
+                rt.anchorMax = Vector2.one;
+                rt.sizeDelta = Vector2.zero;
                 rt.anchoredPosition = Vector2.zero;
 
                 return tr;

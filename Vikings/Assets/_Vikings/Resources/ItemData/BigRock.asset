@@ -25,3 +25,4 @@ MonoBehaviour:
   _isOpen: 0
   _collectTime: 5
   _animatorOverride: {fileID: 22100000, guid: a992cebe9fd7e624c9e713fbbf32a2da, type: 2}
+  _resourceType: 1

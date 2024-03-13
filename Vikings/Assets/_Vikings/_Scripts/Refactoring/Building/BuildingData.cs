@@ -3,6 +3,7 @@ using _Vikings._Scripts.Refactoring.Objects;
 using UnityEngine;
 using Vikings.Building;
 using Vikings.Object;
+using ItemCount = _Vikings.Refactoring.Character.ItemCount;
 
 [CreateAssetMenu(fileName = "BuildingData", menuName = "Data/BuildingData")]
 public class BuildingData : ScriptableObject
@@ -15,5 +16,7 @@ public class BuildingData : ScriptableObject
     public string saveKey;
     public AbstractBuilding prefab;
     public BuildingView _buildingView;
+    public List<ItemCount> priceToUpgrades = new();
     public TaskData taskData;
+    public int priorityInMenu;
 }

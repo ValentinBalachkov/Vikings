@@ -1,8 +1,12 @@
-﻿using TMPro;
+﻿using System;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using Vikings.Building;
+using Vikings.Items;
+using Vikings.Object;
 
 namespace Vikings.UI
 {
@@ -14,8 +18,10 @@ namespace Vikings.UI
         [SerializeField] private TMP_Text _level;
         [SerializeField] private Image _icon;
         [SerializeField] private Button _upgradeBtn;
-        [SerializeField] private Image[] _priceForUpgradeImage;
-        [SerializeField] private TMP_Text[] _priceForUpgradeCount;
+
+        [SerializeField] private List<MenuElementItem> _menuElementItems = new();
+        
+       
         [SerializeField] private TMP_Text _buttonDescription;
         [SerializeField] private TMP_Text _requiredText;
 
@@ -31,11 +37,33 @@ namespace Vikings.UI
             _description.text = description;
             _level.text = level == 0 ? "lvl:1" : $"lvl:{level}";
             _icon.sprite = icon;
-            for (int i = 0; i < _priceForUpgradeImage.Length; i++)
+            // for (int i = 0; i < _priceForUpgradeImage.Length; i++)
+            // {
+            //     _priceForUpgradeImage[i].sprite = priceToUpgrades[i].itemData.icon;
+            //     _priceForUpgradeCount[i].text = priceToUpgrades[i].count.ToString();
+            // }
+        }
+
+        public void UpdateUI(AbstractBuilding abstractBuilding)
+        {
+            var config = abstractBuilding.GetData();
+            
+            priority = config.priorityInMenu;
+            _name.text = config.nameText;
+            _description.text = config.description;
+            _icon.sprite = config.icon;
+
+            _level.text = abstractBuilding.CurrentLevel.Value == 0 ? "lvl:1" : $"lvl:{abstractBuilding.CurrentLevel.Value}";
+
+            var priceToUpgrades = abstractBuilding.GetPriceForUpgrade();
+
+            foreach (var item in _menuElementItems)
             {
-                _priceForUpgradeImage[i].sprite = priceToUpgrades[i].itemData.icon;
-                _priceForUpgradeCount[i].text = priceToUpgrades[i].count.ToString();
+                item.image.sprite = item.itemData.icon;
+                item.count.text = priceToUpgrades[item.itemData.ResourceType].ToString();
             }
+
+            SetButtonDescription(abstractBuilding.CurrentLevel.Value == 0);
         }
 
         public void SetButtonDescription(bool isCreate)
@@ -65,5 +93,13 @@ namespace Vikings.UI
         {
             _upgradeBtn.onClick.AddListener(action);
         }
+    }
+
+    [Serializable]
+    public class MenuElementItem
+    {
+        public Image image;
+        public TMP_Text count;
+        public ItemData itemData;
     }
 }

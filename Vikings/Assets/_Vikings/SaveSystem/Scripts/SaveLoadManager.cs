@@ -568,6 +568,14 @@ public class SaveLoadManager : MonoBehaviour
         {
             _mapFactory.CreateBuilding(data);
         }
+
+        foreach (var data in _itemData)
+        {
+            for (int i = 0; i < _charactersConfig.houseLevel + 1; i++)
+            {
+                _mapFactory.CreateResource(i, data);
+            }
+        }
         
 
         // foreach (var data in _itemData)

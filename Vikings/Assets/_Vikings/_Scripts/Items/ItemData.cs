@@ -46,6 +46,9 @@ namespace Vikings.Items
 
         [SerializeField] private AnimatorOverrideController _animatorOverride;
 
+        [SerializeField] private ResourceType _resourceType;
+        
+
         public int DropCount
         {
             get => _dropCount;
@@ -60,7 +63,7 @@ namespace Vikings.Items
             set => _collectTime = value;
         }
 
-        public ResourceType ResourceType { get; set; }
+        public ResourceType ResourceType => _resourceType;
 
         public GameObject View => view;
 

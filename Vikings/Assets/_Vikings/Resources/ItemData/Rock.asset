@@ -25,3 +25,4 @@ MonoBehaviour:
   _isOpen: 1
   _collectTime: 0.7
   _animatorOverride: {fileID: 0}
+  _resourceType: 1

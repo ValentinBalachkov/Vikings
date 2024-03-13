@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using _Vikings.Refactoring.Character;
+using PanelManager.Scripts.Interfaces;
 using UnityEngine;
 using Vikings.Object;
 
-public class BoneFire : AbstractObject, IAcceptArgs<List<BoneFirePositionData>>
+public class BoneFire : AbstractObject, IAcceptArg<List<BoneFirePositionData>>
 {
     private List<BoneFirePositionData> _positionsData;
     public override void Init()

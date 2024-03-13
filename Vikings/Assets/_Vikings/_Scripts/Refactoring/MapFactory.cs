@@ -42,7 +42,7 @@ namespace Vikings.Map
 
         public void CreateResource(int level, ItemData itemData)
         {
-            var data = mapResourceData.FirstOrDefault(x => x.resourceConfig = itemData);
+            var data = mapResourceData.FirstOrDefault(x => x.resourceConfig == itemData);
 
             if (data == null)
             {
@@ -97,6 +97,23 @@ namespace Vikings.Map
         public BoneFire GetBoneFire()
         {
             return Container.Resolve<BoneFire>();
+        }
+
+        public List<T> GetAllBuildings<T>() where T : AbstractBuilding
+        {
+            var buildings = Container.ResolveAll<AbstractBuilding>();
+
+            List<T> list = new();
+
+            foreach (var building in buildings)
+            {
+                if (building is T abstractBuilding)
+                {
+                    list.Add(abstractBuilding);
+                }
+            }
+
+            return list;
         }
 
         private void CreateBoneFire()

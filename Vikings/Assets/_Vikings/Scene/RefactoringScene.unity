@@ -15188,6 +15188,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainPanelManager: {fileID: 186779661}
+  _mapFactory: {fileID: 1830271481}
+  _charactersTaskManager: {fileID: 29158320}
 --- !u!1 &2023076008
 GameObject:
   m_ObjectHideFlags: 0

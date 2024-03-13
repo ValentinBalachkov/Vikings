@@ -9,17 +9,26 @@ namespace Vikings.Object
     public abstract class AbstractBuildingDynamicData 
     {
         public ItemCount[] CurrentItemsCount;
+        public string SaveKey;
     }
     
     [Serializable]
     public class StorageDynamicData : AbstractBuildingDynamicData
     {
-        public string SaveKey;
         public int Count;
         public int MaxStorageCount;
         public int CurrentLevel;
         public int BuildingTime;
         public BuildingState State;
         public ResourceType ResourceType;
+    }
+    
+    [Serializable]
+    public class CraftingTableDynamicData : AbstractBuildingDynamicData
+    {
+        public int CurrentLevel;
+        public int BuildingTime;
+        public BuildingState State;
+        
     }
 }

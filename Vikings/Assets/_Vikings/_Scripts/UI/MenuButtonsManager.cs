@@ -15,11 +15,19 @@ public class MenuButtonsManager : ViewBase
     protected override void OnInitialize()
     {
         base.OnInitialize();
-        _craftButton.OnClickAsObservable().Subscribe((_ =>
+        
+        _craftButton.OnClickAsObservable().Subscribe(_ =>
         {
+            _panelManager.ActiveOverlay(false);
             _panelManager.OpenPanel<CraftAndBuildingMenu>();
             
-        }));
+        }).AddTo(_panelManager.Disposable);
+        
+        _upgradeButton.OnClickAsObservable().Subscribe(_ =>
+        {
+            _panelManager.ActiveOverlay(false);
+            _panelManager.OpenPanel<UpgradeCharacterMenu>();
+        }).AddTo(_panelManager.Disposable);
     }
 
 
@@ -27,5 +35,6 @@ public class MenuButtonsManager : ViewBase
     {
         _craftButton.interactable = isEnable;
     }
+
     
 }

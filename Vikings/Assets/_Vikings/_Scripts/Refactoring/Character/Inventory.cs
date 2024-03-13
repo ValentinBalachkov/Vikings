@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using _Vikings._Scripts.Refactoring;
 using Vikings.Weapon;
 
@@ -37,13 +36,5 @@ namespace _Vikings.Refactoring.Character
             if (_itemCount == null) return 0;
             return _itemCount.count;
         }
-    }
-
-    
-    [Serializable]
-    public class ItemCount
-    {
-        public ResourceType resourceType;
-        public int count;
     }
 }

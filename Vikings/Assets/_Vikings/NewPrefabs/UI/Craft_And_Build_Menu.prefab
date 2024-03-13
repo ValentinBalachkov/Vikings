@@ -497,6 +497,7 @@ MonoBehaviour:
   _craftingTableData: {fileID: 11400000, guid: 1fc812a57f3c9f144bdb91e364854175, type: 2}
   _weaponsOnMapController: {fileID: 0}
   _audioSourceBtnClick: {fileID: 0}
+  _closeButton: {fileID: 5939277868911179280}
 --- !u!1 &6596869851845802056
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,43 +670,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4379867433312316310}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6343095943875174901}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MenuButtonsManager, Assembly-CSharp
-        m_MethodName: EnableButtons
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &8128591725839795928
 GameObject:
   m_ObjectHideFlags: 0

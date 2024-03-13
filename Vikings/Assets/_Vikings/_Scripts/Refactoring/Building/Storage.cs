@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using _Vikings._Scripts.Refactoring.Objects;
 using _Vikings.Refactoring.Character;
 using UniRx;
@@ -49,13 +51,13 @@ namespace _Vikings._Scripts.Refactoring
 
         public override void Upgrade()
         {
-            _storageDynamicData.CurrentLevel++;
+            CurrentLevel.Value++;
             _storageDynamicData.MaxStorageCount = (int)((Mathf.Pow(_storageDynamicData.CurrentLevel, 3)
                                                          + Mathf.Pow(2, _storageDynamicData.CurrentLevel)
                                                          + (Mathf.Pow(4,
                                                              _storageDynamicData.CurrentLevel - 1)))
                                                         + 15);
-            _buildingView.SetupSprite(_storageDynamicData.CurrentLevel);
+            _buildingView.SetupSprite(CurrentLevel.Value);
         }
 
         public override void ChangeState(BuildingState state)
@@ -81,7 +83,55 @@ namespace _Vikings._Scripts.Refactoring
 
         public override Dictionary<ResourceType, int> GetNeededItemsCount()
         {
-            throw new System.NotImplementedException();
+            Dictionary<ResourceType, int> dict = new();
+
+            var maxPrice = GetPriceForUpgrade();
+
+            foreach (var price in maxPrice)
+            {
+                var currentItem =
+                    _storageDynamicData.CurrentItemsCount.FirstOrDefault(x => x.resourceType == price.Key);
+
+                if (currentItem == null)
+                {
+                    Debug.LogError("GetNeededItemsCount is null");
+                    continue;
+                }
+               
+                dict.Add(price.Key, price.Value - currentItem.count);
+            }
+
+            return dict;
+        }
+
+        public override Dictionary<ResourceType, int> GetPriceForUpgrade()
+        {
+            Dictionary<ResourceType, int> dict = new();
+
+            if (CurrentLevel.Value == 0)
+            {
+                foreach (var price in _storageData.priceToUpgrades)
+                {
+                    dict.Add(price.resourceType, price.count);
+                }
+
+                return dict;
+            }
+            
+            foreach (var price in _storageData.priceToUpgrades)
+            {
+                var a = price.count - 1;
+                float p = 0;
+                for (int i = 2; i <= CurrentLevel.Value + 1; i++)
+                {
+                    p += (Mathf.Pow(i, 4) + ((a * i) - Mathf.Pow(i, 3)))/i;
+                    a = (int)p;
+                }
+                
+                dict.Add(price.resourceType, (int)p);
+            }
+
+            return dict;
         }
 
         public override void SetData(BuildingData buildingData)
@@ -90,6 +140,40 @@ namespace _Vikings._Scripts.Refactoring
 
             _storageDynamicData = new();
             _storageDynamicData = SaveLoadSystem.LoadData(_storageDynamicData, buildingData.saveKey);
+        }
+
+        public override (bool, string) IsEnableToBuild<T>(T arg)
+        {
+            var craftingTable = arg as AbstractBuilding;
+            
+            string requiredText =
+                $"REQUIRED:  {_storageData.required} LEVEL{craftingTable.CurrentLevel.Value + 1}";
+            
+            bool isEnable = false;
+            
+            switch (ResourceType)
+            {
+                case ResourceType.Wood:
+                    isEnable = CurrentLevel.Value == 0 || craftingTable.CurrentLevel.Value - CurrentLevel.Value >= 0;
+                    break;
+                case ResourceType.Rock:
+                    isEnable = craftingTable.CurrentLevel.Value - CurrentLevel.Value >= 1;
+                    break;
+                case ResourceType.Eat:
+                    if (CurrentLevel.Value >= 5)
+                    {
+                        requiredText = "MAX";
+                    }
+                    isEnable = craftingTable.CurrentLevel.Value - CurrentLevel.Value >= 1 && CurrentLevel.Value < 5;
+                    break;
+            }
+
+            return (isEnable, requiredText);
+        }
+
+        public override BuildingData GetData()
+        {
+            return _storageData;
         }
 
         public bool CheckNeededItem()
@@ -120,9 +204,11 @@ namespace _Vikings._Scripts.Refactoring
 
         private void OnCountChangeInProgressState(int value, ResourceType itemType)
         {
-            if (currentItems[itemType] + value >= priceToUpgrades[itemType])
+            var priceDict = GetPriceForUpgrade();
+            
+            if (currentItems[itemType] + value >= priceDict[itemType])
             {
-                currentItems[itemType] = priceToUpgrades[itemType];
+                currentItems[itemType] = priceDict[itemType];
             }
             else
             {

@@ -1,13 +1,18 @@
 using System.Collections.Generic;
 using System.Linq;
+using _Vikings._Scripts.Refactoring;
 using PanelManager.Scripts.Panels;
+using UniRx;
 using UnityEngine;
+using UnityEngine.UI;
 using Vikings.Building;
+using Vikings.Map;
+using Vikings.Object;
 using Vikings.Weapon;
 
 namespace Vikings.UI
 {
-    public class CraftAndBuildingMenu : ViewBase
+    public class CraftAndBuildingMenu : ViewBase, IAcceptArgs<MapFactory, CharactersTaskManager>
     {
         public override PanelType PanelType => PanelType.Screen;
         public override bool RememberInHistory => false;
@@ -21,28 +26,73 @@ namespace Vikings.UI
        // [SerializeField] private BuildingData _craftingTableBuildingData;
         [SerializeField] private WeaponsOnMapController _weaponsOnMapController;
         [SerializeField] private AudioSource _audioSourceBtnClick;
-        
+
+        [SerializeField] private Button _closeButton;
 
         private List<MenuElement> _menuElements = new();
+
+        private MapFactory _mapFactory;
+        private CharactersTaskManager _charactersTaskManager;
+        
+
+        public void AcceptArg(MapFactory arg, CharactersTaskManager arg2)
+        {
+            _mapFactory = arg;
+            _charactersTaskManager = arg2;
+        }
 
         protected override void OnOpened()
         {
             base.OnOpened();
-            Spawn();
-            SortElements();
+            CreatePanels();
+        }
+
+        protected override void OnInitialize()
+        {
+            base.OnInitialize();
+            _closeButton.OnClickAsObservable().Subscribe(_ =>
+            {
+                _panelManager.ActiveOverlay(true);
+                _panelManager.ClosePanel<CraftAndBuildingMenu>();
+            }).AddTo(_panelManager.Disposable);
         }
 
         protected override void OnClosed()
         {
             base.OnClosed();
+            ClearPanel();
+        }
+
+        private void CreatePanels()
+        {
+            var storages = _mapFactory.GetAllBuildings<Storage>();
             
+            foreach (var building in storages)
+            {
+                var item = Instantiate(_menuElement, _content);
+                item.UpdateUI(building);
+                item.AddOnClickListener(() =>
+                {
+                    _charactersTaskManager.setBuildingToQueue.Execute(building);
+                    _panelManager.ClosePanel<CraftAndBuildingMenu>();
+                });
+                var cortege = building.IsEnableToBuild(_mapFactory.GetAllBuildings<CraftingTableController>());
+                item.SetEnable(cortege.Item1, cortege.Item2);
+                _menuElements.Add(item);
+            }
+
+            SortElements();
+        }
+
+        private void ClearPanel()
+        {
             foreach (var element in _menuElements)
             {
                 Destroy(element.gameObject);
             }
-
             _menuElements.Clear();
         }
+        
 
         private void SortElements()
         {
@@ -172,7 +222,5 @@ namespace Vikings.UI
                 });
             }
         }
-
-       
     }
 }

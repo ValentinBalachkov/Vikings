@@ -11,10 +11,6 @@ namespace Vikings.Object
 
         public Action<int, ResourceType> ChangeCount;
 
-        protected BuildingState buildingState;
-
-        public Dictionary<ResourceType, int> priceToUpgrades = new();
-        
         public Dictionary<ResourceType, int> currentItems = new();
         public abstract void Upgrade();
 
@@ -26,9 +22,17 @@ namespace Vikings.Object
         }
 
         public abstract Dictionary<ResourceType, int> GetNeededItemsCount();
+        
+        public abstract Dictionary<ResourceType, int> GetPriceForUpgrade();
 
         public abstract void SetData(BuildingData buildingData);
+        
+        public abstract (bool, string) IsEnableToBuild<T>(T arg);
+        public abstract BuildingData GetData();
+        
+        protected BuildingState buildingState;
     }
+    
 
     public enum BuildingState
     {

@@ -31,10 +31,10 @@ public class TrayView : ViewBase
 
     private void Start()
     {
-        _advertisementButton.onClick.AddListener((() =>
-        {
-            _ironSourceController.ShowRewardVideo();
-        }));
+        // _advertisementButton.onClick.AddListener((() =>
+        // {
+        //     _ironSourceController.ShowRewardVideo();
+        // }));
     }
 
     private void OnDestroy()

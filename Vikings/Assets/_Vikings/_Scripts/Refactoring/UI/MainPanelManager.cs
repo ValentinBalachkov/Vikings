@@ -6,4 +6,9 @@ public class MainPanelManager : PanelManagerBase
     {
         CreatePanelsFromSettings();
     }
+
+    private void OnDestroy()
+    {
+        Disposable.Dispose();
+    }
 }
