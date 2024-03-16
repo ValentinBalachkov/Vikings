@@ -28,12 +28,16 @@ namespace _Vikings.Refactoring.Character
 
         private Inventory _inventory;
 
-        public void Init(Transform position, PlayerController playerController)
+        private CharacterManager _characterManager;
+        
+
+        public void Init(Transform position, PlayerController playerController, CharacterManager characterManager)
         {
             _inventory = new Inventory();
+            _characterManager = characterManager;
             
             _playerController = Instantiate(playerController, position);
-            _playerController.Init(transform);
+            _playerController.Init(transform, _characterManager);
             
             _doActionState = new DoActionState("DoActionState", this, OnCharacterAction);
             _doMoveState = new DoMoveState("DoMoveState", this, _playerController);

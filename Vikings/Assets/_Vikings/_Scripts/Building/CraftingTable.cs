@@ -3,34 +3,41 @@ using System.Linq;
 using _Vikings._Scripts.Refactoring;
 using _Vikings._Scripts.Refactoring.Objects;
 using _Vikings.Refactoring.Character;
+using PanelManager.Scripts.Interfaces;
 using UniRx;
 using UnityEngine;
 using Vikings.Object;
 using Vikings.SaveSystem;
-using Vikings.Weapon;
+using _Vikings.WeaponObject;
+
 
 namespace Vikings.Building
 {
-    public class CraftingTableController : AbstractBuilding
+    public class CraftingTable : AbstractBuilding, IAcceptArg<Weapon>
     {
         [SerializeField] private AudioSource _audioSourceToStorage;
 
         [SerializeField] private GameObject _buildingSpriteObject;
 
+        private Dictionary<ResourceType, int> _currentItemsWeapon = new();
+        
         private BuildingData _craftingTableData;
         private CraftingTableDynamicData _craftingTableDynamicData;
         private BuildingView _buildingView;
-
-
-        private WeaponData _currentWeapon;
-        private bool _isUpgradeWeapon;
-
+        private Weapon _currentWeapon;
+        
         public override void Init()
         {
             for (int i = 0; i < _craftingTableDynamicData.CurrentItemsCount.Length; i++)
             {
                 currentItems.Add(_craftingTableDynamicData.CurrentItemsCount[i].resourceType,
                     _craftingTableDynamicData.CurrentItemsCount[i].count);
+            }
+            
+            for (int i = 0; i < _craftingTableDynamicData.CurrentItemsCountWeapon.Length; i++)
+            {
+                _currentItemsWeapon.Add(_craftingTableDynamicData.CurrentItemsCountWeapon[i].resourceType,
+                    _craftingTableDynamicData.CurrentItemsCountWeapon[i].count);
             }
 
             CurrentLevel.Value = _craftingTableDynamicData.CurrentLevel;
@@ -132,9 +139,9 @@ namespace Vikings.Building
 
         public override (bool, string) IsEnableToBuild<T>(T arg)
         {
-            var weapon = arg as WeaponData;
+            var weapon = arg as Weapon;
             string text = $"REQUIRED:  {_craftingTableData.required} LEVEL{1}";
-            bool isEnable = weapon.IsOpen;
+            bool isEnable = weapon.Level.Value > 0;
 
             return (isEnable, text);
         }
@@ -165,7 +172,13 @@ namespace Vikings.Building
                     break;
             }
         }
-        
+
+        public void AcceptArg(Weapon arg)
+        {
+            _currentWeapon = arg;
+            _currentWeapon.IsSet = true;
+        }
+
         private void ChangeSpriteObject(bool isBuilding)
         {
             _buildingSpriteObject.SetActive(isBuilding);
@@ -186,10 +199,19 @@ namespace Vikings.Building
                 currentItems[itemType] += value;
             }
         }
-        
+
         private void OnCountChangeWeaponState(int value, ResourceType itemType)
         {
-            
+            var priceDict = _currentWeapon.PriceToBuy;
+
+            if (_currentItemsWeapon[itemType] + value >= priceDict[itemType])
+            {
+                _currentItemsWeapon[itemType] = priceDict[itemType];
+            }
+            else
+            {
+                _currentItemsWeapon[itemType] += value;
+            }
         }
     }
 }

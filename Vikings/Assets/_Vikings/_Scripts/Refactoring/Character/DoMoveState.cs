@@ -15,6 +15,7 @@ namespace _Vikings.Refactoring.Character
         {
             base.Enter(abstractObject);
             _playerController.MoveToPoint(abstractObject.GetPosition());
+            _playerController.SetMoveAnimation();
             
             _playerController.SetActionOnGetPosition(() =>
             {

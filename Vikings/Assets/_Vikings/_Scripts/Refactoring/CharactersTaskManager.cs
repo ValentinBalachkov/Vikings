@@ -1,8 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using _Vikings.Refactoring.Character;
 using UniRx;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
+using Vikings.Items;
 using Vikings.Map;
 using Vikings.Object;
 using Zenject;
@@ -12,17 +14,18 @@ namespace _Vikings._Scripts.Refactoring
     public class CharactersTaskManager : MonoBehaviour
     {
         public ReactiveCommand<AbstractBuilding> setBuildingToQueue = new();
-        
+
         private CompositeDisposable _disposable = new();
 
         private MapFactory _mapFactory;
         private Dictionary<ResourceType, int> _neededResource = new();
         private AbstractBuilding _currentBuilding;
         private CharacterFactory _characterFactory;
-        
+        private WeaponFactory _weaponFactory;
+
 
         [Inject]
-        public void Init(MapFactory mapFactory, CharacterFactory characterFactory)
+        public void Init(MapFactory mapFactory, CharacterFactory characterFactory, WeaponFactory weaponFactory)
         {
             _mapFactory = mapFactory;
             _characterFactory = characterFactory;
@@ -32,7 +35,7 @@ namespace _Vikings._Scripts.Refactoring
         private void Start()
         {
             _characterFactory.SpawnCharacters();
-            
+
             var characters = _characterFactory.GetCharacters();
 
             foreach (var character in characters)
@@ -72,7 +75,7 @@ namespace _Vikings._Scripts.Refactoring
                 if (resource.Value > 0)
                 {
                     character.SetBuildingToAction(abstractBuilding,
-                        _mapFactory.GetNearestResource(resource.Key, character), OnCharacterActionDone);
+                        GetNearedResource(resource.Key, character), OnCharacterActionDone);
 
                     _neededResource[resource.Key] -= character.Count;
 
@@ -95,7 +98,24 @@ namespace _Vikings._Scripts.Refactoring
             }
 
             character.SetBuildingToAction(storage,
-                _mapFactory.GetNearestResource(storage.ResourceType, character), SetCharacterToStorage);
+                GetNearedResource(storage.ResourceType, character), SetCharacterToStorage);
+        }
+
+        private AbstractResource GetNearedResource(ResourceType resourceType, CharacterStateMachine characterStateMachine)
+        {
+            var abstractResources = _mapFactory.GetAllResources();
+            var weapons = _weaponFactory.GetOpenWeapons();
+
+            List<ItemData> openedResourcesData = weapons.SelectMany(weapon => weapon.GetWeaponData().avaleableResources).ToList();
+
+            var openedResources = abstractResources.Where(x => openedResourcesData.Contains(x.GetItemData())).ToList();
+
+            var item = openedResources.Where(x => x.GetItemData().ResourceType == resourceType)
+                .OrderBy(x => x.GetItemData().Priority).ThenByDescending(x => x.GetItemData().DropCount)
+                .ThenBy(x => Vector3.Distance(x.GetPosition().position, characterStateMachine.GetPosition().position))
+                .FirstOrDefault();
+
+            return item;
         }
     }
 }

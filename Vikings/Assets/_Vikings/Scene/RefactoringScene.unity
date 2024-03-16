@@ -3770,35 +3770,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5737a5e4fca820746a5e520fc6769bae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _storageData:
-  - {fileID: 11400000, guid: ab86375ca92522e4b95c5c49e713b9be, type: 2}
-  - {fileID: 11400000, guid: e3cc3053499092a49a9428165be974ad, type: 2}
-  - {fileID: 11400000, guid: 480902296caabf2408ac395a39489084, type: 2}
-  _itemData:
-  - {fileID: 11400000, guid: cbe7421b5bd4c3b4fb2fab3fb3cb57f0, type: 2}
-  - {fileID: 11400000, guid: b90d6cdefc2ad7e4cbdd899ef9e419e5, type: 2}
-  - {fileID: 11400000, guid: 8b782c2617e0b8048985ef732675d1be, type: 2}
-  - {fileID: 11400000, guid: 842ec8fe0ff14054fb025a7b78239191, type: 2}
-  - {fileID: 11400000, guid: aa71cd7377003654ab1aad130b722e73, type: 2}
-  _weaponData:
-  - {fileID: 11400000, guid: a0a9de7740517a5488d545315fa8ee3a, type: 2}
-  - {fileID: 11400000, guid: 9ef76be828f44a046a074450ec192bf0, type: 2}
-  _craftingTableData:
-  - {fileID: 11400000, guid: 1fc812a57f3c9f144bdb91e364854175, type: 2}
-  - {fileID: 11400000, guid: 8556bafbd029f304096a42175a8fc358, type: 2}
-  _tasksData:
-  - {fileID: 11400000, guid: 12ecc8dd4fa750b43986741b2bab39d8, type: 2}
-  - {fileID: 11400000, guid: ebe088723dd97c84ca1c07c9458b2bfd, type: 2}
-  - {fileID: 11400000, guid: 18b0ffe85c7f8a740ba6cdbec9edd96f, type: 2}
-  - {fileID: 11400000, guid: 47321345684f25c4d8e4e1d2978056cf, type: 2}
-  - {fileID: 11400000, guid: 540c20a5168b5444c9001bf4e1f04521, type: 2}
-  _charactersConfig: {fileID: 11400000, guid: 556d7956795907442b7227389da83726, type: 2}
   _versionText: {fileID: 0}
   _dateTimeData: {fileID: 11400000, guid: 8450c5083948fff4b89991654c76e451, type: 2}
   _offlineFarmView: {fileID: 0}
   _timeCheatIF: {fileID: 0}
   _constCheatIF: {fileID: 0}
-  _taskManager: {fileID: 0}
 --- !u!4 &510598405
 Transform:
   m_ObjectHideFlags: 0
@@ -8698,6 +8674,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnPoint: {fileID: 1840150022}
+  _characterStateMachine: {fileID: 8476882796007559947, guid: 3f8a1e577f1c6c2489b9f194e19c757e,
+    type: 3}
 --- !u!1 &1230374386
 GameObject:
   m_ObjectHideFlags: 0
@@ -8866,6 +8844,50 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1241696137}
   m_Mesh: {fileID: 1608309716915832858, guid: 616eff80ec12ba342a51cc3a40b256a1, type: 3}
+--- !u!1 &1257531585
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1257531586}
+  - component: {fileID: 1257531587}
+  m_Layer: 0
+  m_Name: WeaponFactory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1257531586
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257531585}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2021403847}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1257531587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257531585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0213df54d75457aa4335f16ff03f7ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1293429644
 GameObject:
   m_ObjectHideFlags: 0
@@ -13603,6 +13625,8 @@ MonoBehaviour:
   - id: 5
     point: {fileID: 162236752}
     isDisable: 0
+  _boneFire: {fileID: 2447724391061627212, guid: c9c1b9e66720e6440a4f220e98b13002,
+    type: 3}
   _boneFireSpawnPoint: {fileID: 585255384}
 --- !u!1 &1840150021
 GameObject:
@@ -15172,6 +15196,7 @@ Transform:
   - {fileID: 29158319}
   - {fileID: 510598405}
   - {fileID: 1225066049}
+  - {fileID: 1257531586}
   m_Father: {fileID: 2142494426}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15190,6 +15215,8 @@ MonoBehaviour:
   _mainPanelManager: {fileID: 186779661}
   _mapFactory: {fileID: 1830271481}
   _charactersTaskManager: {fileID: 29158320}
+  _weaponFactory: {fileID: 1257531587}
+  _configSetting: {fileID: 11400000, guid: 788d5dedbeda2264fab46c65f91c7d81, type: 2}
 --- !u!1 &2023076008
 GameObject:
   m_ObjectHideFlags: 0
@@ -16534,6 +16561,7 @@ MonoBehaviour:
   - {fileID: 2021403848}
   - {fileID: 1830271481}
   - {fileID: 1225066050}
+  - {fileID: 1257531587}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:

@@ -6,7 +6,7 @@ namespace Vikings.Object
 {
 
     [Serializable]
-    public abstract class AbstractBuildingDynamicData 
+    public class AbstractBuildingDynamicData 
     {
         public ItemCount[] CurrentItemsCount;
         public string SaveKey;
@@ -29,6 +29,24 @@ namespace Vikings.Object
         public int CurrentLevel;
         public int BuildingTime;
         public BuildingState State;
-        
+        public ItemCount[] CurrentItemsCountWeapon;
+    }
+    
+    [Serializable]
+    public class CharacterDynamicData
+    {
+        public string SaveKey;
+        public int CharactersCount;
+        public int speedMoveLevel;
+        public int itemsCountLevel;
+        public int speedWorkLevel;
+    }
+    
+    [Serializable]
+    public class WeaponDynamicData
+    {
+        public string SaveKey;
+        public int Level;
+        public bool IsSetOnCraftingTable;
     }
 }

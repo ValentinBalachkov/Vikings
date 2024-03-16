@@ -62,20 +62,20 @@ namespace Vikings.UI
                 {
                     _audioSourceBtnClick.Play();
                     UpdateItemsCount(_characterUpgradeUIData[index].upgradeCharacterEnum);
-                    _charactersConfig.Upgrade(_characterUpgradeUIData[index].upgradeCharacterEnum); 
+                        //_charactersConfig.Upgrade(_characterUpgradeUIData[index].upgradeCharacterEnum); 
                     UpdateUI();
                 });
                 _characterMenuElements.Add(element);
                 switch (_characterUpgradeUIData[i].upgradeCharacterEnum)
                 {
                     case UpgradeCharacterEnum.SpeedMove:
-                        element.UpdateUI(_charactersConfig.speedMoveLevel, _charactersConfig.SpeedMoveCost, _storageData.Count >= _charactersConfig.SpeedMoveCost);
+                       // element.UpdateUI(_charactersConfig.speedMoveLevel, _charactersConfig.SpeedMoveCost, _storageData.Count >= _charactersConfig.SpeedMoveCost);
                         break;
                     case UpgradeCharacterEnum.ItemsCount:
-                        element.UpdateUI(_charactersConfig.itemsCountLevel, _charactersConfig.ItemsCountCost, _storageData.Count >= _charactersConfig.ItemsCountCost);
+                       // element.UpdateUI(_charactersConfig.itemsCountLevel, _charactersConfig.ItemsCountCost, _storageData.Count >= _charactersConfig.ItemsCountCost);
                         break;
                     case UpgradeCharacterEnum.SpeedWork:
-                        element.UpdateUI(_charactersConfig.speedWorkLevel, _charactersConfig.SpeedWorkCost, _storageData.Count >= _charactersConfig.SpeedWorkCost);
+                       // element.UpdateUI(_charactersConfig.speedWorkLevel, _charactersConfig.SpeedWorkCost, _storageData.Count >= _charactersConfig.SpeedWorkCost);
                         break;
                 }
             }
@@ -87,13 +87,13 @@ namespace Vikings.UI
             switch (item.upgradeCharacterEnum)
             {
                 case UpgradeCharacterEnum.SpeedMove:
-                    _storageData.Count -= _charactersConfig.SpeedMoveCost;
+                  //  _storageData.Count -= _charactersConfig.SpeedMoveCost;
                     break;
                 case UpgradeCharacterEnum.ItemsCount:
-                    _storageData.Count -= _charactersConfig.ItemsCountCost;
+                  //  _storageData.Count -= _charactersConfig.ItemsCountCost;
                     break;
                 case UpgradeCharacterEnum.SpeedWork:
-                    _storageData.Count -= _charactersConfig.SpeedWorkCost;
+                    //_storageData.Count -= _charactersConfig.SpeedWorkCost;
                     break;
             }
 
@@ -109,9 +109,9 @@ namespace Vikings.UI
 
         private void UpdateUI()
         {
-            _characterMenuElements[0].UpdateUI(_charactersConfig.speedMoveLevel, _charactersConfig.SpeedMoveCost, _storageData.Count >= _charactersConfig.SpeedMoveCost);
-            _characterMenuElements[1].UpdateUI(_charactersConfig.speedWorkLevel, _charactersConfig.SpeedWorkCost, _storageData.Count >= _charactersConfig.SpeedWorkCost);
-            _characterMenuElements[2].UpdateUI(_charactersConfig.itemsCountLevel, _charactersConfig.ItemsCountCost, _storageData.Count >= _charactersConfig.ItemsCountCost);
+           // _characterMenuElements[0].UpdateUI(_charactersConfig.speedMoveLevel, _charactersConfig.SpeedMoveCost, _storageData.Count >= _charactersConfig.SpeedMoveCost);
+           // _characterMenuElements[1].UpdateUI(_charactersConfig.speedWorkLevel, _charactersConfig.SpeedWorkCost, _storageData.Count >= _charactersConfig.SpeedWorkCost);
+           // _characterMenuElements[2].UpdateUI(_charactersConfig.itemsCountLevel, _charactersConfig.ItemsCountCost, _storageData.Count >= _charactersConfig.ItemsCountCost);
         }
 
         

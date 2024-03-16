@@ -6,7 +6,6 @@ using Vikings.Items;
 using Vikings.Object;
 using Zenject;
 using AbstractBuilding = Vikings.Object.AbstractBuilding;
-using CharacterStateMachine = _Vikings.Refactoring.Character.CharacterStateMachine;
 
 namespace Vikings.Map
 {
@@ -17,6 +16,8 @@ namespace Vikings.Map
 
         [Space(10)]
         [SerializeField] private List<BoneFirePositionData> _boneFirePositionData;
+
+        [SerializeField] private BoneFire _boneFire;
         [SerializeField] private Transform _boneFireSpawnPoint;
         
 
@@ -65,16 +66,11 @@ namespace Vikings.Map
                 resource.Init();
             }
         }
-
-        public AbstractResource GetNearestResource(ResourceType resourceType,
-            CharacterStateMachine characterStateMachine)
+        
+        public List<AbstractResource> GetAllResources()
         {
             var abstractResources = Container.ResolveAll<AbstractResource>();
-            var item = abstractResources.Where(x => x.GetItemData().ResourceType == resourceType)
-                .OrderBy(x => x.GetItemData().Priority).ThenByDescending(x => x.GetItemData().DropCount)
-                .ThenBy(x => Vector3.Distance(x.GetPosition().position, characterStateMachine.GetPosition().position))
-                .FirstOrDefault();
-            return item;
+            return abstractResources;
         }
 
         public Storage GetPartialStorage()
@@ -118,8 +114,7 @@ namespace Vikings.Map
 
         private void CreateBoneFire()
         {
-            var boneFire = Resources.Load<BoneFire>("BoneFire/BoneFire");
-            var building = CreateObject<BoneFire>(boneFire, _boneFireSpawnPoint);
+            var building = CreateObject<BoneFire>(_boneFire, _boneFireSpawnPoint);
             building.Init();
             building.AcceptArg(_boneFirePositionData);
         }

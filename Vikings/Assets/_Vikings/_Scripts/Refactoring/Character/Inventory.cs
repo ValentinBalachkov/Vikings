@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using _Vikings._Scripts.Refactoring;
-using Vikings.Weapon;
 
 namespace _Vikings.Refactoring.Character
 {

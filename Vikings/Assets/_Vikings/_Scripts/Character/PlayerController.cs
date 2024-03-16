@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using _Vikings._Scripts.Refactoring;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -20,6 +21,7 @@ namespace Vikings.Chanacter
         private Transform _currentPoint, _thisTransform;
         private bool _isIdleRotate;
         private Vector3 _currentDestination;
+        private CharacterManager _characterManager;
 
         private void Awake()
         {
@@ -27,9 +29,10 @@ namespace Vikings.Chanacter
             _navMeshAgent = GetComponentInParent<NavMeshAgent>();
         }
 
-        public void Init(Transform transform)
+        public void Init(Transform transform, CharacterManager characterManager)
         {
             _thisTransform = transform;
+            _characterManager = characterManager;
         }
 
         private void Update()
@@ -81,8 +84,7 @@ namespace Vikings.Chanacter
             OnGetPosition = null;
             _onPosition = false;
             
-            DebugLogger.SendMessage(_charactersConfig.SpeedMove.ToString(), Color.green);
-            _navMeshAgent.speed = _charactersConfig.SpeedMove;
+            _navMeshAgent.speed = _characterManager.SpeedMove;
             _currentPoint = point;
             _navMeshAgent.SetDestination(point.position);
             _currentDestination = _navMeshAgent.destination;

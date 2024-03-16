@@ -36,30 +36,30 @@ namespace Vikings.Building
 
         private void Start()
         {
-            if (_charactersConfig.houseLevel != 0)
-            {
-                StartCoroutine(MoveCameraCoroutine(_houseCameraPosition[_charactersConfig.houseLevel]));
-            }
+            // if (_charactersConfig.houseLevel != 0)
+            // {
+            //     StartCoroutine(MoveCameraCoroutine(_houseCameraPosition[_charactersConfig.houseLevel]));
+            // }
 
             CollectingResourceView.Instance.camera = _camera;
 
-            float scaleMove = _houseCameraPosition[0].size / _houseCameraPosition[_charactersConfig.houseLevel].size;
-            foreach (var transform in _allRespawnPointTransform)
-            {
-                transform.localScale *= scaleMove;
-            }
+           // float scaleMove = _houseCameraPosition[0].size / _houseCameraPosition[_charactersConfig.houseLevel].size;
+            // foreach (var transform in _allRespawnPointTransform)
+            // {
+            //     transform.localScale *= scaleMove;
+            // }
         }
 
         public void OnHomeBuilding()
         {
-            if (_charactersConfig.houseLevel >= 5) return;
-           // _charactersOnMap.AddCharacterOnMap(0);
-            _charactersConfig.charactersCount++;
-            _charactersConfig.houseLevel++;
-            OnHomeLevelUp?.Invoke(_charactersConfig.houseLevel);
-            StartCoroutine(MoveCameraCoroutine(_houseCameraPosition[_charactersConfig.houseLevel]));
-
-            _inventoryView.UpdateUI(null);
+           //  if (_charactersConfig.houseLevel >= 5) return;
+           // // _charactersOnMap.AddCharacterOnMap(0);
+           //  _charactersConfig.charactersCount++;
+           //  _charactersConfig.houseLevel++;
+           //  OnHomeLevelUp?.Invoke(_charactersConfig.houseLevel);
+           //  StartCoroutine(MoveCameraCoroutine(_houseCameraPosition[_charactersConfig.houseLevel]));
+           //
+           //  _inventoryView.UpdateUI(null);
 
         }
 

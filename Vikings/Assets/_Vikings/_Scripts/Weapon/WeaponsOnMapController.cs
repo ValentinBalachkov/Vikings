@@ -5,12 +5,11 @@ using Vikings.Building;
 using Vikings.Chanacter;
 using Vikings.Items;
 
-namespace Vikings.Weapon
-{
+
     public class WeaponsOnMapController : MonoBehaviour
     {
         public List<WeaponData> WeaponsData => _weaponsList;
-        [SerializeField] private ItemsOnMapController _itemsOnMapController;
+      //  [SerializeField] private ItemsOnMapController _itemsOnMapController;
         [SerializeField] private List<WeaponData> _weaponsList = new();
         //[SerializeField] private BuildingsOnMap _buildingsOnMap;
         [SerializeField] private MenuButtonsManager _menuButtonsManager;
@@ -24,7 +23,7 @@ namespace Vikings.Weapon
         {
             foreach (var weapon in _weaponsList)
             {
-                weapon.OnOpen += OnOpenWeapon;
+                //weapon.OnOpen += OnOpenWeapon;
             }
         }
 
@@ -43,7 +42,7 @@ namespace Vikings.Weapon
 
             if (_craftingTableData.currentItemsCount.Count > 0 || _craftingTableDataDefault.currentItemsCount.Count > 0)
             {
-                var weapon = _weaponsList.FirstOrDefault(x => x.id == weaponId);
+                //var weapon = _weaponsList.FirstOrDefault(x => x.id == weaponId);
                 //_buildingsOnMap.GetCraftingTable().SetupCraftWeapon(weapon, weapon.IsOpen);
                 // foreach (var character in _charactersOnMap.CharactersList)
                 // {
@@ -72,10 +71,10 @@ namespace Vikings.Weapon
 
         private void OnOpenWeapon(WeaponData weaponData)
         {
-            _itemsOnMapController.AddItemToItemsList(weaponData.ItemData);
+           // _itemsOnMapController.AddItemToItemsList(weaponData.ItemData);
             _menuButtonsManager.EnableButtons(true);
         }
         
     }
-}
+
 

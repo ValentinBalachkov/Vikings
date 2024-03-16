@@ -17,10 +17,11 @@ namespace _Vikings._Scripts.Refactoring
         
         [SerializeField] private GameObject _buildingSpriteObject;
 
+        protected StorageDynamicData _storageDynamicData;
+        
         private BuildingView _buildingView;
 
         private BuildingData _storageData;
-        private StorageDynamicData _storageDynamicData;
 
         public override Transform GetPosition()
         {

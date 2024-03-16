@@ -24,7 +24,7 @@ MonoBehaviour:
   - buildingsSprites: {fileID: 21300000, guid: f3a3c379c53da794c984b04b4e35cfb8, type: 3}
     shadowSprites: {fileID: 21300000, guid: 926f7346479c2254e981b28b84a0394e, type: 3}
   saveKey: EatStorage
-  prefab: {fileID: 3805657028365542445, guid: b14f1d8d437c31441a92ef089e7b92df, type: 3}
+  prefab: {fileID: 7961489388057584634, guid: b041bfdde0799654c9d971f19a623c3d, type: 3}
   _buildingView: {fileID: 577453752117095637, guid: d92e46fb74fe4ca42a704a1340508f9f,
     type: 3}
   priceToUpgrades: []

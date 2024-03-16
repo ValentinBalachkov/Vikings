@@ -1,25 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Vikings.SaveSystem;
+using _Vikings._Scripts.Refactoring;
 using TMPro;
 using UnityEngine;
 using Vikings.Building;
-using Vikings.Chanacter;
-using Vikings.Items;
 using Vikings.Map;
-using Vikings.Weapon;
 using Zenject;
 
 public class SaveLoadManager : MonoBehaviour
 {
-    [SerializeField] private List<StorageData> _storageData = new();
-   // [SerializeField] private List<BuildingData> _buildingData = new();
-    [SerializeField] private List<ItemData> _itemData = new();
-    [SerializeField] private List<WeaponData> _weaponData = new();
-    [SerializeField] private List<CraftingTableData> _craftingTableData = new();
-    [SerializeField] private List<TaskData> _tasksData = new();
-    [SerializeField] private CharactersConfig _charactersConfig;
     [SerializeField] private TMP_Text _versionText;
 
     [SerializeField] private DateTimeData _dateTimeData;
@@ -28,14 +18,8 @@ public class SaveLoadManager : MonoBehaviour
     [SerializeField] private TMP_InputField _timeCheatIF;
     [SerializeField] private TMP_InputField _constCheatIF;
 
-    [SerializeField] private TaskManager _taskManager;
-
-   
-    
-
+    private ConfigSetting _configSetting;
     private MapFactory _mapFactory;
-    private List<IData> _allData = new(); 
-
 
     private const int TIME_CONST = 10;
     
@@ -70,10 +54,10 @@ public class SaveLoadManager : MonoBehaviour
     }
 
     [Inject]
-    private void Init(MapFactory mapFactory)
+    private void Init(MapFactory mapFactory, ConfigSetting configSetting)
     {
         _mapFactory = mapFactory;
-        
+        _configSetting = configSetting;
     }
 
 
@@ -418,27 +402,27 @@ public class SaveLoadManager : MonoBehaviour
         }
 
 
-        if (craftingTableData.craftingTime < time)
-        {
-            time -= craftingTableData.craftingTime;
-            weaponData.level++;
-            weaponData.IsOpen = true;
-            var items = _itemData.Where(x => x.ID == weaponData.ItemData.ID).ToList();
-            foreach (var item in items)
-            {
-                item.IsOpen = true;
-            }
-
-            craftingTableData.Clear();
-            buildingName = weaponData.nameText;
-            level = weaponData.level;
-            sprite = weaponData.iconOfflineFarm;
-        }
-        else
-        {
-            craftingTableData.craftingTime -= (int)time;
-            time = 0;
-        }
+        // if (craftingTableData.craftingTime < time)
+        // {
+        //     time -= craftingTableData.craftingTime;
+        //     weaponData.level++;
+        //     weaponData.IsOpen = true;
+        //     var items = _itemData.Where(x => x.ID == weaponData.ItemData.ID).ToList();
+        //     foreach (var item in items)
+        //     {
+        //         item.IsOpen = true;
+        //     }
+        //
+        //     craftingTableData.Clear();
+        //     buildingName = weaponData.nameText;
+        //     level = weaponData.level;
+        //     sprite = weaponData.iconOfflineFarm;
+        // }
+        // else
+        // {
+        //     craftingTableData.craftingTime -= (int)time;
+        //     time = 0;
+        // }
     }
 
     private void CalculateResourceStorage(ref float time, StorageData[] storagesData, float[] w,
@@ -531,77 +515,30 @@ public class SaveLoadManager : MonoBehaviour
 
     private void SaveAll()
     {
-        foreach (var data in _storageData)
-        {
-            data.Save();
-        }
-        
 
-        foreach (var data in _itemData)
-        {
-            data.Save();
-        }
-
-        foreach (var data in _weaponData)
-        {
-            data.Save();
-        }
-
-        foreach (var data in _craftingTableData)
-        {
-            data.Save();
-        }
-
-        foreach (var data in _tasksData)
-        {
-            data.Save();
-        }
-
-        _charactersConfig.Save();
+       
     }
 
     private void LoadAll()
     {
-        var buildings = Resources.LoadAll<BuildingData>("Building");
+        var buildings = _configSetting.buildingsData;
         
         foreach (var data in buildings)
         {
             _mapFactory.CreateBuilding(data);
         }
+        
+        _mapFactory.CreateBuilding(_configSetting.craftingTable);
 
-        foreach (var data in _itemData)
+        var eatStorage = _mapFactory.GetAllBuildings<EatStorage>().FirstOrDefault();
+
+        foreach (var data in _configSetting.resourcesData)
         {
-            for (int i = 0; i < _charactersConfig.houseLevel + 1; i++)
+            for (int i = 0; i < eatStorage.HouseLevel + 1; i++)
             {
                 _mapFactory.CreateResource(i, data);
             }
         }
-        
-
-        // foreach (var data in _itemData)
-        // {
-        //     data.Load();
-        //     
-        // }
-        //
-        // foreach (var data in _weaponData)
-        // {
-        //     data.Load();
-        // }
-        //
-        // foreach (var data in _craftingTableData)
-        // {
-        //     data.Load();
-        // }
-        //
-        // foreach (var data in _tasksData)
-        // {
-        //     data.Load();
-        // }
-        //
-        // _charactersConfig.Load();
-        //
-        // _dateTimeData.Load();
 
 
         //GetResources();

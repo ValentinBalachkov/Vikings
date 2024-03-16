@@ -9,9 +9,9 @@ namespace Vikings.Object
     {
         public ReactiveProperty<int> CurrentLevel = new();
 
-        public Action<int, ResourceType> ChangeCount;
+        protected Action<int, ResourceType> ChangeCount;
 
-        public Dictionary<ResourceType, int> currentItems = new();
+        protected Dictionary<ResourceType, int> currentItems = new();
         public abstract void Upgrade();
 
         public AbstractBuildingDynamicData abstractBuildingDynamicData;

@@ -8,7 +8,7 @@ namespace Vikings.UI
 {
     public class CraftingTableView : MonoBehaviour
     {
-        [SerializeField] private CraftingTableController _craftingTableController;
+        [SerializeField] private CraftingTable _craftingTable;
         [SerializeField] private TMP_Text _count;
         [SerializeField] private Image _progressBar;
         

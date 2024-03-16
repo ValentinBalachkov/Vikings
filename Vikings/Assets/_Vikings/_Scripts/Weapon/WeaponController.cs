@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Vikings.Weapon
-{
+
     public class WeaponController : MonoBehaviour
     {
         public WeaponData WeaponData => _weaponData;
@@ -34,4 +33,3 @@ namespace Vikings.Weapon
             // _weaponData.Upgrade();
         }
     }
-}

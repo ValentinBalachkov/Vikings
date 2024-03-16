@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using _Vikings.WeaponObject;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -53,7 +54,7 @@ namespace Vikings.UI
             _description.text = config.description;
             _icon.sprite = config.icon;
 
-            _level.text = abstractBuilding.CurrentLevel.Value == 0 ? "lvl:1" : $"lvl:{abstractBuilding.CurrentLevel.Value}";
+            _level.text = $"lvl:{abstractBuilding.CurrentLevel.Value + 1}";
 
             var priceToUpgrades = abstractBuilding.GetPriceForUpgrade();
 
@@ -64,6 +65,28 @@ namespace Vikings.UI
             }
 
             SetButtonDescription(abstractBuilding.CurrentLevel.Value == 0);
+        }
+        
+        public void UpdateUI(Weapon weapon)
+        {
+            var config = weapon.GetWeaponData();
+            
+            priority = config.priority;
+            _name.text = config.nameText;
+            _description.text = config.description;
+            _icon.sprite = config.icon;
+
+            _level.text = $"lvl:{weapon.Level.Value + 1}";
+
+            var priceToUpgrades = weapon.PriceToBuy;
+
+            foreach (var item in _menuElementItems)
+            {
+                item.image.sprite = item.itemData.icon;
+                item.count.text = priceToUpgrades[item.itemData.ResourceType].ToString();
+            }
+
+            SetButtonDescription(weapon.Level.Value == 0);
         }
 
         public void SetButtonDescription(bool isCreate)
