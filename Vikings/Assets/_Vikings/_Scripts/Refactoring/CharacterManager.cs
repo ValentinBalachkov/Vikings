@@ -6,12 +6,23 @@ using Vikings.UI;
 
 namespace _Vikings._Scripts.Refactoring
 {
-    public class CharacterManager
+    public class CharacterManager : ISave
     {
         public int speedMoveLevel => _characterDynamicData.speedMoveLevel;
         public int speedWorkLevel => _characterDynamicData.speedWorkLevel;
-        public int charactersCount => _characterDynamicData.CharactersCount;
-        
+
+        public int charactersCount
+        {
+            get
+            {
+                return _characterDynamicData.CharactersCount;
+            }
+            set
+            {
+                _characterDynamicData.CharactersCount = value;
+            }
+        }
+
         public float SpeedMove =>
             (((Mathf.Sqrt(_characterDynamicData.speedMoveLevel) / 2 + 0.5f) * _charactersConfig.speedMove) +
              Random.Range(0, 0.6f)) * _charactersConfig.speed_up;
@@ -145,6 +156,7 @@ namespace _Vikings._Scripts.Refactoring
             
             _characterDynamicData = new();
             _characterDynamicData = SaveLoadSystem.LoadData(_characterDynamicData, _charactersConfig.saveKey);
+            SaveLoadManager.saves.Add(this);
         }
         
         public void Upgrade(UpgradeCharacterEnum upgradeCharacterEnum)
@@ -161,6 +173,11 @@ namespace _Vikings._Scripts.Refactoring
                     _characterDynamicData.speedWorkLevel++;
                     break;
             }
+        }
+
+        public void Save()
+        {
+            SaveLoadSystem.SaveData(_characterDynamicData, _charactersConfig.saveKey);
         }
     }
 }

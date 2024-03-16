@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 2560
     height: 1357
   m_ShowMode: 4
-  m_Title: Console
+  m_Title: Inspector
   m_RootView: {fileID: 9}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 145
+  controlID: 80
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 100}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 181
+  controlID: 179
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -400,23 +400,23 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/_Vikings/Config
+    - Assets/_Vikings/Config/Character
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/_Vikings/Config
+  - Assets/_Vikings/Config/Character
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Work\GitProjects\GiHub\Vikings\Vikings
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: e27e0000
-    m_LastClickedID: 32482
-    m_ExpandedIDs: 00000000627e0000647e0000667e0000687e0000e27e0000e47e000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 207}
+    m_SelectedIDs: 4a7f0000
+    m_LastClickedID: 32586
+    m_ExpandedIDs: 00000000627e0000647e0000667e0000687e0000da7e0000e27e0000e47e000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -475,15 +475,15 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: c623000038750000266c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: BuildingDataCraftingTable
-      m_OriginalName: BuildingDataCraftingTable
+      m_Name: HousePrefab
+      m_OriginalName: HousePrefab
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 27270
+      m_UserData: 33166
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
@@ -586,9 +586,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: b66a0000
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 24fbffff
+      m_ExpandedIDs: f0a3ffff98b9ffff9ac4ffff12d0ffff24fbffff78ab0000ccab00004aac0000ccac000018b200007eb20000fab20000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 

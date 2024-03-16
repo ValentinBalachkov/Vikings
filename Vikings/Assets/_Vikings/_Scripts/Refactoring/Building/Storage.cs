@@ -11,7 +11,7 @@ using AbstractBuilding = Vikings.Object.AbstractBuilding;
 
 namespace _Vikings._Scripts.Refactoring
 {
-    public class Storage : AbstractBuilding
+    public class Storage : AbstractBuilding, ISave
     {
         public ResourceType ResourceType => _storageDynamicData.ResourceType;
         
@@ -47,6 +47,7 @@ namespace _Vikings._Scripts.Refactoring
             CreateModel();
             ChangeState(_storageDynamicData.State);
             _buildingView.SetupSprite(_storageDynamicData.CurrentLevel);
+            SaveLoadManager.saves.Add(this);
         }
 
 
@@ -215,6 +216,11 @@ namespace _Vikings._Scripts.Refactoring
             {
                 currentItems[itemType] += value;
             }
+            
+            foreach (var item in  _storageDynamicData.CurrentItemsCount)
+            {
+                item.count = currentItems.FirstOrDefault(x => x.Key == item.resourceType).Value;
+            }
         }
 
         private void OnLevelChange(int value)
@@ -228,6 +234,11 @@ namespace _Vikings._Scripts.Refactoring
                     TaskManager.taskChangeStatusCallback?.Invoke(_storageData.taskData, TaskStatus.TakeReward);
                 }
             }
+        }
+
+        public void Save()
+        {
+            SaveLoadSystem.SaveData(_storageDynamicData, _storageData.saveKey);
         }
     }
 }

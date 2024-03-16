@@ -1,7 +1,14 @@
-﻿namespace _Vikings._Scripts.Refactoring
+﻿using System;
+
+namespace _Vikings._Scripts.Refactoring
 {
     public class EatStorage : Storage
     {
-        public int HouseLevel => _storageDynamicData.CurrentLevel;
+        public event Action OnHomeBuilding;
+        public override void Upgrade()
+        {
+            base.Upgrade();
+            OnHomeBuilding?.Invoke();
+        }
     }
 }

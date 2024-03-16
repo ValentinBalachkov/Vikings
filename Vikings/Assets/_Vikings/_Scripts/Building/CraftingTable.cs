@@ -13,7 +13,7 @@ using _Vikings.WeaponObject;
 
 namespace Vikings.Building
 {
-    public class CraftingTable : AbstractBuilding, IAcceptArg<Weapon>
+    public class CraftingTable : AbstractBuilding, IAcceptArg<Weapon>, ISave
     {
         [SerializeField] private AudioSource _audioSourceToStorage;
 
@@ -45,6 +45,7 @@ namespace Vikings.Building
             CreateModel();
             ChangeState(_craftingTableDynamicData.State);
             _buildingView.SetupSprite(CurrentLevel.Value);
+            SaveLoadManager.saves.Add(this);
         }
 
         private void OnLevelChange(int value)
@@ -198,6 +199,11 @@ namespace Vikings.Building
             {
                 currentItems[itemType] += value;
             }
+            
+            foreach (var item in  _craftingTableDynamicData.CurrentItemsCount)
+            {
+                item.count = currentItems.FirstOrDefault(x => x.Key == item.resourceType).Value;
+            }
         }
 
         private void OnCountChangeWeaponState(int value, ResourceType itemType)
@@ -212,6 +218,16 @@ namespace Vikings.Building
             {
                 _currentItemsWeapon[itemType] += value;
             }
+
+            foreach (var item in  _craftingTableDynamicData.CurrentItemsCountWeapon)
+            {
+                item.count = _currentItemsWeapon.FirstOrDefault(x => x.Key == item.resourceType).Value;
+            }
+        }
+
+        public void Save()
+        {
+            SaveLoadSystem.SaveData(_craftingTableDynamicData, _craftingTableData.saveKey);
         }
     }
 }

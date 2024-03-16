@@ -10,6 +10,8 @@ using Zenject;
 
 public class SaveLoadManager : MonoBehaviour
 {
+    public static List<ISave> saves = new();
+
     [SerializeField] private TMP_Text _versionText;
 
     [SerializeField] private DateTimeData _dateTimeData;
@@ -22,7 +24,7 @@ public class SaveLoadManager : MonoBehaviour
     private MapFactory _mapFactory;
 
     private const int TIME_CONST = 10;
-    
+
     public void CheatTimeSave()
     {
         int time;
@@ -515,26 +517,28 @@ public class SaveLoadManager : MonoBehaviour
 
     private void SaveAll()
     {
-
-       
+        foreach (var save in saves)
+        {
+            save.Save();
+        }
     }
 
     private void LoadAll()
     {
         var buildings = _configSetting.buildingsData;
-        
+
         foreach (var data in buildings)
         {
             _mapFactory.CreateBuilding(data);
         }
-        
+
         _mapFactory.CreateBuilding(_configSetting.craftingTable);
 
         var eatStorage = _mapFactory.GetAllBuildings<EatStorage>().FirstOrDefault();
 
         foreach (var data in _configSetting.resourcesData)
         {
-            for (int i = 0; i < eatStorage.HouseLevel + 1; i++)
+            for (int i = 0; i < eatStorage.CurrentLevel.Value + 1; i++)
             {
                 _mapFactory.CreateResource(i, data);
             }

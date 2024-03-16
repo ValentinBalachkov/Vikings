@@ -31,6 +31,7 @@ namespace Vikings.Object
         public abstract BuildingData GetData();
         
         protected BuildingState buildingState;
+       
     }
     
 

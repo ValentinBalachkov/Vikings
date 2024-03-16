@@ -8,7 +8,7 @@ using Vikings.SaveSystem;
 
 namespace _Vikings.WeaponObject
 {
-    public class Weapon
+    public class Weapon : ISave
     {
         public bool IsSet
         {
@@ -75,6 +75,7 @@ namespace _Vikings.WeaponObject
 
             Level.Value = _weaponDynamicData.Level;
             Level.Subscribe(OnLevelChange);
+            SaveLoadManager.saves.Add(this);
         }
 
         public WeaponData GetWeaponData()
@@ -132,6 +133,11 @@ namespace _Vikings.WeaponObject
             }
 
             return (isEnable, text);
+        }
+
+        public void Save()
+        {
+            SaveLoadSystem.SaveData(_weaponDynamicData, _weaponData.saveKey);
         }
     }
 }

@@ -9,7 +9,8 @@ namespace _Vikings._Scripts.Refactoring
 {
     public class CharacterFactory : MonoInstaller
     {
-        public ReactiveCommand<PlayerController> addCharacter = new();
+        public ReactiveCommand addCharacter = new();
+        public int CharactersCount => _characterManager.charactersCount;
 
         [SerializeField] private Transform _spawnPoint;
         [SerializeField] private CharacterStateMachine _characterStateMachine;
@@ -27,7 +28,7 @@ namespace _Vikings._Scripts.Refactoring
         {
             AddBind();
             
-            addCharacter.Subscribe(OnAddCharacter).AddTo(_disposable);
+            addCharacter.Subscribe(_ => OnAddCharacter()).AddTo(_disposable);
             
         }
 
@@ -42,7 +43,7 @@ namespace _Vikings._Scripts.Refactoring
         {
             for (int i = 0; i < _characterManager.charactersCount; i++)
             {
-                addCharacter.Execute(_charactersConfig.playerController);
+                addCharacter.Execute();
             }
         }
         
@@ -52,11 +53,12 @@ namespace _Vikings._Scripts.Refactoring
             return Container.ResolveAll<CharacterStateMachine>();
         }
         
-        private void OnAddCharacter(PlayerController playerController)
+        private void OnAddCharacter()
         {
             var instance = Container.InstantiatePrefabForComponent<CharacterStateMachine>(_characterStateMachine, _spawnPoint.position, Quaternion.identity, _spawnPoint);
             Container.Bind<CharacterStateMachine>().FromInstance(instance).AsTransient();
-            instance.Init(instance.transform, playerController, _characterManager);
+            instance.Init(instance.transform, _charactersConfig.playerController, _characterManager);
+            _characterManager.charactersCount++;
         }
         
         private void AddBind()

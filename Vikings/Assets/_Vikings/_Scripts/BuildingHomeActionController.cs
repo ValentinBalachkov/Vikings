@@ -1,66 +1,68 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using _Vikings._Scripts.Refactoring;
 using UnityEngine;
-using Vikings.Chanacter;
-using Vikings.UI;
+using Vikings.Map;
+using Zenject;
 
 namespace Vikings.Building
 {
     public class BuildingHomeActionController : MonoBehaviour
     {
-        public static BuildingHomeActionController Instance => _instance;
-        private static BuildingHomeActionController _instance;
         [SerializeField] private Camera _camera;
         [SerializeField] private Camera _cameraPassive;
-     //   [SerializeField] private CharactersOnMap _charactersOnMap;
-        [SerializeField] private CharactersConfig _charactersConfig;
         [SerializeField] private HouseCameraPositionInfo[] _houseCameraPosition;
         [SerializeField] private List<Transform> _allRespawnPointTransform = new();
-        [SerializeField] private InventoryView _inventoryView;
-        
-        private float _cameraScale;
-        public Action<int> OnHomeLevelUp;
 
+        private CharacterFactory _charactersOnMap;
+        private MapFactory _mapFactory;
+
+        private EatStorage _eatStorage;
+
+        private float _cameraScale;
 
         private void Awake()
         {
-            if (_instance == null)
-            {
-                _instance = this;
-            }
-
-
             _cameraScale = _camera.orthographicSize / _cameraPassive.orthographicSize;
+        }
+
+        [Inject]
+        public void Init(CharacterFactory characterFactory, MapFactory mapFactory)
+        {
+            _charactersOnMap = characterFactory;
+            _mapFactory = mapFactory;
+            _eatStorage = _mapFactory.GetAllBuildings<EatStorage>().FirstOrDefault();
+            _eatStorage.OnHomeBuilding += OnHomeBuilding;
+        }
+
+        private void OnDestroy()
+        {
+            _eatStorage.OnHomeBuilding -= OnHomeBuilding;
         }
 
         private void Start()
         {
-            // if (_charactersConfig.houseLevel != 0)
-            // {
-            //     StartCoroutine(MoveCameraCoroutine(_houseCameraPosition[_charactersConfig.houseLevel]));
-            // }
+            if (_eatStorage.CurrentLevel.Value != 0)
+            {
+                StartCoroutine(MoveCameraCoroutine(_houseCameraPosition[_eatStorage.CurrentLevel.Value]));
+            }
 
             CollectingResourceView.Instance.camera = _camera;
 
-           // float scaleMove = _houseCameraPosition[0].size / _houseCameraPosition[_charactersConfig.houseLevel].size;
-            // foreach (var transform in _allRespawnPointTransform)
-            // {
-            //     transform.localScale *= scaleMove;
-            // }
+            float scaleMove = _houseCameraPosition[0].size / _houseCameraPosition[_eatStorage.CurrentLevel.Value].size;
+            foreach (var transform in _allRespawnPointTransform)
+            {
+                transform.localScale *= scaleMove;
+            }
         }
 
         public void OnHomeBuilding()
         {
-           //  if (_charactersConfig.houseLevel >= 5) return;
-           // // _charactersOnMap.AddCharacterOnMap(0);
-           //  _charactersConfig.charactersCount++;
-           //  _charactersConfig.houseLevel++;
-           //  OnHomeLevelUp?.Invoke(_charactersConfig.houseLevel);
-           //  StartCoroutine(MoveCameraCoroutine(_houseCameraPosition[_charactersConfig.houseLevel]));
-           //
-           //  _inventoryView.UpdateUI(null);
-
+            if (_eatStorage.CurrentLevel.Value >= 5) return;
+            _charactersOnMap.addCharacter.Execute();
+            StartCoroutine(MoveCameraCoroutine(_houseCameraPosition[_eatStorage.CurrentLevel.Value]));
         }
 
         private IEnumerator MoveCameraCoroutine(HouseCameraPositionInfo positionInfo)

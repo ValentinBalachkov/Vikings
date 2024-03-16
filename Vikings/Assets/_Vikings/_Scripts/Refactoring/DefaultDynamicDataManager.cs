@@ -4,6 +4,7 @@ using _Vikings._Scripts.Refactoring;
 using _Vikings.Refactoring.Character;
 using UnityEditor;
 using UnityEngine;
+using Vikings.Chanacter;
 using Vikings.Object;
 using Vikings.SaveSystem;
 
@@ -13,11 +14,13 @@ public class DefaultDynamicDataManager : EditorWindow
     public DefaultStorageData[] _defaultStoragesData;
     public DefaultWeaponData[] _defaultWeaponsData;
     public DefaultCraftingTableData _defaultCraftingTableData;
+    public DefaultCharacterData _defaultCharacterData;
     private SerializedObject _so;
     private SerializedProperty _storageDataProperty;
     private SerializedProperty _weaponsDataProperty;
     private SerializedProperty _craftingTableDataProperty;
     private SerializedProperty _configProperty;
+    private SerializedProperty _charactersProperty;
     private Vector2 scrollPosition;
 
     private static bool isSetup;
@@ -39,6 +42,7 @@ public class DefaultDynamicDataManager : EditorWindow
         _configProperty = _so.FindProperty("_configSetting");
         _storageDataProperty = _so.FindProperty("_defaultStoragesData");
         _weaponsDataProperty = _so.FindProperty("_defaultWeaponsData");
+        _charactersProperty = _so.FindProperty("_defaultCharacterData");
         _craftingTableDataProperty = _so.FindProperty("_defaultCraftingTableData");
     }
 
@@ -72,6 +76,7 @@ public class DefaultDynamicDataManager : EditorWindow
             EditorGUILayout.PropertyField(_storageDataProperty, true);
             EditorGUILayout.PropertyField(_craftingTableDataProperty, true);
             EditorGUILayout.PropertyField(_weaponsDataProperty, true);
+            EditorGUILayout.PropertyField(_charactersProperty, true);
         }
 
         _so.ApplyModifiedProperties();
@@ -81,11 +86,11 @@ public class DefaultDynamicDataManager : EditorWindow
 
         if (GUILayout.Button("Write building files"))
         {
-            ClearStoragesData();
+            SaveStoragesData();
         }
     }
 
-    private void ClearStoragesData()
+    private void SaveStoragesData()
     {
         foreach (var data in _defaultStoragesData)
         {
@@ -98,6 +103,8 @@ public class DefaultDynamicDataManager : EditorWindow
         {
             SaveLoadSystem.SaveData(data.weaponDynamicData, data.weaponData.saveKey);
         }
+        
+        SaveLoadSystem.SaveData(_defaultCharacterData.characterDynamicData, _defaultCharacterData.charactersConfig.saveKey);
     }
 
     private void FindBuildingsData()
@@ -106,6 +113,19 @@ public class DefaultDynamicDataManager : EditorWindow
         var weaponsData = _configSetting.weaponsData.Where(x => x.saveKey != "WeaponHand").ToList();
 
         var data = _configSetting.craftingTable;
+
+        _defaultCharacterData = new DefaultCharacterData()
+        {
+            charactersConfig = _configSetting.charactersConfig,
+            characterDynamicData = new CharacterDynamicData()
+            {
+                CharactersCount = 1,
+                itemsCountLevel = 1,
+                SaveKey = _configSetting.charactersConfig.saveKey,
+                speedWorkLevel = 1,
+                speedMoveLevel = 1
+            }
+        };
         
         _defaultCraftingTableData = new DefaultCraftingTableData()
         {
@@ -209,4 +229,11 @@ public class DefaultWeaponData
 {
     public WeaponData weaponData;
     public WeaponDynamicData weaponDynamicData;
+}
+
+[Serializable]
+public class DefaultCharacterData
+{
+    public CharactersConfig charactersConfig;
+    public CharacterDynamicData characterDynamicData;
 }
