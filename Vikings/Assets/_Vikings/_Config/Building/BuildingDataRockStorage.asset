@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 9b0178f44ecb8284cbc69151cd5dcd18, type: 3}
   nameText: Rock storage
-  description: 
-  required: 
+  description: Allows storing stone. Upgrade to increase the capacity
+  required: Workbench
   buildingVisualSprites:
   - buildingsSprites: {fileID: 21300000, guid: 5df2779d9e06dc8438ae8b9249c6a501, type: 3}
     shadowSprites: {fileID: 21300000, guid: 8aaebb528d7510445a05046949fd3c92, type: 3}
@@ -29,8 +29,8 @@ MonoBehaviour:
     type: 3}
   priceToUpgrades:
   - resourceType: 0
-    count: 5
+    count: 10
   - resourceType: 1
     count: 5
   taskData: {fileID: 0}
-  priorityInMenu: 0
+  priorityInMenu: 4

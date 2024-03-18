@@ -15,7 +15,7 @@ MonoBehaviour:
   playerController: {fileID: 3085575546098662736, guid: c36a170aed7712a42b71a6f07aa9db45,
     type: 3}
   speed_up: 1
-  taskDataBackpack: {fileID: 0}
+  taskDataBackpack: {fileID: 11400000, guid: 540c20a5168b5444c9001bf4e1f04521, type: 2}
   saveKey: CharactersConfig
   speedMove: 5
   speedMoveCost: 14

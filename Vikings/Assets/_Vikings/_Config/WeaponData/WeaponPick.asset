@@ -21,7 +21,11 @@ MonoBehaviour:
   required: Workbench
   priority: 5
   taskData: {fileID: 0}
-  priceToBuy: []
+  priceToBuy:
+  - resourceType: 0
+    count: 7
+  - resourceType: 1
+    count: 8
   avaleableResources:
   - {fileID: 11400000, guid: cbe7421b5bd4c3b4fb2fab3fb3cb57f0, type: 2}
-  craftingTime: 0
+  craftingTime: 11

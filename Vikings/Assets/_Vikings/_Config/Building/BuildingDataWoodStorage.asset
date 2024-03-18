@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 9d17be8424e2177469bd61508a573bd5, type: 3}
   nameText: Wood storage
-  description: 
-  required: 
+  description: Allows storing wood. Upgrade to increase the capacity
+  required: Workbench
   buildingVisualSprites:
   - buildingsSprites: {fileID: 21300000, guid: 0701ea8cffd802d4f8b99321e430cda7, type: 3}
     shadowSprites: {fileID: 21300000, guid: fc3cd2705724f3642b370590e6d91c1c, type: 3}
@@ -32,5 +32,5 @@ MonoBehaviour:
     count: 5
   - resourceType: 1
     count: 5
-  taskData: {fileID: 0}
-  priorityInMenu: 0
+  taskData: {fileID: 11400000, guid: 12ecc8dd4fa750b43986741b2bab39d8, type: 2}
+  priorityInMenu: 1

@@ -1,5 +1,4 @@
 ﻿using _Vikings._Scripts.Refactoring;
-using Vikings.SaveSystem;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -11,9 +10,6 @@ namespace Vikings.Items
         public AnimatorOverrideController AnimatorOverride => _animatorOverride;
 
         public Sprite icon;
-        public string nameText;
-        public string description;
-
         public GameObject view;
 
         public AudioClip _actionSound;
