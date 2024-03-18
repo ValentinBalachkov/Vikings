@@ -9,6 +9,8 @@ EditorBuildSettings:
     path: Assets/_Vikings/Scene/BrightSceneNewMap.unity
     guid: 353fff911b0c39548aad955c53a770b5
   m_configObjects:
+    com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000,
+      guid: a155b950a52161644af74a1a99a370d7, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 1689602e5be03e148929cd24f7c92e03,
       type: 2}
     com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000,

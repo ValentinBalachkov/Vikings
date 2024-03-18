@@ -8,25 +8,17 @@ namespace _Vikings._Scripts.Refactoring
 {
     public class CharacterManager : ISave
     {
-        public int speedMoveLevel => _characterDynamicData.speedMoveLevel;
-        public int speedWorkLevel => _characterDynamicData.speedWorkLevel;
+        public int ActionCount => _charactersConfig.actionCount;
+        public int SpeedMoveLevel => _characterDynamicData.speedMoveLevel;
+        public int SpeedWorkLevel => _characterDynamicData.speedWorkLevel;
 
-        public int charactersCount
-        {
-            get
-            {
-                return _characterDynamicData.CharactersCount;
-            }
-            set
-            {
-                _characterDynamicData.CharactersCount = value;
-            }
-        }
+        public int CharactersCount => _characterDynamicData.charactersCount;
+       
 
         public float SpeedMove =>
             (((Mathf.Sqrt(_characterDynamicData.speedMoveLevel) / 2 + 0.5f) * _charactersConfig.speedMove) +
              Random.Range(0, 0.6f)) * _charactersConfig.speed_up;
-        
+
         public int SpeedMoveCost
         {
             get
@@ -39,17 +31,17 @@ namespace _Vikings._Scripts.Refactoring
 
                 float newPrice = 0;
                 var a = _charactersConfig.speedMoveCost - 1;
-                for (int i = 2; i <=_characterDynamicData.speedMoveLevel + 1; i++)
+                for (int i = 2; i <= _characterDynamicData.speedMoveLevel + 1; i++)
                 {
                     newPrice += (Mathf.Pow(i, 4) + ((a * i) - Mathf.Pow(i, 3))) / i;
                     a = (int)newPrice;
                 }
-                
-                
+
+
                 return (int)newPrice;
             }
         }
-        
+
         public int ItemsCount
         {
             get
@@ -67,7 +59,6 @@ namespace _Vikings._Scripts.Refactoring
         {
             get
             {
-
                 if (ItemsCountLevel == 1)
                 {
                     return _charactersConfig.itemsCountCost;
@@ -81,14 +72,11 @@ namespace _Vikings._Scripts.Refactoring
                     newPrice += (Mathf.Pow(i, 4) + ((a * i) - Mathf.Pow(i, 3))) / i;
                     a = (int)newPrice;
                 }
-                
 
-
-                //return (int)(Mathf.Pow(itemsCountLevel, 5) + ((itemsCountCost - 1) * itemsCountLevel));
                 return (int)newPrice;
             }
         }
-        
+
         public int ItemsCountLevel
         {
             get => _characterDynamicData.itemsCountLevel;
@@ -100,7 +88,8 @@ namespace _Vikings._Scripts.Refactoring
                     _charactersConfig.taskDataBackpack.accessDone = true;
                     if (_charactersConfig.taskDataBackpack.taskStatus == TaskStatus.InProcess)
                     {
-                        TaskManager.taskChangeStatusCallback?.Invoke(_charactersConfig.taskDataBackpack, TaskStatus.TakeReward);
+                        TaskManager.taskChangeStatusCallback?.Invoke(_charactersConfig.taskDataBackpack,
+                            TaskStatus.TakeReward);
                     }
                 }
             }
@@ -112,10 +101,10 @@ namespace _Vikings._Scripts.Refactoring
             {
                 if (_characterDynamicData.speedWorkLevel == 1)
                 {
-                    return _charactersConfig.speedWork/_charactersConfig.speed_up;
+                    return _charactersConfig.speedWork / _charactersConfig.speed_up;
                 }
 
-                return (4 / (_characterDynamicData.speedWorkLevel + 3))/_charactersConfig.speed_up;
+                return (4 / (_characterDynamicData.speedWorkLevel + 3)) / _charactersConfig.speed_up;
             }
         }
 
@@ -137,11 +126,11 @@ namespace _Vikings._Scripts.Refactoring
                     a = (int)newPrice;
                 }
 
-                if (_characterDynamicData.speedWorkLevel == 3) 
+                if (_characterDynamicData.speedWorkLevel == 3)
                 {
                     newPrice -= 5;
                 }
-                
+
                 return (int)newPrice;
             }
         }
@@ -150,15 +139,20 @@ namespace _Vikings._Scripts.Refactoring
 
         private CharacterDynamicData _characterDynamicData;
 
+        public void AddCharacter()
+        {
+            _characterDynamicData.charactersCount++;
+        }
+
         public CharacterManager(CharactersConfig charactersConfig)
         {
             _charactersConfig = charactersConfig;
-            
+
             _characterDynamicData = new();
             _characterDynamicData = SaveLoadSystem.LoadData(_characterDynamicData, _charactersConfig.saveKey);
             SaveLoadManager.saves.Add(this);
         }
-        
+
         public void Upgrade(UpgradeCharacterEnum upgradeCharacterEnum)
         {
             switch (upgradeCharacterEnum)

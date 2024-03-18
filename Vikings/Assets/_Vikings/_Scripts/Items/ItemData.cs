@@ -6,7 +6,7 @@ using UnityEngine.Audio;
 namespace Vikings.Items
 {
     [CreateAssetMenu(fileName = "ItemData", menuName = "Data/ItemData", order = 1)]
-    public class ItemData : ScriptableObject, IData, IItemData
+    public class ItemData : ScriptableObject, IItemData
     {
         public AnimatorOverrideController AnimatorOverride => _animatorOverride;
 
@@ -19,28 +19,17 @@ namespace Vikings.Items
         public AudioClip _actionSound;
         public AudioMixerGroup _mixer;
 
-
-        public bool IsOpen
-        {
-            get => _isOpen;
-            set => _isOpen = value;
-        }
-
+        public int disableDelaySecond;
         public int ID => _id;
 
         public string ItemName => _itemName;
-
-        public ItemController Prefab => _prefab;
+        
 
         [SerializeField] private int _id;
-
-        [SerializeField] private ItemController _prefab;
 
         [SerializeField] private int _dropCount;
 
         [SerializeField] private string _itemName;
-
-        [SerializeField] private bool _isOpen;
 
         [SerializeField] private float _collectTime;
 
@@ -66,20 +55,6 @@ namespace Vikings.Items
         public ResourceType ResourceType => _resourceType;
 
         public GameObject View => view;
-
-
-        public void Save()
-        {
-            // SaveLoadSystem.SaveData(this);
-        }
-
-        public void Load()
-        {
-            // var data = SaveLoadSystem.LoadData(this) as ItemData;
-            // if (data != null)
-            // {
-            //     _isOpen = data._isOpen;
-            // }
-        }
+        
     }
 }

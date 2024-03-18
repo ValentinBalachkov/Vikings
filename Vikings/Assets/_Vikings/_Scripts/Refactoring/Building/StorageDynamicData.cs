@@ -36,7 +36,7 @@ namespace Vikings.Object
     public class CharacterDynamicData
     {
         public string SaveKey;
-        public int CharactersCount;
+        public int charactersCount;
         public int speedMoveLevel;
         public int itemsCountLevel;
         public int speedWorkLevel;

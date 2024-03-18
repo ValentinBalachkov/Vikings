@@ -18,10 +18,10 @@ MonoBehaviour:
   view: {fileID: 8845588629388665088, guid: 20fea90cb2e56224181e0836c9433b81, type: 3}
   _actionSound: {fileID: 0}
   _mixer: {fileID: 0}
+  disableDelaySecond: 5
   _id: 3
-  _prefab: {fileID: 8222135434574805582, guid: 20fea90cb2e56224181e0836c9433b81, type: 3}
   _dropCount: 3
   _itemName: Three
-  _isOpen: 0
   _collectTime: 4
   _animatorOverride: {fileID: 22100000, guid: a8072fac507007c4c998a8021fa7c846, type: 2}
+  _resourceType: 0

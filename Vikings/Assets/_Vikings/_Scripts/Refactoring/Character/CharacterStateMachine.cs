@@ -12,6 +12,8 @@ namespace _Vikings.Refactoring.Character
     {
         public Action<CharacterStateMachine> OnCharacterAction;
 
+        public int ActionCount => _characterManager.ActionCount;
+
         public Inventory Inventory => _inventory;
 
         public int Count => 1;
@@ -31,9 +33,9 @@ namespace _Vikings.Refactoring.Character
         private CharacterManager _characterManager;
         
 
-        public void Init(Transform position, PlayerController playerController, CharacterManager characterManager)
+        public void Init(Transform position, PlayerController playerController, CharacterManager characterManager, WeaponFactory weaponFactory)
         {
-            _inventory = new Inventory();
+            _inventory = new Inventory(weaponFactory);
             _characterManager = characterManager;
             
             _playerController = Instantiate(playerController, position);
@@ -45,6 +47,12 @@ namespace _Vikings.Refactoring.Character
             _states.Add(_doActionState);
             _states.Add(_doMoveState);
         }
+
+        public void SetCollectAnimation()
+        {
+            _playerController.SetCollectAnimation();
+        }
+        
 
         public void SetIdleAnimation()
         {

@@ -261,6 +261,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentLevel:
     value: 0
+  abstractBuildingDynamicData:
+    CurrentItemsCount: []
+    SaveKey: 
   _buildingSpriteObject: {fileID: 7216879613359587854}
 --- !u!1 &2896521758792839751
 GameObject:
@@ -486,7 +489,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3808910875666826039}
   m_Layer: 8
-  m_Name: BuildingHouse
+  m_Name: Building
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

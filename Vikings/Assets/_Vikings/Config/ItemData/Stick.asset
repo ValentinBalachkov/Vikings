@@ -18,10 +18,10 @@ MonoBehaviour:
   view: {fileID: 7538969506033860326, guid: d49c1c83a9b28c448ab88049e1347b28, type: 3}
   _actionSound: {fileID: 0}
   _mixer: {fileID: 0}
+  disableDelaySecond: 5
   _id: 3
-  _prefab: {fileID: 7538969506033860327, guid: d49c1c83a9b28c448ab88049e1347b28, type: 3}
   _dropCount: 1
   _itemName: Wood
-  _isOpen: 1
   _collectTime: 0.7
   _animatorOverride: {fileID: 0}
+  _resourceType: 0

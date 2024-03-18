@@ -33,8 +33,6 @@ namespace Vikings.Building
         {
             _charactersOnMap = characterFactory;
             _mapFactory = mapFactory;
-            _eatStorage = _mapFactory.GetAllBuildings<EatStorage>().FirstOrDefault();
-            _eatStorage.OnHomeBuilding += OnHomeBuilding;
         }
 
         private void OnDestroy()
@@ -44,6 +42,9 @@ namespace Vikings.Building
 
         private void Start()
         {
+            _eatStorage = _mapFactory.GetAllBuildings<EatStorage>().FirstOrDefault();
+            _eatStorage.OnHomeBuilding += OnHomeBuilding;
+            
             if (_eatStorage.CurrentLevel.Value != 0)
             {
                 StartCoroutine(MoveCameraCoroutine(_houseCameraPosition[_eatStorage.CurrentLevel.Value]));
@@ -62,6 +63,7 @@ namespace Vikings.Building
         {
             if (_eatStorage.CurrentLevel.Value >= 5) return;
             _charactersOnMap.addCharacter.Execute();
+            _charactersOnMap.AddCharactersCount();
             StartCoroutine(MoveCameraCoroutine(_houseCameraPosition[_eatStorage.CurrentLevel.Value]));
         }
 

@@ -18,11 +18,10 @@ MonoBehaviour:
   view: {fileID: 6806352097513530125, guid: 265b88c448f749b4aaa70377c927eddb, type: 3}
   _actionSound: {fileID: 0}
   _mixer: {fileID: 0}
+  disableDelaySecond: 5
   _id: 2
-  _prefab: {fileID: 6806352097513530124, guid: 265b88c448f749b4aaa70377c927eddb, type: 3}
   _dropCount: 1
   _itemName: Rock
-  _isOpen: 1
   _collectTime: 0.7
   _animatorOverride: {fileID: 0}
   _resourceType: 1

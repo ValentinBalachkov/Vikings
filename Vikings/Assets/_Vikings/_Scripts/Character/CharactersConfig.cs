@@ -22,5 +22,7 @@ namespace Vikings.Chanacter
 
         public int itemsCount = 2;
         public int itemsCountCost = 10;
+
+        public int actionCount;
     }
 }

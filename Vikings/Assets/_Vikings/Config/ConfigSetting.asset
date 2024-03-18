@@ -18,8 +18,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1ab712be617146840846a30ebdc11d67, type: 2}
   craftingTable: {fileID: 11400000, guid: 92fdfe3af0b4e4246a76e6ac66b3b552, type: 2}
   weaponsData:
-  - {fileID: 11400000, guid: a0a9de7740517a5488d545315fa8ee3a, type: 2}
   - {fileID: 11400000, guid: 6eb2f8cc1aff6df47ba45ea2880df28d, type: 2}
+  - {fileID: 11400000, guid: a0a9de7740517a5488d545315fa8ee3a, type: 2}
   - {fileID: 11400000, guid: 9ef76be828f44a046a074450ec192bf0, type: 2}
   resourcesData:
   - {fileID: 11400000, guid: cbe7421b5bd4c3b4fb2fab3fb3cb57f0, type: 2}

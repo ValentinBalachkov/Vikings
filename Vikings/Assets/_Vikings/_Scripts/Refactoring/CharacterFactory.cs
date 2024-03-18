@@ -10,43 +10,58 @@ namespace _Vikings._Scripts.Refactoring
     public class CharacterFactory : MonoInstaller
     {
         public ReactiveCommand addCharacter = new();
-        public int CharactersCount => _characterManager.charactersCount;
-
+        
         [SerializeField] private Transform _spawnPoint;
         [SerializeField] private CharacterStateMachine _characterStateMachine;
-
 
         private CharactersConfig _charactersConfig;
 
         private CompositeDisposable _disposable = new();
 
-
         private CharacterManager _characterManager;
-        
+        private WeaponFactory _weaponFactory;
 
         public override void InstallBindings()
         {
-            AddBind();
-            
-            addCharacter.Subscribe(_ => OnAddCharacter()).AddTo(_disposable);
-            
+            AddCharacterFactory();
         }
-
-        [Inject]
-        private void Init(ConfigSetting configSetting)
+        
+        public void Init(ConfigSetting configSetting, WeaponFactory weaponFactory)
         {
             _charactersConfig = configSetting.charactersConfig;
             _characterManager = new CharacterManager(_charactersConfig);
+            _weaponFactory = weaponFactory;
+            addCharacter.Subscribe(_ => OnAddCharacter()).AddTo(_disposable);
+            
+            SpawnCharacters();
         }
 
-        public void SpawnCharacters()
+        private void OnDestroy()
         {
-            for (int i = 0; i < _characterManager.charactersCount; i++)
+            _disposable.Dispose();
+        }
+
+        private void AddCharacterFactory()
+        {
+            Container
+                .Bind<CharacterFactory>()
+                .FromInstance(this)
+                .AsSingle()
+                .NonLazy();
+        }
+
+        public void AddCharactersCount()
+        {
+            _characterManager.AddCharacter();
+        }
+
+        private void SpawnCharacters()
+        {
+            for (int i = 0; i < _characterManager.CharactersCount; i++)
             {
                 addCharacter.Execute();
             }
         }
-        
 
         public List<CharacterStateMachine> GetCharacters()
         {
@@ -57,17 +72,8 @@ namespace _Vikings._Scripts.Refactoring
         {
             var instance = Container.InstantiatePrefabForComponent<CharacterStateMachine>(_characterStateMachine, _spawnPoint.position, Quaternion.identity, _spawnPoint);
             Container.Bind<CharacterStateMachine>().FromInstance(instance).AsTransient();
-            instance.Init(instance.transform, _charactersConfig.playerController, _characterManager);
-            _characterManager.charactersCount++;
+            instance.Init(instance.transform, _charactersConfig.playerController, _characterManager, _weaponFactory);
         }
         
-        private void AddBind()
-        {
-            Container
-                .Bind<CharacterFactory>()
-                .FromInstance(this)
-                .AsSingle()
-                .NonLazy();
-        }
     }
 } 

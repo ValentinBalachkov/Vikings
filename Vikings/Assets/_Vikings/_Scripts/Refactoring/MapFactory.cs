@@ -19,12 +19,10 @@ namespace Vikings.Map
 
         [SerializeField] private BoneFire _boneFire;
         [SerializeField] private Transform _boneFireSpawnPoint;
-        
 
         public override void InstallBindings()
         {
             AddMapSpawner();
-            CreateBoneFire();
         }
 
         public void CreateBuilding(BuildingData buildingData)
@@ -112,7 +110,7 @@ namespace Vikings.Map
             return list;
         }
 
-        private void CreateBoneFire()
+        public void CreateBoneFire()
         {
             var building = CreateObject<BoneFire>(_boneFire, _boneFireSpawnPoint);
             building.Init();
@@ -126,7 +124,7 @@ namespace Vikings.Map
 
             return instance;
         }
-
+        
         private void AddMapSpawner()
         {
             Container
@@ -135,5 +133,6 @@ namespace Vikings.Map
                 .AsSingle()
                 .NonLazy();
         }
+        
     }
 }

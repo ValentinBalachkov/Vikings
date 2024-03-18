@@ -63,10 +63,9 @@ public class SaveLoadManager : MonoBehaviour
     }
 
 
-    private void Awake()
+    private void Start()
     {
         //_taskManager.SubscribeChangeStatusEvent();
-        LoadAll();
         Application.targetFrameRate = 60;
 //        _versionText.text = $"v{Application.version}";
     }
@@ -515,7 +514,7 @@ public class SaveLoadManager : MonoBehaviour
         return charactersCount / ((routeTime / backspaceVolume) + (workTime / weaponsPower));
     }
 
-    private void SaveAll()
+    public void SaveAll()
     {
         foreach (var save in saves)
         {
@@ -523,7 +522,7 @@ public class SaveLoadManager : MonoBehaviour
         }
     }
 
-    private void LoadAll()
+    public void LoadAll()
     {
         var buildings = _configSetting.buildingsData;
 

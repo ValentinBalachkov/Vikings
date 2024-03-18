@@ -37,11 +37,6 @@ public class TrayView : ViewBase
         // }));
     }
 
-    private void OnDestroy()
-    {
-        _advertisementButton.onClick.RemoveAllListeners();
-    }
-
     public void UpdateTrayPanel(List<TaskData> tasksData)
     {
         ClearElements();

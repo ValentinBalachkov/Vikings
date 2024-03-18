@@ -10,13 +10,11 @@ namespace _Vikings._Scripts.Refactoring
         [SerializeField] private AudioSource _audioSource;
         
         private GameObject _view;
-        private const float DELAY_ENABLE = 5f;
         private ItemData _itemData;
 
         public override void CharacterAction(CharacterStateMachine characterStateMachine)
         {
-            characterStateMachine.Inventory.SetItemToInventory(_itemData.ResourceType, _itemData.DropCount);
-            StartCoroutine(GetItemCoroutine());
+            StartCoroutine(GetItemCoroutine(characterStateMachine));
         }
 
         public override void Init()
@@ -52,15 +50,37 @@ namespace _Vikings._Scripts.Refactoring
         }
 
 
-        private IEnumerator GetItemCoroutine()
+        private IEnumerator GetItemCoroutine(CharacterStateMachine characterStateMachine)
         {
+            int actionCount = 0;
+            int itemCount = 0;
+
+            int itemPerActionCount = characterStateMachine.Inventory.GetItemPerActionCount(_itemData);
+            
+            characterStateMachine.SetCollectAnimation();
+
+            while (actionCount < characterStateMachine.ActionCount || itemCount < _itemData.DropCount)
+            {
+                actionCount++;
+                itemCount += itemPerActionCount;
+                yield return new WaitForSeconds(1);
+                yield return null;
+            }
+
+            if (itemCount > _itemData.DropCount)
+            {
+                itemCount = _itemData.DropCount;
+            }
+            
+            characterStateMachine.Inventory.SetItemToInventory(_itemData.ResourceType, itemCount);
+            
             _view.SetActive(false);
             if (_audioSource != null)
             {
                 _audioSource.Play();
             }
             
-            yield return new WaitForSeconds(DELAY_ENABLE);
+            yield return new WaitForSeconds(_itemData.disableDelaySecond);
             _view.SetActive(true);
         }
     }

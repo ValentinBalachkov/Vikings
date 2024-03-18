@@ -119,13 +119,13 @@ namespace Vikings.Chanacter
         public void SetCollectAnimation()
         {
             _playerAnimationController.Collect();
-            StartCoroutine(AwaitAnimationCoroutine(0.5f));
+            //StartCoroutine(AwaitAnimationCoroutine(0.5f));
         }
 
         public void SetCraftingAnimation()
         {
             _playerAnimationController.Work();
-            StartCoroutine(AwaitAnimationCoroutine(2f));
+            //StartCoroutine(AwaitAnimationCoroutine(2f));
         }
 
         private IEnumerator AwaitAnimationCoroutine(float time)

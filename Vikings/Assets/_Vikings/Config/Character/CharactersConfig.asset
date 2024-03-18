@@ -23,3 +23,4 @@ MonoBehaviour:
   speedWorkCost: 17
   itemsCount: 1
   itemsCountCost: 10
+  actionCount: 3

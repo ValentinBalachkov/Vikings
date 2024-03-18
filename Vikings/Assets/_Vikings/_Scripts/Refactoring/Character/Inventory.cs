@@ -1,12 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 using _Vikings._Scripts.Refactoring;
+using Vikings.Items;
 
 namespace _Vikings.Refactoring.Character
 {
     public class Inventory
     {
-        private List<WeaponData> _weapons = new();
         private ItemCount _itemCount;
+
+        private WeaponFactory _weaponFactory;
+
+        public Inventory(WeaponFactory weaponFactory)
+        {
+            _weaponFactory = weaponFactory;
+        }
+
+        public int GetItemPerActionCount(ItemData itemData)
+        {
+            var weapon = _weaponFactory.GetOpenWeapons().FirstOrDefault(x => x.GetWeaponData().avaleableResources.Contains(itemData));
+            return weapon.Level.Value;
+        }
 
         public void SetItemToInventory(ResourceType resourceType, int count)
         {
@@ -19,9 +32,12 @@ namespace _Vikings.Refactoring.Character
 
         public ItemCount GetItemFromInventory()
         {
-            if (_itemCount == null) { return null; }
-            
-            var item =  new ItemCount
+            if (_itemCount == null)
+            {
+                return null;
+            }
+
+            var item = new ItemCount
             {
                 resourceType = _itemCount.resourceType,
                 count = _itemCount.count

@@ -11435,6 +11435,52 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1599831516}
   m_Mesh: {fileID: -3176305395743657389, guid: 616eff80ec12ba342a51cc3a40b256a1, type: 3}
+--- !u!1 &1607395737
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1607395738}
+  - component: {fileID: 1607395739}
+  m_Layer: 0
+  m_Name: EntryPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &1607395738
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607395737}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1607395739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607395737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 939c74d16255408394b55cf980b3a915, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _saveLoadManager: {fileID: 510598404}
+  _charactersTaskManager: {fileID: 29158320}
 --- !u!1 &1622016853
 GameObject:
   m_ObjectHideFlags: 0
@@ -13609,6 +13655,8 @@ MonoBehaviour:
     positions: {fileID: 1116511182}
   - data: {fileID: 11400000, guid: 1ab712be617146840846a30ebdc11d67, type: 2}
     positions: {fileID: 1222435201}
+  - data: {fileID: 11400000, guid: 92fdfe3af0b4e4246a76e6ac66b3b552, type: 2}
+    positions: {fileID: 292437008}
   _boneFirePositionData:
   - id: 1
     point: {fileID: 1552348847}
@@ -15213,9 +15261,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainPanelManager: {fileID: 186779661}
-  _mapFactory: {fileID: 1830271481}
-  _charactersTaskManager: {fileID: 29158320}
-  _weaponFactory: {fileID: 1257531587}
   _configSetting: {fileID: 11400000, guid: 788d5dedbeda2264fab46c65f91c7d81, type: 2}
 --- !u!1 &2023076008
 GameObject:
@@ -16559,9 +16604,9 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 2021403848}
+  - {fileID: 1257531587}
   - {fileID: 1830271481}
   - {fileID: 1225066050}
-  - {fileID: 1257531587}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:

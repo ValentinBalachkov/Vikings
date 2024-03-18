@@ -2,7 +2,6 @@
 using System.Linq;
 using _Vikings.Refactoring.Character;
 using UniRx;
-using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using Vikings.Items;
 using Vikings.Map;
@@ -29,20 +28,8 @@ namespace _Vikings._Scripts.Refactoring
         {
             _mapFactory = mapFactory;
             _characterFactory = characterFactory;
+            _weaponFactory = weaponFactory;
             setBuildingToQueue.Subscribe(OnSetBuilding).AddTo(_disposable);
-        }
-
-        private void Start()
-        {
-            _characterFactory.SpawnCharacters();
-
-            var characters = _characterFactory.GetCharacters();
-
-            foreach (var character in characters)
-            {
-                var boneFire = _mapFactory.GetBoneFire();
-                character.SetState<DoMoveState>(boneFire);
-            }
         }
 
         private void OnSetBuilding(AbstractBuilding abstractBuilding)
@@ -110,7 +97,7 @@ namespace _Vikings._Scripts.Refactoring
 
             var openedResources = abstractResources.Where(x => openedResourcesData.Contains(x.GetItemData())).ToList();
 
-            var item = openedResources.Where(x => x.GetItemData().ResourceType == resourceType)
+            var item = openedResources.Where(x => x.GetItemData().ResourceType == resourceType && x.IsEnableToGet())
                 .OrderBy(x => x.GetItemData().Priority).ThenByDescending(x => x.GetItemData().DropCount)
                 .ThenBy(x => Vector3.Distance(x.GetPosition().position, characterStateMachine.GetPosition().position))
                 .FirstOrDefault();

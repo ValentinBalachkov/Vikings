@@ -10,13 +10,6 @@ namespace _Vikings._Scripts.Refactoring
         public override void InstallBindings()
         {
             AddWeaponFactory();
-            
-        }
-
-        [Inject]
-        private void Init(ConfigSetting configSetting)
-        {
-            CreateWeapons(configSetting.weaponsData);
         }
 
         public Weapon GetWeapon(WeaponData weaponData)
@@ -30,6 +23,15 @@ namespace _Vikings._Scripts.Refactoring
             var weapons = Container.ResolveAll<Weapon>().Where(x => x.Level.Value > 0).ToList();
             return weapons;
         }
+
+        public void CreateWeapons(List<WeaponData> weaponsData)
+        {
+            foreach (var data in weaponsData)
+            {
+                var weapon = new Weapon(data);
+                Container.Bind<Weapon>().FromInstance(weapon).AsTransient();
+            }
+        }
         
         private void AddWeaponFactory()
         {
@@ -39,14 +41,6 @@ namespace _Vikings._Scripts.Refactoring
                 .AsSingle()
                 .NonLazy();
         }
-
-        private void CreateWeapons(List<WeaponData> weaponsData)
-        {
-            foreach (var data in weaponsData)
-            {
-                var weapon = new Weapon(data);
-                Container.Bind<Weapon>().FromInstance(weapon).AsTransient();
-            }
-        }
+        
     }
 }

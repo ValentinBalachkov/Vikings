@@ -18,11 +18,10 @@ MonoBehaviour:
   view: {fileID: 6035762106220388309, guid: 178401ce06cdcc54abb8f511d2edf97b, type: 3}
   _actionSound: {fileID: 0}
   _mixer: {fileID: 0}
+  disableDelaySecond: 5
   _id: 1
-  _prefab: {fileID: 5851211329351986988, guid: 178401ce06cdcc54abb8f511d2edf97b, type: 3}
   _dropCount: 3
   _itemName: Eat
-  _isOpen: 1
   _collectTime: 4
   _animatorOverride: {fileID: 22100000, guid: ed4cf78fc008d2f43a5a2af7f18518e4, type: 2}
   _resourceType: 2

@@ -24,8 +24,8 @@ MonoBehaviour:
   - buildingsSprites: {fileID: 21300000, guid: 7bf4255628e1d254888afda45ee967eb, type: 3}
     shadowSprites: {fileID: 21300000, guid: 22376aac9b54de043a912622815080ee, type: 3}
   saveKey: CraftingTable
-  prefab: {fileID: 3805657028365542445, guid: b14f1d8d437c31441a92ef089e7b92df, type: 3}
-  _buildingView: {fileID: 6687050115691606054, guid: 8f7f3106a14dc7342b35dde7ea3a46ec,
+  prefab: {fileID: -1896998277169036940, guid: 6d3d3d91071042e489e8bbb34dad2ee2, type: 3}
+  _buildingView: {fileID: 5912000992386096361, guid: b5e1a7e4b8754d7488b82b6200a6799b,
     type: 3}
   priceToUpgrades: []
   taskData: {fileID: 0}

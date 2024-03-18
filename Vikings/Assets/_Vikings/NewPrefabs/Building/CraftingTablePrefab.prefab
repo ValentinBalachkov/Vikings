@@ -222,9 +222,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4897016215499429298}
-  - component: {fileID: 7961489388057584634}
+  - component: {fileID: -1896998277169036940}
   m_Layer: 8
-  m_Name: HousePrefab
+  m_Name: CraftingTablePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -247,7 +247,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7961489388057584634
+--- !u!114 &-1896998277169036940
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -256,7 +256,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2331615238191452658}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4cd532cdefc45d4a43753ddaf91ad70, type: 3}
+  m_Script: {fileID: 11500000, guid: 5c130122df144c74868cc09ee137b970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentLevel:
@@ -264,6 +264,7 @@ MonoBehaviour:
   abstractBuildingDynamicData:
     CurrentItemsCount: []
     SaveKey: 
+  _audioSourceToStorage: {fileID: 3894698664435732477}
   _buildingSpriteObject: {fileID: 7216879613359587854}
 --- !u!1 &2896521758792839751
 GameObject:
