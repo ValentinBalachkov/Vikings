@@ -58,6 +58,8 @@ namespace Vikings.UI
 
             var priceToUpgrades = abstractBuilding.GetPriceForUpgrade();
 
+            DebugLogger.SendMessage(abstractBuilding.name, Color.magenta);
+
             foreach (var item in _menuElementItems)
             {
                 item.image.sprite = item.itemData.icon;

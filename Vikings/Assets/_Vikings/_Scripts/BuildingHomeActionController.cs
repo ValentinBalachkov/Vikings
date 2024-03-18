@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using _Vikings._Scripts.Refactoring;
 using UnityEngine;
-using Vikings.Map;
 using Zenject;
 
 namespace Vikings.Building
@@ -17,7 +15,6 @@ namespace Vikings.Building
         [SerializeField] private List<Transform> _allRespawnPointTransform = new();
 
         private CharacterFactory _charactersOnMap;
-        private MapFactory _mapFactory;
 
         private EatStorage _eatStorage;
 
@@ -29,10 +26,9 @@ namespace Vikings.Building
         }
 
         [Inject]
-        public void Init(CharacterFactory characterFactory, MapFactory mapFactory)
+        public void Init(CharacterFactory characterFactory)
         {
             _charactersOnMap = characterFactory;
-            _mapFactory = mapFactory;
         }
 
         private void OnDestroy()
@@ -40,16 +36,16 @@ namespace Vikings.Building
             _eatStorage.OnHomeBuilding -= OnHomeBuilding;
         }
 
-        private void Start()
+        public void Init(EatStorage eatStorage)
         {
-            _eatStorage = _mapFactory.GetAllBuildings<EatStorage>().FirstOrDefault();
+            _eatStorage = eatStorage;
             _eatStorage.OnHomeBuilding += OnHomeBuilding;
             
             if (_eatStorage.CurrentLevel.Value != 0)
             {
                 StartCoroutine(MoveCameraCoroutine(_houseCameraPosition[_eatStorage.CurrentLevel.Value]));
             }
-
+            
             CollectingResourceView.Instance.camera = _camera;
 
             float scaleMove = _houseCameraPosition[0].size / _houseCameraPosition[_eatStorage.CurrentLevel.Value].size;
@@ -59,7 +55,7 @@ namespace Vikings.Building
             }
         }
 
-        public void OnHomeBuilding()
+        private void OnHomeBuilding()
         {
             if (_eatStorage.CurrentLevel.Value >= 5) return;
             _charactersOnMap.addCharacter.Execute();
@@ -90,7 +86,6 @@ namespace Vikings.Building
     [Serializable]
     public class HouseCameraPositionInfo
     {
-        public Vector3 position;
         public float size;
     }
 }

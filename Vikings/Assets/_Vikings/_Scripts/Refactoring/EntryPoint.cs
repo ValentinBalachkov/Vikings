@@ -1,5 +1,7 @@
-﻿using _Vikings.Refactoring.Character;
+﻿using System.Linq;
+using _Vikings.Refactoring.Character;
 using UnityEngine;
+using Vikings.Building;
 using Vikings.Map;
 using Vikings.UI;
 using Zenject;
@@ -10,6 +12,8 @@ namespace _Vikings._Scripts.Refactoring
     {
         [SerializeField] private SaveLoadManager _saveLoadManager;
         [SerializeField] private CharactersTaskManager _charactersTaskManager;
+        [SerializeField] private BuildingHomeActionController _buildingHomeAction;
+        
         
         private MainPanelManager _mainPanelManager;
         private MapFactory _mapFactory;
@@ -34,6 +38,9 @@ namespace _Vikings._Scripts.Refactoring
              _weaponFactory.CreateWeapons(_configSetting.weaponsData);
              InitCharacters();
              InitPanelManager();
+             
+             var eatStorage = _mapFactory.GetAllBuildings<EatStorage>().FirstOrDefault();
+             _buildingHomeAction.Init(eatStorage);
         }
 
         private void InitCharacters()

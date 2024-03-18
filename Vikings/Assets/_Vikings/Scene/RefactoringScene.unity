@@ -181,7 +181,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &26256611
 Transform:
@@ -212,8 +212,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 211836339863327189}
   _cameraPassive: {fileID: 253388662}
-  _houseCameraPosition: []
-  _allRespawnPointTransform: []
+  _houseCameraPosition:
+  - position: {x: 0, y: 0, z: 0}
+    size: 4.5
+  - position: {x: 0, y: 0, z: 0}
+    size: 5
+  - position: {x: 0, y: 0, z: 0}
+    size: 5.2
+  - position: {x: 0, y: 0, z: 0}
+    size: 5.5
+  - position: {x: 0, y: 0, z: 0}
+    size: 5.7
+  - position: {x: 0, y: 0, z: 0}
+    size: 6
+  _allRespawnPointTransform:
+  - {fileID: 1457301697}
+  - {fileID: 994750694}
+  - {fileID: 1843440020}
+  - {fileID: 1002151786}
+  - {fileID: 1002752111}
+  - {fileID: 805812770}
+  - {fileID: 1798381165}
+  - {fileID: 1885291190}
+  - {fileID: 127357883}
+  - {fileID: 1116758099}
+  - {fileID: 1160348764}
+  - {fileID: 54259549}
+  - {fileID: 1311322863}
+  - {fileID: 988676599}
+  - {fileID: 1875601778}
+  - {fileID: 2072033739}
+  - {fileID: 903704330}
+  - {fileID: 1881670438}
+  - {fileID: 1389997999}
+  - {fileID: 706509302}
+  - {fileID: 1222435201}
+  - {fileID: 585255384}
+  - {fileID: 1116511182}
+  - {fileID: 1840150022}
+  - {fileID: 1901289716}
+  - {fileID: 292437008}
+  - {fileID: 959338760}
+  - {fileID: 292842897}
+  - {fileID: 752763646}
 --- !u!1 &29158318
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,7 +477,7 @@ GameObject:
   m_Component:
   - component: {fileID: 54259549}
   m_Layer: 0
-  m_Name: pine_t_01_Pos.26LV0
+  m_Name: pine_t_01_Pos_0
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -886,7 +927,7 @@ GameObject:
   m_Component:
   - component: {fileID: 127357883}
   m_Layer: 0
-  m_Name: pine_t_01_Pos.19LV9
+  m_Name: pine_t_01_Pos_5
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -2539,7 +2580,7 @@ GameObject:
   m_Component:
   - component: {fileID: 292842897}
   m_Layer: 0
-  m_Name: BigRockSpawnpoint_2
+  m_Name: BigRockSpawnpoint_3
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -3836,37 +3877,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2021403847}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &517399747
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 517399748}
-  m_Layer: 0
-  m_Name: rock_flat_t_03_Pos.3 (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &517399748
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 517399747}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.77, y: 0.317, z: 10.1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1558337249}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &527054097
@@ -5535,7 +5545,7 @@ GameObject:
   m_Component:
   - component: {fileID: 706509302}
   m_Layer: 0
-  m_Name: res_wood_01_Pos.1 (2)
+  m_Name: res_wood_01_Pos_0
   m_TagString: Untagged
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -5639,37 +5649,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 716939636}
   m_Mesh: {fileID: -5143882489883547110, guid: 616eff80ec12ba342a51cc3a40b256a1, type: 3}
---- !u!1 &717905654
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 717905655}
-  m_Layer: 0
-  m_Name: rock_flat_t_03_Pos.3 (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &717905655
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 717905654}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.62, y: 0.317, z: 13.06}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1558337249}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &730644173
 GameObject:
   m_ObjectHideFlags: 0
@@ -6387,7 +6366,7 @@ GameObject:
   m_Component:
   - component: {fileID: 805812770}
   m_Layer: 0
-  m_Name: pine_t_01_Pos.11LV1
+  m_Name: pine_t_01_Pos_0
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -6526,37 +6505,6 @@ Transform:
   m_Father: {fileID: 1714331265}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &871176359
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 871176360}
-  m_Layer: 0
-  m_Name: tree_w_food_t_01_Pos.3
-  m_TagString: Untagged
-  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &871176360
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 871176359}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.978, y: 0.317, z: 8.398}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1747665019}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &902289611
 GameObject:
   m_ObjectHideFlags: 0
@@ -6651,7 +6599,7 @@ GameObject:
   m_Component:
   - component: {fileID: 903704330}
   m_Layer: 0
-  m_Name: rock_flat_t_03_Pos.3 (1)
+  m_Name: rock_flat_t_03_Pos_0
   m_TagString: Untagged
   m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -7541,7 +7489,7 @@ GameObject:
   m_Component:
   - component: {fileID: 988676599}
   m_Layer: 0
-  m_Name: pine_t_01_Pos.30LV7
+  m_Name: pine_t_01_Pos_5
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -7572,7 +7520,7 @@ GameObject:
   m_Component:
   - component: {fileID: 994750694}
   m_Layer: 0
-  m_Name: tree_w_food_t_01_Pos.2_LV0
+  m_Name: tree_w_food_t_01_Pos_0
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -7687,7 +7635,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1002151786}
   m_Layer: 0
-  m_Name: pine_t_01_Pos.1LV1
+  m_Name: pine_t_01_Pos_0
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -7802,7 +7750,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1002752111}
   m_Layer: 0
-  m_Name: pine_t_01_Pos.2LV0
+  m_Name: pine_t_01_Pos_0
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -7996,37 +7944,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1084241905}
   m_Mesh: {fileID: -1054576854862351852, guid: 616eff80ec12ba342a51cc3a40b256a1, type: 3}
---- !u!1 &1085554694
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1085554695}
-  m_Layer: 0
-  m_Name: rock_flat_t_03_Pos.2
-  m_TagString: Untagged
-  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1085554695
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1085554694}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.508, y: 0.317, z: 5.164}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1558337249}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1097113227
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8142,7 +8059,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1116758099}
   m_Layer: 0
-  m_Name: pine_t_01_Pos.23LV9
+  m_Name: pine_t_01_Pos_5
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -8425,7 +8342,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1160348764}
   m_Layer: 0
-  m_Name: pine_t_01_Pos.24LV9
+  m_Name: pine_t_01_Pos_5
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -8692,7 +8609,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1225066049
 Transform:
@@ -8907,7 +8824,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1257531586
 Transform:
@@ -9243,7 +9160,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1311322863}
   m_Layer: 0
-  m_Name: pine_t_01_Pos.27LV0
+  m_Name: pine_t_01_Pos_0
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -9784,7 +9701,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1389997999}
   m_Layer: 0
-  m_Name: res_wood_01_Pos.1 (1)
+  m_Name: res_wood_01_Pos_0
   m_TagString: Untagged
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -10551,7 +10468,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1457301697}
   m_Layer: 0
-  m_Name: tree_w_food_t_01_Pos.1
+  m_Name: tree_w_food_t_01_Pos_0
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -11220,14 +11137,11 @@ Transform:
   - {fileID: 1747665019}
   - {fileID: 2076401067}
   - {fileID: 1875601778}
-  - {fileID: 1085554695}
   - {fileID: 2072033739}
+  - {fileID: 903704330}
   - {fileID: 1881670438}
   - {fileID: 1389997999}
   - {fileID: 706509302}
-  - {fileID: 903704330}
-  - {fileID: 517399748}
-  - {fileID: 717905655}
   m_Father: {fileID: 15068433}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11507,13 +11421,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1607395737}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_Father: {fileID: 1866889600}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1607395739
 MonoBehaviour:
@@ -11529,6 +11443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _saveLoadManager: {fileID: 510598404}
   _charactersTaskManager: {fileID: 29158320}
+  _buildingHomeAction: {fileID: 26256612}
 --- !u!1 &1622016853
 GameObject:
   m_ObjectHideFlags: 0
@@ -12734,7 +12649,6 @@ Transform:
   m_Children:
   - {fileID: 1457301697}
   - {fileID: 994750694}
-  - {fileID: 871176360}
   - {fileID: 1843440020}
   m_Father: {fileID: 1558337249}
   m_RootOrder: -1
@@ -13236,7 +13150,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1798381165}
   m_Layer: 0
-  m_Name: pine_t_01_Pos.16LV5
+  m_Name: pine_t_01_Pos_5
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -13765,7 +13679,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1843440020}
   m_Layer: 0
-  m_Name: tree_w_food_t_01_Pos.4
+  m_Name: tree_w_food_t_01_Pos_0
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -13984,6 +13898,7 @@ Transform:
   m_Children:
   - {fileID: 2142494426}
   - {fileID: 26256611}
+  - {fileID: 1607395738}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14080,7 +13995,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1875601778}
   m_Layer: 0
-  m_Name: rock_flat_t_03_Pos.1LV0
+  m_Name: rock_flat_t_03_Pos_0
   m_TagString: Untagged
   m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -14111,7 +14026,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1881670438}
   m_Layer: 0
-  m_Name: res_wood_01_Pos.1
+  m_Name: res_wood_01_Pos_0
   m_TagString: Untagged
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -14142,7 +14057,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1885291190}
   m_Layer: 0
-  m_Name: pine_t_01_Pos.18LV7
+  m_Name: pine_t_01_Pos_5
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -14257,7 +14172,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1901289716}
   m_Layer: 0
-  m_Name: BigRockSpawnpoint
+  m_Name: BigRockSpawnpoint_0
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -14407,37 +14322,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1 &1928246129
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1928246130}
-  m_Layer: 0
-  m_Name: pine_t_01_Pos.LV6
-  m_TagString: Untagged
-  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1928246130
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1928246129}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.74, y: 0.317, z: 13.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2076401067}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1931058991
 GameObject:
   m_ObjectHideFlags: 0
@@ -15741,7 +15625,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2072033739}
   m_Layer: 0
-  m_Name: rock_flat_t_03_Pos.3
+  m_Name: rock_flat_t_03_Pos_1
   m_TagString: Untagged
   m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -15960,7 +15844,6 @@ Transform:
   m_Children:
   - {fileID: 1002151786}
   - {fileID: 1002752111}
-  - {fileID: 1928246130}
   - {fileID: 805812770}
   - {fileID: 1798381165}
   - {fileID: 1885291190}

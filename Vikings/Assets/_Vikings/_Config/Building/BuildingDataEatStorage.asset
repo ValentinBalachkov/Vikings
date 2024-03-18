@@ -27,6 +27,10 @@ MonoBehaviour:
   prefab: {fileID: 7961489388057584634, guid: b041bfdde0799654c9d971f19a623c3d, type: 3}
   _buildingView: {fileID: 577453752117095637, guid: d92e46fb74fe4ca42a704a1340508f9f,
     type: 3}
-  priceToUpgrades: []
+  priceToUpgrades:
+  - resourceType: 0
+    count: 5
+  - resourceType: 1
+    count: 5
   taskData: {fileID: 0}
   priorityInMenu: 0
