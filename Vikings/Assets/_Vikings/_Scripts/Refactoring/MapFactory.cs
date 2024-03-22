@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using _Vikings._Scripts.Refactoring;
 using UnityEngine;
@@ -39,7 +40,7 @@ namespace Vikings.Map
             building.Init();
         }
 
-        public void CreateResource(int level, ItemData itemData)
+        public void CreateResource(int level, ItemData itemData, Action onResourceEnable)
         {
             var data = mapResourceData.FirstOrDefault(x => x.resourceConfig == itemData);
 
@@ -53,7 +54,6 @@ namespace Vikings.Map
 
             if(posLevel == null)
             {
-                Debug.LogError("Resource position not found!");
                 return;
             }
 
@@ -62,6 +62,7 @@ namespace Vikings.Map
                 var resource = CreateObject<AbstractResource>(data.abstractResource, pos);
                 resource.SetItemData(data.resourceConfig);
                 resource.Init();
+                resource.ResourceEnable = onResourceEnable;
             }
         }
         
@@ -71,21 +72,23 @@ namespace Vikings.Map
             return abstractResources;
         }
 
-        public Storage GetPartialStorage()
+        public List<Storage> GetPartialStorage()
         {
-            var storages = Container.ResolveAll<Storage>();
+            List<Storage> storagesToAction = new();
+            
+            var storages = Container.ResolveAll<AbstractBuilding>().Where(x => x is Storage).ToList();
 
             foreach (var storageAbstract in storages)
             {
-                var storage = storageAbstract;
+                var storage = storageAbstract as Storage;
 
                 if (storage.CheckNeededItem())
                 {
-                    return storage;
+                    storagesToAction.Add(storage);
                 }
             }
 
-            return null;
+            return storagesToAction;
         }
 
         public BoneFire GetBoneFire()

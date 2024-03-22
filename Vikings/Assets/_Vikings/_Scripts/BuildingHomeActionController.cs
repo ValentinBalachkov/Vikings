@@ -45,8 +45,6 @@ namespace Vikings.Building
             {
                 StartCoroutine(MoveCameraCoroutine(_houseCameraPosition[_eatStorage.CurrentLevel.Value]));
             }
-            
-            CollectingResourceView.Instance.camera = _camera;
 
             float scaleMove = _houseCameraPosition[0].size / _houseCameraPosition[_eatStorage.CurrentLevel.Value].size;
             foreach (var transform in _allRespawnPointTransform)

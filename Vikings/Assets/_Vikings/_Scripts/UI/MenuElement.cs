@@ -57,9 +57,7 @@ namespace Vikings.UI
             _level.text = $"lvl:{abstractBuilding.CurrentLevel.Value + 1}";
 
             var priceToUpgrades = abstractBuilding.GetPriceForUpgrade();
-
-            DebugLogger.SendMessage(abstractBuilding.name, Color.magenta);
-
+            
             foreach (var item in _menuElementItems)
             {
                 item.image.sprite = item.itemData.icon;

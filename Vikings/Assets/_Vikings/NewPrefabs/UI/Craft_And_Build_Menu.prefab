@@ -490,13 +490,8 @@ MonoBehaviour:
   _content: {fileID: 5441150910731336259}
   _menuElement: {fileID: 2813664272778915832, guid: 6555371dac60b21458281a62e74d2e4c,
     type: 3}
-  _storageDatas:
-  - {fileID: 11400000, guid: 480902296caabf2408ac395a39489084, type: 2}
-  - {fileID: 11400000, guid: e3cc3053499092a49a9428165be974ad, type: 2}
-  - {fileID: 11400000, guid: ab86375ca92522e4b95c5c49e713b9be, type: 2}
-  _craftingTableData: {fileID: 11400000, guid: 1fc812a57f3c9f144bdb91e364854175, type: 2}
-  _weaponsOnMapController: {fileID: 0}
   _audioSourceBtnClick: {fileID: 0}
+  _configSetting: {fileID: 11400000, guid: 788d5dedbeda2264fab46c65f91c7d81, type: 2}
   _closeButton: {fileID: 5939277868911179280}
 --- !u!1 &6596869851845802056
 GameObject:

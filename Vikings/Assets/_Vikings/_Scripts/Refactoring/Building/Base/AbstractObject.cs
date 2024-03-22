@@ -1,4 +1,5 @@
-﻿using _Vikings.Refactoring.Character;
+﻿using System;
+using _Vikings.Refactoring.Character;
 using UniRx;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ namespace Vikings.Object
 {
     public abstract class AbstractObject : MonoBehaviour
     {
+        public Action EndAction;
+        public abstract float GetStoppingDistance();
         public abstract Transform GetPosition();
         public abstract void CharacterAction(CharacterStateMachine characterStateMachine);
         public abstract void Init();

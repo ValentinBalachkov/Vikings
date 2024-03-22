@@ -840,11 +840,11 @@ MonoBehaviour:
   _order: 0
   _itemsCountText:
   - countText: {fileID: 3628598137897372357}
-    item: {fileID: 11400000, guid: 842ec8fe0ff14054fb025a7b78239191, type: 2}
+    type: 0
   - countText: {fileID: 3362134958393901071}
-    item: {fileID: 11400000, guid: 8b782c2617e0b8048985ef732675d1be, type: 2}
+    type: 1
   - countText: {fileID: 6346385485246266463}
-    item: {fileID: 11400000, guid: b90d6cdefc2ad7e4cbdd899ef9e419e5, type: 2}
+    type: 2
   _storagesData:
   - {fileID: 11400000, guid: 480902296caabf2408ac395a39489084, type: 2}
   - {fileID: 11400000, guid: e3cc3053499092a49a9428165be974ad, type: 2}

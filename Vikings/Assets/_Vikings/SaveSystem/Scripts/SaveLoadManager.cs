@@ -19,6 +19,7 @@ public class SaveLoadManager : MonoBehaviour
 
     [SerializeField] private TMP_InputField _timeCheatIF;
     [SerializeField] private TMP_InputField _constCheatIF;
+    [SerializeField] private CharactersTaskManager charactersTaskManager;
 
     private ConfigSetting _configSetting;
     private MapFactory _mapFactory;
@@ -539,7 +540,7 @@ public class SaveLoadManager : MonoBehaviour
         {
             for (int i = 0; i < eatStorage.CurrentLevel.Value + 1; i++)
             {
-                _mapFactory.CreateResource(i, data);
+                _mapFactory.CreateResource(i, data, charactersTaskManager.OnResourceEnable);
             }
         }
 

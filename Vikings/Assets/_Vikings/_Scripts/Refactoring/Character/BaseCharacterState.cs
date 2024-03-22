@@ -25,7 +25,6 @@ namespace _Vikings.Refactoring.Character
         public virtual void Exit()
         {
             _abstractObject = null;
-            DebugLogger.SendMessage("Exit state: " + _stateName, Color.yellow);
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using _Vikings.Refactoring.Character;
 using UnityEngine;
 using Vikings.Building;
 using Vikings.Map;
@@ -36,29 +35,47 @@ namespace _Vikings._Scripts.Refactoring
              _saveLoadManager.LoadAll();
              _mapFactory.CreateBoneFire();
              _weaponFactory.CreateWeapons(_configSetting.weaponsData);
-             InitCharacters();
              InitPanelManager();
-             
-             var eatStorage = _mapFactory.GetAllBuildings<EatStorage>().FirstOrDefault();
-             _buildingHomeAction.Init(eatStorage);
+             InitBuildings();
         }
 
-        private void InitCharacters()
+        private void InitBuildings()
         {
-            _characterFactory.Init(_configSetting, _weaponFactory);
+            var eatStorage = _mapFactory.GetAllBuildings<EatStorage>().FirstOrDefault();
+            _buildingHomeAction.Init(eatStorage);
+             
+            var storages = _mapFactory.GetAllBuildings<Storage>();
+             
+            var craftingTable = _mapFactory.GetAllBuildings<CraftingTable>().FirstOrDefault();
+            craftingTable.BuildingComplete += _charactersTaskManager.SetCharactersToCrafting;
+            craftingTable.AcceptArg(_mainPanelManager);
+            
+            foreach (var storage in storages)
+            {
+                storage.StorageNeedItem += _charactersTaskManager.SetCharacterToStorage;
+                storage.BuildingComplete += _charactersTaskManager.SetCharactersToCrafting;
+                storage.AcceptArg(_mainPanelManager);
+            } 
+            
+            InitCharacters(eatStorage.CurrentLevel.Value + 1);
+        }
+
+        private void InitCharacters(int count)
+        {
+            _characterFactory.Init(_configSetting, _weaponFactory, count);
 
             var characters = _characterFactory.GetCharacters();
             
             foreach (var character in characters)
             {
-                var boneFire = _mapFactory.GetBoneFire();
-                character.SetState<DoMoveState>(boneFire);
+                _charactersTaskManager.SetCharacterToStorage(character);
             }
         }
 
         private void InitPanelManager()
         {
             _mainPanelManager.Init();
+            
             _mainPanelManager.ActiveOverlay(true);
         
             _mainPanelManager.SudoGetPanel<CraftAndBuildingMenu>().AcceptArg(_mapFactory, _charactersTaskManager, _weaponFactory);

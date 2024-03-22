@@ -1,27 +1,46 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using _Vikings._Scripts.Refactoring.Objects;
 using _Vikings.Refactoring.Character;
 using UniRx;
 using UnityEngine;
 using Vikings.Object;
 using Vikings.SaveSystem;
+using Vikings.UI;
 using AbstractBuilding = Vikings.Object.AbstractBuilding;
+using BuildingView = _Vikings._Scripts.Refactoring.Objects.BuildingView;
 
 namespace _Vikings._Scripts.Refactoring
 {
     public class Storage : AbstractBuilding, ISave
     {
-        public ResourceType ResourceType => _storageDynamicData.ResourceType;
+        public int Priority => _storageData.priorityToAction;
         
+        public int CharactersCount;
+        public int MaxStorageCount => _storageDynamicData.MaxStorageCount;
+        
+        public int Count => _storageDynamicData.Count;
+        
+        public Action<Storage> StorageNeedItem;
+        public ResourceType ResourceType => _storageDynamicData.ResourceType;
+
         [SerializeField] private GameObject _buildingSpriteObject;
 
         protected StorageDynamicData _storageDynamicData;
-        
+
         private BuildingView _buildingView;
 
         private BuildingData _storageData;
+
+        private CollectingResourceView _collectingResourceView;
+        private InventoryView _inventoryView;
+        
+
+        public override float GetStoppingDistance()
+        {
+            return _storageData.stoppingDistance;
+        }
 
         public override Transform GetPosition()
         {
@@ -30,16 +49,42 @@ namespace _Vikings._Scripts.Refactoring
 
         public override void CharacterAction(CharacterStateMachine characterStateMachine)
         {
-            var item = characterStateMachine.Inventory.GetItemFromInventory();
-            ChangeCount?.Invoke(item.count, item.resourceType);
+            if (buildingState == BuildingState.Crafting)
+            {
+                characterStateMachine.SetWorkAnimation();
+                if (!isCraftActivated)
+                {
+                    StartCoroutine(UpgradeDelay(characterStateMachine, _storageDynamicData.BuildingTime));
+                }
+                return;
+            }
+            
+            if (characterStateMachine.Inventory.CheckItemCount() == 0)
+            {
+                ItemCount item = new ItemCount
+                {
+                    resourceType = ResourceType,
+                    count = 1
+                };
+                characterStateMachine.Inventory.SetItemToInventory(item.resourceType, item.count);
+                ChangeCount?.Invoke(-item.count, item.resourceType);
+                CharactersCount--;
+            }
+            else
+            {
+                var item = characterStateMachine.Inventory.GetItemFromInventory();
+                ChangeCount?.Invoke(item.count, item.resourceType);
+            }
+
+            StartCoroutine(DelayActionCoroutine(characterStateMachine));
         }
-        
 
         public override void Init()
         {
             for (int i = 0; i < _storageDynamicData.CurrentItemsCount.Length; i++)
             {
-                currentItems.Add(_storageDynamicData.CurrentItemsCount[i].resourceType, _storageDynamicData.CurrentItemsCount[i].count);
+                currentItems.Add(_storageDynamicData.CurrentItemsCount[i].resourceType,
+                    _storageDynamicData.CurrentItemsCount[i].count);
             }
 
             CurrentLevel.Value = _storageDynamicData.CurrentLevel;
@@ -54,12 +99,25 @@ namespace _Vikings._Scripts.Refactoring
         public override void Upgrade()
         {
             CurrentLevel.Value++;
-            _storageDynamicData.MaxStorageCount = (int)((Mathf.Pow(_storageDynamicData.CurrentLevel, 3)
-                                                         + Mathf.Pow(2, _storageDynamicData.CurrentLevel)
-                                                         + (Mathf.Pow(4,
-                                                             _storageDynamicData.CurrentLevel - 1)))
-                                                        + 15);
+            if (CurrentLevel.Value > 1)
+            {
+                _storageDynamicData.MaxStorageCount = (int)((Mathf.Pow(_storageDynamicData.CurrentLevel, 3)
+                                                             + Mathf.Pow(2, _storageDynamicData.CurrentLevel)
+                                                             + (Mathf.Pow(4,
+                                                                 _storageDynamicData.CurrentLevel - 1)))
+                                                            + 15);
+            }
+
             _buildingView.SetupSprite(CurrentLevel.Value);
+            ChangeState(BuildingState.Ready);
+        }
+
+        public override void AcceptArg(MainPanelManager arg)
+        {
+            base.AcceptArg(arg);
+            _collectingResourceView = panelManager.SudoGetPanel<CollectingResourceView>();
+            _inventoryView = panelManager.SudoGetPanel<InventoryView>();
+            _inventoryView.UpdateUI(_storageDynamicData.Count, _storageDynamicData.MaxStorageCount, ResourceType);
         }
 
         public override void ChangeState(BuildingState state)
@@ -74,11 +132,20 @@ namespace _Vikings._Scripts.Refactoring
                     break;
                 case BuildingState.InProgress:
                     ChangeSpriteObject(true);
-                    ChangeCount = OnCountChangeInProgressState;
+                    ChangeCount += OnCountChangeInProgressState;
+                    ChangeCount -= OnCountChangeReadyState;
+                    _collectingResourceView.Setup(this);
                     break;
                 case BuildingState.Ready:
                     ChangeSpriteObject(false);
-                    ChangeCount = OnCountChangeReadyState;
+                    ChangeCount -= OnCountChangeInProgressState;
+                    ChangeCount += OnCountChangeReadyState;
+                    StorageNeedItem?.Invoke(this);
+                    break;
+                case BuildingState.Crafting:
+                    isCraftActivated = false;
+                    BuildingComplete?.Invoke(this);
+                    _collectingResourceView.Clear();
                     break;
             }
         }
@@ -99,7 +166,7 @@ namespace _Vikings._Scripts.Refactoring
                     Debug.LogError("GetNeededItemsCount is null");
                     continue;
                 }
-               
+
                 dict.Add(price.Key, price.Value - currentItem.count);
             }
 
@@ -119,17 +186,17 @@ namespace _Vikings._Scripts.Refactoring
 
                 return dict;
             }
-            
+
             foreach (var price in _storageData.priceToUpgrades)
             {
                 var a = price.count - 1;
                 float p = 0;
                 for (int i = 2; i <= CurrentLevel.Value + 1; i++)
                 {
-                    p += (Mathf.Pow(i, 4) + ((a * i) - Mathf.Pow(i, 3)))/i;
+                    p += (Mathf.Pow(i, 4) + ((a * i) - Mathf.Pow(i, 3))) / i;
                     a = (int)p;
                 }
-                
+
                 dict.Add(price.resourceType, (int)p);
             }
 
@@ -147,12 +214,12 @@ namespace _Vikings._Scripts.Refactoring
         public override (bool, string) IsEnableToBuild<T>(T arg)
         {
             var craftingTable = arg as AbstractBuilding;
-            
+
             string requiredText =
                 $"REQUIRED:  {_storageData.required} LEVEL{craftingTable.CurrentLevel.Value + 1}";
-            
+
             bool isEnable = false;
-            
+
             switch (ResourceType)
             {
                 case ResourceType.Wood:
@@ -166,6 +233,7 @@ namespace _Vikings._Scripts.Refactoring
                     {
                         requiredText = "MAX";
                     }
+
                     isEnable = craftingTable.CurrentLevel.Value - CurrentLevel.Value >= 1 && CurrentLevel.Value < 5;
                     break;
             }
@@ -184,10 +252,22 @@ namespace _Vikings._Scripts.Refactoring
                    buildingState == BuildingState.Ready;
         }
 
+        
+
         private void CreateModel()
         {
             _buildingView = Instantiate(_storageData._buildingView, transform);
             _buildingView.Init(_storageData);
+        }
+
+        private IEnumerator DelayActionCoroutine(CharacterStateMachine characterStateMachine)
+        {
+            if (buildingState != BuildingState.Crafting)
+            {
+                characterStateMachine.SetCollectAnimation();
+                yield return new WaitForSeconds(0.7f);
+                EndAction?.Invoke();
+            }
         }
 
 
@@ -199,15 +279,27 @@ namespace _Vikings._Scripts.Refactoring
 
         private void OnCountChangeReadyState(int value, ResourceType itemType)
         {
-            _storageDynamicData.Count = value > _storageDynamicData.MaxStorageCount
-                ? _storageDynamicData.MaxStorageCount
-                : value;
+            if (_storageDynamicData.Count + value > _storageDynamicData.MaxStorageCount)
+            {
+                _storageDynamicData.Count = _storageDynamicData.MaxStorageCount;
+            }
+            else
+            {
+                _storageDynamicData.Count += value;
+            }
+
+            _inventoryView.UpdateUI(_storageDynamicData.Count, _storageDynamicData.MaxStorageCount, ResourceType);
+
+            if (value < 0)
+            {
+                StorageNeedItem?.Invoke(this);
+            }
         }
 
         private void OnCountChangeInProgressState(int value, ResourceType itemType)
         {
             var priceDict = GetPriceForUpgrade();
-            
+
             if (currentItems[itemType] + value >= priceDict[itemType])
             {
                 currentItems[itemType] = priceDict[itemType];
@@ -216,10 +308,18 @@ namespace _Vikings._Scripts.Refactoring
             {
                 currentItems[itemType] += value;
             }
-            
-            foreach (var item in  _storageDynamicData.CurrentItemsCount)
+
+            foreach (var item in _storageDynamicData.CurrentItemsCount)
             {
                 item.count = currentItems.FirstOrDefault(x => x.Key == item.resourceType).Value;
+            }
+
+            _collectingResourceView.UpdateView(currentItems, priceDict);
+
+            if (priceDict[ResourceType.Wood] == currentItems[ResourceType.Wood] &&
+                priceDict[ResourceType.Rock] == currentItems[ResourceType.Rock])
+            {
+                ChangeState(BuildingState.Crafting);
             }
         }
 

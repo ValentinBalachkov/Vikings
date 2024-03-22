@@ -14,18 +14,17 @@ namespace _Vikings.Refactoring.Character
         public override void Enter(AbstractObject abstractObject)
         {
             base.Enter(abstractObject);
-            _playerController.MoveToPoint(abstractObject.GetPosition());
-            _playerController.SetMoveAnimation();
-            
             _playerController.SetActionOnGetPosition(() =>
             {
-                stateMachine.SetState<DoActionState>(abstractObject);
+                stateMachine.OnNextAction();
             });
+            _playerController.MoveToPoint( abstractObject.GetPosition(), abstractObject.GetStoppingDistance());
+            _playerController.SetMoveAnimation();
         }
 
         public override void Exit()
         {
-            _playerController.ClearAction();
+            _playerController.Clear();
             base.Exit();
         }
     }

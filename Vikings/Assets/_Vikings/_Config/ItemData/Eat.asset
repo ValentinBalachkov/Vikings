@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: Eat
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: e76f1cd188790a54cbf605cbb6fc9a1f, type: 3}
-  nameText: 
-  description: Description
   view: {fileID: 6035762106220388309, guid: 178401ce06cdcc54abb8f511d2edf97b, type: 3}
   _actionSound: {fileID: 0}
   _mixer: {fileID: 0}
   disableDelaySecond: 5
+  stoppingDistance: 2
   _id: 1
   _dropCount: 3
   _itemName: Eat

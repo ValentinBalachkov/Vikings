@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using _Vikings._Scripts.Refactoring;
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,12 +7,10 @@ namespace Vikings.Chanacter
 {
     public class PlayerController : MonoBehaviour
     {
-        public Action OnEndAnimation;
         public PlayerAnimationController PlayerAnimationController => _playerAnimationController;
         public Action OnGetPosition;
 
         [SerializeField] private float _rotateSpeed = 10;
-        [SerializeField] private CharactersConfig _charactersConfig;
         [SerializeField] private PlayerAnimationController _playerAnimationController;
 
         private NavMeshAgent _navMeshAgent;
@@ -22,10 +19,10 @@ namespace Vikings.Chanacter
         private bool _isIdleRotate;
         private Vector3 _currentDestination;
         private CharacterManager _characterManager;
+        private float _stoppingDistanceOffset = 0.5f;
 
         private void Awake()
         {
-            
             _navMeshAgent = GetComponentInParent<NavMeshAgent>();
         }
 
@@ -47,8 +44,10 @@ namespace Vikings.Chanacter
                 var targetRotation = Quaternion.LookRotation(rotate);
                 _thisTransform.rotation = Quaternion.Slerp(_thisTransform.rotation, targetRotation, _rotateSpeed * Time.deltaTime);
             }
+            
             if (CheckDestinationReached() && !_onPosition)
             {
+                _navMeshAgent.speed = 0;
                 OnGetPosition?.Invoke();
                 _onPosition = true;
             }
@@ -58,7 +57,7 @@ namespace Vikings.Chanacter
         {
             float distanceToTarget = Vector3.Distance(_thisTransform.position, _currentPoint.position);
             
-            if (Math.Round(distanceToTarget, 1) <= Math.Round(_navMeshAgent.stoppingDistance + 0.5f, 1))
+            if (Math.Round(distanceToTarget, 1) <= Math.Round(_navMeshAgent.stoppingDistance + _stoppingDistanceOffset, 1))
             {
                 return true;
             }
@@ -73,21 +72,28 @@ namespace Vikings.Chanacter
             OnGetPosition = action;
         }
 
-        public void ClearAction()
+        public void Clear()
         {
             OnGetPosition = null;
             _onPosition = true;
         }
 
-        public void MoveToPoint(Transform point)
+        public void MoveToPoint(Transform point, float stoppingDistance)
         {
-            OnGetPosition = null;
-            _onPosition = false;
+            _stoppingDistanceOffset = stoppingDistance;
             
             _navMeshAgent.speed = _characterManager.SpeedMove;
             _currentPoint = point;
             _navMeshAgent.SetDestination(point.position);
             _currentDestination = _navMeshAgent.destination;
+            _onPosition = false;
+            
+            if (CheckDestinationReached())
+            {
+                _navMeshAgent.speed = 0;
+                OnGetPosition?.Invoke();
+                _onPosition = true;
+            }
         }
 
         public void ResetDestinationForLook(Transform newDestination)
@@ -119,19 +125,12 @@ namespace Vikings.Chanacter
         public void SetCollectAnimation()
         {
             _playerAnimationController.Collect();
-            //StartCoroutine(AwaitAnimationCoroutine(0.5f));
         }
 
         public void SetCraftingAnimation()
         {
             _playerAnimationController.Work();
-            //StartCoroutine(AwaitAnimationCoroutine(2f));
         }
-
-        private IEnumerator AwaitAnimationCoroutine(float time)
-        {
-            yield return new WaitForSeconds(time);
-            OnEndAnimation?.Invoke();
-        }
+        
     }
 }

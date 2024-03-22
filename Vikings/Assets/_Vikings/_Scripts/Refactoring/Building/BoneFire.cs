@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using _Vikings.Refactoring.Character;
 using PanelManager.Scripts.Interfaces;
 using UnityEngine;
@@ -11,6 +12,11 @@ public class BoneFire : AbstractObject, IAcceptArg<List<BoneFirePositionData>>
     public override void Init()
     {
         
+    }
+
+    public override float GetStoppingDistance()
+    {
+        return 0.5f;
     }
 
     public override Transform GetPosition()
@@ -32,6 +38,12 @@ public class BoneFire : AbstractObject, IAcceptArg<List<BoneFirePositionData>>
         characterStateMachine.SetIdleAnimation();
         characterStateMachine.ResetDestinationForLook(transform);
     }
+
+    public void ResetFlag(Transform pos)
+    {
+        var data = _positionsData.FirstOrDefault(x => x.point == pos);
+        data.isDisable = false;
+    }
     
 
     public void AcceptArg(List<BoneFirePositionData> arg)
@@ -43,7 +55,6 @@ public class BoneFire : AbstractObject, IAcceptArg<List<BoneFirePositionData>>
 [Serializable]
 public class BoneFirePositionData
 {
-    public int id;
     public Transform point;
     public bool isDisable;
 }

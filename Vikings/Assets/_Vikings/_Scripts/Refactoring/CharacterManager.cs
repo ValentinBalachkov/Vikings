@@ -12,9 +12,6 @@ namespace _Vikings._Scripts.Refactoring
         public int SpeedMoveLevel => _characterDynamicData.speedMoveLevel;
         public int SpeedWorkLevel => _characterDynamicData.speedWorkLevel;
 
-        public int CharactersCount => _characterDynamicData.charactersCount;
-       
-
         public float SpeedMove =>
             (((Mathf.Sqrt(_characterDynamicData.speedMoveLevel) / 2 + 0.5f) * _charactersConfig.speedMove) +
              Random.Range(0, 0.6f)) * _charactersConfig.speed_up;

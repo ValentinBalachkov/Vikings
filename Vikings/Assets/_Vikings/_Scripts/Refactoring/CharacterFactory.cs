@@ -26,14 +26,14 @@ namespace _Vikings._Scripts.Refactoring
             AddCharacterFactory();
         }
         
-        public void Init(ConfigSetting configSetting, WeaponFactory weaponFactory)
+        public void Init(ConfigSetting configSetting, WeaponFactory weaponFactory, int charactersCount)
         {
             _charactersConfig = configSetting.charactersConfig;
             _characterManager = new CharacterManager(_charactersConfig);
             _weaponFactory = weaponFactory;
             addCharacter.Subscribe(_ => OnAddCharacter()).AddTo(_disposable);
             
-            SpawnCharacters();
+            SpawnCharacters(charactersCount);
         }
 
         private void OnDestroy()
@@ -55,9 +55,9 @@ namespace _Vikings._Scripts.Refactoring
             _characterManager.AddCharacter();
         }
 
-        private void SpawnCharacters()
+        private void SpawnCharacters(int count)
         {
-            for (int i = 0; i < _characterManager.CharactersCount; i++)
+            for (int i = 0; i < count; i++)
             {
                 addCharacter.Execute();
             }

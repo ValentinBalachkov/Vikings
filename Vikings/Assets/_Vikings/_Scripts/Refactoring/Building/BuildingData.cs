@@ -8,6 +8,7 @@ using ItemCount = _Vikings.Refactoring.Character.ItemCount;
 [CreateAssetMenu(fileName = "BuildingData", menuName = "Data/BuildingData")]
 public class BuildingData : ScriptableObject
 {
+    public int priorityToAction;
     public Sprite icon;
     public string nameText;
     public string description;
@@ -19,4 +20,5 @@ public class BuildingData : ScriptableObject
     public List<ItemCount> priceToUpgrades = new();
     public TaskData taskData;
     public int priorityInMenu;
+    public float stoppingDistance;
 }

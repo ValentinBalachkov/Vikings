@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e136616cbf1273499bbb42e399abfa7, type: 3}
   m_Name: BuildingDataRockStorage
   m_EditorClassIdentifier: 
+  priorityToAction: 2
   icon: {fileID: 21300000, guid: 9b0178f44ecb8284cbc69151cd5dcd18, type: 3}
   nameText: Rock storage
   description: Allows storing stone. Upgrade to increase the capacity
@@ -34,3 +35,4 @@ MonoBehaviour:
     count: 5
   taskData: {fileID: 0}
   priorityInMenu: 4
+  stoppingDistance: 2

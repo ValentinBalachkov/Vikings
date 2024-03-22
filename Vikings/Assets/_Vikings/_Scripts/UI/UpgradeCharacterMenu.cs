@@ -104,7 +104,6 @@ namespace Vikings.UI
             //     //     //_buildingsOnMap.UpdateCurrentBuilding(character);
             //     // }
             // }
-            _inventoryView.UpdateUI(null);
         }
 
         private void UpdateUI()

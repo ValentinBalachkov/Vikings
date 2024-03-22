@@ -69,10 +69,13 @@ namespace Vikings.UI
                 item.UpdateUI(building);
                 item.AddOnClickListener(() =>
                 {
+                    building.ChangeState(BuildingState.InProgress);
                     _charactersTaskManager.setBuildingToQueue.Execute(building);
                     _panelManager.ClosePanel<CraftAndBuildingMenu>();
+                    _panelManager.ActiveOverlay(true);
+                    _panelManager.SudoGetPanel<MenuButtonsManager>().EnableButtons(false);
                 });
-                var cortege = building.IsEnableToBuild(_mapFactory.GetAllBuildings<CraftingTable>());
+                var cortege = building.IsEnableToBuild(_mapFactory.GetAllBuildings<CraftingTable>().FirstOrDefault());
                 item.SetEnable(cortege.Item1, cortege.Item2);
                 _menuElements.Add(item);
             }
@@ -93,10 +96,13 @@ namespace Vikings.UI
             table.UpdateUI(craftingTable);
             table.AddOnClickListener(() =>
             {
+                craftingTable.ChangeState(BuildingState.InProgress);
                 _charactersTaskManager.setBuildingToQueue.Execute(craftingTable);
                 _panelManager.ClosePanel<CraftAndBuildingMenu>();
+                _panelManager.ActiveOverlay(true);
+                _panelManager.SudoGetPanel<MenuButtonsManager>().EnableButtons(false);
             });
-            var arg = craftingTable.IsEnableToBuild(_configSetting.weaponsData[1]);
+            var arg = craftingTable.IsEnableToBuild(_weaponFactory.GetWeapon(_configSetting.weaponsData[1]));
             table.SetEnable(arg.Item1, arg.Item2);
             _menuElements.Add(table);
         }
@@ -112,10 +118,13 @@ namespace Vikings.UI
                 item.UpdateUI(weapon);
                 item.AddOnClickListener(() =>
                 {
+                    _mapFactory.GetAllBuildings<CraftingTable>().FirstOrDefault().ChangeState(BuildingState.Ready);
                     _charactersTaskManager.setBuildingToQueue.Execute(_mapFactory.GetAllBuildings<CraftingTable>()
                         .FirstOrDefault());
                     _mapFactory.GetAllBuildings<CraftingTable>().FirstOrDefault().AcceptArg(weapon);
                     _panelManager.ClosePanel<CraftAndBuildingMenu>();
+                    _panelManager.ActiveOverlay(true);
+                    _panelManager.SudoGetPanel<MenuButtonsManager>().EnableButtons(false);
                 });
                 if (i == 1)
                 {

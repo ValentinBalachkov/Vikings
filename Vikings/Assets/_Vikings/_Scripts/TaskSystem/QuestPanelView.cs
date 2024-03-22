@@ -77,7 +77,6 @@ public class QuestPanelView : ViewBase
         {
             var storage = _storagesData.FirstOrDefault(x => x.ItemType.ID == taskData.reward[0].itemData.ID);
             storage.Count += taskData.reward[0].count;
-            _inventoryView.UpdateUI(storage.ItemType);
             TaskManager.taskChangeStatusCallback?.Invoke(taskData, TaskStatus.Done);
             CloseWindow();
         }));

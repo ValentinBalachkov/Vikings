@@ -11,6 +11,11 @@ namespace _Vikings._Scripts.Refactoring
         
         private GameObject _view;
         private ItemData _itemData;
+     
+        public override float GetStoppingDistance()
+        {
+            return _itemData.stoppingDistance;
+        }
 
         public override void CharacterAction(CharacterStateMachine characterStateMachine)
         {
@@ -20,22 +25,30 @@ namespace _Vikings._Scripts.Refactoring
         public override void Init()
         {
             SpawnModel();
-            SetAudioSetting();
+            SetAudioSetting(); 
         }
 
-        public override IItemData GetItemData()
+        public override ItemData GetItemData()
         {
             return _itemData;
         }
 
-        public override void SetItemData(IItemData itemData)
+        public override void SetItemData(ItemData itemData)
         {
-            _itemData = itemData as ItemData;
+            _itemData = itemData;
         }
 
         public override bool IsEnableToGet()
         {
-            return _view.activeSelf;
+            return !IsTarget;
+        }
+
+        public override void ResetState()
+        {
+            StopAllCoroutines();
+            EndAction = null;
+            IsTarget = false;
+            _view.SetActive(true);
         }
 
         private void SetAudioSetting()
@@ -59,12 +72,11 @@ namespace _Vikings._Scripts.Refactoring
             
             characterStateMachine.SetCollectAnimation();
 
-            while (actionCount < characterStateMachine.ActionCount || itemCount < _itemData.DropCount)
+            while (actionCount < characterStateMachine.ActionCount && itemCount < _itemData.DropCount)
             {
                 actionCount++;
                 itemCount += itemPerActionCount;
                 yield return new WaitForSeconds(1);
-                yield return null;
             }
 
             if (itemCount > _itemData.DropCount)
@@ -73,6 +85,8 @@ namespace _Vikings._Scripts.Refactoring
             }
             
             characterStateMachine.Inventory.SetItemToInventory(_itemData.ResourceType, itemCount);
+
+            EndAction?.Invoke();
             
             _view.SetActive(false);
             if (_audioSource != null)
@@ -82,6 +96,8 @@ namespace _Vikings._Scripts.Refactoring
             
             yield return new WaitForSeconds(_itemData.disableDelaySecond);
             _view.SetActive(true);
+            IsTarget = false;
+            ResourceEnable?.Invoke();
         }
     }
 }

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e136616cbf1273499bbb42e399abfa7, type: 3}
   m_Name: BuildingDataWoodStorage
   m_EditorClassIdentifier: 
+  priorityToAction: 1
   icon: {fileID: 21300000, guid: 9d17be8424e2177469bd61508a573bd5, type: 3}
   nameText: Wood storage
   description: Allows storing wood. Upgrade to increase the capacity
@@ -34,3 +35,4 @@ MonoBehaviour:
     count: 5
   taskData: {fileID: 11400000, guid: 12ecc8dd4fa750b43986741b2bab39d8, type: 2}
   priorityInMenu: 1
+  stoppingDistance: 2

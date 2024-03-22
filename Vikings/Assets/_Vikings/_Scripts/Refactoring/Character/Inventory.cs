@@ -30,6 +30,11 @@ namespace _Vikings.Refactoring.Character
             };
         }
 
+        public void Clear()
+        {
+            _itemCount = null;
+        }
+
         public ItemCount GetItemFromInventory()
         {
             if (_itemCount == null)

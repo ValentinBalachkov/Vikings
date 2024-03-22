@@ -16,6 +16,8 @@ namespace Vikings.Items
         public AudioMixerGroup _mixer;
 
         public int disableDelaySecond;
+
+        public float stoppingDistance;
         public int ID => _id;
 
         public string ItemName => _itemName;

@@ -1,18 +1,16 @@
+using System.Collections.Generic;
+using _Vikings._Scripts.Refactoring;
 using PanelManager.Scripts.Panels;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Vikings.Building;
+using Vikings.Object;
 
 public class CollectingResourceView : ViewBase
 {
     public override PanelType PanelType => PanelType.Screen;
     public override bool RememberInHistory => false;
-    
-    public static CollectingResourceView Instance => _instance;
-    private static CollectingResourceView _instance;
 
-    public Camera camera;
     [SerializeField] private TMP_Text _name;
     [SerializeField] private Image _woodBar;
     [SerializeField] private Image _rockBar;
@@ -20,43 +18,57 @@ public class CollectingResourceView : ViewBase
     [SerializeField] private TMP_Text _woodCount;
     [SerializeField] private TMP_Text _rockCount;
     [SerializeField] private RectTransform _rectTransform;
-    
 
-    private void Awake()
+    private Camera _camera;
+    private Dictionary<ResourceType, int> _priceForUpgrade = new();
+
+    protected override void OnInitialize()
     {
-        if (_instance == null)
-        {
-            _instance = this;
-        }
-        gameObject.SetActive(false);
+        base.OnInitialize();
+        _camera = Camera.main;
+        Clear();
     }
 
-    public void Setup(string nameBuilding, ItemCount[] current, ItemCount[] all, Transform pos)
+    public void Setup(AbstractBuilding abstractBuilding)
     {
-        _woodCount.text = $"{current[0].count}/{all[0].count}";
-        _rockCount.text = $"{current[1].count}/{all[1].count}";
-        _woodBar.fillAmount = (float)current[0].count / (float)all[0].count;
-        _rockBar.fillAmount = (float)current[1].count / (float)all[1].count;
-        _name.text = nameBuilding;
-        _rectTransform.position = camera.WorldToScreenPoint(new Vector3(pos.position.x + 0.5f, pos.position.y, pos.position.z - 4f));
+        _priceForUpgrade = abstractBuilding.GetPriceForUpgrade();
+        var pos = abstractBuilding.GetPosition();
+        var current = abstractBuilding.currentItems;
+
+        _woodCount.text = $"{current[ResourceType.Wood]}/{_priceForUpgrade[ResourceType.Wood]}";
+        _rockCount.text = $"{current[ResourceType.Rock]}/{_priceForUpgrade[ResourceType.Rock]}";
+
+        _woodBar.fillAmount = (float)current[ResourceType.Wood] / (float)_priceForUpgrade[ResourceType.Wood];
+        _rockBar.fillAmount = (float)current[ResourceType.Rock] / (float)_priceForUpgrade[ResourceType.Rock];
+        _name.text = abstractBuilding.GetData().nameText;
+        _rectTransform.position =
+            _camera.WorldToScreenPoint(new Vector3(pos.position.x + 0.5f, pos.position.y, pos.position.z - 4f));
         gameObject.SetActive(true);
     }
-    
-    public void Setup(string nameBuilding)
+
+    public void ChangeHeader(string header)
+    {
+        _name.text = header;
+    }
+
+
+    public void Clear()
     {
         _woodCount.text = $"";
         _rockCount.text = $"";
-        _woodBar.fillAmount =0;
+        _woodBar.fillAmount = 0;
         _rockBar.fillAmount = 0;
-        _name.text = nameBuilding;
-        gameObject.SetActive(true);
+        gameObject.SetActive(false);
     }
 
-    public void UpdateView(ItemCount[] current, ItemCount[] all)
+    public void UpdateView(Dictionary<ResourceType, int> currentItems, Dictionary<ResourceType, int> priceForUpgrade)
     {
-        _woodCount.text = $"{current[0].count}/{all[0].count}";
-        _rockCount.text = $"{current[1].count}/{all[1].count}";
-        _woodBar.fillAmount = (float)current[0].count / (float)all[0].count;
-        _rockBar.fillAmount = (float)current[1].count / (float)all[1].count;
+        _woodCount.text = $"{currentItems[ResourceType.Wood]}/{priceForUpgrade[ResourceType.Wood]}";
+        _rockCount.text = $"{currentItems[ResourceType.Rock]}/{priceForUpgrade[ResourceType.Rock]}";
+
+        _woodBar.fillAmount = (float)currentItems[ResourceType.Wood] /
+                              (float)priceForUpgrade[ResourceType.Wood];
+        _rockBar.fillAmount = (float)currentItems[ResourceType.Rock] /
+                              (float)priceForUpgrade[ResourceType.Rock];
     }
 }

@@ -1,17 +1,23 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using _Vikings._Scripts.Refactoring;
+using _Vikings.Refactoring.Character;
+using PanelManager.Scripts.Interfaces;
 using UniRx;
+using UnityEngine;
 
 namespace Vikings.Object
 {
-    public abstract class AbstractBuilding : AbstractObject
+    public abstract class AbstractBuilding : AbstractObject, IAcceptArg<MainPanelManager>
     {
         public ReactiveProperty<int> CurrentLevel = new();
 
-        protected Action<int, ResourceType> ChangeCount;
+        public Action<int, ResourceType> ChangeCount;
 
-        protected Dictionary<ResourceType, int> currentItems = new();
+        public Action<AbstractBuilding> BuildingComplete;
+
+        public Dictionary<ResourceType, int> currentItems = new();
         public abstract void Upgrade();
 
         public AbstractBuildingDynamicData abstractBuildingDynamicData;
@@ -30,8 +36,32 @@ namespace Vikings.Object
         public abstract (bool, string) IsEnableToBuild<T>(T arg);
         public abstract BuildingData GetData();
         
-        protected BuildingState buildingState;
-       
+        public BuildingState buildingState;
+
+        protected MainPanelManager panelManager;
+
+        protected bool isCraftActivated;
+        
+        [SerializeField] protected ParticleSystem particleCraftEffect;
+
+
+        public virtual void AcceptArg(MainPanelManager arg)
+        {
+            panelManager = arg;
+        }
+        
+        protected IEnumerator UpgradeDelay(CharacterStateMachine characterStateMachine, float buildingTime)
+        {
+            isCraftActivated = true;
+            particleCraftEffect.gameObject.SetActive(true);
+            particleCraftEffect.Play();
+            yield return new WaitForSeconds(buildingTime);
+            particleCraftEffect.Stop();
+            particleCraftEffect.gameObject.SetActive(false);
+            Upgrade();
+            panelManager.SudoGetPanel<MenuButtonsManager>().EnableButtons(true);
+            EndAction?.Invoke();
+        }
     }
     
 
@@ -39,6 +69,7 @@ namespace Vikings.Object
     {
         NotSet = 0,
         InProgress = 1,
-        Ready = 2
+        Ready = 2,
+        Crafting = 3
     }
 }
