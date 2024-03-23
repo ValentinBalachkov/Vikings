@@ -28,14 +28,14 @@ namespace _Vikings._Scripts.Refactoring
         [SerializeField] private GameObject _buildingSpriteObject;
 
         protected StorageDynamicData _storageDynamicData;
+        protected InventoryView _inventoryView;
 
         private BuildingView _buildingView;
 
         private BuildingData _storageData;
 
         private CollectingResourceView _collectingResourceView;
-        private InventoryView _inventoryView;
-        
+
 
         public override float GetStoppingDistance()
         {
@@ -61,11 +61,25 @@ namespace _Vikings._Scripts.Refactoring
             
             if (characterStateMachine.Inventory.CheckItemCount() == 0)
             {
-                ItemCount item = new ItemCount
+                ItemCount item;
+                
+                if (Count >= characterStateMachine.BackpackCount)
                 {
-                    resourceType = ResourceType,
-                    count = 1
-                };
+                    item = new ItemCount
+                    {
+                        resourceType = ResourceType,
+                        count = characterStateMachine.BackpackCount
+                    };
+                }
+                else
+                {
+                    item = new ItemCount
+                    {
+                        resourceType = ResourceType,
+                        count = Count
+                    };
+                }
+                 
                 characterStateMachine.Inventory.SetItemToInventory(item.resourceType, item.count);
                 ChangeCount?.Invoke(-item.count, item.resourceType);
                 CharactersCount--;
@@ -264,8 +278,8 @@ namespace _Vikings._Scripts.Refactoring
         {
             if (buildingState != BuildingState.Crafting)
             {
-                characterStateMachine.SetCollectAnimation();
-                yield return new WaitForSeconds(0.7f);
+                characterStateMachine.SetCollectAnimation(null);
+                yield return new WaitForSeconds(0.5f);
                 EndAction?.Invoke();
             }
         }
@@ -282,6 +296,10 @@ namespace _Vikings._Scripts.Refactoring
             if (_storageDynamicData.Count + value > _storageDynamicData.MaxStorageCount)
             {
                 _storageDynamicData.Count = _storageDynamicData.MaxStorageCount;
+            }
+            else if (_storageDynamicData.Count + value < 0)
+            {
+                _storageDynamicData.Count = 0;
             }
             else
             {

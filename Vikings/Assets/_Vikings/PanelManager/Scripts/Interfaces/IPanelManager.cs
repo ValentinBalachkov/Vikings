@@ -13,8 +13,6 @@ namespace PanelManager.Scripts.Interfaces
         
         public void OpenPanel(IView view);
 
-        public void ActiveOverlay(bool isActive);
-
         void OpenPanel<TM, TY>(TY arg) where TM : ViewBase, IAcceptArg<TY>;
 
         void ClosePanel<TM>() where TM : ViewBase;

@@ -18,14 +18,14 @@ public class MenuButtonsManager : ViewBase
         
         _craftButton.OnClickAsObservable().Subscribe(_ =>
         {
-            _panelManager.ActiveOverlay(false);
+            _panelManager.ClosePanel<MenuButtonsManager>();
             _panelManager.OpenPanel<CraftAndBuildingMenu>();
             
         }).AddTo(_panelManager.Disposable);
         
         _upgradeButton.OnClickAsObservable().Subscribe(_ =>
         {
-            _panelManager.ActiveOverlay(false);
+            _panelManager.ClosePanel<MenuButtonsManager>();
             _panelManager.OpenPanel<UpgradeCharacterMenu>();
         }).AddTo(_panelManager.Disposable);
     }

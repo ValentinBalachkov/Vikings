@@ -8,7 +8,6 @@ namespace _Vikings._Scripts.Refactoring
 {
     public class CharacterManager : ISave
     {
-        public int ActionCount => _charactersConfig.actionCount;
         public int SpeedMoveLevel => _characterDynamicData.speedMoveLevel;
         public int SpeedWorkLevel => _characterDynamicData.speedWorkLevel;
 

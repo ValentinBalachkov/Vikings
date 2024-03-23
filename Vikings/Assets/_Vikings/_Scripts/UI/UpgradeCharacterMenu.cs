@@ -1,13 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using _Vikings._Scripts.Refactoring;
+using PanelManager.Scripts.Interfaces;
 using PanelManager.Scripts.Panels;
+using UniRx;
 using UnityEngine;
-using Vikings.Building;
-using Vikings.Chanacter;
+using UnityEngine.UI;
 
 namespace Vikings.UI
 {
-    public class UpgradeCharacterMenu : ViewBase
+    public class UpgradeCharacterMenu : ViewBase, IAcceptArgTwo<CharacterManager, EatStorage>
     {
         public override PanelType PanelType => PanelType.Screen;
         public override bool RememberInHistory => false;
@@ -15,40 +17,51 @@ namespace Vikings.UI
         [SerializeField] private CharacterMenuElement _characterMenuElement;
         [SerializeField] private CharacterUpgradeUIData[] _characterUpgradeUIData;
         [SerializeField] private Transform _content;
-        [SerializeField] private CharactersConfig _charactersConfig;
-        [SerializeField] private StorageData _storageData;
         [SerializeField] private AudioSource _audioSourceBtnClick;
-
-        //[SerializeField] private CharactersOnMap _charactersOnMap;
-      //  [SerializeField] private BuildingsOnMap _buildingsOnMap;
-        [SerializeField] private InventoryView _inventoryView;
-
+        [SerializeField] private Button _closeButton;
+        
+      
         private List<CharacterMenuElement> _characterMenuElements = new();
+        private CharacterManager _characterManager;
+        private EatStorage _eatStorage;
+
+        public void AcceptArg(CharacterManager arg, EatStorage arg2)
+        {
+            _characterManager = arg;
+            _eatStorage = arg2;
+            
+            _eatStorage.ChangeCount += OnUpdateCount;
+            Spawn();
+
+            _closeButton.OnClickAsObservable().Subscribe(_ =>
+            {
+                _panelManager.OpenPanel<MenuButtonsManager>();
+                gameObject.SetActive(false);
+            }).AddTo(_panelManager.Disposable);
+        }
 
         protected override void OnInitialize()
         {
             base.OnInitialize();
-            Spawn();
+        }
+
+        private void OnUpdateCount(int value, ResourceType type)
+        {
+            if (type == _eatStorage.ResourceType)
+            {
+                UpdateUI();
+            }
         }
 
         protected override void OnOpened()
         {
             base.OnOpened();
-            _storageData.OnUpdateCount += () =>
-            {
-                foreach (var item in _characterMenuElements)
-                {
-                    UpdateUI();
-                }
-            };
-            
             UpdateUI();
         }
 
         protected override void OnClosed()
         {
             base.OnClosed();
-            _storageData.OnUpdateCount = null;
         }
 
         private void Spawn()
@@ -60,22 +73,22 @@ namespace Vikings.UI
                 var index = i;
                 element.AddBtnListener(() =>
                 {
-                    _audioSourceBtnClick.Play();
+                   // _audioSourceBtnClick.Play();
                     UpdateItemsCount(_characterUpgradeUIData[index].upgradeCharacterEnum);
-                        //_charactersConfig.Upgrade(_characterUpgradeUIData[index].upgradeCharacterEnum); 
+                    _characterManager.Upgrade(_characterUpgradeUIData[index].upgradeCharacterEnum); 
                     UpdateUI();
                 });
                 _characterMenuElements.Add(element);
                 switch (_characterUpgradeUIData[i].upgradeCharacterEnum)
                 {
                     case UpgradeCharacterEnum.SpeedMove:
-                       // element.UpdateUI(_charactersConfig.speedMoveLevel, _charactersConfig.SpeedMoveCost, _storageData.Count >= _charactersConfig.SpeedMoveCost);
+                        element.UpdateUI(_characterManager.SpeedMoveLevel, _characterManager.SpeedMoveCost, _eatStorage.Count >= _characterManager.SpeedMoveCost);
                         break;
                     case UpgradeCharacterEnum.ItemsCount:
-                       // element.UpdateUI(_charactersConfig.itemsCountLevel, _charactersConfig.ItemsCountCost, _storageData.Count >= _charactersConfig.ItemsCountCost);
+                        element.UpdateUI(_characterManager.ItemsCountLevel, _characterManager.ItemsCountCost, _eatStorage.Count >= _characterManager.ItemsCountCost);
                         break;
                     case UpgradeCharacterEnum.SpeedWork:
-                       // element.UpdateUI(_charactersConfig.speedWorkLevel, _charactersConfig.SpeedWorkCost, _storageData.Count >= _charactersConfig.SpeedWorkCost);
+                        element.UpdateUI(_characterManager.SpeedWorkLevel, _characterManager.SpeedWorkCost, _eatStorage.Count >= _characterManager.SpeedWorkCost);
                         break;
                 }
             }
@@ -87,33 +100,23 @@ namespace Vikings.UI
             switch (item.upgradeCharacterEnum)
             {
                 case UpgradeCharacterEnum.SpeedMove:
-                  //  _storageData.Count -= _charactersConfig.SpeedMoveCost;
+                    _eatStorage.SudoChangeCount(-_characterManager.SpeedMoveCost);
                     break;
                 case UpgradeCharacterEnum.ItemsCount:
-                  //  _storageData.Count -= _charactersConfig.ItemsCountCost;
+                    _eatStorage.SudoChangeCount(-_characterManager.ItemsCountCost);
                     break;
                 case UpgradeCharacterEnum.SpeedWork:
-                    //_storageData.Count -= _charactersConfig.SpeedWorkCost;
+                    _eatStorage.SudoChangeCount(-_characterManager.SpeedWorkCost);
                     break;
             }
-
-            // foreach (var character in _charactersOnMap.CharactersList)
-            // {
-            //     // if (character.CurrentState is IdleState)
-            //     // {
-            //     //     //_buildingsOnMap.UpdateCurrentBuilding(character);
-            //     // }
-            // }
         }
 
         private void UpdateUI()
         {
-           // _characterMenuElements[0].UpdateUI(_charactersConfig.speedMoveLevel, _charactersConfig.SpeedMoveCost, _storageData.Count >= _charactersConfig.SpeedMoveCost);
-           // _characterMenuElements[1].UpdateUI(_charactersConfig.speedWorkLevel, _charactersConfig.SpeedWorkCost, _storageData.Count >= _charactersConfig.SpeedWorkCost);
-           // _characterMenuElements[2].UpdateUI(_charactersConfig.itemsCountLevel, _charactersConfig.ItemsCountCost, _storageData.Count >= _charactersConfig.ItemsCountCost);
+           _characterMenuElements[0].UpdateUI(_characterManager.SpeedMoveLevel, _characterManager.SpeedMoveCost, _eatStorage.Count >= _characterManager.SpeedMoveCost);
+           _characterMenuElements[1].UpdateUI(_characterManager.SpeedWorkLevel, _characterManager.SpeedWorkCost, _eatStorage.Count >= _characterManager.SpeedWorkCost);
+           _characterMenuElements[2].UpdateUI(_characterManager.ItemsCountLevel, _characterManager.ItemsCountCost, _eatStorage.Count >= _characterManager.ItemsCountCost);
         }
-
-        
     }
 
 }

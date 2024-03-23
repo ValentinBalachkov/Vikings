@@ -8,6 +8,7 @@ namespace Vikings.Chanacter
     public class PlayerController : MonoBehaviour
     {
         public PlayerAnimationController PlayerAnimationController => _playerAnimationController;
+        public PlayerAnimationEvent PlayerAnimationEvent;
         public Action OnGetPosition;
 
         [SerializeField] private float _rotateSpeed = 10;

@@ -5400,8 +5400,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 829597bb4c8275a46851100e417ba06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerAnimationEvent: {fileID: 1272590685302702503}
   _rotateSpeed: 10
-  _charactersConfig: {fileID: 11400000, guid: 556d7956795907442b7227389da83726, type: 2}
   _playerAnimationController: {fileID: 3809436261508426468}
 --- !u!1 &6544465501000079939
 GameObject:

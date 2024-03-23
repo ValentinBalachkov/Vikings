@@ -55,7 +55,9 @@ namespace Vikings.Object
             isCraftActivated = true;
             particleCraftEffect.gameObject.SetActive(true);
             particleCraftEffect.Play();
-            yield return new WaitForSeconds(buildingTime);
+            var time = buildingTime * characterStateMachine.SpeedWork;
+            panelManager.SudoGetPanel<CraftingIndicatorView>().Setup((int)time, GetPosition());
+            yield return new WaitForSeconds(time);
             particleCraftEffect.Stop();
             particleCraftEffect.gameObject.SetActive(false);
             Upgrade();

@@ -60,10 +60,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7d753b11e68e6e446a7576886c291270, type: 2}
   - {fileID: 11400000, guid: 00241dfad77d47541aa0b0ff752ca208, type: 2}
   _content: {fileID: 2164381557728583736}
-  _charactersConfig: {fileID: 11400000, guid: 556d7956795907442b7227389da83726, type: 2}
-  _storageData: {fileID: 11400000, guid: ab86375ca92522e4b95c5c49e713b9be, type: 2}
   _audioSourceBtnClick: {fileID: 0}
-  _inventoryView: {fileID: 0}
+  _closeButton: {fileID: 8313923274498406106}
 --- !u!1 &1124706281336148433
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,31 +456,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5678193593771178992}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 38015102080323955}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &6582173039011250297
 GameObject:
   m_ObjectHideFlags: 0

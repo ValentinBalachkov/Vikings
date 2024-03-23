@@ -107,8 +107,8 @@ namespace Vikings.Building
         {
             if (buildingState != BuildingState.Crafting)
             {
-                characterStateMachine.SetCollectAnimation();
-                yield return new WaitForSeconds(0.7f);
+                characterStateMachine.SetCollectAnimation(null);
+                yield return new WaitForSeconds(0.5f);
                 EndAction?.Invoke();
             }
         }
@@ -247,12 +247,14 @@ namespace Vikings.Building
             }
         }
 
-        protected IEnumerator UpgradeWeaponDelay(CharacterStateMachine characterStateMachine, float buildingTime)
+        private IEnumerator UpgradeWeaponDelay(CharacterStateMachine characterStateMachine, float buildingTime)
         {
             isCraftActivated = true;
             particleCraftEffect.gameObject.SetActive(true);
             particleCraftEffect.Play();
-            yield return new WaitForSeconds(buildingTime);
+            var time = buildingTime * characterStateMachine.SpeedWork;
+            panelManager.SudoGetPanel<CraftingIndicatorView>().Setup((int)time, GetPosition());
+            yield return new WaitForSeconds(time);
             particleCraftEffect.Stop();
             particleCraftEffect.gameObject.SetActive(false);
             _currentWeapon.Level.Value++;

@@ -4,4 +4,9 @@
     {
         void AcceptArg(T arg);
     }
+    
+    public interface IAcceptArgTwo<in TM, in TN>
+    {
+        void AcceptArg(TM arg1, TN arg2);
+    }
 }

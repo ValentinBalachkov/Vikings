@@ -12,7 +12,9 @@ namespace _Vikings.Refactoring.Character
         public bool IsIdle;
 
         public Action<CharacterStateMachine> OnCharacterAction;
-        public int ActionCount => _characterManager.ActionCount;
+        public int BackpackCount => _characterManager.ItemsCount;
+
+        public float SpeedWork => _characterManager.SpeedWork;
         public Inventory Inventory => _inventory;
 
         private BaseCharacterState _currentState;
@@ -47,19 +49,31 @@ namespace _Vikings.Refactoring.Character
             _states.Add(_doMoveState);
         }
 
-        public void SetCollectAnimation()
+        public void SetCollectAnimation(AnimatorOverrideController animatorOverrideController)
         {
+            _playerController.PlayerAnimationEvent.DisableEffects();
+            _playerController.PlayerAnimationController.ReturnBaseAnimator();
+            
+            if (animatorOverrideController != null)
+            {
+                _playerController.PlayerAnimationController.ChangeAnimatorController(animatorOverrideController);
+            }
+            
             _playerController.SetCollectAnimation();
         }
 
         public void SetWorkAnimation()
         {
+            _playerController.PlayerAnimationEvent.DisableEffects();
+            _playerController.PlayerAnimationController.ReturnBaseAnimator();
             _playerController.SetCraftingAnimation();
         }
 
 
         public void SetIdleAnimation()
         {
+            _playerController.PlayerAnimationEvent.DisableEffects();
+            _playerController.PlayerAnimationController.ReturnBaseAnimator();
             _playerController.SetIdleAnimation();
         }
 
@@ -95,12 +109,7 @@ namespace _Vikings.Refactoring.Character
 
             if (_actionsQueue.TryDequeue(out actionData))
             {
-                IsIdle = actionData.characterState is DoMoveState && actionData.abstractObject is BoneFire;
-
-                if (!IsIdle)
-                {
-                    _playerController.ResetIdleFlag();
-                }
+                IsIdle = actionData.abstractObject is BoneFire;
 
                 SetState(actionData.characterState, actionData.abstractObject);
                 return;

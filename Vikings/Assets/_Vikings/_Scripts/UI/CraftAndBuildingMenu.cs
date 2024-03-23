@@ -48,7 +48,7 @@ namespace Vikings.UI
             base.OnInitialize();
             _closeButton.OnClickAsObservable().Subscribe(_ =>
             {
-                _panelManager.ActiveOverlay(true);
+                _panelManager.OpenPanel<MenuButtonsManager>();
                 _panelManager.ClosePanel<CraftAndBuildingMenu>();
             }).AddTo(_panelManager.Disposable);
         }
@@ -72,7 +72,7 @@ namespace Vikings.UI
                     building.ChangeState(BuildingState.InProgress);
                     _charactersTaskManager.setBuildingToQueue.Execute(building);
                     _panelManager.ClosePanel<CraftAndBuildingMenu>();
-                    _panelManager.ActiveOverlay(true);
+                    _panelManager.OpenPanel<MenuButtonsManager>();
                     _panelManager.SudoGetPanel<MenuButtonsManager>().EnableButtons(false);
                 });
                 var cortege = building.IsEnableToBuild(_mapFactory.GetAllBuildings<CraftingTable>().FirstOrDefault());
@@ -99,7 +99,7 @@ namespace Vikings.UI
                 craftingTable.ChangeState(BuildingState.InProgress);
                 _charactersTaskManager.setBuildingToQueue.Execute(craftingTable);
                 _panelManager.ClosePanel<CraftAndBuildingMenu>();
-                _panelManager.ActiveOverlay(true);
+                _panelManager.OpenPanel<MenuButtonsManager>();
                 _panelManager.SudoGetPanel<MenuButtonsManager>().EnableButtons(false);
             });
             var arg = craftingTable.IsEnableToBuild(_weaponFactory.GetWeapon(_configSetting.weaponsData[1]));
@@ -123,7 +123,7 @@ namespace Vikings.UI
                         .FirstOrDefault());
                     _mapFactory.GetAllBuildings<CraftingTable>().FirstOrDefault().AcceptArg(weapon);
                     _panelManager.ClosePanel<CraftAndBuildingMenu>();
-                    _panelManager.ActiveOverlay(true);
+                    _panelManager.OpenPanel<MenuButtonsManager>();
                     _panelManager.SudoGetPanel<MenuButtonsManager>().EnableButtons(false);
                 });
                 if (i == 1)

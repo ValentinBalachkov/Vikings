@@ -72,21 +72,24 @@ namespace _Vikings._Scripts.Refactoring
 
         public void SetCharacterToStorage(Storage storage)
         {
+            DebugLogger.SendMessage("1", Color.green);
             if (_currentBuilding != null) return;
 
             var characters = _characterFactory.GetCharacters();
 
             foreach (var character in characters)
             {
-                var resource = GetNearedResource(storage.ResourceType, character);
+                var resource = GetNearedResource(storage.ResourceType, character, true);
                 if (resource == null)
                 {
+                    DebugLogger.SendMessage("2", Color.green);
                     SetCharacterToFire(character);
                     continue;
                 }
 
+                DebugLogger.SendMessage("3", Color.green);
                 character.SetBuildingToAction(storage,
-                    resource, SetCharacterToStorage, false);
+                    resource, SetCharacterToStorage);
             }
         }
 
@@ -156,11 +159,11 @@ namespace _Vikings._Scripts.Refactoring
                     continue;
                 }
 
-                int dropCount = 1;
+                int dropCount = character.BackpackCount;
 
-                if (resource as AbstractResource)
+                if (resource is AbstractResource abstractResource)
                 {
-                    var data = (resource as AbstractResource).GetItemData();
+                    var data = abstractResource.GetItemData();
                     dropCount = GetItemDropCount(character, data);
                 }
                 
@@ -187,7 +190,7 @@ namespace _Vikings._Scripts.Refactoring
             var storage = _mapFactory.GetAllBuildings<Storage>()
                 .FirstOrDefault(x => x.ResourceType == resourceType && x.CurrentLevel.Value > 0);
 
-            if (storage != null && !isStorage && storage.Count > 1 * storage.CharactersCount)
+            if (storage != null && !isStorage && storage.Count > characterStateMachine.BackpackCount * storage.CharactersCount)
             {
                 storage.CharactersCount++;
                 return storage;
@@ -223,7 +226,7 @@ namespace _Vikings._Scripts.Refactoring
                                                                                         .avaleableResources)
                                                                                 .Contains(x));
             int itemPerActionCount = characterStateMachine.Inventory.GetItemPerActionCount(itemData);
-            var count = characterStateMachine.ActionCount * itemPerActionCount;
+            var count = characterStateMachine.BackpackCount * itemPerActionCount;
             if (count > itemData.DropCount)
             {
                 count = itemData.DropCount;
@@ -235,7 +238,7 @@ namespace _Vikings._Scripts.Refactoring
         private int GetItemDropCount(CharacterStateMachine characterStateMachine, ItemData resource)
         {
             int itemPerActionCount = characterStateMachine.Inventory.GetItemPerActionCount(resource);
-            var count = characterStateMachine.ActionCount * itemPerActionCount;
+            var count = characterStateMachine.BackpackCount * itemPerActionCount;
             if (count > resource.DropCount)
             {
                 count = resource.DropCount;

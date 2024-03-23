@@ -1,4 +1,6 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
+using UniRx;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -16,10 +18,17 @@ namespace Vikings.UI
         [SerializeField] private TMP_Text _name;
         [SerializeField] private TMP_Text _description;
         [SerializeField] private Image _iconImage;
+
+        private CompositeDisposable _disposable = new();
         
         public void AddBtnListener(UnityAction action)
         {
-            _upgradeBtn.onClick.AddListener(action);
+            _upgradeBtn.OnClickAsObservable().Subscribe(unit => action?.Invoke()).AddTo(_disposable);
+        }
+
+        private void OnDestroy()
+        {
+            _disposable.Dispose();
         }
 
         public void Init(CharacterUpgradeUIData data)

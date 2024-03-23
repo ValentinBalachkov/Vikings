@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Vikings/Scene/BrightSceneNewMap.unity
-    guid: 353fff911b0c39548aad955c53a770b5
+    path: Assets/_Vikings/Scene/RefactoringScene.unity
+    guid: 40bd4dc5d811687489fb35da8a710fbd
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000,
       guid: a155b950a52161644af74a1a99a370d7, type: 2}

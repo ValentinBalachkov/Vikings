@@ -68,16 +68,16 @@ public class SaveLoadManager : MonoBehaviour
     {
         //_taskManager.SubscribeChangeStatusEvent();
         Application.targetFrameRate = 60;
-//        _versionText.text = $"v{Application.version}";
+        _versionText.text = $"v{Application.version}";
     }
 
-    private void OnApplicationPause(bool pauseStatus)
-    {
-        if (pauseStatus)
-        {
-            SaveAll();
-        }
-    }
+    // private void OnApplicationPause(bool pauseStatus)
+    // {
+    //     if (pauseStatus)
+    //     {
+    //         SaveAll();
+    //     }
+    // }
 
     private void OnApplicationFocus(bool hasFocus)
     {
@@ -86,8 +86,9 @@ public class SaveLoadManager : MonoBehaviour
         }
         else
         {
-            // _dateTimeData.currentDateTime = DateTime.Now.ToString();
-            // _dateTimeData.Save();
+            _dateTimeData.currentDateTime = DateTime.Now.ToString();
+            _dateTimeData.Save();
+            SaveAll();
         }
     }
 

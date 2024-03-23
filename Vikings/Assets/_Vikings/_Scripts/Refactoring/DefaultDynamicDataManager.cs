@@ -8,6 +8,7 @@ using Vikings.Chanacter;
 using Vikings.Object;
 using Vikings.SaveSystem;
 
+#if UNITY_EDITOR
 public class DefaultDynamicDataManager : EditorWindow
 {
     public ConfigSetting _configSetting;
@@ -209,6 +210,8 @@ public class DefaultDynamicDataManager : EditorWindow
         }
     }
 }
+#endif
+
 
 [Serializable]
 public class DefaultStorageData

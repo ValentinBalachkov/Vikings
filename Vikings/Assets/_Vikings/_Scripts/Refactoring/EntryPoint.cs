@@ -19,6 +19,7 @@ namespace _Vikings._Scripts.Refactoring
         private CharacterFactory _characterFactory;
         private WeaponFactory _weaponFactory;
         private ConfigSetting _configSetting;
+        private EatStorage _eatStorage;
         
         [Inject]
         public void Init(MainPanelManager mainPanelManager, MapFactory mapFactory, CharacterFactory characterFactory, WeaponFactory weaponFactory, ConfigSetting configSetting)
@@ -41,8 +42,8 @@ namespace _Vikings._Scripts.Refactoring
 
         private void InitBuildings()
         {
-            var eatStorage = _mapFactory.GetAllBuildings<EatStorage>().FirstOrDefault();
-            _buildingHomeAction.Init(eatStorage);
+            _eatStorage = _mapFactory.GetAllBuildings<EatStorage>().FirstOrDefault();
+            _buildingHomeAction.Init(_eatStorage);
              
             var storages = _mapFactory.GetAllBuildings<Storage>();
              
@@ -57,7 +58,7 @@ namespace _Vikings._Scripts.Refactoring
                 storage.AcceptArg(_mainPanelManager);
             } 
             
-            InitCharacters(eatStorage.CurrentLevel.Value + 1);
+            InitCharacters(_eatStorage.CurrentLevel.Value + 1);
         }
 
         private void InitCharacters(int count)
@@ -70,6 +71,8 @@ namespace _Vikings._Scripts.Refactoring
             {
                 _charactersTaskManager.SetCharacterToStorage(character);
             }
+            
+            _mainPanelManager.SudoGetPanel<UpgradeCharacterMenu>().AcceptArg(_characterFactory.CharacterManager, _eatStorage);
         }
 
         private void InitPanelManager()

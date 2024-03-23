@@ -30,6 +30,7 @@ public class PlayerAnimationController : MonoBehaviour
         _animator.SetBool("Work", false);
         _animator.SetBool("Collect", false);
         _animator.SetFloat("Move", 1);
+        DebugLogger.SendMessage("Run", Color.cyan);
     }
 
     public void Idle()
@@ -37,6 +38,7 @@ public class PlayerAnimationController : MonoBehaviour
         _animator.SetBool("Work", false);
         _animator.SetBool("Collect", false);
         _animator.SetFloat("Move", 0);
+        DebugLogger.SendMessage("idle", Color.cyan);
     }
 
     public void Collect()
@@ -44,6 +46,7 @@ public class PlayerAnimationController : MonoBehaviour
         _animator.SetBool("Work", false);
         _animator.SetBool("Collect", true);
         _animator.SetFloat("Move", 0);
+        DebugLogger.SendMessage("Collect", Color.cyan);
     }
 
     public void Work()
@@ -51,6 +54,7 @@ public class PlayerAnimationController : MonoBehaviour
         _animator.SetBool("Work", true);
         _animator.SetBool("Collect", false);
         _animator.SetFloat("Move", 0);
+        DebugLogger.SendMessage("Work", Color.cyan);
     }
 
    

@@ -9,6 +9,7 @@ namespace _Vikings._Scripts.Refactoring
 {
     public class CharacterFactory : MonoInstaller
     {
+        public CharacterManager CharacterManager => _characterManager;
         public ReactiveCommand addCharacter = new();
         
         [SerializeField] private Transform _spawnPoint;
