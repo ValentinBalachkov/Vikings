@@ -59,6 +59,37 @@ namespace _Vikings._Scripts.Refactoring
                 return;
             }
             
+            if (characterStateMachine.Inventory.CheckItemCount() == 0)
+            {
+                ItemCount item;
+                
+                if (Count >= characterStateMachine.BackpackCount)
+                {
+                    item = new ItemCount
+                    {
+                        resourceType = ResourceType,
+                        count = characterStateMachine.BackpackCount
+                    };
+                }
+                else
+                {
+                    item = new ItemCount
+                    {
+                        resourceType = ResourceType,
+                        count = Count
+                    };
+                }
+                 
+                characterStateMachine.Inventory.SetItemToInventory(item.resourceType, item.count);
+                ChangeCount?.Invoke(-item.count, item.resourceType);
+                CharactersCount--;
+            }
+            else
+            {
+                var item = characterStateMachine.Inventory.GetItemFromInventory();
+                ChangeCount?.Invoke(item.count, item.resourceType);
+            }
+            
             
 
             DelayActionCoroutine(characterStateMachine);
@@ -251,37 +282,6 @@ namespace _Vikings._Scripts.Refactoring
             {
                 characterStateMachine.SetCollectAnimation(null, () =>
                 {
-                    if (characterStateMachine.Inventory.CheckItemCount() == 0)
-                    {
-                        ItemCount item;
-                
-                        if (Count >= characterStateMachine.BackpackCount)
-                        {
-                            item = new ItemCount
-                            {
-                                resourceType = ResourceType,
-                                count = characterStateMachine.BackpackCount
-                            };
-                        }
-                        else
-                        {
-                            item = new ItemCount
-                            {
-                                resourceType = ResourceType,
-                                count = Count
-                            };
-                        }
-                 
-                        characterStateMachine.Inventory.SetItemToInventory(item.resourceType, item.count);
-                        ChangeCount?.Invoke(-item.count, item.resourceType);
-                        CharactersCount--;
-                    }
-                    else
-                    {
-                        var item = characterStateMachine.Inventory.GetItemFromInventory();
-                        ChangeCount?.Invoke(item.count, item.resourceType);
-                    }
-                    
                     EndAction?.Invoke();
                 });
             }

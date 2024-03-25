@@ -97,6 +97,9 @@ namespace Vikings.Building
                 return;
             }
             
+            var item = characterStateMachine.Inventory.GetItemFromInventory();
+            ChangeCount?.Invoke(item.count, item.resourceType);
+            
             EndAnimationCharacter(characterStateMachine);
         }
 
@@ -106,16 +109,9 @@ namespace Vikings.Building
             {
                 characterStateMachine.SetCollectAnimation(null, () =>
                 {
-                    var item = characterStateMachine.Inventory.GetItemFromInventory();
-                    ChangeCount?.Invoke(item.count, item.resourceType);
-                    
                     EndAction?.Invoke();
                 });
-                return;
             }
-            
-            var item = characterStateMachine.Inventory.GetItemFromInventory();
-            ChangeCount?.Invoke(item.count, item.resourceType);
         }
 
         public override void Upgrade()
@@ -212,13 +208,13 @@ namespace Vikings.Building
                     _buildingView.gameObject.SetActive(false);
                     break;
                 case BuildingState.InProgress:
-                    ChangeSpriteObject(true);
+                    ChangeSpriteObject();
                     ChangeCount += OnCountChangeInProgressState;
                     ChangeCount -= OnCountChangeWeaponState;
                     _collectingResourceView.Setup(this);
                     break;
                 case BuildingState.Ready:
-                    ChangeSpriteObject(false);
+                    ChangeSpriteObject();
                     ChangeCount -= OnCountChangeInProgressState;
                     ChangeCount += OnCountChangeWeaponState;
                     break;
@@ -238,17 +234,17 @@ namespace Vikings.Building
             _collectingResourceView.UpdateView(_currentItemsWeapon, _currentWeapon.PriceToBuy);
         }
 
-        private void ChangeSpriteObject(bool isBuilding)
+        private void ChangeSpriteObject()
         {
-            if (CurrentLevel.Value > 0)
+            if (CurrentLevel.Value == 0 || _currentWeapon == null)
             {
-                _buildingSpriteObject.SetActive(isBuilding);
-                _buildingView.gameObject.SetActive(!isBuilding);
+                _buildingSpriteObject.SetActive(true);
+                _buildingView.gameObject.SetActive(false);
             }
             else
             {
-                _buildingSpriteObject.SetActive(!isBuilding);
-                _buildingView.gameObject.SetActive(isBuilding);
+                _buildingSpriteObject.SetActive(false);
+                _buildingView.gameObject.SetActive(true);
             }
         }
 

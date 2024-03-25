@@ -267,6 +267,7 @@ MonoBehaviour:
     SaveKey: 
   buildingState: 0
   particleCraftEffect: {fileID: 6750811392434912320}
+  CharactersCount: 0
   _buildingSpriteObject: {fileID: 7216879613359587854}
 --- !u!1 &2896521758792839751
 GameObject:
@@ -530,18 +531,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5459232567998229941, guid: 3d2b8ee5ac62b074da55e1019da33e20,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5459232567998229941, guid: 3d2b8ee5ac62b074da55e1019da33e20,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5459232567998229941, guid: 3d2b8ee5ac62b074da55e1019da33e20,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5459232567998229941, guid: 3d2b8ee5ac62b074da55e1019da33e20,
+        type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.44
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5459232567998229941, guid: 3d2b8ee5ac62b074da55e1019da33e20,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.14
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5459232567998229941, guid: 3d2b8ee5ac62b074da55e1019da33e20,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.92789173
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5459232567998229941, guid: 3d2b8ee5ac62b074da55e1019da33e20,
         type: 3}
@@ -577,6 +593,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5459232567998229941, guid: 3d2b8ee5ac62b074da55e1019da33e20,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9055730629940689881, guid: 3d2b8ee5ac62b074da55e1019da33e20,
         type: 3}

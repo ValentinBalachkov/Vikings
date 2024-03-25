@@ -94,6 +94,7 @@ namespace _Vikings.Refactoring.Character
         {
             OnCharacterAction = endAction;
             _actionsQueue.Clear();
+            Inventory.Clear();
             AddActionToQueue(abstractObject, _doMoveState);
             AddActionToQueue(abstractObject, _doActionState);
             OnNextAction();

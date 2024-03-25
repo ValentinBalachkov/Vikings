@@ -118,10 +118,10 @@ namespace Vikings.UI
                 item.UpdateUI(weapon);
                 item.AddOnClickListener(() =>
                 {
+                    _mapFactory.GetAllBuildings<CraftingTable>().FirstOrDefault().AcceptArg(weapon);
                     _mapFactory.GetAllBuildings<CraftingTable>().FirstOrDefault().ChangeState(BuildingState.Ready);
                     _charactersTaskManager.setBuildingToQueue.Execute(_mapFactory.GetAllBuildings<CraftingTable>()
                         .FirstOrDefault());
-                    _mapFactory.GetAllBuildings<CraftingTable>().FirstOrDefault().AcceptArg(weapon);
                     _panelManager.ClosePanel<CraftAndBuildingMenu>();
                     _panelManager.OpenPanel<MenuButtonsManager>();
                     _panelManager.SudoGetPanel<MenuButtonsManager>().EnableButtons(false);

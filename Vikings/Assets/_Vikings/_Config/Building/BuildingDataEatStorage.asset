@@ -35,4 +35,4 @@ MonoBehaviour:
     count: 10
   taskData: {fileID: 11400000, guid: 47321345684f25c4d8e4e1d2978056cf, type: 2}
   priorityInMenu: 6
-  stoppingDistance: 2
+  stoppingDistance: 1

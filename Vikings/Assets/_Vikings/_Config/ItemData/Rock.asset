@@ -17,7 +17,7 @@ MonoBehaviour:
   _actionSound: {fileID: 0}
   _mixer: {fileID: 0}
   disableDelaySecond: 5
-  stoppingDistance: 2
+  stoppingDistance: 1
   _id: 2
   _dropCount: 1
   _itemName: Rock
