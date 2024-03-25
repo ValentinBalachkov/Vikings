@@ -3,7 +3,6 @@ using _Vikings._Scripts.Refactoring;
 using PanelManager.Scripts.Panels;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using Vikings.Object;
 
 public class CollectingResourceView : ViewBase
@@ -12,8 +11,6 @@ public class CollectingResourceView : ViewBase
     public override bool RememberInHistory => false;
 
     [SerializeField] private TMP_Text _name;
-    [SerializeField] private Image _woodBar;
-    [SerializeField] private Image _rockBar;
 
     [SerializeField] private TMP_Text _woodCount;
     [SerializeField] private TMP_Text _rockCount;
@@ -37,9 +34,7 @@ public class CollectingResourceView : ViewBase
 
         _woodCount.text = $"{current[ResourceType.Wood]}/{_priceForUpgrade[ResourceType.Wood]}";
         _rockCount.text = $"{current[ResourceType.Rock]}/{_priceForUpgrade[ResourceType.Rock]}";
-
-        _woodBar.fillAmount = (float)current[ResourceType.Wood] / (float)_priceForUpgrade[ResourceType.Wood];
-        _rockBar.fillAmount = (float)current[ResourceType.Rock] / (float)_priceForUpgrade[ResourceType.Rock];
+        
         _name.text = abstractBuilding.GetData().nameText;
         _rectTransform.position =
             _camera.WorldToScreenPoint(new Vector3(pos.position.x + 0.5f, pos.position.y, pos.position.z - 4f));
@@ -56,8 +51,6 @@ public class CollectingResourceView : ViewBase
     {
         _woodCount.text = $"";
         _rockCount.text = $"";
-        _woodBar.fillAmount = 0;
-        _rockBar.fillAmount = 0;
         gameObject.SetActive(false);
     }
 
@@ -65,10 +58,5 @@ public class CollectingResourceView : ViewBase
     {
         _woodCount.text = $"{currentItems[ResourceType.Wood]}/{priceForUpgrade[ResourceType.Wood]}";
         _rockCount.text = $"{currentItems[ResourceType.Rock]}/{priceForUpgrade[ResourceType.Rock]}";
-
-        _woodBar.fillAmount = (float)currentItems[ResourceType.Wood] /
-                              (float)priceForUpgrade[ResourceType.Wood];
-        _rockBar.fillAmount = (float)currentItems[ResourceType.Rock] /
-                              (float)priceForUpgrade[ResourceType.Rock];
     }
 }

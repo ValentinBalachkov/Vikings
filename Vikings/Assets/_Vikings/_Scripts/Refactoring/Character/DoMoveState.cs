@@ -19,7 +19,6 @@ namespace _Vikings.Refactoring.Character
                 stateMachine.OnNextAction();
             });
             _playerController.MoveToPoint( abstractObject.GetPosition(), abstractObject.GetStoppingDistance());
-            _playerController.SetMoveAnimation();
         }
 
         public override void Exit()

@@ -49,7 +49,7 @@ namespace _Vikings.Refactoring.Character
             _states.Add(_doMoveState);
         }
 
-        public void SetCollectAnimation(AnimatorOverrideController animatorOverrideController)
+        public void SetCollectAnimation(AnimatorOverrideController animatorOverrideController, Action endAction)
         {
             _playerController.PlayerAnimationEvent.DisableEffects();
             _playerController.PlayerAnimationController.ReturnBaseAnimator();
@@ -58,14 +58,16 @@ namespace _Vikings.Refactoring.Character
             {
                 _playerController.PlayerAnimationController.ChangeAnimatorController(animatorOverrideController);
             }
-            
+
+            _playerController.OnEndAnimation = endAction;
             _playerController.SetCollectAnimation();
         }
 
-        public void SetWorkAnimation()
+        public void SetWorkAnimation(Action endAction)
         {
             _playerController.PlayerAnimationEvent.DisableEffects();
             _playerController.PlayerAnimationController.ReturnBaseAnimator();
+            _playerController.OnEndAnimation = endAction;
             _playerController.SetCraftingAnimation();
         }
 

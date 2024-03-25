@@ -19,6 +19,10 @@ namespace Vikings.UI
         [SerializeField] private TMP_Text _description;
         [SerializeField] private Image _iconImage;
 
+        [SerializeField] private Sprite _activeButtonSprite;
+        [SerializeField] private Sprite _defaultButtonSprite;
+        
+
         private CompositeDisposable _disposable = new();
         
         public void AddBtnListener(UnityAction action)
@@ -44,6 +48,7 @@ namespace Vikings.UI
             _levelText.text = $"lvl:{level}";
             _costText.text = cost.ToString();
             _upgradeBtn.interactable = isEnable;
+            _upgradeBtn.image.sprite = isEnable ? _activeButtonSprite : _defaultButtonSprite;
         }
         
         

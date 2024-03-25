@@ -24,7 +24,7 @@ public class PlayerAnimationController : MonoBehaviour
     {
         _animator.runtimeAnimatorController = _baseController;
     }
-
+    
     public void Run()
     {
         _animator.SetBool("Work", false);

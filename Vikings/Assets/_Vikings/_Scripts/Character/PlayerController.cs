@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using _Vikings._Scripts.Refactoring;
 using UnityEngine;
 using UnityEngine.AI;
@@ -7,6 +8,7 @@ namespace Vikings.Chanacter
 {
     public class PlayerController : MonoBehaviour
     {
+        public Action OnEndAnimation;
         public PlayerAnimationController PlayerAnimationController => _playerAnimationController;
         public PlayerAnimationEvent PlayerAnimationEvent;
         public Action OnGetPosition;
@@ -21,6 +23,7 @@ namespace Vikings.Chanacter
         private Vector3 _currentDestination;
         private CharacterManager _characterManager;
         private float _stoppingDistanceOffset = 0.5f;
+
 
         private void Awake()
         {
@@ -94,7 +97,10 @@ namespace Vikings.Chanacter
                 _navMeshAgent.speed = 0;
                 OnGetPosition?.Invoke();
                 _onPosition = true;
+                return;
             }
+
+            SetMoveAnimation();
         }
 
         public void ResetDestinationForLook(Transform newDestination)
@@ -126,11 +132,20 @@ namespace Vikings.Chanacter
         public void SetCollectAnimation()
         {
             _playerAnimationController.Collect();
+            StartCoroutine(AwaitAnimationCoroutine(0.5f));
         }
 
         public void SetCraftingAnimation()
         {
             _playerAnimationController.Work();
+            StartCoroutine(AwaitAnimationCoroutine(2f));
+        }
+        
+        private IEnumerator AwaitAnimationCoroutine(float time)
+        {
+            yield return new WaitForSeconds(time);
+            OnEndAnimation?.Invoke();
+            OnEndAnimation = null;
         }
         
     }

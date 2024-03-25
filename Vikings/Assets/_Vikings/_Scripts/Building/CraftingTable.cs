@@ -82,7 +82,7 @@ namespace Vikings.Building
         {
             if (buildingState == BuildingState.Crafting)
             {
-                characterStateMachine.SetWorkAnimation();
+                characterStateMachine.SetWorkAnimation(null);
                 if (!isCraftActivated)
                 {
                     if (_currentWeapon == null)
@@ -97,20 +97,25 @@ namespace Vikings.Building
                 return;
             }
             
-            var item = characterStateMachine.Inventory.GetItemFromInventory();
-            ChangeCount?.Invoke(item.count, item.resourceType);
-            
-            StartCoroutine(DelayActionCoroutine(characterStateMachine));
+            EndAnimationCharacter(characterStateMachine);
         }
 
-        private IEnumerator DelayActionCoroutine(CharacterStateMachine characterStateMachine)
+        private void EndAnimationCharacter(CharacterStateMachine characterStateMachine)
         {
             if (buildingState != BuildingState.Crafting)
             {
-                characterStateMachine.SetCollectAnimation(null);
-                yield return new WaitForSeconds(0.5f);
-                EndAction?.Invoke();
+                characterStateMachine.SetCollectAnimation(null, () =>
+                {
+                    var item = characterStateMachine.Inventory.GetItemFromInventory();
+                    ChangeCount?.Invoke(item.count, item.resourceType);
+                    
+                    EndAction?.Invoke();
+                });
+                return;
             }
+            
+            var item = characterStateMachine.Inventory.GetItemFromInventory();
+            ChangeCount?.Invoke(item.count, item.resourceType);
         }
 
         public override void Upgrade()

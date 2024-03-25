@@ -71,14 +71,6 @@ public class SaveLoadManager : MonoBehaviour
         _versionText.text = $"v{Application.version}";
     }
 
-    // private void OnApplicationPause(bool pauseStatus)
-    // {
-    //     if (pauseStatus)
-    //     {
-    //         SaveAll();
-    //     }
-    // }
-
     private void OnApplicationFocus(bool hasFocus)
     {
         if (hasFocus)
@@ -86,9 +78,9 @@ public class SaveLoadManager : MonoBehaviour
         }
         else
         {
-            _dateTimeData.currentDateTime = DateTime.Now.ToString();
-            _dateTimeData.Save();
-            SaveAll();
+            // _dateTimeData.currentDateTime = DateTime.Now.ToString();
+            // _dateTimeData.Save();
+            // SaveAll();
         }
     }
 

@@ -70,7 +70,7 @@ namespace _Vikings._Scripts.Refactoring
 
             int itemPerActionCount = characterStateMachine.Inventory.GetItemPerActionCount(_itemData);
             
-            characterStateMachine.SetCollectAnimation(_itemData.AnimatorOverride);
+            characterStateMachine.SetCollectAnimation(_itemData.AnimatorOverride, null);
 
             while (actionCount < characterStateMachine.BackpackCount && itemCount < _itemData.DropCount)
             {
