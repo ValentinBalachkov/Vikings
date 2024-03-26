@@ -1,42 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using _Vikings._Scripts.Refactoring;
 using UnityEngine;
 
 public class TaskManager : MonoBehaviour
 {
     public static Action<TaskData, TaskStatus> taskChangeStatusCallback;
-
-    [SerializeField] private TaskData[] _tasksData;
-    [SerializeField] private TrayView _trayView;
-
-    private List<TaskData> _taskQueue = new();
     
+    private TrayView _trayView;
+    private List<TaskData> _taskQueue = new();
+    private ConfigSetting _configSetting;
 
-    private void Start()
+
+    public void Init(MainPanelManager panelManager, ConfigSetting configSetting)
     {
-        var tasks = _tasksData.Where(x => x.taskStatus != TaskStatus.Done && x.taskStatus != TaskStatus.NotAdded).OrderBy(x => x.taskStatus).ToList();
+        _configSetting = configSetting;
         
+        _trayView = panelManager.SudoGetPanel<TrayView>();
+        panelManager.OpenPanel<TrayView>();
         
-        foreach (var task in _tasksData)
+        SubscribeChangeStatusEvent();
+
+        var tasks = _configSetting.tasksData.Where(x => x.TaskStatus != TaskStatus.Done && x.TaskStatus != TaskStatus.NotAdded)
+            .OrderBy(x => x.TaskStatus).ToList();
+
+
+        foreach (var task in _configSetting.tasksData)
         {
             task.taskDoneCallback += SetSuccessStatus;
         }
 
-        for (int i = 0; i < tasks.Count; i++)
+        foreach (var data in tasks)
         {
-            AddTaskToQueue(tasks[i]);
+            AddTaskToQueue(data);
         }
-
-        
 
         if (!PlayerPrefs.HasKey("FirstLoading"))
         {
-            var task = _tasksData.FirstOrDefault(x => x.id == 2);
+            var task = _configSetting.tasksData.FirstOrDefault(x => x.id == 2);
             taskChangeStatusCallback?.Invoke(task, TaskStatus.IsSuccess);
-            PlayerPrefs.SetInt( "FirstLoading", 1);
+            PlayerPrefs.SetInt("FirstLoading", 1);
         }
-        if(tasks.Count > 0)
+
+        if (tasks.Count > 0)
         {
             _trayView.UpdateTrayPanel(_taskQueue);
         }
@@ -49,11 +56,12 @@ public class TaskManager : MonoBehaviour
 
     private void SetSuccessStatus(TaskData taskData)
     {
-        var data = _tasksData.FirstOrDefault(x => x.id == taskData.id + 1);
+        var data = _configSetting.tasksData.FirstOrDefault(x => x.id == taskData.id + 1);
         if (data == null)
         {
             return;
         }
+
         taskChangeStatusCallback?.Invoke(data, TaskStatus.IsSuccess);
     }
 
@@ -61,7 +69,7 @@ public class TaskManager : MonoBehaviour
     {
         taskChangeStatusCallback -= OnTaskChangeStatus;
 
-        foreach (var task in _tasksData)
+        foreach (var task in _configSetting.tasksData)
         {
             task.taskDoneCallback = null;
         }
@@ -69,9 +77,9 @@ public class TaskManager : MonoBehaviour
 
     private void AddTaskToQueue(TaskData taskData)
     {
-        DebugLogger.SendMessage("Task 3", Color.cyan);
         _taskQueue.Add(taskData);
     }
+
     private void RemoveTaskFromQueue(TaskData taskData)
     {
         _taskQueue.Remove(taskData);
@@ -79,27 +87,26 @@ public class TaskManager : MonoBehaviour
 
     private void OnTaskChangeStatus(TaskData taskData, TaskStatus status)
     {
-        taskData.taskStatus = status;
-      
-        switch (taskData.taskStatus)
+        taskData.TaskStatus = status;
+
+        switch (taskData.TaskStatus)
         {
             case TaskStatus.IsSuccess:
                 AddTaskToQueue(taskData);
                 break;
             case TaskStatus.InProcess:
-                if (taskData.accessDone)
+                if (taskData.AccessDone)
                 {
                     taskChangeStatusCallback?.Invoke(taskData, TaskStatus.TakeReward);
                 }
+
                 break;
             case TaskStatus.Done:
                 taskData.taskDoneCallback?.Invoke(taskData);
                 RemoveTaskFromQueue(taskData);
                 break;
         }
-      
+
         _trayView.UpdateTrayPanel(_taskQueue);
     }
-
-
 }

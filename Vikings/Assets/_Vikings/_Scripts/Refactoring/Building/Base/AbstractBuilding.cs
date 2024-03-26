@@ -33,7 +33,7 @@ namespace Vikings.Object
 
         public abstract void SetData(BuildingData buildingData);
         
-        public abstract (bool, string) IsEnableToBuild<T>(T arg);
+        public abstract (bool, int, Sprite) IsEnableToBuild<T>(T arg);
         public abstract BuildingData GetData();
         
         public BuildingState buildingState;

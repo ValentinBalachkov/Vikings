@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using Vikings.Building;
 using Vikings.Map;
+using Vikings.Object;
 using Zenject;
 
 public class SaveLoadManager : MonoBehaviour
@@ -15,58 +16,30 @@ public class SaveLoadManager : MonoBehaviour
     [SerializeField] private TMP_Text _versionText;
 
     [SerializeField] private DateTimeData _dateTimeData;
-    [SerializeField] private OfflineFarmView _offlineFarmView;
 
-    [SerializeField] private TMP_InputField _timeCheatIF;
-    [SerializeField] private TMP_InputField _constCheatIF;
     [SerializeField] private CharactersTaskManager charactersTaskManager;
+    [SerializeField] private BuildingHomeActionController _buildingHomeAction;
 
     private ConfigSetting _configSetting;
     private MapFactory _mapFactory;
-
-    private const int TIME_CONST = 10;
-
-    public void CheatTimeSave()
-    {
-        int time;
-
-        if (Int32.TryParse(_timeCheatIF.text, out time))
-        {
-            _dateTimeData.cheatTime = time;
-            _dateTimeData.Save();
-            DebugLogger.SendMessage($"Save Time {_dateTimeData.cheatTime} sec", Color.green);
-            return;
-        }
-
-        DebugLogger.SendMessage("Incorrect Input", Color.red);
-    }
-
-    public void CheatConstSave()
-    {
-        int time;
-
-        if (Int32.TryParse(_constCheatIF.text, out time))
-        {
-            _dateTimeData.timeConst = time;
-            _dateTimeData.Save();
-            DebugLogger.SendMessage($"Save Const {_dateTimeData.timeConst}", Color.green);
-            return;
-        }
-
-        DebugLogger.SendMessage("Incorrect Input", Color.red);
-    }
+    private CharacterFactory _characterFactory;
+    private WeaponFactory _weaponFactory;
+    private MainPanelManager _mainPanelManager;
 
     [Inject]
-    private void Init(MapFactory mapFactory, ConfigSetting configSetting)
+    private void Init(MapFactory mapFactory, ConfigSetting configSetting, CharacterFactory characterFactory,
+        WeaponFactory weaponFactory, MainPanelManager mainPanelManager)
     {
         _mapFactory = mapFactory;
         _configSetting = configSetting;
+        _characterFactory = characterFactory;
+        _weaponFactory = weaponFactory;
+        _mainPanelManager = mainPanelManager;
     }
 
 
     private void Start()
     {
-        //_taskManager.SubscribeChangeStatusEvent();
         Application.targetFrameRate = 60;
         _versionText.text = $"v{Application.version}";
     }
@@ -78,279 +51,90 @@ public class SaveLoadManager : MonoBehaviour
         }
         else
         {
-            // _dateTimeData.currentDateTime = DateTime.Now.ToString();
-            // _dateTimeData.Save();
-            // SaveAll();
+            _dateTimeData.dateTimeDynamicData.currentDateTime = DateTime.Now.ToString();
+            _dateTimeData.Save();
+            SaveAll();
         }
     }
 
-    // private void GetResources()
-    // {
-    //     DebugLogger.SendMessage(
-    //         $"Current const: {_dateTimeData.timeConst} \n Current loaded time: {_dateTimeData.cheatTime}sec",
-    //         Color.yellow);
-    //
-    //     //var time = GetTimeAfterRestart();
-    //     var time = (float)_dateTimeData.cheatTime;
-    //
-    //     if (time == 0)
-    //     {
-    //         return;
-    //     }
-    //
-    //     var charCount = _charactersConfig.charactersCount + 1;
-    //
-    //     float wRock = GetCharactersCapacity(charCount,
-    //         GetRouteTime(_charactersConfig.SpeedMove), _itemData[2].CollectTime, _charactersConfig.ItemsCount,
-    //         _weaponData.FirstOrDefault(x => x.id == 1).level + 1);
-    //
-    //     float wWood = GetCharactersCapacity(charCount,
-    //         GetRouteTime(_charactersConfig.SpeedMove), _itemData[3].CollectTime, _charactersConfig.ItemsCount,
-    //         _weaponData.FirstOrDefault(x => x.id == 0).level + 1);
-    //
-    //     float wEat = GetCharactersCapacity(charCount,
-    //         GetRouteTime(_charactersConfig.SpeedMove), _itemData[1].CollectTime, _charactersConfig.ItemsCount,
-    //         _charactersConfig.ItemsCount);
-    //
-    //     // var currentBuilding = _buildingData.FirstOrDefault(x => x.isSetOnMap && !x.IsBuild);
-    //     //
-    //     // var currentBuildingUpgrade =
-    //     //     _buildingData.FirstOrDefault(x => x.StorageData != null && x.StorageData.DynamicData.IsUpgrade);
-    //
-    //     string craftName = "";
-    //     int level = 0;
-    //     Sprite sprite = null;
-    //
-    //     // if (_craftingTableData[0].isUpgrade)
-    //     // {
-    //     //     CalculateResourceBuilding(ref time, _buildingData[0], wRock, wWood, ref craftName, ref level,
-    //     //         ref sprite);
-    //     // }
-    //     else if (currentBuildingUpgrade != null)
-    //     {
-    //         CalculateResourceBuilding(ref time, currentBuildingUpgrade, wRock, wWood, ref craftName, ref level,
-    //             ref sprite);
-    //     }
-    //     else if (currentBuilding != null)
-    //     {
-    //         CalculateResourceBuilding(ref time, currentBuilding, wRock, wWood, ref craftName, ref level, ref sprite);
-    //     }
-    //     else if (_craftingTableData[0].currentItemsCount.Count > 0)
-    //     {
-    //         int weaponId = _craftingTableData[0].currentWeaponId;
-    //         var weapon = _weaponData.FirstOrDefault(x => x.id == weaponId);
-    //         CalculateResourceCraftingTable(ref time, _craftingTableData[0], weapon, wRock, wWood, ref craftName,
-    //             ref level, ref sprite);
-    //     }
-    //     else if (_craftingTableData[1].currentItemsCount.Count > 0)
-    //     {
-    //         int weaponId = _craftingTableData[1].currentWeaponId;
-    //         var weapon = _weaponData.FirstOrDefault(x => x.id == weaponId);
-    //         CalculateResourceCraftingTable(ref time, _craftingTableData[1], weapon, wRock, wWood, ref craftName,
-    //             ref level, ref sprite);
-    //     }
-    //
-    //     var storagesData = _storageData
-    //         .Where(x => x.CurrentLevel > 0 && x.Count < x.MaxStorageCount)
-    //         .OrderBy(x => x.priority)
-    //         .ToArray();
-    //
-    //     List<float> wList = new();
-    //
-    //     for (int i = 0; i < storagesData.Length; i++)
-    //     {
-    //         switch (storagesData[i].ItemType.ID)
-    //         {
-    //             case 1:
-    //                 wList.Add(wEat);
-    //                 break;
-    //             case 2:
-    //                 wList.Add(wRock);
-    //                 break;
-    //             case 3:
-    //                 wList.Add(wWood);
-    //                 break;
-    //         }
-    //     }
-    //
-    //     Dictionary<int, int> resourcesDict = new Dictionary<int, int>();
-    //
-    //     if (time > 0)
-    //     {
-    //         CalculateResourceStorage(ref time, storagesData, wList.ToArray(), ref resourcesDict);
-    //     }
-    //
-    //
-    //     _offlineFarmView.OpenWindow(resourcesDict, craftName, level, sprite);
-    // }
-    //
-    // private void CalculateResourceBuilding(ref float time, BuildingData buildingData, float wRock, float wWood,
-    //     ref string buildingName, ref int level, ref Sprite sprite)
-    // {
-    //     if (_craftingTableData[0].isUpgrade)
-    //     {
-    //         var stick = _craftingTableData[0].PriceToUpgrade[0];
-    //         var rock = _craftingTableData[0].PriceToUpgrade[0];
-    //
-    //         List<float> timesIteration = new();
-    //
-    //
-    //         for (int i = 0; i < 2; i++)
-    //         {
-    //             float w = i == 0 ? wWood : wRock;
-    //             int currentCount = i == 0 ? stick.count : rock.count;
-    //
-    //             var m = _craftingTableData[0].currentItemsPriceToUpgrade[i].count - currentCount;
-    //
-    //
-    //             if (i > 0)
-    //             {
-    //                 time = timesIteration[i - 1] - (m / w);
-    //             }
-    //             else
-    //             {
-    //                 time -= (m / w);
-    //             }
-    //
-    //             DebugLogger.SendMessage($"Building: iteration(i) - {i}, w = {w}, T[{i}] = {time}", Color.green);
-    //
-    //             timesIteration.Add(time);
-    //
-    //             if (time > 0)
-    //             {
-    //                 _craftingTableData[0].currentItemsPriceToUpgrade[i].count += m;
-    //             }
-    //             else
-    //             {
-    //                 if (i > 0)
-    //                 {
-    //                     float t = timesIteration[i - 1] - Mathf.Abs(timesIteration[i]);
-    //                     _craftingTableData[0].currentItemsPriceToUpgrade[i].count += (int)(t * w);
-    //                 }
-    //                 else
-    //                 {
-    //                     _craftingTableData[0].currentItemsPriceToUpgrade[i].count +=
-    //                         (int)(Mathf.Abs(timesIteration[i]) * w);
-    //                 }
-    //
-    //                 return;
-    //             }
-    //         }
-    //     }
-    //     else
-    //     {
-    //         var stick = buildingData.currentItemsCount[0];
-    //         var rock = buildingData.currentItemsCount[1];
-    //
-    //         List<float> timesIteration = new();
-    //
-    //
-    //         for (int i = 0; i < 2; i++)
-    //         {
-    //             float w = i == 0 ? wWood : wRock;
-    //             int currentCount = i == 0 ? stick.count : rock.count;
-    //
-    //             var m = buildingData.PriceToUpgrades[i].count - currentCount;
-    //
-    //
-    //             if (i > 0)
-    //             {
-    //                 time = timesIteration[i - 1] - (m / w);
-    //             }
-    //             else
-    //             {
-    //                 time -= (m / w);
-    //             }
-    //
-    //             DebugLogger.SendMessage($"Building: iteration(i) - {i}, w = {w}, T[{i}] = {time}", Color.green);
-    //
-    //             timesIteration.Add(time);
-    //
-    //             if (time > 0)
-    //             {
-    //                 buildingData.currentItemsCount[i].count += m;
-    //             }
-    //             else
-    //             {
-    //                 if (i > 0)
-    //                 {
-    //                     float t = timesIteration[i - 1] - Mathf.Abs(timesIteration[i]);
-    //                     buildingData.currentItemsCount[i].count += (int)(t * w);
-    //                 }
-    //                 else
-    //                 {
-    //                     buildingData.currentItemsCount[i].count += (int)(Mathf.Abs(timesIteration[i]) * w);
-    //                 }
-    //
-    //                 return;
-    //             }
-    //         }
-    //     }
-    //
-    //     if (buildingData.StorageData != null)
-    //     {
-    //         if (buildingData.StorageData.BuildTime < time)
-    //         {
-    //             if (buildingData.StorageData.DynamicData.IsUpgrade)
-    //             {
-    //                 buildingData.StorageData.DynamicData.IsUpgrade = false;
-    //             }
-    //             else
-    //             {
-    //                 buildingData.isSetOnMap = true;
-    //                 buildingData.IsBuild = true;
-    //             }
-    //
-    //             buildingData.StorageData.CurrentLevel++;
-    //             time -= (int)buildingData.StorageData.BuildTime;
-    //             buildingName = buildingData.StorageData.nameText;
-    //             level = buildingData.StorageData.CurrentLevel;
-    //             sprite = buildingData.StorageData.iconOfflineFarm;
-    //             if (buildingData.StorageData.ItemType.ID == 1 && _charactersConfig.houseLevel < 5)
-    //             {
-    //                 _charactersConfig.charactersCount++;
-    //             }
-    //         }
-    //         else
-    //         {
-    //             //buildingData.StorageData.BuildTime -= time;
-    //             time = 0;
-    //         }
-    //     }
-    //     else
-    //     {
-    //         if (buildingData.craftingTableCrateTime < time)
-    //         {
-    //             if (_craftingTableData[0].isUpgrade)
-    //             {
-    //                 _craftingTableData[0].isUpgrade = false;
-    //             }
-    //             else
-    //             {
-    //                 buildingData.isSetOnMap = true;
-    //                 buildingData.IsBuild = true;
-    //             }
-    //
-    //             _craftingTableData[0].currentLevel++;
-    //             time -= buildingData.craftingTableCrateTime;
-    //             buildingName = _craftingTableData[0].nameText;
-    //             level = _craftingTableData[0].currentLevel;
-    //             sprite = _craftingTableData[0].iconOfflineFarm;
-    //         }
-    //         else
-    //         {
-    //             //_craftingTableData[0].tableBuildingTime -= (int)time;
-    //             time = 0;
-    //         }
-    //     }
-    // }
-
-    private void CalculateResourceCraftingTable(ref float time, CraftingTableData craftingTableData,
-        WeaponData weaponData, float wRock,
-        float wWood, ref string buildingName, ref int level, ref Sprite sprite)
+    public void GetResources()
     {
-        var stick = craftingTableData.currentItemsCount[0];
-        var rock = craftingTableData.currentItemsCount[1];
+        var time = GetTimeAfterRestart();
+
+        if (time == 0)
+        {
+            return;
+        }
+
+        var eatStorage = _mapFactory.GetAllBuildings<EatStorage>().FirstOrDefault();
+
+
+        var charCount = eatStorage.CurrentLevel.Value + 1;
+
+        float wRock = GetCharactersCapacity(charCount,
+            GetRouteTime(_characterFactory.CharacterManager.SpeedMove), _configSetting.resourcesData[2].CollectTime,
+            _characterFactory.CharacterManager.ItemsCount,
+            _weaponFactory.GetWeapon(_configSetting.weaponsData[2]).Level.Value + 1);
+
+        float wWood = GetCharactersCapacity(charCount,
+            GetRouteTime(_characterFactory.CharacterManager.SpeedMove), _configSetting.resourcesData[3].CollectTime,
+            _characterFactory.CharacterManager.ItemsCount,
+            _weaponFactory.GetWeapon(_configSetting.weaponsData[1]).Level.Value + 1);
+
+        float wEat = GetCharactersCapacity(charCount,
+            GetRouteTime(_characterFactory.CharacterManager.SpeedMove), _configSetting.resourcesData[1].CollectTime,
+            _characterFactory.CharacterManager.ItemsCount,
+            _characterFactory.CharacterManager.ItemsCount);
+
+        var currentBuilding = _mapFactory.GetAllBuildings<AbstractBuilding>().FirstOrDefault(x =>
+            x.buildingState == BuildingState.InProgress || x.buildingState == BuildingState.Crafting);
+
+        string craftName = "";
+        int level = 0;
+        Sprite sprite = null;
+
+        if (currentBuilding != null)
+        {
+            CalculateResourceBuilding(ref time, currentBuilding, wRock, wWood, ref craftName, ref level, ref sprite);
+        }
+
+        var storages = _mapFactory.GetAllBuildings<Storage>().Where(x => x.CheckNeededItem())
+            .OrderBy(x => x.GetData().priorityToAction).ToList();
+
+        List<float> wList = new();
+
+        foreach (var storage in storages)
+        {
+            switch (storage.ResourceType)
+            {
+                case ResourceType.Eat:
+                    wList.Add(wEat);
+                    break;
+                case ResourceType.Rock:
+                    wList.Add(wRock);
+                    break;
+                case ResourceType.Wood:
+                    wList.Add(wWood);
+                    break;
+            }
+        }
+
+        Dictionary<ResourceType, int> resourcesDict = new Dictionary<ResourceType, int>();
+
+        if (time > 0)
+        {
+            CalculateResourceStorage(ref time, storages, wList.ToArray(), ref resourcesDict);
+        }
+
+
+        _mainPanelManager.SudoGetPanel<OfflineFarmView>().OpenWindow(resourcesDict, craftName, level, sprite);
+    }
+
+    private void CalculateResourceBuilding(ref float time, AbstractBuilding abstractBuilding, float wRock, float wWood,
+        ref string buildingName, ref int level, ref Sprite sprite)
+    {
+        var stick = abstractBuilding.currentItems[ResourceType.Wood];
+        var rock = abstractBuilding.currentItems[ResourceType.Rock];
 
         List<float> timesIteration = new();
 
@@ -358,10 +142,11 @@ public class SaveLoadManager : MonoBehaviour
         for (int i = 0; i < 2; i++)
         {
             float w = i == 0 ? wWood : wRock;
-            int currentCount = i == 0 ? stick.count : rock.count;
+            int currentCount = i == 0 ? stick : rock;
 
-            var m = craftingTableData.priceToUpgradeCraftingTable[i].count - currentCount;
+            ResourceType type = i == 0 ? ResourceType.Wood : ResourceType.Rock;
 
+            var m = abstractBuilding.GetPriceForUpgrade()[type] - currentCount;
 
             if (i > 0)
             {
@@ -372,24 +157,24 @@ public class SaveLoadManager : MonoBehaviour
                 time -= (m / w);
             }
 
-            DebugLogger.SendMessage($"CraftingTable: iteration(i) - {i}, w = {w}, T[{i}] = {time}", Color.green);
+            DebugLogger.SendMessage($"Building: iteration(i) - {i}, w = {w}, T[{i}] = {time}", Color.green);
 
             timesIteration.Add(time);
 
             if (time > 0)
             {
-                craftingTableData.currentItemsCount[i].count += m;
+                abstractBuilding.ChangeCount?.Invoke(m, i == 0 ? ResourceType.Wood : ResourceType.Rock);
             }
             else
             {
                 if (i > 0)
                 {
                     float t = timesIteration[i - 1] - Mathf.Abs(timesIteration[i]);
-                    craftingTableData.currentItemsCount[i].count += (int)(t * w);
+                    abstractBuilding.ChangeCount?.Invoke((int)(t * w), ResourceType.Rock);
                 }
                 else
                 {
-                    craftingTableData.currentItemsCount[i].count += (int)(Mathf.Abs(timesIteration[i]) * w);
+                    abstractBuilding.ChangeCount?.Invoke((int)(Mathf.Abs(timesIteration[i]) * w), ResourceType.Wood);
                 }
 
                 return;
@@ -397,39 +182,32 @@ public class SaveLoadManager : MonoBehaviour
         }
 
 
-        // if (craftingTableData.craftingTime < time)
-        // {
-        //     time -= craftingTableData.craftingTime;
-        //     weaponData.level++;
-        //     weaponData.IsOpen = true;
-        //     var items = _itemData.Where(x => x.ID == weaponData.ItemData.ID).ToList();
-        //     foreach (var item in items)
-        //     {
-        //         item.IsOpen = true;
-        //     }
-        //
-        //     craftingTableData.Clear();
-        //     buildingName = weaponData.nameText;
-        //     level = weaponData.level;
-        //     sprite = weaponData.iconOfflineFarm;
-        // }
-        // else
-        // {
-        //     craftingTableData.craftingTime -= (int)time;
-        //     time = 0;
-        // }
+        if (abstractBuilding.abstractBuildingDynamicData.BuildingTime < time)
+        {
+            abstractBuilding.Upgrade();
+            abstractBuilding.ChangeState(BuildingState.Ready);
+
+            time -= abstractBuilding.abstractBuildingDynamicData.BuildingTime;
+            buildingName = abstractBuilding.GetData().nameText;
+            level = abstractBuilding.CurrentLevel.Value;
+            sprite = abstractBuilding.GetData().icon;
+        }
+        else
+        {
+            time = 0;
+        }
     }
 
-    private void CalculateResourceStorage(ref float time, StorageData[] storagesData, float[] w,
-        ref Dictionary<int, int> resourceDict)
+    private void CalculateResourceStorage(ref float time, List<Storage> storages, float[] w,
+        ref Dictionary<ResourceType, int> resourceDict)
     {
         List<float> timesIteration = new();
 
-        for (int i = 0; i < storagesData.Length; i++)
+        for (int i = 0; i < storages.Count; i++)
         {
-            int currentCount = storagesData[i].Count;
+            int currentCount = storages[i].Count;
 
-            var m = storagesData[i].MaxStorageCount - currentCount;
+            var m = storages[i].MaxStorageCount - currentCount;
             if (i > 0)
             {
                 time = timesIteration[i - 1] - (m / w[i]);
@@ -445,8 +223,8 @@ public class SaveLoadManager : MonoBehaviour
 
             if (time > 0)
             {
-                storagesData[i].Count += m;
-                resourceDict.Add(storagesData[i].ItemType.ID, m);
+                storages[i].ChangeCount?.Invoke(m, storages[i].ResourceType);
+                resourceDict.Add(storages[i].ResourceType, m);
             }
             else
             {
@@ -454,14 +232,14 @@ public class SaveLoadManager : MonoBehaviour
                 {
                     float t = timesIteration[i - 1] - Mathf.Abs(timesIteration[i]);
                     float count = t * w[i];
-                    storagesData[i].Count += (int)count;
-                    resourceDict.Add(storagesData[i].ItemType.ID, (int)count);
+                    storages[i].ChangeCount?.Invoke((int)count, storages[i].ResourceType);
+                    resourceDict.Add(storages[i].ResourceType, (int)count);
                 }
                 else
                 {
                     float count = Mathf.Abs(timesIteration[i]) * w[i];
-                    storagesData[i].Count += (int)count;
-                    resourceDict.Add(storagesData[i].ItemType.ID, (int)count);
+                    storages[i].ChangeCount?.Invoke((int)count, storages[i].ResourceType);
+                    resourceDict.Add(storages[i].ResourceType, (int)count);
                 }
 
                 return;
@@ -469,24 +247,17 @@ public class SaveLoadManager : MonoBehaviour
         }
     }
 
-    public void ClearAllCheatData()
-    {
-        _dateTimeData.timeConst = TIME_CONST;
-        _dateTimeData.cheatTime = 0;
-        _dateTimeData.Save();
-    }
-
     private float GetTimeAfterRestart()
     {
-        _dateTimeData.Load();
-        if (_dateTimeData.currentDateTime == "")
+        _dateTimeData.Init();
+        if (_dateTimeData.dateTimeDynamicData.currentDateTime == "")
         {
             return 0;
         }
 
-        var parsedDateTime = DateTime.Parse(_dateTimeData.currentDateTime);
+        var parsedDateTime = DateTime.Parse(_dateTimeData.dateTimeDynamicData.currentDateTime);
         DebugLogger.SendMessage(
-            $"{DateTime.Now.Subtract(parsedDateTime).TotalSeconds} {_dateTimeData.currentDateTime} {DateTime.Now}",
+            $"{DateTime.Now.Subtract(parsedDateTime).TotalSeconds} {_dateTimeData.dateTimeDynamicData.currentDateTime} {DateTime.Now}",
             Color.green);
         return (float)DateTime.Now.Subtract(parsedDateTime).TotalSeconds;
     }
@@ -508,7 +279,7 @@ public class SaveLoadManager : MonoBehaviour
         return charactersCount / ((routeTime / backspaceVolume) + (workTime / weaponsPower));
     }
 
-    public void SaveAll()
+    private void SaveAll()
     {
         foreach (var save in saves)
         {
@@ -528,6 +299,8 @@ public class SaveLoadManager : MonoBehaviour
         _mapFactory.CreateBuilding(_configSetting.craftingTable);
 
         var eatStorage = _mapFactory.GetAllBuildings<EatStorage>().FirstOrDefault();
+        
+        _buildingHomeAction.Init(eatStorage);
 
         foreach (var data in _configSetting.resourcesData)
         {
@@ -537,6 +310,12 @@ public class SaveLoadManager : MonoBehaviour
             }
         }
 
+        foreach (var task in _configSetting.tasksData)
+        {
+            task.Init();
+        }
+        
+        _dateTimeData.Init();
 
         //GetResources();
     }

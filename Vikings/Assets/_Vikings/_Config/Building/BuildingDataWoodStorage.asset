@@ -17,6 +17,7 @@ MonoBehaviour:
   nameText: Wood storage
   description: Allows storing wood. Upgrade to increase the capacity
   required: Workbench
+  requiredSprite: {fileID: 21300000, guid: 77f9782e323686143a53ad0436cff1e2, type: 3}
   buildingVisualSprites:
   - buildingsSprites: {fileID: 21300000, guid: 0701ea8cffd802d4f8b99321e430cda7, type: 3}
     shadowSprites: {fileID: 21300000, guid: fc3cd2705724f3642b370590e6d91c1c, type: 3}

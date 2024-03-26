@@ -1,19 +1,21 @@
 using System.Collections;
 using UnityEngine;
 using Vikings.Chanacter;
+using Zenject;
 
 public class IronSourceController : MonoBehaviour
 {
     public string appKey;
+    
+    [SerializeField] private CharactersConfig _charactersConfig;
 
     private const int TIMER_ON_START = 30;
     private const int TIMER = 180;
     private const int EFFECT_TIME = 10;
     private const float EFFECT = 2f;
 
-    [SerializeField] private TrayView _trayView;
-    [SerializeField] private CharactersConfig _charactersConfig;
 
+    private MainPanelManager _mainPanelManager;
     private bool _isRewardedLoaded;
 
     private void Awake()
@@ -33,6 +35,12 @@ public class IronSourceController : MonoBehaviour
         _charactersConfig.speed_up = 1;
     }
 
+    [Inject]
+    public void Init(MainPanelManager panelManager)
+    {
+        _mainPanelManager = panelManager;
+    }
+
     private void Start()
     {
         StartCoroutine(RewardDelayCoroutineOnStart(TIMER_ON_START));
@@ -49,7 +57,7 @@ public class IronSourceController : MonoBehaviour
         yield return new WaitForSeconds(time);
         if (_isRewardedLoaded)
         {
-            _trayView.AddAdvertisementOnPanel();
+            _mainPanelManager.SudoGetPanel<TrayView>().AddAdvertisementOnPanel();
         }
         else
         {
@@ -85,7 +93,7 @@ public class IronSourceController : MonoBehaviour
     private void RewardedVideoOnAdOpenedEvent(IronSourceAdInfo adInfo)
     {
         StopAllCoroutines();
-        _trayView.RemoveAdvertisementOnPanel();
+        _mainPanelManager.SudoGetPanel<TrayView>().RemoveAdvertisementOnPanel();
         StartCoroutine(RewardDelayCoroutineOnStart(TIMER));
     }
 

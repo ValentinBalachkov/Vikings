@@ -47,9 +47,10 @@ namespace Vikings.Building
             }
 
             float scaleMove = _houseCameraPosition[0].size / _houseCameraPosition[_eatStorage.CurrentLevel.Value].size;
-            foreach (var transform in _allRespawnPointTransform)
+            foreach (var t in _allRespawnPointTransform)
             {
-                transform.localScale *= scaleMove;
+                t.localScale *= scaleMove;
+                DebugLogger.SendMessage($"{t.localScale}", Color.cyan);
             }
         }
 
@@ -70,10 +71,12 @@ namespace Vikings.Building
                 _cameraPassive.orthographicSize = _camera.orthographicSize / _cameraScale;
                 float scaleMove = startSize / _camera.orthographicSize;
 
-                foreach (var transform in _allRespawnPointTransform)
+                foreach (var t in _allRespawnPointTransform)
                 {
-                    transform.localScale.Set(transform.localScale.x * scaleMove, transform.localScale.y * scaleMove,
-                        transform.localScale.z * scaleMove);
+                    t.localScale.Set(t.localScale.x * scaleMove, t.localScale.y * scaleMove,
+                        t.localScale.z * scaleMove);
+                    
+                    DebugLogger.SendMessage($"{t.localScale}", Color.cyan);
                 }
 
                 yield return null;

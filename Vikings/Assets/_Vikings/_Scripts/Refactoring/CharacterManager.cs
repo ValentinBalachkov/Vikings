@@ -81,8 +81,8 @@ namespace _Vikings._Scripts.Refactoring
                 _characterDynamicData.itemsCountLevel = value;
                 if (_characterDynamicData.itemsCountLevel == 2 && _charactersConfig.taskDataBackpack != null)
                 {
-                    _charactersConfig.taskDataBackpack.accessDone = true;
-                    if (_charactersConfig.taskDataBackpack.taskStatus == TaskStatus.InProcess)
+                    _charactersConfig.taskDataBackpack.AccessDone = true;
+                    if (_charactersConfig.taskDataBackpack.TaskStatus == TaskStatus.InProcess)
                     {
                         TaskManager.taskChangeStatusCallback?.Invoke(_charactersConfig.taskDataBackpack,
                             TaskStatus.TakeReward);

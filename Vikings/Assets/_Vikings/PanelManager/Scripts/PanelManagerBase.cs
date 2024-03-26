@@ -274,7 +274,7 @@ namespace PanelManager.Scripts
                 var tr = new GameObject(containerName, typeof(RectTransform)).transform;
 
                 tr.SetParent(containerParent, false);
-                tr.SetAsLastSibling();
+                tr.SetAsFirstSibling();
 
                 var rt = tr.GetComponent<RectTransform>();
 

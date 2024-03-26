@@ -17,6 +17,7 @@ MonoBehaviour:
   nameText: Rock storage
   description: Allows storing stone. Upgrade to increase the capacity
   required: Workbench
+  requiredSprite: {fileID: 21300000, guid: 77f9782e323686143a53ad0436cff1e2, type: 3}
   buildingVisualSprites:
   - buildingsSprites: {fileID: 21300000, guid: 5df2779d9e06dc8438ae8b9249c6a501, type: 3}
     shadowSprites: {fileID: 21300000, guid: 8aaebb528d7510445a05046949fd3c92, type: 3}

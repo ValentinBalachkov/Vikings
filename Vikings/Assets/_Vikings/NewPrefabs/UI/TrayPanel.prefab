@@ -50,18 +50,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62b034346cb7440b870629b6684727e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _order: -1
   _content: {fileID: 7339662723444400315}
-  _trayElement: {fileID: 7107226481520065332, guid: 761447551be2541449c358ee0c20e305,
+  _trayElement: {fileID: 3996395395996367767, guid: 04266b92aec4eed44bc96a22fbcbe3bc,
     type: 3}
-  _successImage: {fileID: 21300000, guid: 20eaf61994f7e1b4d98fe444bf10acf3, type: 3}
-  _processImage: {fileID: 21300000, guid: c2977d0107bfcc74da0dddff3792c320, type: 3}
-  _rewardImage: {fileID: 21300000, guid: 5fa6cc371435f1e42a5223df3b940f87, type: 3}
-  _advertisementImage: {fileID: 21300000, guid: 66efccb687d3a804e94d7d03de511c2d,
+  _successImage: {fileID: 21300000, guid: 656cbb6a58766e34dbe95122b5851ba6, type: 3}
+  _processImage: {fileID: 21300000, guid: 5b4c6306ee30ec942a39ae33efeb555e, type: 3}
+  _rewardImage: {fileID: 21300000, guid: ea9a023b9f7ed144db584b9175d27598, type: 3}
+  _advertisementImage: {fileID: 21300000, guid: 63756ca23b2c4804fb003afe21d4ec25,
     type: 3}
-  _questPanelView: {fileID: 0}
-  _advertisementPanel: {fileID: 0}
-  _advertisementButton: {fileID: 0}
-  _ironSourceController: {fileID: 0}
 --- !u!1 &9048691856475259643
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,7 +97,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 0}
+  m_SizeDelta: {x: 180, y: 0}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &6556397911346634252
 CanvasRenderer:

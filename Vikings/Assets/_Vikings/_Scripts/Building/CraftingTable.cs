@@ -182,13 +182,14 @@ namespace Vikings.Building
             _craftingTableDynamicData = SaveLoadSystem.LoadData(_craftingTableDynamicData, buildingData.saveKey);
         }
 
-        public override (bool, string) IsEnableToBuild<T>(T arg)
+        public override (bool, int, Sprite) IsEnableToBuild<T>(T arg)
         {
             var weapon = arg as Weapon;
-            string text = $"REQUIRED:  {_craftingTableData.required} LEVEL{1}";
             bool isEnable = weapon.Level.Value > 0;
+            Sprite sprite = _craftingTableData.requiredSprite;
+            int level = 1;
 
-            return (isEnable, text);
+            return (isEnable, level, sprite);
         }
 
         public override BuildingData GetData()
@@ -208,20 +209,26 @@ namespace Vikings.Building
                     _buildingView.gameObject.SetActive(false);
                     break;
                 case BuildingState.InProgress:
-                    ChangeSpriteObject();
+                    ChangeSpriteObject(false);
                     ChangeCount += OnCountChangeInProgressState;
                     ChangeCount -= OnCountChangeWeaponState;
-                    _collectingResourceView.Setup(this);
+                    if (_collectingResourceView != null)
+                    {
+                        _collectingResourceView.Setup(this);
+                    }
                     break;
                 case BuildingState.Ready:
-                    ChangeSpriteObject();
+                    ChangeSpriteObject(true);
                     ChangeCount -= OnCountChangeInProgressState;
                     ChangeCount += OnCountChangeWeaponState;
                     break;
                 case BuildingState.Crafting:
                     isCraftActivated = false;
                     BuildingComplete?.Invoke(this);
-                    _collectingResourceView.Clear();
+                    if (_collectingResourceView != null)
+                    {
+                        _collectingResourceView.Clear();
+                    }
                     break;
             }
         }
@@ -234,8 +241,15 @@ namespace Vikings.Building
             _collectingResourceView.UpdateView(_currentItemsWeapon, _currentWeapon.PriceToBuy);
         }
 
-        private void ChangeSpriteObject()
+        private void ChangeSpriteObject(bool isReady)
         {
+            if (isReady)
+            {
+                _buildingSpriteObject.SetActive(false);
+                _buildingView.gameObject.SetActive(true);
+                return;
+            }
+            
             if (CurrentLevel.Value == 0 || _currentWeapon == null)
             {
                 _buildingSpriteObject.SetActive(true);

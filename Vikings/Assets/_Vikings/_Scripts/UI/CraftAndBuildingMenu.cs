@@ -76,7 +76,7 @@ namespace Vikings.UI
                     _panelManager.SudoGetPanel<MenuButtonsManager>().EnableButtons(false);
                 });
                 var cortege = building.IsEnableToBuild(_mapFactory.GetAllBuildings<CraftingTable>().FirstOrDefault());
-                item.SetEnable(cortege.Item1, cortege.Item2);
+                item.SetEnable(cortege.Item1, cortege.Item2, cortege.Item3);
                 _menuElements.Add(item);
             }
 
@@ -103,7 +103,7 @@ namespace Vikings.UI
                 _panelManager.SudoGetPanel<MenuButtonsManager>().EnableButtons(false);
             });
             var arg = craftingTable.IsEnableToBuild(_weaponFactory.GetWeapon(_configSetting.weaponsData[1]));
-            table.SetEnable(arg.Item1, arg.Item2);
+            table.SetEnable(arg.Item1, arg.Item2, arg.Item3);
             _menuElements.Add(table);
         }
 
@@ -130,13 +130,13 @@ namespace Vikings.UI
                 {
                     var cortege = weapon.IsEnableToBuild(_mapFactory.GetAllBuildings<CraftingTable>().FirstOrDefault(),
                         storage);
-                    item.SetEnable(cortege.Item1, cortege.Item2);
+                    item.SetEnable(cortege.Item1, cortege.Item2, cortege.Item3);
                     _menuElements.Add(item);
                 }
                 else if (i == 2)
                 {
                     var cortege = weapon.IsEnableToBuild(_mapFactory.GetAllBuildings<CraftingTable>().FirstOrDefault());
-                    item.SetEnable(cortege.Item1, cortege.Item2);
+                    item.SetEnable(cortege.Item1, cortege.Item2, cortege.Item3);
                     _menuElements.Add(item);
                 }
             }

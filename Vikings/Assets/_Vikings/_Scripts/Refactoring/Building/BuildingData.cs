@@ -13,6 +13,7 @@ public class BuildingData : ScriptableObject
     public string nameText;
     public string description;
     public string required;
+    public Sprite requiredSprite;
     public List<BuildingVisualSprites> buildingVisualSprites;
     public string saveKey;
     public AbstractBuilding prefab;

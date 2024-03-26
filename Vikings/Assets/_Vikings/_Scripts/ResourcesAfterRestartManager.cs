@@ -14,18 +14,18 @@ namespace Vikings.Building
         {
             if (hasFocus)
             {
-                _dateTimeData.Load();
-                if (_dateTimeData.currentDateTime == "")
+                _dateTimeData.Init();
+                if (_dateTimeData.dateTimeDynamicData.currentDateTime == "")
                 {
                     return;
                 }
-                var parsedDateTime = DateTime.Parse(_dateTimeData.currentDateTime);
+                var parsedDateTime = DateTime.Parse(_dateTimeData.dateTimeDynamicData.currentDateTime);
                 var time = DateTime.Now.Subtract(parsedDateTime);
-                DebugLogger.SendMessage($"{time.TotalSeconds} {_dateTimeData.currentDateTime} {DateTime.Now}", Color.green);
+                DebugLogger.SendMessage($"{time.TotalSeconds} {_dateTimeData.dateTimeDynamicData.currentDateTime} {DateTime.Now}", Color.green);
             }
             else
             {
-                _dateTimeData.currentDateTime = DateTime.Now.ToString();
+                _dateTimeData.dateTimeDynamicData.currentDateTime = DateTime.Now.ToString();
                 _dateTimeData.Save();
             }
         }

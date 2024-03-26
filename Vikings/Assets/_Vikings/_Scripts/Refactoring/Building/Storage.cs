@@ -150,7 +150,10 @@ namespace _Vikings._Scripts.Refactoring
                     ChangeSpriteObject(true);
                     ChangeCount += OnCountChangeInProgressState;
                     ChangeCount -= OnCountChangeReadyState;
-                    _collectingResourceView.Setup(this);
+                    if (_collectingResourceView != null)
+                    {
+                        _collectingResourceView.Setup(this);
+                    }
                     break;
                 case BuildingState.Ready:
                     ChangeSpriteObject(false);
@@ -161,7 +164,10 @@ namespace _Vikings._Scripts.Refactoring
                 case BuildingState.Crafting:
                     isCraftActivated = false;
                     BuildingComplete?.Invoke(this);
-                    _collectingResourceView.Clear();
+                    if (_collectingResourceView != null)
+                    {
+                        _collectingResourceView.Clear();
+                    }
                     break;
             }
         }
@@ -227,12 +233,14 @@ namespace _Vikings._Scripts.Refactoring
             _storageDynamicData = SaveLoadSystem.LoadData(_storageDynamicData, buildingData.saveKey);
         }
 
-        public override (bool, string) IsEnableToBuild<T>(T arg)
+        public override (bool, int, Sprite) IsEnableToBuild<T>(T arg)
         {
             var craftingTable = arg as AbstractBuilding;
 
-            string requiredText =
-                $"REQUIRED:  {_storageData.required} LEVEL{craftingTable.CurrentLevel.Value + 1}";
+            Sprite sprite = _storageData.requiredSprite;
+
+            int level = craftingTable.CurrentLevel.Value + 1;
+            
 
             bool isEnable = false;
 
@@ -247,14 +255,17 @@ namespace _Vikings._Scripts.Refactoring
                 case ResourceType.Eat:
                     if (CurrentLevel.Value >= 5)
                     {
-                        requiredText = "MAX";
+                        isEnable = false;
                     }
-
-                    isEnable = craftingTable.CurrentLevel.Value - CurrentLevel.Value >= 1 && CurrentLevel.Value < 5;
+                    else
+                    {
+                        isEnable = craftingTable.CurrentLevel.Value - CurrentLevel.Value >= 1 && CurrentLevel.Value < 5;
+                    }
+                    
                     break;
             }
 
-            return (isEnable, requiredText);
+            return (isEnable, level, sprite);
         }
 
         public override BuildingData GetData()
@@ -266,6 +277,12 @@ namespace _Vikings._Scripts.Refactoring
         {
             return _storageDynamicData.Count < _storageDynamicData.MaxStorageCount &&
                    buildingState == BuildingState.Ready;
+        }
+
+        public void SudoChangeCount(int count)
+        {
+            _storageDynamicData.Count += count;
+            _inventoryView.UpdateUI(_storageDynamicData.Count, _storageDynamicData.MaxStorageCount, ResourceType);
         }
 
         
@@ -349,8 +366,8 @@ namespace _Vikings._Scripts.Refactoring
             _storageDynamicData.CurrentLevel = value;
             if (_storageDynamicData.CurrentLevel == 1 && _storageData.taskData != null)
             {
-                _storageData.taskData.accessDone = true;
-                if (_storageData.taskData.taskStatus == TaskStatus.InProcess)
+                _storageData.taskData.AccessDone = true;
+                if (_storageData.taskData.TaskStatus == TaskStatus.InProcess)
                 {
                     TaskManager.taskChangeStatusCallback?.Invoke(_storageData.taskData, TaskStatus.TakeReward);
                 }

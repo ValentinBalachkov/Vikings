@@ -12,6 +12,7 @@ namespace _Vikings._Scripts.Refactoring
         public BuildingData craftingTable;
         public List<WeaponData> weaponsData = new();
         public List<ItemData> resourcesData = new();
+        public List<TaskData> tasksData = new();
         public CharactersConfig charactersConfig;
     }
 }

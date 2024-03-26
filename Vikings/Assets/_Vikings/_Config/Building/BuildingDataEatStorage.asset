@@ -17,6 +17,7 @@ MonoBehaviour:
   nameText: Home
   description: Allows you to store food. Upgrade to increase the capacity
   required: Workbench
+  requiredSprite: {fileID: 21300000, guid: 77f9782e323686143a53ad0436cff1e2, type: 3}
   buildingVisualSprites:
   - buildingsSprites: {fileID: 21300000, guid: 119bb13953cd33145bde65a9a9e7c4c4, type: 3}
     shadowSprites: {fileID: 21300000, guid: 886fedff78cc77f48b309405b01f7605, type: 3}

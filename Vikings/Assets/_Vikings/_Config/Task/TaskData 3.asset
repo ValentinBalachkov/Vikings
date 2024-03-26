@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38522c9c68986884699ee2651c3e4ada, type: 3}
   m_Name: TaskData 3
   m_EditorClassIdentifier: 
+  saveKey: Task3
   id: 4
-  taskStatus: 1
-  accessDone: 0
   reward:
   - itemData: {fileID: 11400000, guid: 842ec8fe0ff14054fb025a7b78239191, type: 2}
     count: 10

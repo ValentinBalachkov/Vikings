@@ -108,8 +108,8 @@ namespace Vikings.Building
                 _currentLevel = value;
                 if (_currentLevel == 1 && _taskData != null)
                 {
-                    _taskData.accessDone = true;
-                    if (_taskData.taskStatus == TaskStatus.InProcess)
+                    _taskData.AccessDone = true;
+                    if (_taskData.TaskStatus == TaskStatus.InProcess)
                     {
                         TaskManager.taskChangeStatusCallback?.Invoke(_taskData, TaskStatus.TakeReward);
                     }

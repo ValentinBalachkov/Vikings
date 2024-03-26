@@ -1,6 +1,5 @@
 using System.IO;
 using UnityEngine;
-using Vikings.Object;
 
 namespace Vikings.SaveSystem
 {
@@ -22,6 +21,10 @@ namespace Vikings.SaveSystem
             if (!File.Exists(loadPath))
             {
                 DebugLogger.SendMessage($"Data not fount from path {loadPath}", Color.red);
+                loadFileName = dataKey + "Data";
+                var asset = Resources.Load<TextAsset>($"DefaultSave/{loadFileName}");
+                DebugLogger.SendMessage(asset.text, Color.green);
+                JsonUtility.FromJsonOverwrite(asset.text, dynamicData);
                 return dynamicData;
             }
 

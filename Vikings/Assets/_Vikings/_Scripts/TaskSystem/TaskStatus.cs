@@ -1,6 +1,6 @@
 ﻿public enum TaskStatus
 {
-    NotAdded = 1,
+    NotAdded = 0,
     IsSuccess = 2,
     InProcess = 3,
     TakeReward = 4,

@@ -1,30 +1,27 @@
-﻿using System;
-using Vikings.SaveSystem;
+﻿using _Vikings._Scripts.Refactoring;
 using UnityEngine;
+using Vikings.Object;
+using Vikings.SaveSystem;
 
 namespace Vikings.Building
 {
     [CreateAssetMenu(fileName = "DateTimeData", menuName = "Data/DateTimeData")]
-    public class DateTimeData : ScriptableObject, IData
+    public class DateTimeData : ScriptableObject, ISave
     {
-        public string  currentDateTime;
-        public int cheatTime;
+        public string saveKey;
         public int timeConst;
-        
+        public DateTimeDynamicData dateTimeDynamicData;
+
+
         public void Save()
         {
-            //SaveLoadSystem.SaveData(this);
+            SaveLoadSystem.SaveData(dateTimeDynamicData, saveKey);
         }
 
-        public void Load()
+        public void Init()
         {
-            // var data = SaveLoadSystem.LoadData(this) as DateTimeData;
-            // if (data != null)
-            // {
-            //     currentDateTime = data.currentDateTime;
-            //     cheatTime = data.cheatTime;
-            //     timeConst = data.timeConst;
-            // }
+            dateTimeDynamicData = new();
+            dateTimeDynamicData = SaveLoadSystem.LoadData(dateTimeDynamicData, saveKey);
         }
     }
 }

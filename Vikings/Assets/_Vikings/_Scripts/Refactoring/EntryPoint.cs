@@ -11,18 +11,19 @@ namespace _Vikings._Scripts.Refactoring
     {
         [SerializeField] private SaveLoadManager _saveLoadManager;
         [SerializeField] private CharactersTaskManager _charactersTaskManager;
-        [SerializeField] private BuildingHomeActionController _buildingHomeAction;
-        
-        
+        [SerializeField] private TaskManager _taskManager;
+        [SerializeField] private IronSourceController _ironSourceController;
+
         private MainPanelManager _mainPanelManager;
         private MapFactory _mapFactory;
         private CharacterFactory _characterFactory;
         private WeaponFactory _weaponFactory;
         private ConfigSetting _configSetting;
         private EatStorage _eatStorage;
-        
+
         [Inject]
-        public void Init(MainPanelManager mainPanelManager, MapFactory mapFactory, CharacterFactory characterFactory, WeaponFactory weaponFactory, ConfigSetting configSetting)
+        public void Init(MainPanelManager mainPanelManager, MapFactory mapFactory, CharacterFactory characterFactory,
+            WeaponFactory weaponFactory, ConfigSetting configSetting)
         {
             _mainPanelManager = mainPanelManager;
             _mapFactory = mapFactory;
@@ -33,32 +34,37 @@ namespace _Vikings._Scripts.Refactoring
 
         private void Start()
         {
-             _saveLoadManager.LoadAll();
-             _mapFactory.CreateBoneFire();
-             _weaponFactory.CreateWeapons(_configSetting.weaponsData);
-             InitPanelManager();
-             InitBuildings();
+            _mainPanelManager.Init();
+            _mainPanelManager.ActiveOverlay(true);
+
+            _saveLoadManager.LoadAll();
+            _mapFactory.CreateBoneFire();
+            _weaponFactory.CreateWeapons(_configSetting.weaponsData);
+            InitBuildings();
+            InitPanelManager();
+            _taskManager.Init(_mainPanelManager, _configSetting);
+            _saveLoadManager.GetResources();
         }
 
         private void InitBuildings()
         {
             _eatStorage = _mapFactory.GetAllBuildings<EatStorage>().FirstOrDefault();
-            _buildingHomeAction.Init(_eatStorage);
-             
+
             var storages = _mapFactory.GetAllBuildings<Storage>();
-             
+
             var craftingTable = _mapFactory.GetAllBuildings<CraftingTable>().FirstOrDefault();
             craftingTable.BuildingComplete += _charactersTaskManager.SetCharactersToCrafting;
             craftingTable.AcceptArg(_mainPanelManager);
-            
+
             foreach (var storage in storages)
             {
                 storage.StorageNeedItem += _charactersTaskManager.SetCharacterToStorage;
                 storage.BuildingComplete += _charactersTaskManager.SetCharactersToCrafting;
                 storage.AcceptArg(_mainPanelManager);
-            } 
-            
+            }
+
             InitCharacters(_eatStorage.CurrentLevel.Value + 1);
+           
         }
 
         private void InitCharacters(int count)
@@ -66,22 +72,22 @@ namespace _Vikings._Scripts.Refactoring
             _characterFactory.Init(_configSetting, _weaponFactory, count);
 
             var characters = _characterFactory.GetCharacters();
-            
+
             foreach (var character in characters)
             {
                 _charactersTaskManager.SetCharacterToStorage(character);
             }
-            
-            _mainPanelManager.SudoGetPanel<UpgradeCharacterMenu>().AcceptArg(_characterFactory.CharacterManager, _eatStorage);
+
+            _mainPanelManager.SudoGetPanel<UpgradeCharacterMenu>()
+                .AcceptArg(_characterFactory.CharacterManager, _eatStorage);
         }
 
         private void InitPanelManager()
         {
-            _mainPanelManager.Init();
-            
-            _mainPanelManager.ActiveOverlay(true);
-        
-            _mainPanelManager.SudoGetPanel<CraftAndBuildingMenu>().AcceptArg(_mapFactory, _charactersTaskManager, _weaponFactory);
+            _mainPanelManager.SudoGetPanel<CraftAndBuildingMenu>()
+                .AcceptArg(_mapFactory, _charactersTaskManager, _weaponFactory);
+            _mainPanelManager.SudoGetPanel<RewardView>().AcceptArg(_ironSourceController);
+            _mainPanelManager.SudoGetPanel<QuestPanelView>().AcceptArg(_mapFactory);
         }
     }
 }

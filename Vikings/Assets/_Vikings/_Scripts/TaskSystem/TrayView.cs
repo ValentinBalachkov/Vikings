@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using PanelManager.Scripts.Panels;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class TrayView : ViewBase
 {
@@ -17,24 +16,16 @@ public class TrayView : ViewBase
     [SerializeField] private Sprite _rewardImage;
     
     [SerializeField] private Sprite _advertisementImage;
-    
-    [SerializeField] private QuestPanelView _questPanelView;
-
-    [SerializeField] private GameObject _advertisementPanel;
-    [SerializeField] private Button _advertisementButton;
-
-    [SerializeField] private IronSourceController _ironSourceController;
 
     private List<TrayElement> _trayElements = new();
 
     private TrayElement _advertisementOnTray;
+    
+    private QuestPanelView _questPanelView;
 
     private void Start()
     {
-        // _advertisementButton.onClick.AddListener((() =>
-        // {
-        //     _ironSourceController.ShowRewardVideo();
-        // }));
+        _questPanelView = _panelManager.SudoGetPanel<QuestPanelView>();
     }
 
     public void UpdateTrayPanel(List<TaskData> tasksData)
@@ -45,7 +36,7 @@ public class TrayView : ViewBase
             var taskObject = Instantiate(_trayElement, _content);
             _trayElements.Add(taskObject);
 
-            switch (task.taskStatus)
+            switch (task.TaskStatus)
             {
                 case TaskStatus.IsSuccess:
                     taskObject.Init(task, _successImage, (() =>
@@ -72,10 +63,10 @@ public class TrayView : ViewBase
     public void AddAdvertisementOnPanel()
     {
         _advertisementOnTray = Instantiate(_trayElement, _content);
-        _advertisementOnTray.Init(_advertisementImage, (() =>
+        _advertisementOnTray.Init(_advertisementImage, () =>
         {
-            _advertisementPanel.SetActive(true);
-        }));
+            _panelManager.OpenPanel<RewardView>();
+        });
     }
     
     public void RemoveAdvertisementOnPanel()
@@ -84,7 +75,7 @@ public class TrayView : ViewBase
         {
             return;
         }
-        _advertisementPanel.SetActive(false);
+        _panelManager.ClosePanel<RewardView>();
        Destroy(_advertisementOnTray.gameObject);
        _advertisementOnTray = null;
     }

@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: PanelManagerSettings
   m_EditorClassIdentifier: 
   Panels:
+  - {fileID: 2083606301431066620, guid: fe6d3335ce1e5a847b22a067057c2c2e, type: 3}
+  - {fileID: 3847989421982891762, guid: 22ea20f5c5bbbcb4c842d29814a7ca66, type: 3}
   - {fileID: 7843449467847883638, guid: 7a96bc9916052d34b9f44b505a73e860, type: 3}
+  - {fileID: 5555433249938616692, guid: 9f264bef993e4d04fab2d8d883d39df9, type: 3}
+  - {fileID: 4952085765912347834, guid: 06d54201375cbf249ad3c0d903f0fce9, type: 3}
   - {fileID: 1624193946337241828, guid: cdbdd3b5e5ad7584fba1fb7a007fe5dd, type: 3}
   - {fileID: 6041146192151166990, guid: cc2fbcd08fd4725408e6c79a00a953a4, type: 3}
-  - {fileID: 3847989421982891762, guid: 22ea20f5c5bbbcb4c842d29814a7ca66, type: 3}
-  - {fileID: 5555433249938616692, guid: 9f264bef993e4d04fab2d8d883d39df9, type: 3}
-  - {fileID: 4202646834690875432, guid: d0481a3c505bfa24c8c96916b3e227f6, type: 3}
-  - {fileID: 5380231647887804573, guid: c8854a8723055c64f9f892901388dfd6, type: 3}
+  - {fileID: 1741924350360774336, guid: d0481a3c505bfa24c8c96916b3e227f6, type: 3}
   - {fileID: 9117780063118076, guid: 038393f420ab3ee4a8d6f31e318e1044, type: 3}
-  - {fileID: 4952085765912347834, guid: 06d54201375cbf249ad3c0d903f0fce9, type: 3}
-  - {fileID: 5849474933578311299, guid: 4f935077477625c4e978315aedbc2092, type: 3}
+  - {fileID: 5508449757949524608, guid: 4f935077477625c4e978315aedbc2092, type: 3}

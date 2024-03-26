@@ -15,6 +15,7 @@ using ItemCount = _Vikings.Refactoring.Character.ItemCount;
         public string nameText;
         public string description;
         public string required;
+        public Sprite requiredSprite;
         public int priority;
         public TaskData taskData;
         public List<ItemCount> priceToBuy = new();

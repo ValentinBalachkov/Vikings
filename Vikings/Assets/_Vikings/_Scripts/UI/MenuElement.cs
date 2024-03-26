@@ -24,7 +24,10 @@ namespace Vikings.UI
         
        
         [SerializeField] private TMP_Text _buttonDescription;
-        [SerializeField] private TMP_Text _requiredText;
+        [SerializeField] private TMP_Text _requiredLevelText;
+        [SerializeField] private Image _requiredImage;
+        [SerializeField] private GameObject _requiredPanel;
+        
 
         [SerializeField] private Sprite _activeSprite;
         [SerializeField] private Sprite _defaultSprite;
@@ -95,18 +98,19 @@ namespace Vikings.UI
         }
 
 
-        public void SetEnable(bool isEnable, string requiredText)
+        public void SetEnable(bool isEnable, int requiredLevel, Sprite requiredSprite)
         {
             if (isEnable)
             {
-                _requiredText.gameObject.SetActive(false);
+                _requiredPanel.gameObject.SetActive(false);
                 _upgradeBtn.interactable = true;
                 _upgradeBtn.image.sprite = _activeSprite;
             }
             else
             {
-                _requiredText.gameObject.SetActive(true);
-                _requiredText.text = requiredText;
+                _requiredPanel.gameObject.SetActive(true);
+                _requiredLevelText.text = requiredLevel.ToString();
+                _requiredImage.sprite = requiredSprite;
                 _upgradeBtn.interactable = false;
                 _upgradeBtn.image.sprite = _defaultSprite;
             }

@@ -88,51 +88,52 @@ namespace _Vikings.WeaponObject
             _weaponDynamicData.Level = value;
             if (_weaponDynamicData.Level == 1 && _weaponData.taskData != null)
             {
-                _weaponData.taskData.accessDone = true;
-                if (_weaponData.taskData.taskStatus == TaskStatus.InProcess)
+                _weaponData.taskData.AccessDone = true;
+                if (_weaponData.taskData.TaskStatus == TaskStatus.InProcess)
                 {
                     TaskManager.taskChangeStatusCallback?.Invoke(_weaponData.taskData, TaskStatus.TakeReward);
                 }
             }
         }
         
-        public (bool, string) IsEnableToBuild(CraftingTable craftingTable, Storage storage)
+        public (bool, int, Sprite) IsEnableToBuild(CraftingTable craftingTable, Storage storage)
         {
             bool isEnable;
-            string text = "";
+            int level;
+            Sprite sprite = _weaponData.requiredSprite;
             
             if (Level.Value > 0)
             {
                 isEnable = storage.CurrentLevel.Value > 0 && craftingTable.CurrentLevel.Value > Level.Value;
-                text = $"REQUIRED:  {_weaponData.required} LEVEL{craftingTable.CurrentLevel.Value + 1}";
+                level = craftingTable.CurrentLevel.Value + 1;
             }
             else
             {
                 isEnable = storage.CurrentLevel.Value > 0;
-                text = $"REQUIRED:  {_weaponData.required} LEVEL{storage.CurrentLevel.Value + 1}";
+                level = storage.CurrentLevel.Value + 1;
             }
 
-            return (isEnable, text);
+            return (isEnable, level, sprite);
         }
         
-        public (bool, string) IsEnableToBuild(CraftingTable craftingTable)
+        public (bool, int, Sprite) IsEnableToBuild(CraftingTable craftingTable)
         {
             bool isEnable;
-            string text = "";
+            int level;
+            Sprite sprite = _weaponData.requiredSprite;
             
             if (Level.Value > 0)
             {
                 isEnable = craftingTable.CurrentLevel.Value >= 2 && craftingTable.CurrentLevel.Value > Level.Value;
-                text =
-                    $"REQUIRED:  {_weaponData.required} LEVEL{craftingTable.CurrentLevel.Value + 1}";
+                level = craftingTable.CurrentLevel.Value + 1;
             }
             else
             {
                 isEnable = craftingTable.CurrentLevel.Value >= 2;
-                text = $"REQUIRED:  {_weaponData.required} LEVEL{2}";
+                level = 2;
             }
 
-            return (isEnable, text);
+            return (isEnable, level, sprite);
         }
 
         public void Save()

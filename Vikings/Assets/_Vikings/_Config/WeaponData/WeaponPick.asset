@@ -19,6 +19,7 @@ MonoBehaviour:
   description: Allows you to mine stones. Upgrade to increase the amount of stones
     you get
   required: Workbench
+  requiredSprite: {fileID: 21300000, guid: 77f9782e323686143a53ad0436cff1e2, type: 3}
   priority: 5
   taskData: {fileID: 0}
   priceToBuy:
