@@ -4595,7 +4595,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1080, y: 1920}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.5
+  m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -13655,7 +13655,7 @@ MonoBehaviour:
       - {fileID: 292842897}
       - {fileID: 752763646}
       level: 3
-  - abstractResource: {fileID: 7558777686571704970, guid: 06295d8444be2b24384753ada3fcd366,
+  - abstractResource: {fileID: 2117310397720322518, guid: 2168e54236b53724ea5540d78cde1162,
       type: 3}
     resourceConfig: {fileID: 11400000, guid: b90d6cdefc2ad7e4cbdd899ef9e419e5, type: 2}
     levelPosition:
@@ -13714,15 +13714,15 @@ MonoBehaviour:
     positions: {fileID: 292437008}
   _boneFirePositionData:
   - point: {fileID: 1552348847}
-    isDisable: 0
+    character: {fileID: 0}
   - point: {fileID: 154330935}
-    isDisable: 0
+    character: {fileID: 0}
   - point: {fileID: 157291874}
-    isDisable: 0
+    character: {fileID: 0}
   - point: {fileID: 1168590690}
-    isDisable: 0
+    character: {fileID: 0}
   - point: {fileID: 162236752}
-    isDisable: 0
+    character: {fileID: 0}
   _boneFire: {fileID: 2447724391061627212, guid: c9c1b9e66720e6440a4f220e98b13002,
     type: 3}
   _boneFireSpawnPoint: {fileID: 585255384}

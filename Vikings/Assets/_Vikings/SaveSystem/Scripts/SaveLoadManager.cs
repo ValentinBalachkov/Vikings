@@ -184,13 +184,25 @@ public class SaveLoadManager : MonoBehaviour
 
         if (abstractBuilding.abstractBuildingDynamicData.BuildingTime < time)
         {
-            abstractBuilding.Upgrade();
-            abstractBuilding.ChangeState(BuildingState.Ready);
+            if (abstractBuilding is CraftingTable table && table.CurrentWeapon != null)
+            {
+                time -= table.CurrentWeapon.CraftingTime;
+                buildingName = table.CurrentWeapon.GetWeaponData().nameText;
+                level = table.CurrentWeapon.Level.Value;
+                sprite =  table.CurrentWeapon.GetWeaponData().icon;
+                
+                table.UpgradeWeapon();
+            }
+            else
+            {
+                 
+                abstractBuilding.Upgrade();
 
-            time -= abstractBuilding.abstractBuildingDynamicData.BuildingTime;
-            buildingName = abstractBuilding.GetData().nameText;
-            level = abstractBuilding.CurrentLevel.Value;
-            sprite = abstractBuilding.GetData().icon;
+                time -= abstractBuilding.abstractBuildingDynamicData.BuildingTime;
+                buildingName = abstractBuilding.GetData().nameText;
+                level = abstractBuilding.CurrentLevel.Value;
+                sprite = abstractBuilding.GetData().icon;
+            }
         }
         else
         {
@@ -293,10 +305,10 @@ public class SaveLoadManager : MonoBehaviour
 
         foreach (var data in buildings)
         {
-            _mapFactory.CreateBuilding(data);
+            _mapFactory.CreateBuilding(data, _mainPanelManager);
         }
 
-        _mapFactory.CreateBuilding(_configSetting.craftingTable);
+        _mapFactory.CreateBuilding(_configSetting.craftingTable, _mainPanelManager);
 
         var eatStorage = _mapFactory.GetAllBuildings<EatStorage>().FirstOrDefault();
         
@@ -306,7 +318,7 @@ public class SaveLoadManager : MonoBehaviour
         {
             for (int i = 0; i < eatStorage.CurrentLevel.Value + 1; i++)
             {
-                _mapFactory.CreateResource(i, data, charactersTaskManager.OnResourceEnable);
+                _mapFactory.CreateResource(i, data, charactersTaskManager.OnResourceEnable, _mainPanelManager);
             }
         }
 
@@ -316,7 +328,5 @@ public class SaveLoadManager : MonoBehaviour
         }
         
         _dateTimeData.Init();
-
-        //GetResources();
     }
 }

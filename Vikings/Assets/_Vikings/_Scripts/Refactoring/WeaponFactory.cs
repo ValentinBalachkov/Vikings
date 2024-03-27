@@ -23,6 +23,12 @@ namespace _Vikings._Scripts.Refactoring
             var weapons = Container.ResolveAll<Weapon>().Where(x => x.Level.Value > 0).ToList();
             return weapons;
         }
+        
+        public List<Weapon> GetAllWeapons()
+        {
+            var weapons = Container.ResolveAll<Weapon>();
+            return weapons;
+        }
 
         public void CreateWeapons(List<WeaponData> weaponsData)
         {

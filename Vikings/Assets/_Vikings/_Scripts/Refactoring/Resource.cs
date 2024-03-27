@@ -10,7 +10,7 @@ namespace _Vikings._Scripts.Refactoring
         [SerializeField] private AudioSource _audioSource;
         
         private GameObject _view;
-        private ItemData _itemData;
+        protected ItemData _itemData;
      
         public override float GetStoppingDistance()
         {
@@ -22,7 +22,7 @@ namespace _Vikings._Scripts.Refactoring
             StartCoroutine(GetItemCoroutine(characterStateMachine));
         }
 
-        public override void Init()
+        public override void Init(MainPanelManager mainPanelManager)
         {
             SpawnModel();
             SetAudioSetting(); 
@@ -58,13 +58,18 @@ namespace _Vikings._Scripts.Refactoring
             _audioSource.clip = _itemData._actionSound;
         }
 
-        private void SpawnModel()
+        protected virtual void SpawnModel()
         {
             _view = Instantiate(_itemData.View, transform);
         }
 
+        protected void PlaySound()
+        {
+            _audioSource.Play();
+        }
 
-        private IEnumerator GetItemCoroutine(CharacterStateMachine characterStateMachine)
+
+        protected virtual IEnumerator GetItemCoroutine(CharacterStateMachine characterStateMachine)
         {
             int actionCount = 0;
             int itemCount = 0;
@@ -80,6 +85,8 @@ namespace _Vikings._Scripts.Refactoring
                 yield return new WaitForSeconds(1);
             }
 
+            PlaySound();
+
             if (itemCount > _itemData.DropCount)
             {
                 itemCount = _itemData.DropCount;
@@ -90,10 +97,6 @@ namespace _Vikings._Scripts.Refactoring
             EndAction?.Invoke();
             
             _view.SetActive(false);
-            if (_audioSource != null)
-            {
-                _audioSource.Play();
-            }
             
             yield return new WaitForSeconds(_itemData.disableDelaySecond);
             _view.SetActive(true);

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: e76f1cd188790a54cbf605cbb6fc9a1f, type: 3}
   view: {fileID: 6035762106220388309, guid: 178401ce06cdcc54abb8f511d2edf97b, type: 3}
-  _actionSound: {fileID: 0}
-  _mixer: {fileID: 0}
+  _actionSound: {fileID: 8300000, guid: eecda38e1879385408804ce21525237a, type: 3}
+  _mixer: {fileID: -4360307246535744512, guid: 0d2c6481c247dac4d8ac2b384507e50b, type: 2}
   disableDelaySecond: 5
   stoppingDistance: 2
   _id: 1

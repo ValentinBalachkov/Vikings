@@ -48,7 +48,14 @@ namespace _Vikings._Scripts.Refactoring
                     continue;
                 }
 
-                SetCharacterToStorage(character);
+                if (_currentBuilding != null)
+                {
+                    SetCharacterToBuilding(character);
+                }
+                else
+                {
+                    SetCharacterToStorage(character);
+                }
             }
         }
 
@@ -72,7 +79,6 @@ namespace _Vikings._Scripts.Refactoring
 
         public void SetCharacterToStorage(Storage storage)
         {
-            DebugLogger.SendMessage("1", Color.green);
             if (_currentBuilding != null) return;
 
             var characters = _characterFactory.GetCharacters();
@@ -82,12 +88,10 @@ namespace _Vikings._Scripts.Refactoring
                 var resource = GetNearedResource(storage.ResourceType, character, true);
                 if (resource == null)
                 {
-                    DebugLogger.SendMessage("2", Color.green);
                     SetCharacterToFire(character);
                     continue;
                 }
 
-                DebugLogger.SendMessage("3", Color.green);
                 character.SetBuildingToAction(storage,
                     resource, SetCharacterToStorage);
             }
@@ -120,22 +124,61 @@ namespace _Vikings._Scripts.Refactoring
         {
             foreach (var resource in _neededResource)
             {
+                DebugLogger.SendMessage($"{resource.Key} 1", Color.green);
+
                 if (resource.Value > 0)
                 {
-                    var resourceObject = GetNearedResource(resource.Key, character);
+                    DebugLogger.SendMessage($"{resource.Key} 2", Color.green);
+
+                    AbstractObject resourceObject = null;
+
+                    if (_currentBuilding is Storage storage)
+                    {
+                        DebugLogger.SendMessage($"{resource.Key} 2 1", Color.green);
+
+                        if (storage.ResourceType == resource.Key)
+                        {
+                            DebugLogger.SendMessage($"{resource.Key} 2 2", Color.green);
+
+                            resourceObject = GetNearedResource(resource.Key, character, true);
+                        }
+                        else
+                        {
+                            resourceObject = GetNearedResource(resource.Key, character);
+                        }
+                    }
+                    else
+                    {
+                        resourceObject = GetNearedResource(resource.Key, character);
+                    }
+
                     if (resourceObject == null)
                     {
+                        DebugLogger.SendMessage($"{resourceObject} 3", Color.green);
+
                         continue;
                     }
+
+                    int dropCount = character.BackpackCount;
+
+                    if (resourceObject is AbstractResource abstractResource)
+                    {
+                        var data = abstractResource.GetItemData();
+                        dropCount = GetItemDropCount(character, data);
+                    }
+
+                    DebugLogger.SendMessage($"{dropCount} 4", Color.green);
 
                     character.SetBuildingToAction(_currentBuilding,
                         resourceObject, OnCharacterActionDone);
 
-                    _neededResource[resource.Key] -= GetItemDropCount(character, resource.Key);
+                    _neededResource[resource.Key] -= dropCount;
 
                     return;
                 }
             }
+
+            DebugLogger.SendMessage($"5", Color.green);
 
             SetCharacterToStorage(character);
         }
@@ -166,7 +209,7 @@ namespace _Vikings._Scripts.Refactoring
                     var data = abstractResource.GetItemData();
                     dropCount = GetItemDropCount(character, data);
                 }
-                
+
                 if (storage.MaxStorageCount >= storage.Count + dropCount)
                 {
                     character.SetBuildingToAction(storage,
@@ -180,6 +223,11 @@ namespace _Vikings._Scripts.Refactoring
 
         private void SetCharacterToFire(CharacterStateMachine character)
         {
+            if (character.IsIdle)
+            {
+                return;
+            }
+
             var boneFire = _mapFactory.GetBoneFire();
             character.SetObject(boneFire);
         }
@@ -190,7 +238,8 @@ namespace _Vikings._Scripts.Refactoring
             var storage = _mapFactory.GetAllBuildings<Storage>()
                 .FirstOrDefault(x => x.ResourceType == resourceType && x.CurrentLevel.Value > 0);
 
-            if (storage != null && !isStorage && storage.Count > characterStateMachine.BackpackCount * storage.CharactersCount)
+            if (storage != null && !isStorage &&
+                storage.Count > characterStateMachine.BackpackCount * storage.CharactersCount)
             {
                 storage.CharactersCount++;
                 return storage;
@@ -204,6 +253,7 @@ namespace _Vikings._Scripts.Refactoring
 
             var openedResources = abstractResources.Where(x => openedResourcesData.Contains(x.GetItemData())).ToList();
 
+
             var item = openedResources.Where(x => x.GetItemData().ResourceType == resourceType && x.IsEnableToGet())
                 .OrderBy(x => x.GetItemData().Priority).ThenByDescending(x => x.GetItemData().DropCount)
                 .ThenBy(x => Vector3.Distance(x.GetPosition().position, characterStateMachine.GetPosition().position))
@@ -211,30 +261,15 @@ namespace _Vikings._Scripts.Refactoring
 
             if (item != null)
             {
+                DebugLogger.SendMessage($"{item} is select", Color.green);
+
                 item.IsTarget = true;
             }
 
             return item;
         }
 
-        private int GetItemDropCount(CharacterStateMachine characterStateMachine, ResourceType resource)
-        {
-            var itemData = _configSetting.resourcesData.FirstOrDefault(x => x.ResourceType == resource &&
-                                                                            _weaponFactory.GetOpenWeapons()
-                                                                                .SelectMany(weapon =>
-                                                                                    weapon.GetWeaponData()
-                                                                                        .avaleableResources)
-                                                                                .Contains(x));
-            int itemPerActionCount = characterStateMachine.Inventory.GetItemPerActionCount(itemData);
-            var count = characterStateMachine.BackpackCount * itemPerActionCount;
-            if (count > itemData.DropCount)
-            {
-                count = itemData.DropCount;
-            }
 
-            return count;
-        }
-        
         private int GetItemDropCount(CharacterStateMachine characterStateMachine, ItemData resource)
         {
             int itemPerActionCount = characterStateMachine.Inventory.GetItemPerActionCount(resource);

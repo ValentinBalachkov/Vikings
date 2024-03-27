@@ -11,7 +11,7 @@ namespace Vikings.Object
         public abstract float GetStoppingDistance();
         public abstract Transform GetPosition();
         public abstract void CharacterAction(CharacterStateMachine characterStateMachine);
-        public abstract void Init();
+        public abstract void Init(MainPanelManager panelManager);
 
         protected CompositeDisposable _disposable = new();
     }

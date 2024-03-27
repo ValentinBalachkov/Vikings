@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using _Vikings.Refactoring.Character;
@@ -95,8 +94,14 @@ namespace _Vikings._Scripts.Refactoring
             DelayActionCoroutine(characterStateMachine);
         }
 
-        public override void Init()
+        public override void Init(MainPanelManager panelManager)
         {
+            _panelManager = panelManager;
+            
+            _collectingResourceView = _panelManager.SudoGetPanel<CollectingResourceView>();
+            _inventoryView = _panelManager.SudoGetPanel<InventoryView>();
+            _inventoryView.UpdateUI(_storageDynamicData.Count, _storageDynamicData.MaxStorageCount, ResourceType);
+            
             for (int i = 0; i < _storageDynamicData.CurrentItemsCount.Length; i++)
             {
                 currentItems.Add(_storageDynamicData.CurrentItemsCount[i].resourceType,
@@ -124,18 +129,13 @@ namespace _Vikings._Scripts.Refactoring
                                                             + 15);
             }
 
+            currentItems[ResourceType.Rock] = 0;
+            currentItems[ResourceType.Wood] = 0;
+
             _buildingView.SetupSprite(CurrentLevel.Value);
             ChangeState(BuildingState.Ready);
         }
-
-        public override void AcceptArg(MainPanelManager arg)
-        {
-            base.AcceptArg(arg);
-            _collectingResourceView = panelManager.SudoGetPanel<CollectingResourceView>();
-            _inventoryView = panelManager.SudoGetPanel<InventoryView>();
-            _inventoryView.UpdateUI(_storageDynamicData.Count, _storageDynamicData.MaxStorageCount, ResourceType);
-        }
-
+        
         public override void ChangeState(BuildingState state)
         {
             base.ChangeState(state);
@@ -150,10 +150,7 @@ namespace _Vikings._Scripts.Refactoring
                     ChangeSpriteObject(true);
                     ChangeCount += OnCountChangeInProgressState;
                     ChangeCount -= OnCountChangeReadyState;
-                    if (_collectingResourceView != null)
-                    {
-                        _collectingResourceView.Setup(this);
-                    }
+                    _collectingResourceView.Setup(this);
                     break;
                 case BuildingState.Ready:
                     ChangeSpriteObject(false);
@@ -164,10 +161,7 @@ namespace _Vikings._Scripts.Refactoring
                 case BuildingState.Crafting:
                     isCraftActivated = false;
                     BuildingComplete?.Invoke(this);
-                    if (_collectingResourceView != null)
-                    {
-                        _collectingResourceView.Clear();
-                    }
+                    _collectingResourceView.Clear();
                     break;
             }
         }
@@ -181,15 +175,9 @@ namespace _Vikings._Scripts.Refactoring
             foreach (var price in maxPrice)
             {
                 var currentItem =
-                    _storageDynamicData.CurrentItemsCount.FirstOrDefault(x => x.resourceType == price.Key);
+                    currentItems.FirstOrDefault(x => x.Key == price.Key).Value;
 
-                if (currentItem == null)
-                {
-                    Debug.LogError("GetNeededItemsCount is null");
-                    continue;
-                }
-
-                dict.Add(price.Key, price.Value - currentItem.count);
+                dict.Add(price.Key, price.Value - currentItem);
             }
 
             return dict;
@@ -299,6 +287,7 @@ namespace _Vikings._Scripts.Refactoring
             {
                 characterStateMachine.SetCollectAnimation(null, () =>
                 {
+                    _changeItemSound.Play();
                     EndAction?.Invoke();
                 });
             }
@@ -376,6 +365,12 @@ namespace _Vikings._Scripts.Refactoring
 
         public void Save()
         {
+            foreach (var item in currentItems)
+            {
+                _storageDynamicData.CurrentItemsCount.FirstOrDefault(x => x.resourceType == item.Key).count =
+                    currentItems[item.Key];
+            }
+            
             SaveLoadSystem.SaveData(_storageDynamicData, _storageData.saveKey);
         }
     }

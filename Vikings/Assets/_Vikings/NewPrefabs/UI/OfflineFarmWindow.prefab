@@ -2306,10 +2306,10 @@ MonoBehaviour:
     resourceType: 0
   - icon: {fileID: 500560084431874018}
     text: {fileID: 114096715199902861}
-    resourceType: 0
+    resourceType: 1
   - icon: {fileID: 7417411404492882308}
     text: {fileID: 64702203899960148}
-    resourceType: 0
+    resourceType: 2
   _buildingPanel: {fileID: 496998276009059166}
   _resourcesPanel: {fileID: 6753355516048761281}
   _buildingLevelText: {fileID: 437197026919504747}

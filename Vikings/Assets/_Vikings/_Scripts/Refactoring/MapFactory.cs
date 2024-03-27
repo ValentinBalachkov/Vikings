@@ -26,7 +26,7 @@ namespace Vikings.Map
             AddMapSpawner();
         }
 
-        public void CreateBuilding(BuildingData buildingData)
+        public void CreateBuilding(BuildingData buildingData, MainPanelManager mainPanelManager)
         {
             var pos = mapBuildingData.FirstOrDefault(x => x.data == buildingData);
             if (pos == null)
@@ -37,11 +37,11 @@ namespace Vikings.Map
 
             var building = CreateObject<AbstractBuilding>(pos.data.prefab, pos.positions);
             building.SetData(buildingData);
-            building.Init();
+            building.Init(mainPanelManager);
             building.transform.localScale = new Vector3(0.3f,0.3f, 0.3f);
         }
 
-        public void CreateResource(int level, ItemData itemData, Action onResourceEnable)
+        public void CreateResource(int level, ItemData itemData, Action onResourceEnable, MainPanelManager mainPanelManager)
         {
             var data = mapResourceData.FirstOrDefault(x => x.resourceConfig == itemData);
 
@@ -62,7 +62,7 @@ namespace Vikings.Map
             {
                 var resource = CreateObject<AbstractResource>(data.abstractResource, pos);
                 resource.SetItemData(data.resourceConfig);
-                resource.Init();
+                resource.Init(mainPanelManager);
                 resource.transform.localScale = Vector3.one;
                 resource.ResourceEnable = onResourceEnable;
             }
@@ -115,10 +115,10 @@ namespace Vikings.Map
             return list;
         }
 
-        public void CreateBoneFire()
+        public void CreateBoneFire(MainPanelManager mainPanelManager)
         {
             var building = CreateObject<BoneFire>(_boneFire, _boneFireSpawnPoint);
-            building.Init();
+            building.Init(mainPanelManager);
             building.transform.localScale = Vector3.one;
             building.AcceptArg(_boneFirePositionData);
         }

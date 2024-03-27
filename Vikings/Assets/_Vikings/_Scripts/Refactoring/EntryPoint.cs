@@ -2,6 +2,7 @@
 using UnityEngine;
 using Vikings.Building;
 using Vikings.Map;
+using Vikings.Object;
 using Vikings.UI;
 using Zenject;
 
@@ -38,12 +39,11 @@ namespace _Vikings._Scripts.Refactoring
             _mainPanelManager.ActiveOverlay(true);
 
             _saveLoadManager.LoadAll();
-            _mapFactory.CreateBoneFire();
+            _mapFactory.CreateBoneFire(_mainPanelManager);
             _weaponFactory.CreateWeapons(_configSetting.weaponsData);
             InitBuildings();
             InitPanelManager();
             _taskManager.Init(_mainPanelManager, _configSetting);
-            _saveLoadManager.GetResources();
         }
 
         private void InitBuildings()
@@ -54,13 +54,18 @@ namespace _Vikings._Scripts.Refactoring
 
             var craftingTable = _mapFactory.GetAllBuildings<CraftingTable>().FirstOrDefault();
             craftingTable.BuildingComplete += _charactersTaskManager.SetCharactersToCrafting;
-            craftingTable.AcceptArg(_mainPanelManager);
+
+            var weapon = _weaponFactory.GetAllWeapons().FirstOrDefault(x => x.IsSet);
+
+            if (weapon != null)
+            {
+                craftingTable.AcceptArg(weapon);
+            }
 
             foreach (var storage in storages)
             {
                 storage.StorageNeedItem += _charactersTaskManager.SetCharacterToStorage;
                 storage.BuildingComplete += _charactersTaskManager.SetCharactersToCrafting;
-                storage.AcceptArg(_mainPanelManager);
             }
 
             InitCharacters(_eatStorage.CurrentLevel.Value + 1);
@@ -72,10 +77,23 @@ namespace _Vikings._Scripts.Refactoring
             _characterFactory.Init(_configSetting, _weaponFactory, count);
 
             var characters = _characterFactory.GetCharacters();
+            
+            _saveLoadManager.GetResources();
+
+            var currentBuilding = _mapFactory.GetAllBuildings<AbstractBuilding>().FirstOrDefault(x =>
+                x.buildingState == BuildingState.InProgress || x.buildingState == BuildingState.Crafting);
 
             foreach (var character in characters)
             {
-                _charactersTaskManager.SetCharacterToStorage(character);
+                if (currentBuilding != null)
+                {
+                    _charactersTaskManager.setBuildingToQueue.Execute(currentBuilding);
+                }
+                else
+                {
+                    _charactersTaskManager.SetCharacterToStorage(character);
+                }
+                
             }
 
             _mainPanelManager.SudoGetPanel<UpgradeCharacterMenu>()

@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Vikings.Object
 {
-    public abstract class AbstractBuilding : AbstractObject, IAcceptArg<MainPanelManager>
+    public abstract class AbstractBuilding : AbstractObject
     {
         public ReactiveProperty<int> CurrentLevel = new();
 
@@ -38,30 +38,30 @@ namespace Vikings.Object
         
         public BuildingState buildingState;
 
-        protected MainPanelManager panelManager;
+        protected MainPanelManager _panelManager;
 
         protected bool isCraftActivated;
+
+        [SerializeField] protected AudioSource _changeItemSound;
+        [SerializeField] protected AudioSource _craftingSound;
         
         [SerializeField] protected ParticleSystem particleCraftEffect;
-
-
-        public virtual void AcceptArg(MainPanelManager arg)
-        {
-            panelManager = arg;
-        }
+        
         
         protected IEnumerator UpgradeDelay(CharacterStateMachine characterStateMachine, float buildingTime)
         {
+            _craftingSound.Play();
             isCraftActivated = true;
             particleCraftEffect.gameObject.SetActive(true);
             particleCraftEffect.Play();
             var time = buildingTime * characterStateMachine.SpeedWork;
-            panelManager.SudoGetPanel<CraftingIndicatorView>().Setup((int)time, GetPosition());
+            _panelManager.SudoGetPanel<CraftingIndicatorView>().Setup((int)time, GetPosition());
             yield return new WaitForSeconds(time);
             particleCraftEffect.Stop();
             particleCraftEffect.gameObject.SetActive(false);
+            _craftingSound.Stop();
             Upgrade();
-            panelManager.SudoGetPanel<MenuButtonsManager>().EnableButtons(true);
+            _panelManager.SudoGetPanel<MenuButtonsManager>().EnableButtons(true);
             EndAction?.Invoke();
         }
     }

@@ -19,7 +19,7 @@ namespace _Vikings.Refactoring.Character
         public virtual void Enter(AbstractObject abstractObject)
         {
             _abstractObject = abstractObject;
-            DebugLogger.SendMessage("Enter state: " + _stateName, Color.green);
+            //DebugLogger.SendMessage("Enter state: " + _stateName, Color.green);
         }
 
         public virtual void Exit()
