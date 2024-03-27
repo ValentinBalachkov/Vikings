@@ -18,6 +18,7 @@ public class MenuButtonsManager : ViewBase
         
         _craftButton.OnClickAsObservable().Subscribe(_ =>
         {
+            _panelManager.PlaySound(UISoundType.Open);
             _panelManager.ClosePanel<MenuButtonsManager>();
             _panelManager.OpenPanel<CraftAndBuildingMenu>();
             
@@ -25,6 +26,7 @@ public class MenuButtonsManager : ViewBase
         
         _upgradeButton.OnClickAsObservable().Subscribe(_ =>
         {
+            _panelManager.PlaySound(UISoundType.Open);
             _panelManager.ClosePanel<MenuButtonsManager>();
             _panelManager.OpenPanel<UpgradeCharacterMenu>();
         }).AddTo(_panelManager.Disposable);

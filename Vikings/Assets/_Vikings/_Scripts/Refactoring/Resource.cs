@@ -26,6 +26,7 @@ namespace _Vikings._Scripts.Refactoring
         {
             SpawnModel();
             SetAudioSetting(); 
+            transform.localScale = Vector3.one;
         }
 
         public override ItemData GetItemData()

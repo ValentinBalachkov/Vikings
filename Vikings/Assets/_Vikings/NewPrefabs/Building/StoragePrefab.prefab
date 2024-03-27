@@ -110,10 +110,10 @@ Transform:
   m_GameObject: {fileID: 1494851383012990405}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3808910875666826039}
+  m_Father: {fileID: 4897016215499429298}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &3894698664435732477
@@ -239,10 +239,10 @@ Transform:
   m_GameObject: {fileID: 2331615238191452658}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 4524370790646162220}
+  - {fileID: 1882960176124857149}
   - {fileID: 3808910875666826039}
   - {fileID: 2026125249456608536}
   m_Father: {fileID: 0}
@@ -263,10 +263,14 @@ MonoBehaviour:
   CurrentLevel:
     value: 0
   abstractBuildingDynamicData:
-    CurrentItemsCount: []
     SaveKey: 
+    CurrentItemsCount: []
+    BuildingTime: 0
+    State: 0
+    CurrentLevel: 0
   buildingState: 0
   particleCraftEffect: {fileID: 3252475680703802542}
+  CharactersCount: 0
   _buildingSpriteObject: {fileID: 7216879613359587854}
 --- !u!1 &2896521758792839751
 GameObject:
@@ -353,7 +357,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &4412782136857992000
+--- !u!1 &4698471394070077904
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -361,8 +365,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4524370790646162220}
-  - component: {fileID: 6672524736376054700}
+  - component: {fileID: 7106265446149306759}
+  - component: {fileID: 3323058497999940394}
   m_Layer: 8
   m_Name: AudioTo
   m_TagString: Untagged
@@ -370,28 +374,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4524370790646162220
+--- !u!4 &7106265446149306759
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4412782136857992000}
+  m_GameObject: {fileID: 4698471394070077904}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4897016215499429298}
+  m_Father: {fileID: 3808910875666826039}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &6672524736376054700
+--- !u!82 &3323058497999940394
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4412782136857992000}
+  m_GameObject: {fileID: 4698471394070077904}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 0d2c6481c247dac4d8ac2b384507e50b,
@@ -511,7 +515,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6212365838912522631}
-  - {fileID: 1882960176124857149}
+  - {fileID: 7106265446149306759}
   m_Father: {fileID: 4897016215499429298}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

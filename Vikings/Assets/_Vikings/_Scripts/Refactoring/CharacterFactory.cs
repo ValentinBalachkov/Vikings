@@ -74,6 +74,7 @@ namespace _Vikings._Scripts.Refactoring
             var instance = Container.InstantiatePrefabForComponent<CharacterStateMachine>(_characterStateMachine, _spawnPoint.position, Quaternion.identity, _spawnPoint);
             Container.Bind<CharacterStateMachine>().FromInstance(instance).AsTransient();
             instance.Init(instance.transform, _charactersConfig.playerController, _characterManager, _weaponFactory);
+            instance.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
         }
         
     }

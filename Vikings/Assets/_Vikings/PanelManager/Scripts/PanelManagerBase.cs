@@ -16,6 +16,8 @@ namespace PanelManager.Scripts
         [Header("Base")] [SerializeField] private PanelManagerSettings _settings;
         [SerializeField] private Canvas _canvas;
         [SerializeField] private Transform _panelsParent;
+        [SerializeField] private List<UISoundData> _uiSound;
+        
 
         #endregion
 
@@ -39,6 +41,12 @@ namespace PanelManager.Scripts
 
 
         public Canvas Canvas => _canvas;
+
+        public void PlaySound(UISoundType uiSoundType)
+        {
+            var audioData = _uiSound.FirstOrDefault(x => x.type == uiSoundType);
+            audioData?.audio.Play();
+        }
 
         public void OpenPanel<T>() where T : ViewBase
         {

@@ -1,4 +1,6 @@
+using System;
 using PanelManager.Scripts;
+using UnityEngine;
 
 public class MainPanelManager : PanelManagerBase
 {
@@ -11,4 +13,20 @@ public class MainPanelManager : PanelManagerBase
     {
         Disposable.Dispose();
     }
+    
+}
+
+public enum UISoundType
+{
+    Open,
+    Close,
+    UpgradePeople,
+    CreateBuilding
+}
+
+[Serializable]
+public class UISoundData
+{
+    public UISoundType type;
+    public AudioSource audio;
 }

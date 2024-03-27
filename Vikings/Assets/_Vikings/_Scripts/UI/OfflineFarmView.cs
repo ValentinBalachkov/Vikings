@@ -28,6 +28,7 @@ public class OfflineFarmView : ViewBase
 
         _closeButton.OnClickAsObservable().Subscribe(_ =>
         {
+            _panelManager.PlaySound(UISoundType.Close);
             gameObject.SetActive(false);
         }).AddTo(_panelManager.Disposable);
     }

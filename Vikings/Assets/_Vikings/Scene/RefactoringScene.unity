@@ -1655,6 +1655,15 @@ MonoBehaviour:
   _settings: {fileID: 11400000, guid: b8e6966e71fa84346b8fcc50e9bd3ee5, type: 2}
   _canvas: {fileID: 572374561}
   _panelsParent: {fileID: 572374558}
+  _uiSound:
+  - type: 0
+    audio: {fileID: 1306165164}
+  - type: 1
+    audio: {fileID: 190870377}
+  - type: 3
+    audio: {fileID: 2126376110}
+  - type: 2
+    audio: {fileID: 1740390390}
 --- !u!1 &190870375
 GameObject:
   m_ObjectHideFlags: 0
@@ -12231,10 +12240,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 15068433}
   - {fileID: 219821310}
   - {fileID: 842913887}
   - {fileID: 365633114}
+  - {fileID: 15068433}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

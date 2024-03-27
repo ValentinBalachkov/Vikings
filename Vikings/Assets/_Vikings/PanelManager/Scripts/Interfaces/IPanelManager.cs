@@ -8,6 +8,8 @@ namespace PanelManager.Scripts.Interfaces
     {
         public CompositeDisposable Disposable { get;}
         public Canvas Canvas { get; }
+
+        public void PlaySound(UISoundType uiSoundType);
         
         void OpenPanel<TM>() where TM : ViewBase;
         

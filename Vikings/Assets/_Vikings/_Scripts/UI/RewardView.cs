@@ -19,6 +19,7 @@ public class RewardView : ViewBase, IAcceptArg<IronSourceController>
         base.OnInitialize();
         _closeButton.OnClickAsObservable().Subscribe(_ =>
         {
+            _panelManager.PlaySound(UISoundType.Close);
             gameObject.SetActive(false);
         }).AddTo(_panelManager.Disposable);
     }
@@ -29,6 +30,7 @@ public class RewardView : ViewBase, IAcceptArg<IronSourceController>
         
         _watchButton.OnClickAsObservable().Subscribe(_ =>
         {
+            _panelManager.PlaySound(UISoundType.Open);
             _ironSourceController.ShowRewardVideo();
         }).AddTo(_panelManager.Disposable);
     }

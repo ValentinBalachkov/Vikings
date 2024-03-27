@@ -50,7 +50,6 @@ namespace Vikings.Building
             foreach (var t in _allRespawnPointTransform)
             {
                 t.localScale *= scaleMove;
-                DebugLogger.SendMessage($"{t.localScale}", Color.cyan);
             }
         }
 
@@ -75,8 +74,6 @@ namespace Vikings.Building
                 {
                     t.localScale.Set(t.localScale.x * scaleMove, t.localScale.y * scaleMove,
                         t.localScale.z * scaleMove);
-                    
-                    DebugLogger.SendMessage($"{t.localScale}", Color.cyan);
                 }
 
                 yield return null;

@@ -38,6 +38,7 @@ namespace Vikings.Map
             var building = CreateObject<AbstractBuilding>(pos.data.prefab, pos.positions);
             building.SetData(buildingData);
             building.Init();
+            building.transform.localScale = new Vector3(0.3f,0.3f, 0.3f);
         }
 
         public void CreateResource(int level, ItemData itemData, Action onResourceEnable)
@@ -62,6 +63,7 @@ namespace Vikings.Map
                 var resource = CreateObject<AbstractResource>(data.abstractResource, pos);
                 resource.SetItemData(data.resourceConfig);
                 resource.Init();
+                resource.transform.localScale = Vector3.one;
                 resource.ResourceEnable = onResourceEnable;
             }
         }
@@ -117,6 +119,7 @@ namespace Vikings.Map
         {
             var building = CreateObject<BoneFire>(_boneFire, _boneFireSpawnPoint);
             building.Init();
+            building.transform.localScale = Vector3.one;
             building.AcceptArg(_boneFirePositionData);
         }
 
@@ -124,7 +127,6 @@ namespace Vikings.Map
         {
             var instance = Container.InstantiatePrefabForComponent<T>(obj, pos.position, Quaternion.identity, pos);
             Container.Bind<T>().FromInstance(instance).AsTransient();
-
             return instance;
         }
         

@@ -35,6 +35,7 @@ public class QuestPanelView : ViewBase, IAcceptArg<MapFactory>
         _acceptBtnText.text = "Accept";
         _acceptBtn.onClick.AddListener(() =>
         {
+            _panelManager.PlaySound(UISoundType.Open);
             TaskManager.taskChangeStatusCallback?.Invoke(taskData, TaskStatus.InProcess);
             gameObject.SetActive(false);
         });
@@ -50,7 +51,11 @@ public class QuestPanelView : ViewBase, IAcceptArg<MapFactory>
         _iconReward.sprite = taskData.reward[0].itemData.icon;
         _rewardCount.text = taskData.reward[0].count.ToString();
         _acceptBtnText.text = "Ok";
-        _acceptBtn.onClick.AddListener(() => gameObject.SetActive(false));
+        _acceptBtn.onClick.AddListener(() =>
+        {
+            _panelManager.PlaySound(UISoundType.Close);
+            gameObject.SetActive(false);
+        });
         gameObject.SetActive(true);
     }
 
@@ -69,6 +74,7 @@ public class QuestPanelView : ViewBase, IAcceptArg<MapFactory>
                 .FirstOrDefault(x => x.ResourceType == taskData.reward[0].itemData.ResourceType);
             storage.SudoChangeCount(taskData.reward[0].count);
             TaskManager.taskChangeStatusCallback?.Invoke(taskData, TaskStatus.Done);
+            _panelManager.PlaySound(UISoundType.Open);
             gameObject.SetActive(false);
         });
 

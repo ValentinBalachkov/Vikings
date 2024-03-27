@@ -35,6 +35,7 @@ namespace Vikings.UI
 
             _closeButton.OnClickAsObservable().Subscribe(_ =>
             {
+                _panelManager.PlaySound(UISoundType.Close);
                 _panelManager.OpenPanel<MenuButtonsManager>();
                 gameObject.SetActive(false);
             }).AddTo(_panelManager.Disposable);
@@ -73,6 +74,7 @@ namespace Vikings.UI
                 var index = i;
                 element.AddBtnListener(() =>
                 {
+                    _panelManager.PlaySound(UISoundType.UpgradePeople);
                    // _audioSourceBtnClick.Play();
                     UpdateItemsCount(_characterUpgradeUIData[index].upgradeCharacterEnum);
                     _characterManager.Upgrade(_characterUpgradeUIData[index].upgradeCharacterEnum); 

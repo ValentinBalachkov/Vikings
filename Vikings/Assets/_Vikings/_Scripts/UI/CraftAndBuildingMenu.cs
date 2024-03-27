@@ -48,6 +48,7 @@ namespace Vikings.UI
             base.OnInitialize();
             _closeButton.OnClickAsObservable().Subscribe(_ =>
             {
+                _panelManager.PlaySound(UISoundType.Close);
                 _panelManager.OpenPanel<MenuButtonsManager>();
                 _panelManager.ClosePanel<CraftAndBuildingMenu>();
             }).AddTo(_panelManager.Disposable);
@@ -69,6 +70,7 @@ namespace Vikings.UI
                 item.UpdateUI(building);
                 item.AddOnClickListener(() =>
                 {
+                    _panelManager.PlaySound(UISoundType.CreateBuilding);
                     building.ChangeState(BuildingState.InProgress);
                     _charactersTaskManager.setBuildingToQueue.Execute(building);
                     _panelManager.ClosePanel<CraftAndBuildingMenu>();
@@ -96,6 +98,7 @@ namespace Vikings.UI
             table.UpdateUI(craftingTable);
             table.AddOnClickListener(() =>
             {
+                _panelManager.PlaySound(UISoundType.CreateBuilding);
                 craftingTable.ChangeState(BuildingState.InProgress);
                 _charactersTaskManager.setBuildingToQueue.Execute(craftingTable);
                 _panelManager.ClosePanel<CraftAndBuildingMenu>();
@@ -118,6 +121,7 @@ namespace Vikings.UI
                 item.UpdateUI(weapon);
                 item.AddOnClickListener(() =>
                 {
+                    _panelManager.PlaySound(UISoundType.CreateBuilding);
                     _mapFactory.GetAllBuildings<CraftingTable>().FirstOrDefault().AcceptArg(weapon);
                     _mapFactory.GetAllBuildings<CraftingTable>().FirstOrDefault().ChangeState(BuildingState.Ready);
                     _charactersTaskManager.setBuildingToQueue.Execute(_mapFactory.GetAllBuildings<CraftingTable>()

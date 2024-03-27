@@ -41,18 +41,21 @@ public class TrayView : ViewBase
                 case TaskStatus.IsSuccess:
                     taskObject.Init(task, _successImage, (() =>
                     {
+                        _panelManager.PlaySound(UISoundType.Open);
                         _questPanelView.SetNewQuest(task);
                     }));
                     break;
                 case TaskStatus.InProcess:
                     taskObject.Init(task, _processImage, (() =>
                     {
+                        _panelManager.PlaySound(UISoundType.Open);
                         _questPanelView.SetCurrentQuest(task);
                     }));
                     break;
                 case TaskStatus.TakeReward:
                     taskObject.Init(task, _rewardImage, (() =>
                     {
+                        _panelManager.PlaySound(UISoundType.Open);
                         _questPanelView.SetReward(task);
                     }));
                     break;
@@ -65,6 +68,7 @@ public class TrayView : ViewBase
         _advertisementOnTray = Instantiate(_trayElement, _content);
         _advertisementOnTray.Init(_advertisementImage, () =>
         {
+            _panelManager.PlaySound(UISoundType.Open);
             _panelManager.OpenPanel<RewardView>();
         });
     }
