@@ -13,7 +13,12 @@ namespace Vikings.UI
         public override bool RememberInHistory => false;
         
         [SerializeField] private InventoryViewTextData[] _itemsCountText;
-        
+
+        public void SetActiveResourcePanel(ResourceType resourceType, bool status)
+        {
+            var view = _itemsCountText.FirstOrDefault(x => x.type == resourceType);
+            view.panel.SetActive(status);
+        }
 
         public void UpdateUI(int value, int maxCount, ResourceType resourceType)
         {
@@ -27,5 +32,6 @@ namespace Vikings.UI
     {
         public TMP_Text countText;
         public ResourceType type;
+        public GameObject panel;
     }
 }

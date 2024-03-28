@@ -101,7 +101,7 @@ namespace _Vikings._Scripts.Refactoring
             _collectingResourceView = _panelManager.SudoGetPanel<CollectingResourceView>();
             _inventoryView = _panelManager.SudoGetPanel<InventoryView>();
             _inventoryView.UpdateUI(_storageDynamicData.Count, _storageDynamicData.MaxStorageCount, ResourceType);
-            
+
             for (int i = 0; i < _storageDynamicData.CurrentItemsCount.Length; i++)
             {
                 currentItems.Add(_storageDynamicData.CurrentItemsCount[i].resourceType,
@@ -113,6 +113,7 @@ namespace _Vikings._Scripts.Refactoring
             CreateModel();
             ChangeState(_storageDynamicData.State);
             _buildingView.SetupSprite(_storageDynamicData.CurrentLevel);
+            _inventoryView.SetActiveResourcePanel(ResourceType, CurrentLevel.Value > 0);
             SaveLoadManager.saves.Add(this);
         }
 
@@ -131,6 +132,8 @@ namespace _Vikings._Scripts.Refactoring
 
             currentItems[ResourceType.Rock] = 0;
             currentItems[ResourceType.Wood] = 0;
+            
+            _inventoryView.SetActiveResourcePanel(ResourceType, CurrentLevel.Value > 0);
 
             _buildingView.SetupSprite(CurrentLevel.Value);
             ChangeState(BuildingState.Ready);
@@ -302,7 +305,7 @@ namespace _Vikings._Scripts.Refactoring
 
         private void OnCountChangeReadyState(int value, ResourceType itemType)
         {
-            if (_storageDynamicData.Count + value > _storageDynamicData.MaxStorageCount)
+            if (_storageDynamicData.Count + value > _storageDynamicData.MaxStorageCount && _storageDynamicData.Count <= _storageDynamicData.MaxStorageCount)
             {
                 _storageDynamicData.Count = _storageDynamicData.MaxStorageCount;
             }

@@ -27,12 +27,13 @@ public class QuestPanelView : ViewBase, IAcceptArg<MapFactory>
     public void SetNewQuest(TaskData taskData)
     {
         _header.text = "New quest";
-        _descriptionReward.text = "Your reward";
+        _descriptionReward.text = "Reward";
         _description.text = taskData.descriptionNewTask;
         _icon.sprite = taskData.icon;
         _iconReward.sprite = taskData.reward[0].itemData.icon;
         _rewardCount.text = taskData.reward[0].count.ToString();
         _acceptBtnText.text = "Accept";
+        _acceptBtn.onClick.RemoveAllListeners();
         _acceptBtn.onClick.AddListener(() =>
         {
             _panelManager.PlaySound(UISoundType.Open);
@@ -45,12 +46,13 @@ public class QuestPanelView : ViewBase, IAcceptArg<MapFactory>
     public void SetCurrentQuest(TaskData taskData)
     {
         _header.text = "Current quest";
-        _descriptionReward.text = "We will get";
+        _descriptionReward.text = "Reward";
         _description.text = taskData.descriptionCurrentTask;
         _icon.sprite = taskData.icon;
         _iconReward.sprite = taskData.reward[0].itemData.icon;
         _rewardCount.text = taskData.reward[0].count.ToString();
         _acceptBtnText.text = "Ok";
+        _acceptBtn.onClick.RemoveAllListeners();
         _acceptBtn.onClick.AddListener(() =>
         {
             _panelManager.PlaySound(UISoundType.Close);
@@ -62,12 +64,13 @@ public class QuestPanelView : ViewBase, IAcceptArg<MapFactory>
     public void SetReward(TaskData taskData)
     {
         _header.text = "Quest completed";
-        _descriptionReward.text = "Your reward";
+        _descriptionReward.text = "Reward";
         _description.text = taskData.descriptionReward;
         _icon.sprite = taskData.icon;
         _iconReward.sprite = taskData.reward[0].itemData.icon;
         _rewardCount.text = taskData.reward[0].count.ToString();
-        _acceptBtnText.text = "Accept";
+        _acceptBtnText.text = "OK";
+        _acceptBtn.onClick.RemoveAllListeners();
         _acceptBtn.onClick.AddListener(() =>
         {
             var storage = _mapFactory.GetAllBuildings<Storage>()

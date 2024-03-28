@@ -135,11 +135,6 @@ namespace _Vikings._Scripts.Refactoring
 
         private CharacterDynamicData _characterDynamicData;
 
-        public void AddCharacter()
-        {
-            _characterDynamicData.charactersCount++;
-        }
-
         public CharacterManager(CharactersConfig charactersConfig)
         {
             _charactersConfig = charactersConfig;

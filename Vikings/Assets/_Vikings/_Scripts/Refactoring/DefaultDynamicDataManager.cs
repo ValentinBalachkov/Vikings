@@ -120,7 +120,6 @@ public class DefaultDynamicDataManager : EditorWindow
             charactersConfig = _configSetting.charactersConfig,
             characterDynamicData = new CharacterDynamicData()
             {
-                charactersCount = 1,
                 itemsCountLevel = 1,
                 SaveKey = _configSetting.charactersConfig.saveKey,
                 speedWorkLevel = 1,

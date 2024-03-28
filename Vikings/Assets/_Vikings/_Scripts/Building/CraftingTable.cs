@@ -19,7 +19,7 @@ namespace Vikings.Building
         public Weapon CurrentWeapon => _currentWeapon;
         [SerializeField] private GameObject _buildingSpriteObject;
 
-        private Dictionary<ResourceType, int> _currentItemsWeapon = new();
+        public Dictionary<ResourceType, int> currentItemsWeapon = new();
 
         private BuildingData _craftingTableData;
         private CraftingTableDynamicData _craftingTableDynamicData;
@@ -30,9 +30,9 @@ namespace Vikings.Building
         public override void Init(MainPanelManager mainPanelManager)
         {
             _panelManager = mainPanelManager;
-            
+
             _collectingResourceView = _panelManager.SudoGetPanel<CollectingResourceView>();
-            
+
             for (int i = 0; i < _craftingTableDynamicData.CurrentItemsCount.Length; i++)
             {
                 currentItems.Add(_craftingTableDynamicData.CurrentItemsCount[i].resourceType,
@@ -41,7 +41,7 @@ namespace Vikings.Building
 
             for (int i = 0; i < _craftingTableDynamicData.CurrentItemsCountWeapon.Length; i++)
             {
-                _currentItemsWeapon.Add(_craftingTableDynamicData.CurrentItemsCountWeapon[i].resourceType,
+                currentItemsWeapon.Add(_craftingTableDynamicData.CurrentItemsCountWeapon[i].resourceType,
                     _craftingTableDynamicData.CurrentItemsCountWeapon[i].count);
             }
 
@@ -56,6 +56,15 @@ namespace Vikings.Building
         private void OnLevelChange(int value)
         {
             _craftingTableDynamicData.CurrentLevel = value;
+
+            if (_craftingTableDynamicData.CurrentLevel == 1 && _craftingTableData.taskData != null)
+            {
+                _craftingTableData.taskData.AccessDone = true;
+                if (_craftingTableData.taskData.TaskStatus == TaskStatus.InProcess)
+                {
+                    TaskManager.taskChangeStatusCallback?.Invoke(_craftingTableData.taskData, TaskStatus.TakeReward);
+                }
+            }
         }
 
         private void CreateModel()
@@ -63,8 +72,6 @@ namespace Vikings.Building
             _buildingView = Instantiate(_craftingTableData._buildingView, transform);
             _buildingView.Init(_craftingTableData);
         }
-
-      
 
 
         public override float GetStoppingDistance()
@@ -93,12 +100,13 @@ namespace Vikings.Building
                         StartCoroutine(UpgradeWeaponDelay(characterStateMachine, _currentWeapon.CraftingTime));
                     }
                 }
+
                 return;
             }
-            
+
             var item = characterStateMachine.Inventory.GetItemFromInventory();
             ChangeCount?.Invoke(item.count, item.resourceType);
-            
+
             EndAnimationCharacter(characterStateMachine);
         }
 
@@ -118,10 +126,13 @@ namespace Vikings.Building
         {
             CurrentLevel.Value++;
             _buildingView.SetupSprite(CurrentLevel.Value);
-            
+
             currentItems[ResourceType.Wood] = 0;
             currentItems[ResourceType.Rock] = 0;
             
+            currentItemsWeapon[ResourceType.Wood] = 0;
+            currentItemsWeapon[ResourceType.Rock] = 0;
+
             ChangeState(BuildingState.Ready);
         }
 
@@ -129,10 +140,10 @@ namespace Vikings.Building
         {
             Dictionary<ResourceType, int> dict = new();
 
+            var maxPrice = GetPriceForUpgrade();
+
             if (_currentWeapon == null)
             {
-                var maxPrice = GetPriceForUpgrade();
-
                 foreach (var price in maxPrice)
                 {
                     var currentItem =
@@ -143,12 +154,10 @@ namespace Vikings.Building
             }
             else
             {
-                var maxPrice = _currentWeapon.PriceToBuy;
-
                 foreach (var price in maxPrice)
                 {
                     var currentItem =
-                        _currentItemsWeapon.FirstOrDefault(x => x.Key == price.Key).Value;
+                        currentItemsWeapon.FirstOrDefault(x => x.Key == price.Key).Value;
 
                     dict.Add(price.Key, price.Value - currentItem);
                 }
@@ -159,6 +168,11 @@ namespace Vikings.Building
 
         public override Dictionary<ResourceType, int> GetPriceForUpgrade()
         {
+            if (_currentWeapon != null)
+            {
+                return _currentWeapon.PriceToBuy;
+            }
+
             Dictionary<ResourceType, int> dict = new();
 
             if (CurrentLevel.Value == 0)
@@ -225,20 +239,18 @@ namespace Vikings.Building
                     ChangeSpriteObject(false);
                     if (_currentWeapon == null)
                     {
-                        ChangeCount += OnCountChangeInProgressState;
-                        ChangeCount -= OnCountChangeWeaponState;
+                        ChangeCount = OnCountChangeInProgressState;
                     }
                     else
                     {
-                        ChangeCount -= OnCountChangeInProgressState;
-                        ChangeCount += OnCountChangeWeaponState;
+                        ChangeCount = OnCountChangeWeaponState;
                     }
+
                     _collectingResourceView.Setup(this);
                     break;
                 case BuildingState.Ready:
+                    ChangeCount = OnCountChangeInProgressState;
                     ChangeSpriteObject(true);
-                    ChangeCount -= OnCountChangeInProgressState;
-                    ChangeCount += OnCountChangeWeaponState;
                     break;
                 case BuildingState.Crafting:
                     isCraftActivated = false;
@@ -252,8 +264,6 @@ namespace Vikings.Building
         {
             _currentWeapon = arg;
             _currentWeapon.IsSet = true;
-            _collectingResourceView.ChangeHeader(_currentWeapon.GetWeaponData().nameText);
-            _collectingResourceView.UpdateView(_currentItemsWeapon, _currentWeapon.PriceToBuy);
         }
 
         private void ChangeSpriteObject(bool isReady)
@@ -264,7 +274,7 @@ namespace Vikings.Building
                 _buildingView.gameObject.SetActive(true);
                 return;
             }
-            
+
             if (CurrentLevel.Value == 0 || _currentWeapon == null)
             {
                 _buildingSpriteObject.SetActive(true);
@@ -291,7 +301,6 @@ namespace Vikings.Building
             _craftingSound.Stop();
             UpgradeWeapon();
             EndAction?.Invoke();
-            
         }
 
         public void UpgradeWeapon()
@@ -299,10 +308,13 @@ namespace Vikings.Building
             _currentWeapon.Level.Value++;
             _currentWeapon.IsSet = false;
             _currentWeapon = null;
+
+            currentItemsWeapon[ResourceType.Wood] = 0;
+            currentItemsWeapon[ResourceType.Rock] = 0;
             
-            _currentItemsWeapon[ResourceType.Wood] = 0;
-            _currentItemsWeapon[ResourceType.Rock] = 0;
-            
+            currentItems[ResourceType.Wood] = 0;
+            currentItems[ResourceType.Rock] = 0;
+
             ChangeState(CurrentLevel.Value == 0 ? BuildingState.NotSet : BuildingState.Ready);
             _panelManager.SudoGetPanel<MenuButtonsManager>().EnableButtons(true);
         }
@@ -339,24 +351,24 @@ namespace Vikings.Building
         {
             var priceDict = _currentWeapon.PriceToBuy;
 
-            if (_currentItemsWeapon[itemType] + value >= priceDict[itemType])
+            if (currentItemsWeapon[itemType] + value >= priceDict[itemType])
             {
-                _currentItemsWeapon[itemType] = priceDict[itemType];
+                currentItemsWeapon[itemType] = priceDict[itemType];
             }
             else
             {
-                _currentItemsWeapon[itemType] += value;
+                currentItemsWeapon[itemType] += value;
             }
 
             foreach (var item in _craftingTableDynamicData.CurrentItemsCountWeapon)
             {
-                item.count = _currentItemsWeapon.FirstOrDefault(x => x.Key == item.resourceType).Value;
+                item.count = currentItemsWeapon.FirstOrDefault(x => x.Key == item.resourceType).Value;
             }
 
-            _collectingResourceView.UpdateView(_currentItemsWeapon, priceDict);
+            _collectingResourceView.UpdateView(currentItemsWeapon, priceDict);
 
-            if (priceDict[ResourceType.Wood] == _currentItemsWeapon[ResourceType.Wood] &&
-                priceDict[ResourceType.Rock] == _currentItemsWeapon[ResourceType.Rock])
+            if (priceDict[ResourceType.Wood] == currentItemsWeapon[ResourceType.Wood] &&
+                priceDict[ResourceType.Rock] == currentItemsWeapon[ResourceType.Rock])
             {
                 ChangeState(BuildingState.Crafting);
             }
@@ -369,13 +381,15 @@ namespace Vikings.Building
                 _craftingTableDynamicData.CurrentItemsCount.FirstOrDefault(x => x.resourceType == item.Key).count =
                     currentItems[item.Key];
             }
+
             
-            foreach (var item in _currentItemsWeapon)
+            foreach (var item in currentItemsWeapon)
             {
-                _craftingTableDynamicData.CurrentItemsCountWeapon.FirstOrDefault(x => x.resourceType == item.Key).count =
-                    currentItems[item.Key];
+                _craftingTableDynamicData.CurrentItemsCountWeapon.FirstOrDefault(x => x.resourceType == item.Key)
+                        .count =
+                    currentItemsWeapon[item.Key];
             }
-            
+
             SaveLoadSystem.SaveData(_craftingTableDynamicData, _craftingTableData.saveKey);
         }
     }

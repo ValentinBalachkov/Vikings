@@ -33,6 +33,7 @@ public class TrayView : ViewBase
         ClearElements();
         foreach (var task in tasksData)
         {
+            DebugLogger.SendMessage(tasksData.Count.ToString(), Color.red);
             var taskObject = Instantiate(_trayElement, _content);
             _trayElements.Add(taskObject);
 
@@ -88,7 +89,6 @@ public class TrayView : ViewBase
     {
         if (_trayElements.Count == 0)
         {
-            
             return;
         }
 

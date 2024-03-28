@@ -16,8 +16,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 70b65ef7ee8cf914aab0e53c4a165b5a, type: 3}
   iconOfflineFarm: {fileID: 21300000, guid: 5bc941ef2f3970844910348aa755b962, type: 3}
   nameText: Axe
-  description: Allows you to cut down trees. Upgrade to increase the amount of wood
-    you get
+  description: Can be upgraded to increase the amount of wood produced when chopping.
   required: Wood storage
   requiredSprite: {fileID: 21300000, guid: 9d17be8424e2177469bd61508a573bd5, type: 3}
   priority: 2

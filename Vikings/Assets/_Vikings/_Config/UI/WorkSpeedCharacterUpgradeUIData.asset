@@ -15,5 +15,5 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 68ee6543676f8a749a4f4812515ad6c4, type: 3}
   iconOfflineFarm: {fileID: 21300000, guid: 42331567cfd8df54488ee024ca511955, type: 3}
   upgradeName: Work speed
-  description: UpgradeWorkSpeed
+  description: Upgrade work speed
   upgradeCharacterEnum: 2

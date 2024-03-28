@@ -56,8 +56,7 @@ namespace Vikings.Building
         private void OnHomeBuilding()
         {
             if (_eatStorage.CurrentLevel.Value >= 5) return;
-            _charactersOnMap.addCharacter.Execute();
-            _charactersOnMap.AddCharactersCount();
+            _charactersOnMap.addCharacter.Execute(false);
             StartCoroutine(MoveCameraCoroutine(_houseCameraPosition[_eatStorage.CurrentLevel.Value]));
         }
 

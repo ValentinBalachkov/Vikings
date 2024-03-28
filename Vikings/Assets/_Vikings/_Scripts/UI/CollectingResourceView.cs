@@ -3,6 +3,7 @@ using _Vikings._Scripts.Refactoring;
 using PanelManager.Scripts.Panels;
 using TMPro;
 using UnityEngine;
+using Vikings.Building;
 using Vikings.Object;
 
 public class CollectingResourceView : ViewBase
@@ -36,6 +37,28 @@ public class CollectingResourceView : ViewBase
         _rockCount.text = $"{current[ResourceType.Rock]}/{_priceForUpgrade[ResourceType.Rock]}";
         
         _name.text = abstractBuilding.GetData().nameText;
+        _rectTransform.position =
+            _camera.WorldToScreenPoint(new Vector3(pos.position.x + 0.5f, pos.position.y, pos.position.z - 4f));
+        gameObject.SetActive(true);
+    }
+    
+    public void Setup(CraftingTable table)
+    {
+        _priceForUpgrade = table.GetPriceForUpgrade();
+        var pos = table.GetPosition();
+        
+        var current = table.currentItems;
+        _name.text = table.GetData().nameText;
+        
+        if (table.CurrentWeapon != null)
+        {
+            current = table.currentItemsWeapon;
+            _name.text = table.CurrentWeapon.GetWeaponData().nameText;
+        }
+
+        _woodCount.text = $"{current[ResourceType.Wood]}/{_priceForUpgrade[ResourceType.Wood]}";
+        _rockCount.text = $"{current[ResourceType.Rock]}/{_priceForUpgrade[ResourceType.Rock]}";
+        
         _rectTransform.position =
             _camera.WorldToScreenPoint(new Vector3(pos.position.x + 0.5f, pos.position.y, pos.position.z - 4f));
         gameObject.SetActive(true);

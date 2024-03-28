@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 942558571962980448}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4756441277356034633}
@@ -63,7 +63,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5592395848147094324
 Transform:
@@ -192,7 +192,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2460563816275139878
 Transform:
@@ -203,7 +203,7 @@ Transform:
   m_GameObject: {fileID: 4185400622738286495}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0.7071068, w: 0}
   m_LocalPosition: {x: -0.04, y: -1.94, z: -2.07}
-  m_LocalScale: {x: 3.4899998, y: 3.4899998, z: 2.3266666}
+  m_LocalScale: {x: 1.9499998, y: 1.9499998, z: 1.3}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2426631371536550011}
@@ -276,7 +276,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2426631371536550011
 Transform:
@@ -428,6 +428,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: crafting_table_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1738524198771394489, guid: 0e2a697d69a5ddd4d9b1bed8baa0460d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 225328398319167084, guid: 0e2a697d69a5ddd4d9b1bed8baa0460d, type: 3}

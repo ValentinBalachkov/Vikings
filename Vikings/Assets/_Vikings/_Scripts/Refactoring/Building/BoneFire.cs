@@ -16,7 +16,7 @@ public class BoneFire : AbstractObject, IAcceptArg<List<BoneFirePositionData>>
 
     public override float GetStoppingDistance()
     {
-        return 0f;
+        return -0.1f;
     }
 
     public override Transform GetPosition()

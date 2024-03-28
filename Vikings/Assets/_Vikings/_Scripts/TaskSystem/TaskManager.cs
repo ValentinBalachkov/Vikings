@@ -7,7 +7,7 @@ using UnityEngine;
 public class TaskManager : MonoBehaviour
 {
     public static Action<TaskData, TaskStatus> taskChangeStatusCallback;
-    
+
     private TrayView _trayView;
     private List<TaskData> _taskQueue = new();
     private ConfigSetting _configSetting;
@@ -16,13 +16,19 @@ public class TaskManager : MonoBehaviour
     public void Init(MainPanelManager panelManager, ConfigSetting configSetting)
     {
         _configSetting = configSetting;
-        
+
+        foreach (var task in _configSetting.tasksData)
+        {
+            task.Init();
+        }
+
         _trayView = panelManager.SudoGetPanel<TrayView>();
         panelManager.OpenPanel<TrayView>();
-        
+
         SubscribeChangeStatusEvent();
 
-        var tasks = _configSetting.tasksData.Where(x => x.TaskStatus != TaskStatus.Done && x.TaskStatus != TaskStatus.NotAdded)
+        var tasks = _configSetting.tasksData
+            .Where(x => x.TaskStatus != TaskStatus.Done && x.TaskStatus != TaskStatus.NotAdded)
             .OrderBy(x => x.TaskStatus).ToList();
 
 
@@ -77,6 +83,10 @@ public class TaskManager : MonoBehaviour
 
     private void AddTaskToQueue(TaskData taskData)
     {
+        if (_taskQueue.Contains(taskData))
+        {
+            return;
+        }
         _taskQueue.Add(taskData);
     }
 

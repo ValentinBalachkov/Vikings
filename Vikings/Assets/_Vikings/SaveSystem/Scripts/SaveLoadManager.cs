@@ -127,7 +127,7 @@ public class SaveLoadManager : MonoBehaviour
         }
 
 
-        _mainPanelManager.SudoGetPanel<OfflineFarmView>().OpenWindow(resourcesDict, craftName, level, sprite);
+        _mainPanelManager.SudoGetPanel<OfflineFarmView>().OpenWindow(resourcesDict, level, sprite);
     }
 
     private void CalculateResourceBuilding(ref float time, AbstractBuilding abstractBuilding, float wRock, float wWood,
@@ -135,6 +135,14 @@ public class SaveLoadManager : MonoBehaviour
     {
         var stick = abstractBuilding.currentItems[ResourceType.Wood];
         var rock = abstractBuilding.currentItems[ResourceType.Rock];
+        
+        if (abstractBuilding is CraftingTable building && building.CurrentWeapon != null)
+        {
+             stick = abstractBuilding.currentItems[ResourceType.Wood];
+             rock = abstractBuilding.currentItems[ResourceType.Rock];
+            
+        }
+        
 
         List<float> timesIteration = new();
 
@@ -188,16 +196,13 @@ public class SaveLoadManager : MonoBehaviour
             {
                 time -= table.CurrentWeapon.CraftingTime;
                 buildingName = table.CurrentWeapon.GetWeaponData().nameText;
-                level = table.CurrentWeapon.Level.Value;
+                level = table.CurrentWeapon.Level.Value + 1;
                 sprite =  table.CurrentWeapon.GetWeaponData().icon;
-                
                 table.UpgradeWeapon();
             }
             else
             {
-                 
                 abstractBuilding.Upgrade();
-
                 time -= abstractBuilding.abstractBuildingDynamicData.BuildingTime;
                 buildingName = abstractBuilding.GetData().nameText;
                 level = abstractBuilding.CurrentLevel.Value;
@@ -245,12 +250,24 @@ public class SaveLoadManager : MonoBehaviour
                     float t = timesIteration[i - 1] - Mathf.Abs(timesIteration[i]);
                     float count = t * w[i];
                     storages[i].ChangeCount?.Invoke((int)count, storages[i].ResourceType);
+                    
+                    if (count > storages[i].MaxStorageCount)
+                    {
+                        count = storages[i].MaxStorageCount;
+                    }
+                    
                     resourceDict.Add(storages[i].ResourceType, (int)count);
                 }
                 else
                 {
                     float count = Mathf.Abs(timesIteration[i]) * w[i];
                     storages[i].ChangeCount?.Invoke((int)count, storages[i].ResourceType);
+                    
+                    if (count > storages[i].MaxStorageCount)
+                    {
+                        count = storages[i].MaxStorageCount;
+                    }
+                    
                     resourceDict.Add(storages[i].ResourceType, (int)count);
                 }
 
@@ -320,11 +337,6 @@ public class SaveLoadManager : MonoBehaviour
             {
                 _mapFactory.CreateResource(i, data, charactersTaskManager.OnResourceEnable, _mainPanelManager);
             }
-        }
-
-        foreach (var task in _configSetting.tasksData)
-        {
-            task.Init();
         }
         
         _dateTimeData.Init();

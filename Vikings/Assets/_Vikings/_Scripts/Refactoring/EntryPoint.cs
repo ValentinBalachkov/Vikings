@@ -38,12 +38,12 @@ namespace _Vikings._Scripts.Refactoring
             _mainPanelManager.Init();
             _mainPanelManager.ActiveOverlay(true);
 
+            _taskManager.Init(_mainPanelManager, _configSetting);
             _saveLoadManager.LoadAll();
             _mapFactory.CreateBoneFire(_mainPanelManager);
             _weaponFactory.CreateWeapons(_configSetting.weaponsData);
             InitBuildings();
             InitPanelManager();
-            _taskManager.Init(_mainPanelManager, _configSetting);
         }
 
         private void InitBuildings()
@@ -68,33 +68,32 @@ namespace _Vikings._Scripts.Refactoring
                 storage.BuildingComplete += _charactersTaskManager.SetCharactersToCrafting;
             }
 
-            InitCharacters(_eatStorage.CurrentLevel.Value + 1);
-           
+            int count = _eatStorage.CurrentLevel.Value == 5 ? 5 : _eatStorage.CurrentLevel.Value + 1;
+
+            InitCharacters(count);
         }
 
         private void InitCharacters(int count)
         {
             _characterFactory.Init(_configSetting, _weaponFactory, count);
 
-            var characters = _characterFactory.GetCharacters();
-            
             _saveLoadManager.GetResources();
 
-            var currentBuilding = _mapFactory.GetAllBuildings<AbstractBuilding>().FirstOrDefault(x =>
-                x.buildingState == BuildingState.InProgress || x.buildingState == BuildingState.Crafting);
+            var characters = _characterFactory.GetCharacters();
 
             foreach (var character in characters)
             {
-                if (currentBuilding != null)
-                {
-                    _charactersTaskManager.setBuildingToQueue.Execute(currentBuilding);
-                }
-                else
-                {
-                    _charactersTaskManager.SetCharacterToStorage(character);
-                }
-                
+                _charactersTaskManager.SetCharacterWork(character);
             }
+
+            var currentBuilding = _mapFactory.GetAllBuildings<AbstractBuilding>().FirstOrDefault(x =>
+                x.buildingState == BuildingState.InProgress || x.buildingState == BuildingState.Crafting);
+            
+            if (currentBuilding != null)
+            {
+                _charactersTaskManager.setBuildingToQueue.Execute(currentBuilding);
+            }
+            
 
             _mainPanelManager.SudoGetPanel<UpgradeCharacterMenu>()
                 .AcceptArg(_characterFactory.CharacterManager, _eatStorage);

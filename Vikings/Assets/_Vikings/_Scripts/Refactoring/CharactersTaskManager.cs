@@ -22,18 +22,16 @@ namespace _Vikings._Scripts.Refactoring
         private CharacterFactory _characterFactory;
         private WeaponFactory _weaponFactory;
         private MainPanelManager _panelManager;
-        private ConfigSetting _configSetting;
 
 
         [Inject]
         public void Init(MapFactory mapFactory, CharacterFactory characterFactory, WeaponFactory weaponFactory,
-            MainPanelManager panelManager, ConfigSetting configSetting)
+            MainPanelManager panelManager)
         {
             _mapFactory = mapFactory;
             _characterFactory = characterFactory;
             _weaponFactory = weaponFactory;
             _panelManager = panelManager;
-            _configSetting = configSetting;
             setBuildingToQueue.Subscribe(OnSetBuilding).AddTo(_disposable);
         }
 
@@ -48,14 +46,19 @@ namespace _Vikings._Scripts.Refactoring
                     continue;
                 }
 
-                if (_currentBuilding != null)
-                {
-                    SetCharacterToBuilding(character);
-                }
-                else
-                {
-                    SetCharacterToStorage(character);
-                }
+                SetCharacterWork(character);
+            }
+        }
+
+        public void SetCharacterWork(CharacterStateMachine character)
+        {
+            if (_currentBuilding != null)
+            {
+                SetCharacterToBuilding(character);
+            }
+            else
+            {
+                SetCharacterToStorage(character);
             }
         }
 

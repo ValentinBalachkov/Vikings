@@ -33,7 +33,7 @@ public class OfflineFarmView : ViewBase
         }).AddTo(_panelManager.Disposable);
     }
 
-    public void OpenWindow(Dictionary<ResourceType, int> itemsDict, string craftName, int level, Sprite sprite = null)
+    public void OpenWindow(Dictionary<ResourceType, int> itemsDict, int level, Sprite sprite = null)
     {
         DebugLogger.SendMessage($"{itemsDict.Count}, {level}", Color.cyan);
         
@@ -57,6 +57,7 @@ public class OfflineFarmView : ViewBase
             foreach (var item in itemsDict)
             {
                 var icon = _icons.FirstOrDefault(x => x.resourceType == item.Key);
+                DebugLogger.SendMessage(item.Value.ToString(), Color.blue);
                 icon.text.text = item.Value.ToString();
                 icon.icon.SetActive(true);
             }

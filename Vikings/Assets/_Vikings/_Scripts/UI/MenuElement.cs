@@ -31,22 +31,7 @@ namespace Vikings.UI
 
         [SerializeField] private Sprite _activeSprite;
         [SerializeField] private Sprite _defaultSprite;
-
-
-        public void UpdateUI(string itemName, string description, int level, Sprite icon,
-            ItemCount[] priceToUpgrades, int priority)
-        {
-            this.priority = priority;
-            _name.text = itemName;
-            _description.text = description;
-            _level.text = level == 0 ? "lvl:1" : $"lvl:{level}";
-            _icon.sprite = icon;
-            // for (int i = 0; i < _priceForUpgradeImage.Length; i++)
-            // {
-            //     _priceForUpgradeImage[i].sprite = priceToUpgrades[i].itemData.icon;
-            //     _priceForUpgradeCount[i].text = priceToUpgrades[i].count.ToString();
-            // }
-        }
+        
 
         public void UpdateUI(AbstractBuilding abstractBuilding)
         {
@@ -57,7 +42,7 @@ namespace Vikings.UI
             _description.text = config.description;
             _icon.sprite = config.icon;
 
-            _level.text = $"lvl:{abstractBuilding.CurrentLevel.Value + 1}";
+            _level.text = $"lvl. {abstractBuilding.CurrentLevel.Value + 1}";
 
             var priceToUpgrades = abstractBuilding.GetPriceForUpgrade();
             
@@ -79,7 +64,7 @@ namespace Vikings.UI
             _description.text = config.description;
             _icon.sprite = config.icon;
 
-            _level.text = $"lvl:{weapon.Level.Value + 1}";
+            _level.text = $"lvl. {weapon.Level.Value + 1}";
 
             var priceToUpgrades = weapon.PriceToBuy;
 

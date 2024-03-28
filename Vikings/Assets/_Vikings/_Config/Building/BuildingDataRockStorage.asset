@@ -15,7 +15,7 @@ MonoBehaviour:
   priorityToAction: 2
   icon: {fileID: 21300000, guid: 9b0178f44ecb8284cbc69151cd5dcd18, type: 3}
   nameText: Rock storage
-  description: Allows storing stone. Upgrade to increase the capacity
+  description: Can be upgraded to increase the amount of stone stored.
   required: Workbench
   requiredSprite: {fileID: 21300000, guid: 77f9782e323686143a53ad0436cff1e2, type: 3}
   buildingVisualSprites:

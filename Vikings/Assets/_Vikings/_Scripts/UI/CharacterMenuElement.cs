@@ -45,7 +45,7 @@ namespace Vikings.UI
 
         public void UpdateUI(int level, int cost, bool isEnable)
         {
-            _levelText.text = $"lvl:{level}";
+            _levelText.text = $"lvl. {level}";
             _costText.text = cost.ToString();
             _upgradeBtn.interactable = isEnable;
             _upgradeBtn.image.sprite = isEnable ? _activeButtonSprite : _defaultButtonSprite;

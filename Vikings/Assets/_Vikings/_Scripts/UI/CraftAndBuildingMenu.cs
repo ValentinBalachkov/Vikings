@@ -18,7 +18,6 @@ namespace Vikings.UI
 
         [SerializeField] private Transform _content;
         [SerializeField] private MenuElement _menuElement;
-        [SerializeField] private AudioSource _audioSourceBtnClick;
         [SerializeField] private ConfigSetting _configSetting;
 
         [SerializeField] private Button _closeButton;
@@ -123,7 +122,7 @@ namespace Vikings.UI
                 {
                     _panelManager.PlaySound(UISoundType.CreateBuilding);
                     _mapFactory.GetAllBuildings<CraftingTable>().FirstOrDefault().AcceptArg(weapon);
-                    _mapFactory.GetAllBuildings<CraftingTable>().FirstOrDefault().ChangeState(BuildingState.Ready);
+                    _mapFactory.GetAllBuildings<CraftingTable>().FirstOrDefault().ChangeState(BuildingState.InProgress);
                     _charactersTaskManager.setBuildingToQueue.Execute(_mapFactory.GetAllBuildings<CraftingTable>()
                         .FirstOrDefault());
                     _panelManager.ClosePanel<CraftAndBuildingMenu>();
