@@ -19,7 +19,7 @@ MonoBehaviour:
   disableDelaySecond: 5
   stoppingDistance: 2
   _id: 3
-  _dropCount: 3
+  _dropCount: 5
   _itemName: Three
   _collectTime: 4
   _animatorOverride: {fileID: 22100000, guid: a8072fac507007c4c998a8021fa7c846, type: 2}

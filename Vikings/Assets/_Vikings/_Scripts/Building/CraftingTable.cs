@@ -105,8 +105,10 @@ namespace Vikings.Building
             }
 
             var item = characterStateMachine.Inventory.GetItemFromInventory();
-            ChangeCount?.Invoke(item.count, item.resourceType);
-
+            if (item != null)
+            {
+                ChangeCount?.Invoke(item.count, item.resourceType);
+            }
             EndAnimationCharacter(characterStateMachine);
         }
 
@@ -264,6 +266,8 @@ namespace Vikings.Building
         {
             _currentWeapon = arg;
             _currentWeapon.IsSet = true;
+            _collectingResourceView.ChangeHeader(_currentWeapon.GetWeaponData().nameText);
+            
         }
 
         private void ChangeSpriteObject(bool isReady)
@@ -322,6 +326,11 @@ namespace Vikings.Building
 
         private void OnCountChangeInProgressState(int value, ResourceType itemType)
         {
+            if (itemType == ResourceType.Eat || value < 0)
+            {
+                return;
+            }
+            
             var priceDict = GetPriceForUpgrade();
 
             if (currentItems[itemType] + value >= priceDict[itemType])
@@ -340,8 +349,8 @@ namespace Vikings.Building
 
             _collectingResourceView.UpdateView(currentItems, priceDict);
 
-            if (priceDict[ResourceType.Wood] == currentItems[ResourceType.Wood] &&
-                priceDict[ResourceType.Rock] == currentItems[ResourceType.Rock])
+            if (priceDict[ResourceType.Wood] <= currentItems[ResourceType.Wood] &&
+                priceDict[ResourceType.Rock] <= currentItems[ResourceType.Rock])
             {
                 ChangeState(BuildingState.Crafting);
             }
@@ -349,6 +358,10 @@ namespace Vikings.Building
 
         private void OnCountChangeWeaponState(int value, ResourceType itemType)
         {
+            if (itemType == ResourceType.Eat || value < 0)
+            {
+                return;
+            }
             var priceDict = _currentWeapon.PriceToBuy;
 
             if (currentItemsWeapon[itemType] + value >= priceDict[itemType])
@@ -367,8 +380,8 @@ namespace Vikings.Building
 
             _collectingResourceView.UpdateView(currentItemsWeapon, priceDict);
 
-            if (priceDict[ResourceType.Wood] == currentItemsWeapon[ResourceType.Wood] &&
-                priceDict[ResourceType.Rock] == currentItemsWeapon[ResourceType.Rock])
+            if (priceDict[ResourceType.Wood] <= currentItemsWeapon[ResourceType.Wood] &&
+                priceDict[ResourceType.Rock] <= currentItemsWeapon[ResourceType.Rock])
             {
                 ChangeState(BuildingState.Crafting);
             }

@@ -772,7 +772,7 @@ MonoBehaviour:
   - countText: {fileID: 1601216837358007354}
     type: 0
     panel: {fileID: 5565778923120889547}
-  - countText: {fileID: 1601216837358007354}
+  - countText: {fileID: 7946460571410294101}
     type: 1
     panel: {fileID: 8752614821389814294}
   - countText: {fileID: 5135993687411530897}

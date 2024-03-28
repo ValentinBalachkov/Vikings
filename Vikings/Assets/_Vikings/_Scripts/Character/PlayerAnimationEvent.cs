@@ -19,6 +19,8 @@ public class PlayerAnimationEvent : MonoBehaviour
         _stowne.Stop();
         _stoneAudio.Stop();
         _woodAudio.Stop();
+        _wood.gameObject.SetActive(false);
+        _stowne.gameObject.SetActive(false);
         _axe.SetActive(false);
         pick.SetActive(false);
     }
@@ -28,6 +30,7 @@ public class PlayerAnimationEvent : MonoBehaviour
         _axe.SetActive(true);
         pick.SetActive(false);
        
+        _wood.gameObject.SetActive(true);
         _wood.Play();
         _woodAudio.Play();
     }
@@ -37,6 +40,7 @@ public class PlayerAnimationEvent : MonoBehaviour
         _axe.SetActive(false);
         pick.SetActive(true);
         
+        _stowne.gameObject.SetActive(true);
         _stowne.Play();
         _stoneAudio.Play();
     }

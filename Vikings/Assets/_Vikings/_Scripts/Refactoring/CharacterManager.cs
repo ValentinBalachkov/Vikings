@@ -100,7 +100,8 @@ namespace _Vikings._Scripts.Refactoring
                     return _charactersConfig.speedWork / _charactersConfig.speed_up;
                 }
 
-                return (4 / (_characterDynamicData.speedWorkLevel + 3)) / _charactersConfig.speed_up;
+                float count = _characterDynamicData.speedWorkLevel + 3;
+                return 4 / count / _charactersConfig.speed_up;
             }
         }
 

@@ -86,10 +86,12 @@ namespace _Vikings._Scripts.Refactoring
             else
             {
                 var item = characterStateMachine.Inventory.GetItemFromInventory();
-                ChangeCount?.Invoke(item.count, item.resourceType);
+                if (item != null)
+                {
+                    ChangeCount?.Invoke(item.count, item.resourceType);
+                }
+                
             }
-            
-            
 
             DelayActionCoroutine(characterStateMachine);
         }
@@ -328,6 +330,11 @@ namespace _Vikings._Scripts.Refactoring
 
         private void OnCountChangeInProgressState(int value, ResourceType itemType)
         {
+            if (itemType == ResourceType.Eat || value < 0)
+            {
+                return;
+            }
+            
             var priceDict = GetPriceForUpgrade();
 
             if (currentItems[itemType] + value >= priceDict[itemType])

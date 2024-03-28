@@ -84,6 +84,11 @@ namespace _Vikings.Refactoring.Character
             _playerController.ResetDestinationForLook(newDestination);
         }
 
+        public void ClearRotation()
+        {
+            _playerController.ResetIdleFlag();
+        }
+
         public Transform GetPosition()
         {
             return transform;

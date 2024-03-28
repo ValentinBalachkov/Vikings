@@ -54,7 +54,11 @@ namespace Vikings.Object
             isCraftActivated = true;
             particleCraftEffect.gameObject.SetActive(true);
             particleCraftEffect.Play();
-            var time = buildingTime * characterStateMachine.SpeedWork;
+            DebugLogger.SendMessage(buildingTime.ToString(), Color.black);
+            DebugLogger.SendMessage($"{characterStateMachine.SpeedWork}", Color.black);
+            float speedUp = characterStateMachine.SpeedWork;
+            float time = (float)buildingTime * speedUp;
+            DebugLogger.SendMessage(time.ToString(), Color.black);
             _panelManager.SudoGetPanel<CraftingIndicatorView>().Setup((int)time, GetPosition());
             yield return new WaitForSeconds(time);
             particleCraftEffect.Stop();

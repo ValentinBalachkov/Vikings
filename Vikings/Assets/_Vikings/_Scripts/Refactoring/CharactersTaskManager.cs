@@ -17,7 +17,6 @@ namespace _Vikings._Scripts.Refactoring
         private CompositeDisposable _disposable = new();
 
         private MapFactory _mapFactory;
-        private Dictionary<ResourceType, int> _neededResource = new();
         private AbstractBuilding _currentBuilding;
         private CharacterFactory _characterFactory;
         private WeaponFactory _weaponFactory;
@@ -104,12 +103,6 @@ namespace _Vikings._Scripts.Refactoring
         {
             _currentBuilding = abstractBuilding;
 
-            _neededResource.Clear();
-
-            _neededResource = abstractBuilding.GetNeededItemsCount();
-
-            _panelManager.SudoGetPanel<CollectingResourceView>().Setup(abstractBuilding);
-
             var characters = _characterFactory.GetCharacters();
 
             foreach (var character in characters)
@@ -125,7 +118,7 @@ namespace _Vikings._Scripts.Refactoring
 
         private void SetCharacterToBuilding(CharacterStateMachine character)
         {
-            foreach (var resource in _neededResource)
+            foreach (var resource in _currentBuilding.GetNeededItemsCount())
             {
                 DebugLogger.SendMessage($"{resource.Key} 1", Color.green);
 
@@ -162,20 +155,18 @@ namespace _Vikings._Scripts.Refactoring
                         continue;
                     }
 
-                    int dropCount = character.BackpackCount;
-
-                    if (resourceObject is AbstractResource abstractResource)
-                    {
-                        var data = abstractResource.GetItemData();
-                        dropCount = GetItemDropCount(character, data);
-                    }
-
-                    DebugLogger.SendMessage($"{dropCount} 4", Color.green);
+                    // int dropCount = character.BackpackCount;
+                    //
+                    // if (resourceObject is AbstractResource abstractResource)
+                    // {
+                    //     var data = abstractResource.GetItemData();
+                    //     dropCount = GetItemDropCount(character, data);
+                    // }
+                    //
+                    // DebugLogger.SendMessage($"{dropCount} 4", Color.green);
 
                     character.SetBuildingToAction(_currentBuilding,
                         resourceObject, OnCharacterActionDone);
-
-                    _neededResource[resource.Key] -= dropCount;
 
                     return;
                 }

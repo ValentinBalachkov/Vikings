@@ -19,7 +19,7 @@ MonoBehaviour:
   disableDelaySecond: 5
   stoppingDistance: 1
   _id: 2
-  _dropCount: 1
+  _dropCount: 2
   _itemName: Rock
   _collectTime: 0.7
   _animatorOverride: {fileID: 0}

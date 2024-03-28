@@ -19,7 +19,7 @@ MonoBehaviour:
   disableDelaySecond: 5
   stoppingDistance: 2
   _id: 2
-  _dropCount: 3
+  _dropCount: 5
   _itemName: BigRock
   _collectTime: 5
   _animatorOverride: {fileID: 22100000, guid: a992cebe9fd7e624c9e713fbbf32a2da, type: 2}

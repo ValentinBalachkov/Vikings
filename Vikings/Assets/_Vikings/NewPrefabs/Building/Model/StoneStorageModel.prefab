@@ -34,7 +34,7 @@ Transform:
   - {fileID: 4449380561540461338}
   - {fileID: 1985847263173952671}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7814062672320211518
 MeshFilter:
@@ -54,11 +54,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 4.5, y: 1.5, z: 7}
+  m_Extents: {x: 6.5, y: 1.5, z: 6.1}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: -0.1, y: 0, z: -5.44}
+  m_Center: {x: 4.35, y: 0, z: -7.29}
   m_TimeToStationary: 0.5
 --- !u!114 &1985725270374596299
 MonoBehaviour:

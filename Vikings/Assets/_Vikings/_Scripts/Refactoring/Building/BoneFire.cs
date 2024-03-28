@@ -50,6 +50,7 @@ public class BoneFire : AbstractObject, IAcceptArg<List<BoneFirePositionData>>
 
     public void SetFlagState(CharacterStateMachine character)
     {
+        character.ClearRotation();
         var data = _positionsData.FirstOrDefault(x => x.character == character);
         if (data != null)
         {
