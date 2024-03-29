@@ -19,6 +19,7 @@ namespace Vikings.UI
         [SerializeField] private Transform _content;
         [SerializeField] private AudioSource _audioSourceBtnClick;
         [SerializeField] private Button _closeButton;
+        [SerializeField] private Button _restartBtn;
         
       
         private List<CharacterMenuElement> _characterMenuElements = new();
@@ -38,6 +39,11 @@ namespace Vikings.UI
                 _panelManager.PlaySound(UISoundType.Close);
                 _panelManager.OpenPanel<MenuButtonsManager>();
                 gameObject.SetActive(false);
+            }).AddTo(_panelManager.Disposable);
+            
+            _restartBtn.OnClickAsObservable().Subscribe(_ =>
+            {
+               SaveLoadManager.RestartGame();
             }).AddTo(_panelManager.Disposable);
         }
 

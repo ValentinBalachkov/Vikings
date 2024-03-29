@@ -165,5 +165,10 @@ namespace _Vikings._Scripts.Refactoring
         {
             SaveLoadSystem.SaveData(_characterDynamicData, _charactersConfig.saveKey);
         }
+
+        public void Reset()
+        {
+            SaveLoadSystem.Restart(_characterDynamicData, _charactersConfig.saveKey);
+        }
     }
 }

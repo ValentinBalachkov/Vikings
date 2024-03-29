@@ -383,5 +383,10 @@ namespace _Vikings._Scripts.Refactoring
             
             SaveLoadSystem.SaveData(_storageDynamicData, _storageData.saveKey);
         }
+
+        public void Reset()
+        {
+            SaveLoadSystem.Restart(_storageDynamicData, _storageData.saveKey);
+        }
     }
 }

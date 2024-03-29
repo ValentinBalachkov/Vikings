@@ -3,5 +3,7 @@
     public interface ISave
     {
         public void Save();
+
+        public void Reset();
     }
 }

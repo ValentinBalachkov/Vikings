@@ -4,6 +4,7 @@ using System.Linq;
 using _Vikings._Scripts.Refactoring;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Vikings.Building;
 using Vikings.Map;
 using Vikings.Object;
@@ -35,6 +36,16 @@ public class SaveLoadManager : MonoBehaviour
         _characterFactory = characterFactory;
         _weaponFactory = weaponFactory;
         _mainPanelManager = mainPanelManager;
+    }
+
+    public static void RestartGame()
+    {
+        foreach (var save in saves)
+        {
+            save.Reset();
+        }
+        saves.Clear();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
 

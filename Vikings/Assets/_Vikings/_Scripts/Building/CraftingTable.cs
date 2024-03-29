@@ -405,5 +405,10 @@ namespace Vikings.Building
 
             SaveLoadSystem.SaveData(_craftingTableDynamicData, _craftingTableData.saveKey);
         }
+
+        public void Reset()
+        {
+            SaveLoadSystem.Restart(_craftingTableDynamicData, _craftingTableData.saveKey);
+        }
     }
 }

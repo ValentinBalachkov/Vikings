@@ -140,5 +140,10 @@ namespace _Vikings.WeaponObject
         {
             SaveLoadSystem.SaveData(_weaponDynamicData, _weaponData.saveKey);
         }
+
+        public void Reset()
+        {
+            SaveLoadSystem.Restart(_weaponDynamicData, _weaponData.saveKey);
+        }
     }
 }

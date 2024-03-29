@@ -39,6 +39,11 @@ public class TaskData : ScriptableObject, ISave
         SaveLoadSystem.SaveData(_taskDynamicData, saveKey);
     }
 
+    public void Reset()
+    {
+        SaveLoadSystem.Restart(_taskDynamicData, saveKey);
+    }
+
     public void Init()
     {
         _taskDynamicData = new();

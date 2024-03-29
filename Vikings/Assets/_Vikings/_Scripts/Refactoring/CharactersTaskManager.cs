@@ -34,6 +34,16 @@ namespace _Vikings._Scripts.Refactoring
             setBuildingToQueue.Subscribe(OnSetBuilding).AddTo(_disposable);
         }
 
+        public void CheatFunc()
+        {
+            var characters = _characterFactory.GetCharacters();
+            
+            foreach (var character in characters)
+            {
+                SetCharacterWork(character);
+            }
+        }
+
         public void OnResourceEnable()
         {
             var characters = _characterFactory.GetCharacters();

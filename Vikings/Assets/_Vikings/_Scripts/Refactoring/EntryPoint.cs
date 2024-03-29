@@ -3,6 +3,7 @@ using UnityEngine;
 using Vikings.Building;
 using Vikings.Map;
 using Vikings.Object;
+using Vikings.SaveSystem;
 using Vikings.UI;
 using Zenject;
 
@@ -31,6 +32,11 @@ namespace _Vikings._Scripts.Refactoring
             _characterFactory = characterFactory;
             _weaponFactory = weaponFactory;
             _configSetting = configSetting;
+        }
+
+        public void ClearSaveAndRestart()
+        {
+           
         }
 
         private void Start()

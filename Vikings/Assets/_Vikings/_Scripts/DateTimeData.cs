@@ -18,6 +18,11 @@ namespace Vikings.Building
             SaveLoadSystem.SaveData(dateTimeDynamicData, saveKey);
         }
 
+        public void Reset()
+        {
+            SaveLoadSystem.Restart(dateTimeDynamicData, saveKey);
+        }
+
         public void Init()
         {
             dateTimeDynamicData = new();

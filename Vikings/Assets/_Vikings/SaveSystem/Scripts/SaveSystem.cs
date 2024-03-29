@@ -32,6 +32,15 @@ namespace Vikings.SaveSystem
             JsonUtility.FromJsonOverwrite(json, dynamicData);
             return dynamicData;
         }
+        
+        public static T Restart<T>(T dynamicData, string dataKey)
+        {
+            string loadFileName = dataKey + "Data";
+            var asset = Resources.Load<TextAsset>($"DefaultSave/{loadFileName}");
+            JsonUtility.FromJsonOverwrite(asset.text, dynamicData);
+            SaveData(dynamicData, dataKey);
+            return dynamicData;
+        }
 
         private static string GetDataPath(string saveFileName)
         {
