@@ -49,6 +49,14 @@ namespace _Vikings.Refactoring.Character
             _states.Add(_doMoveState);
         }
 
+        private void Update()
+        {
+            if (Input.touchCount > 0)
+            {
+                DebugLogger.SendMessage("Touch character!", Color.green);
+            }
+        }
+
         public void SetCollectAnimation(AnimatorOverrideController animatorOverrideController, Action endAction)
         {
             _playerController.PlayerAnimationEvent.DisableEffects();

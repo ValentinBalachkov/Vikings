@@ -57,6 +57,16 @@ namespace Vikings.Chanacter
             }
         }
 
+        private IEnumerator ChangeMoveSpeedOnClick()
+        {
+            if (_navMeshAgent.speed == 0)
+            {
+                yield return null;
+            }
+            _navMeshAgent.speed *= _characterManager.SpeedOnClick;
+            yield return new WaitForSeconds(_characterManager.SpeedOnClickTime);
+        }
+
         private bool CheckDestinationReached()
         {
             float distanceToTarget = Vector3.Distance(_thisTransform.position, _currentPoint.position);

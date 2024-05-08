@@ -8,6 +8,8 @@ namespace _Vikings._Scripts.Refactoring
 {
     public class CharacterManager : ISave
     {
+        public float SpeedOnClick => _charactersConfig.speedOnClick;
+        public float SpeedOnClickTime => _charactersConfig.speedOnClickTime;
         public int SpeedMoveLevel => _characterDynamicData.speedMoveLevel;
         public int SpeedWorkLevel => _characterDynamicData.speedWorkLevel;
 
