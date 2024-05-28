@@ -23,3 +23,5 @@ MonoBehaviour:
   speedWorkCost: 17
   itemsCount: 1
   itemsCountCost: 10
+  speedOnClick: 2
+  speedOnClickTime: 3

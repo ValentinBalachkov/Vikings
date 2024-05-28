@@ -24,6 +24,9 @@ namespace Vikings.Chanacter
         private CharacterManager _characterManager;
         private float _stoppingDistanceOffset = 0.5f;
 
+        private bool _isChangeMoveSpeedOnClick;
+        private float _speedOnClick;
+
 
         private void Awake()
         {
@@ -34,6 +37,15 @@ namespace Vikings.Chanacter
         {
             _thisTransform = transform;
             _characterManager = characterManager;
+        }
+
+        public void ChangeMoveSpeedOnClick()
+        {
+            if (_isChangeMoveSpeedOnClick)
+            {
+                return;
+            }
+            StartCoroutine(ChangeMoveSpeedOnClickCoroutine());
         }
 
         private void Update()
@@ -57,14 +69,28 @@ namespace Vikings.Chanacter
             }
         }
 
-        private IEnumerator ChangeMoveSpeedOnClick()
+        private IEnumerator ChangeMoveSpeedOnClickCoroutine()
         {
             if (_navMeshAgent.speed == 0)
             {
-                yield return null;
+                yield break;
             }
-            _navMeshAgent.speed *= _characterManager.SpeedOnClick;
+
+            _speedOnClick = _characterManager.SpeedOnClick;
+            
+            _isChangeMoveSpeedOnClick = true;
+            _navMeshAgent.speed = _characterManager.SpeedMove + _speedOnClick;
+            
             yield return new WaitForSeconds(_characterManager.SpeedOnClickTime);
+
+            _speedOnClick = 0;
+            
+            if (_navMeshAgent.speed > 0)
+            {
+                _navMeshAgent.speed = _characterManager.SpeedMove;
+            }
+            
+            _isChangeMoveSpeedOnClick = false;
         }
 
         private bool CheckDestinationReached()
@@ -96,7 +122,7 @@ namespace Vikings.Chanacter
         {
             _stoppingDistanceOffset = stoppingDistance;
             
-            _navMeshAgent.speed = _characterManager.SpeedMove;
+            _navMeshAgent.speed = _characterManager.SpeedMove + _speedOnClick;
             _currentPoint = point;
             _navMeshAgent.SetDestination(point.position);
             _currentDestination = _navMeshAgent.destination;

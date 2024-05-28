@@ -49,13 +49,11 @@ namespace _Vikings.Refactoring.Character
             _states.Add(_doMoveState);
         }
 
-        private void Update()
+        private void OnMouseUp()
         {
-            if (Input.touchCount > 0)
-            {
-                DebugLogger.SendMessage("Touch character!", Color.green);
-            }
+            _playerController.ChangeMoveSpeedOnClick();
         }
+        
 
         public void SetCollectAnimation(AnimatorOverrideController animatorOverrideController, Action endAction)
         {
