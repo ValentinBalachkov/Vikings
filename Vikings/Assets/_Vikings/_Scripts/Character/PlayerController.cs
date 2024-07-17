@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using _Vikings._Scripts.Refactoring;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,6 +16,8 @@ namespace Vikings.Chanacter
 
         [SerializeField] private float _rotateSpeed = 10;
         [SerializeField] private PlayerAnimationController _playerAnimationController;
+        [SerializeField] private ParticleSystem _fireOnMoveParticle;
+        
 
         private NavMeshAgent _navMeshAgent;
         private bool _onPosition = true;
@@ -75,6 +78,14 @@ namespace Vikings.Chanacter
             {
                 yield break;
             }
+            
+            _fireOnMoveParticle.gameObject.SetActive(true);
+            _fireOnMoveParticle.Play();
+            var tween = transform.DOShakeScale(1f, new Vector3(0.3f, 0, 0.3f));
+            tween.onComplete += () =>
+            {
+                tween.Kill();
+            };
 
             _speedOnClick = _characterManager.SpeedOnClick;
             
@@ -82,7 +93,10 @@ namespace Vikings.Chanacter
             _navMeshAgent.speed = _characterManager.SpeedMove + _speedOnClick;
             
             yield return new WaitForSeconds(_characterManager.SpeedOnClickTime);
-
+            
+            _fireOnMoveParticle.gameObject.SetActive(false);
+            _fireOnMoveParticle.Stop();
+            
             _speedOnClick = 0;
             
             if (_navMeshAgent.speed > 0)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using PanelManager.Scripts.Interfaces;
 using UniRx;
 using UnityEngine;
@@ -8,10 +9,11 @@ namespace PanelManager.Scripts.Panels
     public abstract class ViewBase : MonoBehaviour, IView, IComparable<IView>
     {
         [SerializeField] private int _order = 0;
-        
-        
+        [SerializeField] private List<TutorialSteps> _tutorialStepsList = new();
+
+
         public virtual bool IsOpen => gameObject.activeSelf;
-        
+
         public abstract PanelType PanelType { get; }
 
         protected IPanelManager _panelManager;
@@ -24,7 +26,9 @@ namespace PanelManager.Scripts.Panels
             _panelManager = panelManager;
             OnInitialize();
         }
-
+        
+        
+        
         protected virtual void OnInitialize() {}
 
         protected virtual void OnOpened()
@@ -58,6 +62,11 @@ namespace PanelManager.Scripts.Panels
         public ReactiveCommand ViewOpened { get; private set; }
 
         public ReactiveCommand ViewClosed { get; private set; }
+
+        public List<TutorialSteps> GetTutorialSteps()
+        {
+            return _tutorialStepsList;
+        }
 
         public void Open()
         {

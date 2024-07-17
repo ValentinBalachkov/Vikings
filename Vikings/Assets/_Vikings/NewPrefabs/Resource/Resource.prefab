@@ -138,6 +138,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8813520151180164480}
   - component: {fileID: 7558777686571704970}
+  - component: {fileID: 5261285384171056982}
   m_Layer: 8
   m_Name: Resource
   m_TagString: Untagged
@@ -175,3 +176,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsTarget: 0
   _audioSource: {fileID: 4508543911304740304}
+--- !u!136 &5261285384171056982
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8354089871093498646}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.4
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}

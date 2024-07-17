@@ -104,12 +104,12 @@ namespace _Vikings.WeaponObject
             
             if (Level.Value > 0)
             {
-                isEnable = storage.CurrentLevel.Value > 0 && craftingTable.CurrentLevel.Value > Level.Value;
+                isEnable = craftingTable.CurrentLevel.Value > Level.Value;
                 level = craftingTable.CurrentLevel.Value + 1;
             }
             else
             {
-                isEnable = storage.CurrentLevel.Value > 0;
+                isEnable = true;
                 level = storage.CurrentLevel.Value + 1;
             }
 

@@ -3,7 +3,6 @@ using UnityEngine;
 using Vikings.Building;
 using Vikings.Map;
 using Vikings.Object;
-using Vikings.SaveSystem;
 using Vikings.UI;
 using Zenject;
 

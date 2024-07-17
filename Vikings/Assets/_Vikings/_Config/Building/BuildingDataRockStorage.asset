@@ -35,5 +35,5 @@ MonoBehaviour:
   - resourceType: 1
     count: 5
   taskData: {fileID: 0}
-  priorityInMenu: 4
+  priorityInMenu: 5
   stoppingDistance: 1.5

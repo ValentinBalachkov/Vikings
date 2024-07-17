@@ -7,6 +7,7 @@ namespace Vikings.Items
     [CreateAssetMenu(fileName = "ItemData", menuName = "Data/ItemData", order = 1)]
     public class ItemData : ScriptableObject, IItemData
     {
+        public ParticleSystem EffectOnTap => _effectOnTap;
         public AnimatorOverrideController AnimatorOverride => _animatorOverride;
 
         public Sprite icon;
@@ -21,7 +22,7 @@ namespace Vikings.Items
         public int ID => _id;
 
         public string ItemName => _itemName;
-        
+
 
         [SerializeField] private int _id;
 
@@ -34,7 +35,9 @@ namespace Vikings.Items
         [SerializeField] private AnimatorOverrideController _animatorOverride;
 
         [SerializeField] private ResourceType _resourceType;
-        
+
+        [SerializeField] private ParticleSystem _effectOnTap;
+
 
         public int DropCount
         {

@@ -35,5 +35,5 @@ MonoBehaviour:
   - resourceType: 1
     count: 5
   taskData: {fileID: 11400000, guid: 12ecc8dd4fa750b43986741b2bab39d8, type: 2}
-  priorityInMenu: 1
+  priorityInMenu: 4
   stoppingDistance: 2

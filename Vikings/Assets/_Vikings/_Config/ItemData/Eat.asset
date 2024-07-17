@@ -24,3 +24,5 @@ MonoBehaviour:
   _collectTime: 4
   _animatorOverride: {fileID: 22100000, guid: ed4cf78fc008d2f43a5a2af7f18518e4, type: 2}
   _resourceType: 2
+  _effectOnTap: {fileID: 7780197558463495654, guid: 2e79f16be10fbd14f8d5ef191f8db4aa,
+    type: 3}

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using PanelManager.Scripts.Panels;
 using UniRx;
 using UnityEngine;
@@ -37,6 +38,5 @@ public class MenuButtonsManager : ViewBase
     {
         _craftButton.interactable = isEnable;
     }
-
     
 }

@@ -213,11 +213,22 @@ namespace Vikings.Building
 
         public override (bool, int, Sprite) IsEnableToBuild<T>(T arg)
         {
-            var weapon = arg as Weapon;
-            bool isEnable = weapon.Level.Value > 0;
+            var storage = arg as Storage;
+            bool isEnable = storage.CurrentLevel.Value > 0;
             Sprite sprite = _craftingTableData.requiredSprite;
             int level = 1;
 
+            return (isEnable, level, sprite);
+        }
+
+        public override (bool, int, Sprite) IsEnableToBuild<T1, T2>(T1 arg1, T2 arg2)
+        {
+            Sprite sprite = _craftingTableData.requiredSprite;
+
+            int level = 0;
+
+            bool isEnable = false;
+            
             return (isEnable, level, sprite);
         }
 

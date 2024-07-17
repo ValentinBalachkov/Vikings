@@ -31,9 +31,9 @@ MonoBehaviour:
     type: 3}
   priceToUpgrades:
   - resourceType: 0
-    count: 15
+    count: 8
   - resourceType: 1
-    count: 10
+    count: 5
   taskData: {fileID: 11400000, guid: 47321345684f25c4d8e4e1d2978056cf, type: 2}
-  priorityInMenu: 6
+  priorityInMenu: 2
   stoppingDistance: 1

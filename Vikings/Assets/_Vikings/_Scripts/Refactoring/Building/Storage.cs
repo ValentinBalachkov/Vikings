@@ -31,7 +31,7 @@ namespace _Vikings._Scripts.Refactoring
 
         private BuildingView _buildingView;
 
-        private BuildingData _storageData;
+        protected BuildingData _storageData;
 
         private CollectingResourceView _collectingResourceView;
 
@@ -240,7 +240,7 @@ namespace _Vikings._Scripts.Refactoring
             switch (ResourceType)
             {
                 case ResourceType.Wood:
-                    isEnable = CurrentLevel.Value == 0 || craftingTable.CurrentLevel.Value - CurrentLevel.Value >= 0;
+                    isEnable = craftingTable.CurrentLevel.Value - CurrentLevel.Value >= 1;
                     break;
                 case ResourceType.Rock:
                     isEnable = craftingTable.CurrentLevel.Value - CurrentLevel.Value >= 1;
@@ -252,12 +252,23 @@ namespace _Vikings._Scripts.Refactoring
                     }
                     else
                     {
-                        isEnable = craftingTable.CurrentLevel.Value - CurrentLevel.Value >= 1 && CurrentLevel.Value < 5;
+                        isEnable = CurrentLevel.Value == 0 || craftingTable.CurrentLevel.Value - CurrentLevel.Value >= 1 && CurrentLevel.Value < 5;
                     }
                     
                     break;
             }
 
+            return (isEnable, level, sprite);
+        }
+
+        public override (bool, int, Sprite) IsEnableToBuild<T1, T2>(T1 arg1, T2 arg2)
+        {
+            Sprite sprite = _storageData.requiredSprite;
+
+            int level = 0;
+
+            bool isEnable = false;
+            
             return (isEnable, level, sprite);
         }
 

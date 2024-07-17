@@ -76,9 +76,18 @@ namespace Vikings.UI
                     _panelManager.OpenPanel<MenuButtonsManager>();
                     _panelManager.SudoGetPanel<MenuButtonsManager>().EnableButtons(false);
                 });
-                var cortege = building.IsEnableToBuild(_mapFactory.GetAllBuildings<CraftingTable>().FirstOrDefault());
-                item.SetEnable(cortege.Item1, cortege.Item2, cortege.Item3);
-                _menuElements.Add(item);
+                if (building is EatStorage)
+                {
+                    var cortege = building.IsEnableToBuild(_mapFactory.GetAllBuildings<CraftingTable>().FirstOrDefault(), _weaponFactory.GetWeapon(_configSetting.weaponsData[1]));
+                    item.SetEnable(cortege.Item1, cortege.Item2, cortege.Item3);
+                    _menuElements.Add(item);
+                }
+                else
+                {
+                    var cortege = building.IsEnableToBuild(_mapFactory.GetAllBuildings<CraftingTable>().FirstOrDefault());
+                    item.SetEnable(cortege.Item1, cortege.Item2, cortege.Item3);
+                    _menuElements.Add(item);
+                }
             }
 
             CreateCraftingTableElement();
@@ -104,7 +113,7 @@ namespace Vikings.UI
                 _panelManager.OpenPanel<MenuButtonsManager>();
                 _panelManager.SudoGetPanel<MenuButtonsManager>().EnableButtons(false);
             });
-            var arg = craftingTable.IsEnableToBuild(_weaponFactory.GetWeapon(_configSetting.weaponsData[1]));
+            var arg = craftingTable.IsEnableToBuild(_mapFactory.GetAllBuildings<Storage>().FirstOrDefault(x => x is EatStorage));
             table.SetEnable(arg.Item1, arg.Item2, arg.Item3);
             _menuElements.Add(table);
         }

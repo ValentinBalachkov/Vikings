@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: WeaponPick
   m_EditorClassIdentifier: 
   saveKey: WeaponPick
-  icon: {fileID: 21300000, guid: 3eafe4be0d9df5e49b0bb9f6627b6342, type: 3}
+  icon: {fileID: 21300000, guid: 56045710511daed4da91e5dbf9c4bc60, type: 3}
   iconOfflineFarm: {fileID: 21300000, guid: 56045710511daed4da91e5dbf9c4bc60, type: 3}
   nameText: Pickaxe
   description: Can be upgraded to increase the amount of stone produced when mining.
   required: Workbench
   requiredSprite: {fileID: 21300000, guid: 77f9782e323686143a53ad0436cff1e2, type: 3}
-  priority: 5
+  priority: 6
   taskData: {fileID: 0}
   priceToBuy:
   - resourceType: 0

@@ -1,4 +1,5 @@
-﻿using PanelManager.Scripts.Panels;
+﻿using System.Collections.Generic;
+using PanelManager.Scripts.Panels;
 using UniRx;
 
 namespace PanelManager.Scripts.Interfaces
@@ -12,7 +13,10 @@ namespace PanelManager.Scripts.Interfaces
         ReactiveCommand ViewOpened { get; }
         ReactiveCommand ViewClosed { get; }
 
+        public List<TutorialSteps> GetTutorialSteps();
+
         void Open();
         void Close();
+        
     }
 }

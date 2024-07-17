@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using _Vikings.Refactoring.Character;
+using DG.Tweening;
 using UnityEngine;
 using Vikings.Items;
 
@@ -11,6 +12,18 @@ namespace _Vikings._Scripts.Refactoring
         
         private GameObject _view;
         protected ItemData _itemData;
+        protected ParticleSystem _effectOnTap;
+        protected Coroutine _getItemCoroutine;
+        protected bool _isEffectActive;
+
+        protected virtual void OnMouseUp()
+        {
+            if (_isEffectActive || _effectOnTap == null)
+            {
+                return;
+            }
+            StartCoroutine(EffectOnTapCoroutine());
+        }
      
         public override float GetStoppingDistance()
         {
@@ -19,7 +32,7 @@ namespace _Vikings._Scripts.Refactoring
 
         public override void CharacterAction(CharacterStateMachine characterStateMachine)
         {
-            StartCoroutine(GetItemCoroutine(characterStateMachine));
+            _getItemCoroutine = StartCoroutine(GetItemCoroutine(characterStateMachine));
         }
 
         public override void Init(MainPanelManager mainPanelManager)
@@ -46,7 +59,11 @@ namespace _Vikings._Scripts.Refactoring
 
         public override void ResetState()
         {
-            StopAllCoroutines();
+            if (_getItemCoroutine != null)
+            {
+                StopCoroutine(_getItemCoroutine);
+            }
+            
             EndAction = null;
             IsTarget = false;
             _view.SetActive(true);
@@ -58,9 +75,36 @@ namespace _Vikings._Scripts.Refactoring
             _audioSource.clip = _itemData._actionSound;
         }
 
+        protected IEnumerator EffectOnTapCoroutine()
+        {
+            _isEffectActive = true;
+            _effectOnTap.gameObject.SetActive(true);
+            _effectOnTap.Play();
+            ModelAnimationOnTap();
+            yield return new WaitForSeconds(2f);
+            _effectOnTap.Stop();
+            _effectOnTap.gameObject.SetActive(false);
+            _isEffectActive = false;
+        }
+
+        protected virtual void ModelAnimationOnTap()
+        {
+            var tween = _view.transform.DOShakeScale(1f, new Vector3(0.5f, 0, 0.5f));
+            tween.onComplete += () =>
+            {
+                tween.Kill();
+            };
+        }
+
         protected virtual void SpawnModel()
         {
             _view = Instantiate(_itemData.View, transform);
+            if (_itemData.EffectOnTap == null)
+            {
+                return;
+            }
+            _effectOnTap = Instantiate(_itemData.EffectOnTap, transform);
+            _effectOnTap.gameObject.SetActive(false);
         }
 
         protected void PlaySound()

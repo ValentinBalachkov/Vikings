@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: WeaponAxe
   m_EditorClassIdentifier: 
   saveKey: WeaponAxe
-  icon: {fileID: 21300000, guid: 70b65ef7ee8cf914aab0e53c4a165b5a, type: 3}
+  icon: {fileID: 21300000, guid: 5bc941ef2f3970844910348aa755b962, type: 3}
   iconOfflineFarm: {fileID: 21300000, guid: 5bc941ef2f3970844910348aa755b962, type: 3}
   nameText: Axe
   description: Can be upgraded to increase the amount of wood produced when chopping.
   required: Wood storage
-  requiredSprite: {fileID: 21300000, guid: 9d17be8424e2177469bd61508a573bd5, type: 3}
-  priority: 2
+  requiredSprite: {fileID: 21300000, guid: 77f9782e323686143a53ad0436cff1e2, type: 3}
+  priority: 1
   taskData: {fileID: 11400000, guid: ebe088723dd97c84ca1c07c9458b2bfd, type: 2}
   priceToBuy:
   - resourceType: 0
