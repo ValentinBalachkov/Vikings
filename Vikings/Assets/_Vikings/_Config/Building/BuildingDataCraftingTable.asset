@@ -18,13 +18,10 @@ MonoBehaviour:
   description: Allows you to create higher level tools and buildings.
   required: Axe
   requiredSprite: {fileID: 21300000, guid: 4cdd5e87f38283f4d95670ff20d6f279, type: 3}
-  buildingVisualSprites:
-  - buildingsSprites: {fileID: 21300000, guid: 0f1ac8e103eaa714882f600b0cba5350, type: 3}
-    shadowSprites: {fileID: 21300000, guid: 33ce05d98047d8a498d47e54a739aee4, type: 3}
-  - buildingsSprites: {fileID: 21300000, guid: 02fa1a9e5b536504283d87ef7aae4902, type: 3}
-    shadowSprites: {fileID: 21300000, guid: 124b464587824a6468de4ecaedd64a6d, type: 3}
-  - buildingsSprites: {fileID: 21300000, guid: 7bf4255628e1d254888afda45ee967eb, type: 3}
-    shadowSprites: {fileID: 21300000, guid: 22376aac9b54de043a912622815080ee, type: 3}
+  buildingModel:
+  - {fileID: 919132149155446097, guid: ceaf086fbe59ae34fb4bcc3c551fbf61, type: 3}
+  - {fileID: 919132149155446097, guid: a68be985f00c09848b20f893d8da57c6, type: 3}
+  - {fileID: 919132149155446097, guid: cf729613adb8a9b419f1e7cd9e74a7dd, type: 3}
   saveKey: CraftingTable
   prefab: {fileID: -1896998277169036940, guid: 6d3d3d91071042e489e8bbb34dad2ee2, type: 3}
   _buildingView: {fileID: 5912000992386096361, guid: b5e1a7e4b8754d7488b82b6200a6799b,

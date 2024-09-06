@@ -14,7 +14,7 @@ public class BuildingData : ScriptableObject
     public string description;
     public string required;
     public Sprite requiredSprite;
-    public List<BuildingVisualSprites> buildingVisualSprites;
+    public List<GameObject> buildingModel;
     public string saveKey;
     public AbstractBuilding prefab;
     public BuildingView _buildingView;

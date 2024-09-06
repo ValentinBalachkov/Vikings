@@ -18,13 +18,10 @@ MonoBehaviour:
   description: Can be upgraded to increase the amount of wood stored.
   required: Workbench
   requiredSprite: {fileID: 21300000, guid: 77f9782e323686143a53ad0436cff1e2, type: 3}
-  buildingVisualSprites:
-  - buildingsSprites: {fileID: 21300000, guid: 0701ea8cffd802d4f8b99321e430cda7, type: 3}
-    shadowSprites: {fileID: 21300000, guid: fc3cd2705724f3642b370590e6d91c1c, type: 3}
-  - buildingsSprites: {fileID: 21300000, guid: ecc8298764331764db1d6fb6175c4cbc, type: 3}
-    shadowSprites: {fileID: 21300000, guid: ef77f99f8ffea3a429a04aaa96117fad, type: 3}
-  - buildingsSprites: {fileID: 21300000, guid: 31ee502d4dd486642b5d5ddaa0d0694e, type: 3}
-    shadowSprites: {fileID: 21300000, guid: 32b07857348b6414fbeb06b9548c4953, type: 3}
+  buildingModel:
+  - {fileID: 919132149155446097, guid: 5e507355055498845bd97cc9ecad5680, type: 3}
+  - {fileID: 919132149155446097, guid: 9a8706d952dfaac4f901e535743c8444, type: 3}
+  - {fileID: 919132149155446097, guid: 54e17ce0ba70c5e429dc77237de0841c, type: 3}
   saveKey: WoodStorage
   prefab: {fileID: 3805657028365542445, guid: b14f1d8d437c31441a92ef089e7b92df, type: 3}
   _buildingView: {fileID: 6687050115691606054, guid: 8f7f3106a14dc7342b35dde7ea3a46ec,

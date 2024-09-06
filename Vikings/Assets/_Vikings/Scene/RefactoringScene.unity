@@ -2823,7 +2823,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &342765009
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7977,7 +7977,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1095088285
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15640,6 +15640,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainPanelManager: {fileID: 186779661}
   _configSetting: {fileID: 11400000, guid: 788d5dedbeda2264fab46c65f91c7d81, type: 2}
+  _textureChanger: {fileID: 0}
 --- !u!1 &2023076008
 GameObject:
   m_ObjectHideFlags: 0

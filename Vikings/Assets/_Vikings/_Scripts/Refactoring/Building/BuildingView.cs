@@ -4,9 +4,7 @@ namespace _Vikings._Scripts.Refactoring.Objects
 {
     public class BuildingView : MonoBehaviour
     {
-        [SerializeField] private SpriteRenderer _buildingSprite;
-        [SerializeField] private SpriteRenderer _shadowSprite;
-
+        private GameObject _model;
         private BuildingData _buildingData;
 
         public void Init(BuildingData storageData)
@@ -21,17 +19,21 @@ namespace _Vikings._Scripts.Refactoring.Objects
             
             int index;
 
-            if (lvl > _buildingData.buildingVisualSprites.Count)
+            if (lvl > _buildingData.buildingModel.Count)
             {
-                index = _buildingData.buildingVisualSprites.Count - 1;
+                index = _buildingData.buildingModel.Count - 1;
             }
             else
             {
                 index = lvl - 1;
             }
+
+            if (_model != null)
+            {
+                Destroy(_model.gameObject);
+            }
             
-            _buildingSprite.sprite = _buildingData.buildingVisualSprites[index].buildingsSprites;
-            _shadowSprite.sprite = _buildingData.buildingVisualSprites[index].shadowSprites;
+            _model = Instantiate(_buildingData.buildingModel[index], transform);
         }
     }
 }
